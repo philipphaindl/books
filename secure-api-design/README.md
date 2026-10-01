@@ -14,3 +14,5 @@ Aufbau:
 - `AENDERUNGEN-2026-09.md`  fachliche Aktualisierungen und Prüfumfang
 
 Zum Live-Bearbeiten: `typst watch --font-path fonts main.typ`
+- `literatur.typ`, `literatur.yml`  Literaturverzeichnis (IEEE-Stil, Zitate im Text als `@schluessel`)
+- `QUELLENPRUEFUNG.md`  Ergebnis der Quellenprüfung: geänderte und unbelegte Aussagen (nicht Teil des Buchs)

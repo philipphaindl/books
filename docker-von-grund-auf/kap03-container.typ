@@ -6,7 +6,7 @@ Bevor es um eigene Images geht, lohnt es sich, mit fertigen Images vertraut zu w
 
 == `docker run` im Detail
 
-`docker run` lädt das Image (falls nicht vorhanden), legt einen Container an und startet ihn. Die Optionen stehen *vor* dem Image-Namen, alles *nach* dem Image-Namen ist der Befehl, der im Container ausgeführt wird.
+`docker run` lädt das Image (falls nicht vorhanden), legt einen Container an und startet ihn. Die Optionen stehen *vor* dem Image-Namen, alles *nach* dem Image-Namen ist der Befehl, der im Container ausgeführt wird @docs-docker-com-reference-cli-docker-container-run.
 
 ```bash
 docker run -d --name db \
@@ -23,8 +23,8 @@ docker run -d --name db \
   [`--name db`], [fester Name. Ohne ihn vergibt Docker Zufallsnamen wie `eager_turing`.],
   [`-e NAME=wert`], [Umgebungsvariable setzen, der übliche Weg, Container zu konfigurieren],
   [`-p 127.0.0.1:5432:5432`], [Port veröffentlichen: _Host-Adresse:Host-Port:Container-Port_ (Kapitel 6)],
-  [`-v pgdaten:/var/lib/postgresql`], [Volume `pgdaten` an diesen Pfad im Container einbinden (Kapitel 5)],
-  [`--restart unless-stopped`], [nach Absturz oder Neustart des Daemons automatisch wieder starten],
+  [`-v pgdaten:/var/lib/postgresql`], [Volume `pgdaten` an diesen Pfad im Container einbinden @docs-docker-com-engine-storage-volumes (Kapitel 5)],
+  [`--restart unless-stopped`], [nach Absturz oder Neustart des Daemons automatisch wieder starten @docs-docker-com-engine-containers-start-containers-automatically],
   [`--rm`], [Container nach dem Beenden automatisch löschen, ideal für Einmal-Aufgaben],
   [`-it`], [interaktiv mit Terminal, z.B. für eine Shell: `docker run --rm -it python:3.14-slim bash`],
 )
@@ -48,7 +48,7 @@ docker run -d --name db \
   caption: [Zustände eines Containers. Ein gestoppter Container existiert weiter, bis er entfernt wird.],
 )
 
-Ein gestoppter Container ist nicht weg: Er behält seine Schreibschicht und seine Konfiguration und kann mit `docker start` fortgesetzt werden. Erst `docker rm` entfernt ihn. Deshalb sammeln sich ohne `--rm` mit der Zeit viele gestoppte Container an.
+Ein gestoppter Container ist nicht weg: Er behält seine Schreibschicht und seine Konfiguration und kann mit `docker start` fortgesetzt werden. Erst `docker rm` entfernt ihn. Deshalb sammeln sich ohne `--rm` mit der Zeit viele gestoppte Container an @docs-docker-com-reference-cli-docker-container-run @docs-docker-com-engine-manage-resources-pruning.
 
 == Die wichtigsten Befehle
 
@@ -56,10 +56,10 @@ Ein gestoppter Container ist nicht weg: Er behält seine Schreibschicht und sein
   [Befehl], [Wirkung],
   [`docker ps`], [laufende Container anzeigen (`-a` zusätzlich gestoppte)],
   [`docker logs -f db`], [Ausgaben des Hauptprozesses fortlaufend anzeigen (`--tail 100`, `--since 10m`)],
-  [`docker exec -it db bash`], [Befehl in einem *laufenden* Container ausführen, hier eine Shell],
-  [`docker stop db` / `start` / `restart`], [anhalten (erst SIGTERM, nach 10 s SIGKILL), fortsetzen, neu starten],
+  [`docker exec -it db bash`], [Befehl in einem *laufenden* Container ausführen, hier eine Shell @docs-docker-com-reference-cli-docker-container-exec],
+  [`docker stop db` / `start` / `restart`], [anhalten (erst SIGTERM, nach 10 s SIGKILL), fortsetzen, neu starten @docs-docker-com-reference-cli-docker-container-stop],
   [`docker rm db`], [gestoppten Container entfernen (`-f` stoppt vorher)],
-  [`docker inspect db`], [vollständige Konfiguration als JSON: IP, Mounts, Umgebung, Status],
+  [`docker inspect db`], [vollständige Konfiguration als JSON: IP, Mounts, Umgebung, Status @docs-docker-com-reference-cli-docker-container-inspect],
   [`docker stats`], [CPU-, Speicher- und Netzwerkverbrauch live],
   [`docker top db`], [Prozesse im Container],
   [`docker cp db:/pfad/datei .`], [Dateien zwischen Container und Mac kopieren],
@@ -86,11 +86,11 @@ Type "help" for help.
 postgres=#
 ```
 
-`docker exec` funktioniert nur, solange der Container läuft, und die Shell muss im Image vorhanden sein. Schlanke Images enthalten oft kein `bash`, dann hilft `sh`. Minimale Images (_distroless_) enthalten gar keine Shell (Kapitel 8 und 10).
+`docker exec` funktioniert nur, solange der Container läuft, und die Shell muss im Image vorhanden sein @docs-docker-com-reference-cli-docker-container-exec. Schlanke Images enthalten oft kein `bash`, dann hilft `sh`. Minimale Images (_distroless_) enthalten gar keine Shell @github-com-googlecontainertools-distroless (Kapitel 8 und 10).
 
 == Umgebungsvariablen und Konfiguration
 
-Container werden fast immer über Umgebungsvariablen konfiguriert. Welche ein Image versteht, steht in seiner Dokumentation auf Docker Hub. Bei vielen Variablen ist eine Datei übersichtlicher:
+Container werden fast immer über Umgebungsvariablen konfiguriert. Welche ein Image versteht, steht in seiner Dokumentation auf Docker Hub @hub-docker-com-postgres. Bei vielen Variablen ist eine Datei übersichtlicher @docs-docker-com-reference-cli-docker-container-run:
 
 #datei(".env.db")[
 ```ini
@@ -104,7 +104,7 @@ POSTGRES_DB=notizen
 docker run -d --name db --env-file .env.db -v pgdaten:/var/lib/postgresql postgres:18
 ```
 
-#achtung[Umgebungsvariablen sind für jeden sichtbar, der `docker inspect` ausführen darf, und landen leicht in Logs. Für Passwörter in Produktion gibt es bessere Wege (Kapitel 12). Dateien wie `.env.db` gehören in die `.gitignore`.]
+#achtung[Umgebungsvariablen sind für jeden sichtbar, der `docker inspect` ausführen darf @docs-docker-com-reference-cli-docker-container-inspect, und landen leicht in Logs. Für Passwörter in Produktion gibt es bessere Wege (Kapitel 12). Dateien wie `.env.db` gehören in die `.gitignore`.]
 
 == Neustart-Richtlinien
 
@@ -112,13 +112,13 @@ docker run -d --name db --env-file .env.db -v pgdaten:/var/lib/postgresql postgr
   [`--restart`], [Verhalten],
   [`no`], [nie automatisch neu starten (Standard)],
   [`on-failure[:5]`], [nur bei Exit-Code ungleich 0, optional höchstens fünfmal],
-  [`unless-stopped`], [immer, außer der Container wurde bewusst gestoppt. *Empfohlen für Dienste.*],
-  [`always`], [immer, auch nach einem bewussten Stopp, sobald der Daemon neu startet],
+  [`unless-stopped`], [immer, außer der Container wurde bewusst gestoppt. *Empfehlung dieses Buchs für Dienste.*],
+  [`always`], [immer, auch nach einem bewussten Stopp, sobald der Daemon neu startet @docs-docker-com-engine-containers-start-containers-automatically],
 )
 
 == Aufräumen
 
-Images, gestoppte Container, ungenutzte Netzwerke und der Build-Cache belegen mit der Zeit viel Platz:
+Images, gestoppte Container, ungenutzte Netzwerke und der Build-Cache belegen mit der Zeit viel Platz @docs-docker-com-engine-manage-resources-pruning:
 
 ```bash
 docker system df                 # Übersicht: wie viel belegt was?
@@ -129,4 +129,4 @@ docker builder prune             # Build-Cache leeren
 docker system prune              # gestoppte Container, ungenutzte Netze, Images ohne Tag, Build-Cache
 ```
 
-#achtung[`docker volume prune` und `docker system prune --volumes` entfernen standardmäßig ungenutzte *anonyme* Volumes. Benannte Volumes werden erst mit `docker volume prune -a` entfernt; `docker compose down -v` entfernt die im Projekt verwendeten benannten und anonymen Volumes. Vor jedem Löschen mit `docker volume ls` beziehungsweise `docker compose config --volumes` prüfen, was betroffen ist.]
+#achtung[`docker volume prune` und `docker system prune --volumes` entfernen standardmäßig ungenutzte *anonyme* Volumes @docs-docker-com-reference-cli-docker-volume-prune @docs-docker-com-reference-cli-docker-system-prune. Benannte Volumes werden erst mit `docker volume prune -a` entfernt; `docker compose down -v` entfernt die im Projekt verwendeten benannten und anonymen Volumes @docs-docker-com-reference-cli-docker-compose-down. Vor jedem Löschen mit `docker volume ls` beziehungsweise `docker compose config --volumes` prüfen, was betroffen ist.]

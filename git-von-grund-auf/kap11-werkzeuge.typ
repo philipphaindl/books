@@ -6,7 +6,7 @@ Dieses Kapitel sammelt, was man nicht täglich, aber regelmäßig braucht: Tags 
 
 == Tags
 
-Ein Tag ist ein fester Name für einen Commit, typischerweise für eine veröffentlichte Version. Anders als ein Branch bewegt sich ein Tag nie weiter.
+Ein Tag ist ein fester Name für einen Commit, typischerweise für eine veröffentlichte Version. Anders als ein Branch bewegt sich ein Tag nie weiter @git-scm-com-docs-git-tag.
 
 ```bash
 git tag -a v1.2.0 -m "Version 1.2.0"   # annotierter Tag (empfohlen)
@@ -20,13 +20,13 @@ git tag -d v1.2.0-rc1                  # lokal löschen
 git push origin --delete v1.2.0-rc1    # auf dem Server löschen
 ```
 
-*Annotierte Tags* sind eigene Objekte mit Autor, Datum und Nachricht, *leichtgewichtige* sind nur ein Zeiger. Für Versionen immer annotierte verwenden. `git describe` nutzt sie etwa, um einen Stand wie `v1.2.0-3-g7b9e4d1` zu beschreiben (drei Commits nach v1.2.0).
+*Annotierte Tags* sind eigene Objekte mit Autor, Datum und Nachricht, *leichtgewichtige* sind nur ein Zeiger @git-scm-com-docs-git-tag @git-scm-com-book-en-v2-git-basics-tagging. Für Versionen immer annotierte verwenden. `git describe` nutzt sie etwa, um einen Stand wie `v1.2.0-3-g7b9e4d1` zu beschreiben (drei Commits nach v1.2.0) @git-scm-com-docs-git-describe.
 
-Tags werden bei einem normalen `git push` *nicht* automatisch übertragen. Das ist eine häufige Stolperfalle, besonders wenn ein Tag eine Pipeline auslösen soll (Kapitel 15). Als Versionsschema hat sich _Semantic Versioning_ durchgesetzt: `MAJOR.MINOR.PATCH`, wobei MAJOR bei inkompatiblen Änderungen, MINOR bei neuen Funktionen und PATCH bei Fehlerbehebungen steigt.
+Tags werden bei einem normalen `git push` *nicht* automatisch übertragen @git-scm-com-docs-git-push @git-scm-com-book-en-v2-git-basics-tagging. Das ist eine häufige Stolperfalle, besonders wenn ein Tag eine Pipeline auslösen soll (Kapitel 15). Als Versionsschema hat sich _Semantic Versioning_ durchgesetzt: `MAJOR.MINOR.PATCH`, wobei MAJOR bei inkompatiblen Änderungen, MINOR bei neuen Funktionen und PATCH bei Fehlerbehebungen steigt @semver-org-lang-de.
 
 === Commits und Tags signieren
 
-Eine kryptografische Signatur belegt, dass ein Commit oder Tag mit einem bestimmten privaten Schlüssel erzeugt wurde. Sie verschlüsselt den Inhalt nicht und ersetzt kein Review, erschwert aber das Unterschieben fremder Releases. Git kann dafür neben OpenPGP auch SSH-Schlüssel verwenden. Sinnvoll ist ein eigener Signaturschlüssel statt des Anmeldeschlüssels:
+Eine kryptografische Signatur belegt, dass ein Commit oder Tag mit einem bestimmten privaten Schlüssel erzeugt wurde. Sie verschlüsselt den Inhalt nicht und ersetzt kein Review, erschwert aber das Unterschieben fremder Releases. Git kann dafür neben OpenPGP auch SSH-Schlüssel verwenden @git-scm-com-docs-git-config. Sinnvoll ist ein eigener Signaturschlüssel statt des Anmeldeschlüssels:
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_git_signing -C "git-signing"
@@ -36,11 +36,11 @@ git config --global commit.gpgSign true
 git config --global tag.gpgSign true
 ```
 
-Den öffentlichen Schlüssel hinterlegst du in Gitea als Signaturschlüssel. Danach kennzeichnet Gitea passende Commits und annotierte Tags als verifiziert. Lokal benötigt `git verify-commit <hash>` beziehungsweise `git verify-tag <tag>` zusätzlich eine `gpg.ssh.allowedSignersFile`, die vertrauenswürdige Identitäten ihren öffentlichen Schlüsseln zuordnet. Signiere insbesondere Release-Tags; schütze die entsprechenden Tag-Muster zusätzlich serverseitig.
+Den öffentlichen Schlüssel hinterlegst du in Gitea als Signaturschlüssel. Danach kennzeichnet Gitea passende Commits und annotierte Tags als verifiziert @docs-gitea-com-administration-signing. Lokal benötigt `git verify-commit <hash>` beziehungsweise `git verify-tag <tag>` zusätzlich eine `gpg.ssh.allowedSignersFile`, die vertrauenswürdige Identitäten ihren öffentlichen Schlüsseln zuordnet @git-scm-com-docs-git-config. Signiere insbesondere Release-Tags; schütze die entsprechenden Tag-Muster zusätzlich serverseitig @docs-gitea-com-usage-access-control-protected-tags.
 
 == Commits benennen
 
-Fast jeder Befehl akzeptiert statt eines Hashes auch einen relativen Ausdruck:
+Fast jeder Befehl akzeptiert statt eines Hashes auch einen relativen Ausdruck @git-scm-com-docs-gitrevisions:
 
 #table(columns: (auto, 1fr),
   [Ausdruck], [Bedeutung],
@@ -65,7 +65,7 @@ Fast jeder Befehl akzeptiert statt eines Hashes auch einen relativen Ausdruck:
 
 == Bereiche: zwei und drei Punkte
 
-Viele Fragen an die Historie lauten "Was hat der eine Branch, was der andere nicht hat?". Dafür gibt es zwei Schreibweisen, deren Unterschied man einmal verstanden haben sollte:
+Viele Fragen an die Historie lauten "Was hat der eine Branch, was der andere nicht hat?". Dafür gibt es zwei Schreibweisen, deren Unterschied man einmal verstanden haben sollte @git-scm-com-docs-gitrevisions:
 
 #figure(
   grid(columns: (1fr, 1fr), column-gutter: 10pt,
@@ -86,7 +86,7 @@ git log @{u}..                 # meine noch nicht gepushten Commits
 git diff main...feature        # nur die Änderungen des Features seit dem Abzweigen
 ```
 
-Achtung, bei `git diff` ist die Bedeutung leicht verschoben: `git diff main...feature` vergleicht die Merge-Basis mit `feature` und zeigt damit genau das, was ein Pull Request in Gitea als Änderungen anzeigt. `git diff main feature` vergleicht dagegen die beiden Enden direkt und enthält auch die Änderungen, die nur in `main` passiert sind.
+Achtung, bei `git diff` ist die Bedeutung leicht verschoben: `git diff main...feature` vergleicht die Merge-Basis mit `feature` @git-scm-com-docs-git-diff und zeigt damit genau das, was ein Pull Request in Gitea als Änderungen anzeigt. `git diff main feature` vergleicht dagegen die beiden Enden direkt und enthält auch die Änderungen, die nur in `main` passiert sind.
 
 == Suchen in der Historie
 
@@ -97,7 +97,7 @@ git log --grep="Login" -i         # in Commit-Nachrichten suchen
 git grep "TODO" v1.2.0            # im Dateistand eines beliebigen Commits suchen
 ```
 
-Die Suche mit `-S` (_pickaxe_) ist besonders nützlich für die Frage "Wann ist diese Funktion verschwunden?". Sie findet genau die Commits, in denen der Text hinzugefügt oder entfernt wurde.
+Die Suche mit `-S` (_pickaxe_) ist besonders nützlich für die Frage "Wann ist diese Funktion verschwunden?". Sie findet genau die Commits, in denen sich die Anzahl der Vorkommen des Textes geändert hat @git-scm-com-docs-git-log.
 
 === `blame`: Wer hat diese Zeile zuletzt geändert?
 
@@ -107,11 +107,11 @@ git blame -L 40,60 src/login.py     # nur Zeilen 40 bis 60
 git blame -w -C src/login.py        # Leerzeichen ignorieren, verschobenen Code erkennen
 ```
 
-`blame` beantwortet nicht "wer ist schuld", sondern "in welchem Zusammenhang entstand diese Zeile". Mit dem gefundenen Hash führt `git show` zur Commit-Nachricht und damit oft zum Warum. Reine Formatierungs-Commits (etwa nach Einführung eines Formatierers) verstellen den Blick. Trägt man ihre Hashes in eine Datei `.git-blame-ignore-revs` ein und setzt `git config blame.ignoreRevsFile .git-blame-ignore-revs`, überspringt `blame` sie.
+`blame` beantwortet nicht "wer ist schuld", sondern "in welchem Zusammenhang entstand diese Zeile". Mit dem gefundenen Hash führt `git show` zur Commit-Nachricht und damit oft zum Warum. Reine Formatierungs-Commits (etwa nach Einführung eines Formatierers) verstellen den Blick. Trägt man ihre Hashes in eine Datei `.git-blame-ignore-revs` ein und setzt `git config blame.ignoreRevsFile .git-blame-ignore-revs`, überspringt `blame` sie @git-scm-com-docs-git-blame @git-scm-com-docs-git-config.
 
 == `bisect`: den schuldigen Commit finden
 
-Ein Fehler ist da, vor zwei Wochen war er es noch nicht, dazwischen liegen 80 Commits. `git bisect` findet den verursachenden Commit per binärer Suche in etwa sieben Schritten:
+Ein Fehler ist da, vor zwei Wochen war er es noch nicht, dazwischen liegen 80 Commits. `git bisect` findet den verursachenden Commit per binärer Suche in etwa sieben Schritten @git-scm-com-docs-git-bisect:
 
 ```bash
 git bisect start
@@ -147,17 +147,17 @@ git bisect reset                  # zurück zum Ausgangspunkt
   caption: [Jeder Schritt halbiert den Suchbereich. 1000 Commits brauchen höchstens zehn Tests.],
 )
 
-Lässt sich der Test automatisieren, erledigt Git die ganze Suche selbst: `git bisect run make test` führt den Befehl an jedem Kandidaten aus und wertet den Rückgabewert aus (0 = gut, sonst schlecht). Das funktioniert umso besser, je kleiner und in sich funktionsfähiger die einzelnen Commits sind. Das ist ein handfester Grund für die sauberen Commits aus Kapitel 3.
+Lässt sich der Test automatisieren, erledigt Git die ganze Suche selbst: `git bisect run make test` führt den Befehl an jedem Kandidaten aus und wertet den Rückgabewert aus (0 = gut, 1 bis 127 außer 125 = schlecht, 125 = überspringen) @git-scm-com-docs-git-bisect. Das funktioniert umso besser, je kleiner und in sich funktionsfähiger die einzelnen Commits sind. Das ist ein handfester Grund für die sauberen Commits aus Kapitel 3.
 
 == Kleine Helfer
 
 #table(columns: (auto, 1fr),
   [Befehl], [Wirkung],
-  [`git shortlog -sn`], [Anzahl der Commits pro Autor],
-  [`git describe --tags`], [lesbare Versionsbezeichnung für den aktuellen Stand],
-  [`git archive -o demo.zip HEAD`], [Projektstand ohne `.git` als ZIP exportieren],
-  [`git show HEAD~5:src/app.py`], [eine Datei in einem alten Stand ausgeben],
-  [`git log --oneline --first-parent main`], [nur die Hauptlinie: ein Eintrag pro gemergtem Feature],
-  [`git count-objects -vH`], [Größe des Repositories],
-  [`git maintenance start`], [regelmäßige Hintergrundoptimierung für große Repositories einrichten],
+  [`git shortlog -sn`], [Anzahl der Commits pro Autor @git-scm-com-docs-git-shortlog],
+  [`git describe --tags`], [lesbare Versionsbezeichnung für den aktuellen Stand @git-scm-com-docs-git-describe],
+  [`git archive -o demo.zip HEAD`], [Projektstand ohne `.git` als ZIP exportieren @git-scm-com-docs-git-archive],
+  [`git show HEAD~5:src/app.py`], [eine Datei in einem alten Stand ausgeben @git-scm-com-docs-git-show],
+  [`git log --oneline --first-parent main`], [nur die Hauptlinie: ein Eintrag pro gemergtem Feature @git-scm-com-docs-git-log],
+  [`git count-objects -vH`], [Größe des Repositories @git-scm-com-docs-git-count-objects],
+  [`git maintenance start`], [regelmäßige Hintergrundoptimierung für große Repositories einrichten @git-scm-com-docs-git-maintenance],
 )

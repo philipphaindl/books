@@ -30,7 +30,7 @@ Dieses Kapitel behandelt ① und ②, Kapitel 9 die Rechte gegen ③, Kapitel 10
 
 == TLS und gegenseitige Authentifizierung
 
-Beide Broker unterstützen TLS, und beide können zusätzlich ein *Client-Zertifikat* verlangen (mTLS). Dann weist nicht nur der Server sich gegenüber dem Client aus, sondern auch jeder Dienst gegenüber dem Server. Ein gestohlenes Passwort allein genügt nicht mehr. Die Zertifikate stellt eine eigene, interne Zertifizierungsstelle aus, etwa mit `step-ca` oder für kleine Umgebungen mit `openssl`.
+Beide Broker unterstützen TLS, und beide können zusätzlich ein *Client-Zertifikat* verlangen (mTLS) @docs-nats-io-learn-security-encryption @www-rabbitmq-com-docs-ssl. Dann weist nicht nur der Server sich gegenüber dem Client aus, sondern auch jeder Dienst gegenüber dem Server. Ein gestohlenes Passwort allein genügt nicht mehr. Die Zertifikate stellt eine eigene, interne Zertifizierungsstelle aus, etwa mit `step-ca` @smallstep-com-docs-step-ca oder für kleine Umgebungen mit `openssl`.
 
 #datei("nats-server.conf (Auszug)")[
 ```text
@@ -59,7 +59,7 @@ loopback_users.guest   = true                # Standardkonto nur lokal (Standard
 ```
 ]
 
-In Python wird dasselbe `ssl.SSLContext` für beide Clients verwendet:
+In Python wird dasselbe `ssl.SSLContext` für beide Clients verwendet @docs-python-org-3-13-library-ssl-html:
 
 #datei("gemeinsam/tls.py")[
 ```python
@@ -71,7 +71,7 @@ def tls_kontext(dienst: str) -> ssl.SSLContext:
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2
     return ctx
 
-# NATS
+# NATS (.creds nur bei JWT-Authentifizierung, sonst user= und password=)
 nc = await nats.connect(servers=["tls://nats.example.com:4222"], tls=tls_kontext("shop"),
                         user_credentials="/run/secrets/shop.creds")
 # RabbitMQ
@@ -84,11 +84,11 @@ verbindung = await aio_pika.connect_robust(
 
 #table(columns: (auto, 1fr, 1fr),
   [], [NATS], [RabbitMQ],
-  [einfach], [Benutzer und Passwort in der Serverkonfiguration (Passwörter als bcrypt-Hash, erzeugt mit `nats server passwd`)], [Benutzer und Passwort in der internen Datenbank (`rabbitmqctl add_user`)],
-  [stärker], [_NKeys_: Schlüsselpaare, der Server kennt nur den öffentlichen Schlüssel], [Client-Zertifikat als Identität über das Plugin `rabbitmq_auth_mechanism_ssl` (Benutzername aus dem Zertifikat)],
-  [zentral verwaltet], [_Decentralized JWT Auth_: Operator, Accounts und Benutzer als signierte JWTs, verwaltet mit `nsc`, Clients erhalten `.creds`-Dateien], [externe Verzeichnisse per LDAP oder OAuth 2.0 (Plugin `rabbitmq_auth_backend_oauth2`)],
+  [einfach], [Benutzer und Passwort in der Serverkonfiguration (Passwörter als bcrypt-Hash, erzeugt mit `nats server passwd`) @docs-nats-io-learn-security-authentication-basics], [Benutzer und Passwort in der internen Datenbank (`rabbitmqctl add_user`) @www-rabbitmq-com-docs-access-control],
+  [stärker], [_NKeys_: Schlüsselpaare, der Server kennt nur den öffentlichen Schlüssel @docs-nats-io-learn-security-authentication-basics], [Client-Zertifikat als Identität über das Plugin `rabbitmq_auth_mechanism_ssl` (Benutzername aus dem Zertifikat) @www-rabbitmq-com-docs-ssl],
+  [zentral verwaltet], [_Decentralized JWT Auth_: Operator, Accounts und Benutzer als signierte JWTs, verwaltet mit `nsc`, Clients erhalten `.creds`-Dateien @docs-nats-io-learn-security-decentralized-auth @docs-nats-io-concepts-ecosystem], [externe Verzeichnisse per LDAP oder OAuth 2.0 (Plugin `rabbitmq_auth_backend_oauth2`) @www-rabbitmq-com-docs-ldap @www-rabbitmq-com-docs-oauth2],
 )
 
-Für eine überschaubare Zahl von Diensten genügen Passwörter oder NKeys pro Dienst, kombiniert mit mTLS. Die JWT-basierte Verwaltung von NATS lohnt sich, sobald viele Dienste, Umgebungen oder Mandanten dazukommen, weil sich Benutzer dann ohne Neustart des Servers anlegen und widerrufen lassen.
+Für eine überschaubare Zahl von Diensten genügen Passwörter oder NKeys pro Dienst, kombiniert mit mTLS. Die JWT-basierte Verwaltung von NATS lohnt sich, sobald viele Dienste, Umgebungen oder Mandanten dazukommen, weil sich Benutzer dann ohne Neustart des Servers anlegen und widerrufen lassen @docs-nats-io-learn-security-decentralized-auth.
 
-Unabhängig vom Verfahren gilt: *ein Konto pro Dienst*, nie ein gemeinsames Konto für alle, das Standardkonto `guest` von RabbitMQ löschen, Zugangsdaten als Docker-Secrets bereitstellen (Docker-Handbuch, Kapitel 12) und die Verwaltungsoberflächen (RabbitMQ Management, NATS-Überwachung) nie öffentlich erreichbar machen, sondern nur über VPN oder lokal.
+Unabhängig vom Verfahren gilt: *ein Konto pro Dienst*, nie ein gemeinsames Konto für alle, das Standardkonto `guest` von RabbitMQ löschen @www-rabbitmq-com-docs-production-checklist, Zugangsdaten als Docker-Secrets bereitstellen (Docker-Handbuch, Kapitel 12) und die Verwaltungsoberflächen (RabbitMQ Management, NATS-Überwachung) nie öffentlich erreichbar machen @docs-nats-io-learn-monitoring-monitoring-endpoints @www-rabbitmq-com-docs-networking, sondern nur über VPN oder lokal.

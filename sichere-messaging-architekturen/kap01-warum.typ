@@ -29,7 +29,7 @@
   caption: [Links hängt der Erfolg an allen Beteiligten, rechts nur am Broker.],
 )
 
-Bei direkten Aufrufen muss jeder Dienst in dem Moment erreichbar sein, in dem ein anderer ihn braucht. Ein Broker entkoppelt in drei Dimensionen: *zeitlich* (der Empfänger kann später verarbeiten), *räumlich* (der Sender muss nicht wissen, wer empfängt und wie viele es sind) und *in der Last* (Lastspitzen werden gepuffert statt weitergereicht).
+Bei direkten Aufrufen muss jeder Dienst in dem Moment erreichbar sein, in dem ein anderer ihn braucht. Ein Broker entkoppelt in drei Dimensionen: *zeitlich* (der Empfänger kann später verarbeiten), *räumlich* (der Sender muss nicht wissen, wer empfängt und wie viele es sind) und *in der Last* (Lastspitzen werden gepuffert statt weitergereicht) @www-enterpriseintegrationpatterns-com-patterns-messaging-messaging-html @docs-nats-io-concepts-jetstream.
 
 Der Preis: Das Ergebnis steht nicht sofort fest, Fehler werden später sichtbar, und die Frage "wurde die Nachricht verarbeitet?" braucht eigene Antworten (Kapitel 2 und 7). Für Abfragen, auf deren Antwort ein Benutzer wartet, bleibt ein direkter API-Aufruf oft die bessere Wahl.
 
@@ -37,17 +37,17 @@ Der Preis: Das Ergebnis steht nicht sofort fest, Fehler werden später sichtbar,
 
 #table(columns: (auto, 1fr, auto),
   [Muster], [Verhalten], [Beispiel],
-  [*Queue* (Arbeitswarteschlange)], [Jede Nachricht wird von *genau einem* von mehreren gleichartigen Konsumenten verarbeitet (_competing consumers_). Skalierung durch mehr Konsumenten.], [Provisionierungsaufträge auf drei Worker verteilen],
-  [*Publish/Subscribe*], [Jede Nachricht erreicht *alle* interessierten Empfängergruppen.], [Bestellung an Provisionierung *und* Benachrichtigung],
-  [*Stream* (Log)], [Nachrichten werden dauerhaft in Reihenfolge gespeichert. Konsumenten lesen ab einer Position und können zurückspulen.], [Ereignishistorie, neue Dienste lesen alte Ereignisse nach],
-  [*Request/Reply*], [Anfrage über den Broker, Antwort auf einer temporären Rückadresse.], [Preis abfragen, ohne die Adresse des Preisdienstes zu kennen],
+  [*Queue* (Arbeitswarteschlange)], [Jede Nachricht wird von *genau einem* von mehreren gleichartigen Konsumenten verarbeitet (_competing consumers_). Skalierung durch mehr Konsumenten @www-enterpriseintegrationpatterns-com-patterns-messaging-pointtopointchannel-html @www-enterpriseintegrationpatterns-com-patterns-messaging-competingconsumers-html.], [Provisionierungsaufträge auf drei Worker verteilen],
+  [*Publish/Subscribe*], [Jede Nachricht erreicht *alle* interessierten Empfängergruppen @www-enterpriseintegrationpatterns-com-patterns-messaging-publishsubscribechannel-html.], [Bestellung an Provisionierung *und* Benachrichtigung],
+  [*Stream* (Log)], [Nachrichten werden dauerhaft in Reihenfolge gespeichert. Konsumenten lesen ab einer Position und können zurückspulen @docs-nats-io-learn-jetstream-reading-back @www-rabbitmq-com-docs-streams.], [Ereignishistorie, neue Dienste lesen alte Ereignisse nach],
+  [*Request/Reply*], [Anfrage über den Broker, Antwort auf einer temporären Rückadresse @www-enterpriseintegrationpatterns-com-patterns-messaging-requestreply-html @docs-nats-io-learn-core-nats-request-reply.], [Preis abfragen, ohne die Adresse des Preisdienstes zu kennen],
 )
 
 In der Praxis werden die Muster kombiniert: Ein Ereignis wird per Pub/Sub an mehrere Gruppen verteilt, innerhalb jeder Gruppe teilen sich mehrere Instanzen die Arbeit wie in einer Queue.
 
 == Befehle und Ereignisse
 
-Nachrichten sind entweder *Befehle* oder *Ereignisse*, und der Unterschied prägt das Design:
+Nachrichten sind entweder *Befehle* oder *Ereignisse* @www-enterpriseintegrationpatterns-com-patterns-messaging-commandmessage-html @www-enterpriseintegrationpatterns-com-patterns-messaging-eventmessage-html, und der Unterschied prägt das Design:
 
 #table(columns: (auto, 1fr, 1fr),
   [], [Befehl], [Ereignis],

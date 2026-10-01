@@ -1,6 +1,6 @@
 #import "lib.typ": *
 
-= Glossar und Quellen
+= Glossar
 
 #let begriffe = (
   ([Access-Token], [Token, das zum Zugriff auf eine API berechtigt. Die einzige Token-Art, die eine API annehmen darf.]),
@@ -37,15 +37,6 @@
   ]
 ]
 
-#v(0.2em)
-#heading(level: 2, numbering: none)[Weiterführende Quellen]
-
-- *OWASP API Security Top 10 (2023)*: https://owasp.org/API-Security/
-- *OWASP REST Security Cheat Sheet* und *Authorization Cheat Sheet*: https://cheatsheetseries.owasp.org
-- *Authentik 2026.8*, OAuth2-Provider, Introspection und Token Exchange: https://docs.goauthentik.io
-- *OAuth 2.0 Security Best Current Practice* (RFC 9700) und *OAuth 2.0 for Browser-Based Applications* (RFC 10017)
-- *JWT Best Current Practices* (RFC 8725) und *JWT Profile for OAuth 2.0 Access Tokens* (RFC 9068)
-- *Sendergebundene Tokens:* mTLS (RFC 8705) und DPoP (RFC 9449)
-- *FastAPI Security*: https://fastapi.tiangolo.com/tutorial/security/
-- *PyJWT*: https://pyjwt.readthedocs.io
-- *RFC 9457* (Problem Details), *RFC 8594* (Sunset), *RFC 9745* (Deprecation)
+#v(0.4em)
+#set text(size: 9pt)
+Quellen und weiterführende Literatur zu den Begriffen, Standards und Werkzeugen dieses Handbuchs stehen im anschließenden Literaturverzeichnis.

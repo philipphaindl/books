@@ -10,6 +10,8 @@
   ([Cherry-Pick], [Übernahme der Änderung eines einzelnen Commits als neuer Commit auf einem anderen Branch, typisch für Backports.]),
   ([Commit], [Unveränderlicher Schnappschuss des Projekts mit Verweis auf seine Eltern, Autor und Nachricht.]),
   ([Detached HEAD], [Zustand, in dem `HEAD` direkt auf einen Commit statt auf einen Branch zeigt.]),
+  ([Dependency-Bot], [Dienst wie Renovate, der Versionsänderungen als normale Pull Requests vorschlägt.]),
+  ([Deploy Key], [Öffentlicher SSH-Schlüssel, der maschinellen Zugriff auf genau ein Gitea-Repository gewährt, möglichst nur lesend.]),
   ([Fast-Forward], [Merge ohne neuen Commit: Der Branch-Zeiger wird nur nach vorne geschoben.]),
   ([Fetch], [Neue Commits vom Server holen, ohne eigene Branches zu verändern.]),
   ([Fixup], [Korrektur-Commit, der beim interaktiven Rebase in einen früheren Commit eingefaltet wird.]),
@@ -20,6 +22,7 @@
   ([Label], [Name, über den `runs-on` einen passenden Runner und dessen Ausführungsumgebung wählt.]),
   ([Merge-Basis], [Jüngster gemeinsamer Vorfahre zweier Branches.]),
   ([Merge-Commit], [Commit mit zwei (oder mehr) Eltern, entsteht beim Zusammenführen auseinandergelaufener Branches.]),
+  ([PAT], [Personal Access Token eines Benutzers oder Dienstkontos für Git- und API-Zugriffe; dauerhaft und deshalb eng zu begrenzen.]),
   ([Pull Request], [Vorschlag in Gitea, einen Branch in einen anderen zu integrieren, mit Review und CI-Prüfung.]),
   ([Quality Gate], [Schwellwerte in SonarQube, an denen eine Analyse als bestanden oder nicht bestanden gilt.]),
   ([Rebase], [Neues Abspielen von Commits auf einer anderen Basis. Erzeugt neue Commits mit neuen Hashes.]),
@@ -28,6 +31,9 @@
   ([Remote-Tracking-Branch], [Lokale Kopie des zuletzt bekannten Server-Stands, z.B. `origin/main`.]),
   ([Signatur], [Kryptografischer Nachweis, dass ein Commit oder Tag mit einem bestimmten privaten Schlüssel erzeugt wurde; keine Verschlüsselung.]),
   ([Runner], [Programm (`gitea-runner`, früher `act_runner`), das Jobs von Gitea abholt und ausführt.]),
+  ([SAST], [Statische Anwendungssicherheitsanalyse: sucht Sicherheitsmuster im Quellcode, ohne das Programm auszuführen.]),
+  ([SBOM], [Maschinenlesbare Stückliste der enthaltenen Softwarebestandteile, etwa im CycloneDX-Format.]),
+  ([Scoped Workflow], [Zentral verwalteter Gitea-Workflow, der in mehreren Ziel-Repositories mit deren Kontext läuft.]),
   ([Secret], [Geschützt gespeicherter Wert in Gitea, im Workflow über `secrets.NAME` erreichbar. Die Log-Maskierung ist nur ein zusätzliches Auffangnetz.]),
   ([Squash], [Zusammenfassen mehrerer Commits zu einem einzigen.]),
   ([Stash], [Stapel für vorübergehend beiseitegelegte, uncommittete Änderungen.]),
@@ -55,3 +61,7 @@
 - *Gitea Runner 3.x*: Installation, Upgrade-Hinweise und Sicherheitsoptionen unter https://docs.gitea.com/runner/
 - *Syntax für Workflows*: Die GitHub-Dokumentation zu _Workflow syntax_ gilt mit den Einschränkungen aus Kapitel 13 auch für Gitea.
 - *SonarQube*: https://docs.sonarsource.com, Abschnitt zur CI-Integration mit GitHub Actions.
+- *Gitea Actions*: Runner, Job-Token-Rechte, Secrets und Scoped Workflows unter https://docs.gitea.com/usage/actions/
+- *Renovate für Gitea*: Plattformintegration und Self-Hosting unter https://docs.renovatebot.com/modules/platform/gitea/ und https://docs.renovatebot.com/examples/self-hosting/
+- *Trivy*: Dateisystem-, IaC-, Secret- und Image-Scans unter https://trivy.dev/docs/latest/
+- *Semgrep*: lokale Scans und CI-Konfiguration unter https://semgrep.dev/docs/

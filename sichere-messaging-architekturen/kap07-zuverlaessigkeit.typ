@@ -6,11 +6,11 @@ Die Broker liefern at-least-once, wenn Producer und Consumer richtig bestätigen
 
 == Das Problem der zwei Schreibvorgänge
 
-Der Shop speichert eine Bestellung in PostgreSQL und veröffentlicht danach `bestellung.eingegangen`. Was, wenn der Dienst genau dazwischen abstürzt? Die Bestellung existiert, die Nachricht nie, die Provisionierung passiert nicht. Andersherum (erst senden, dann speichern) kann eine Nachricht für eine Bestellung existieren, deren Transaktion scheitert. Eine gemeinsame Transaktion über Datenbank und Broker gibt es nicht.
+Der Shop speichert eine Bestellung in PostgreSQL und veröffentlicht danach `bestellung.eingegangen`. Was, wenn der Dienst genau dazwischen abstürzt? Die Bestellung existiert, die Nachricht nie, die Provisionierung passiert nicht. Andersherum (erst senden, dann speichern) kann eine Nachricht für eine Bestellung existieren, deren Transaktion scheitert. Eine gemeinsame, verteilte Transaktion über Datenbank und Broker ist in der Praxis keine Option @microservices-io-patterns-data-transactional-outbox-html.
 
 == Transactional Outbox
 
-Die Lösung: Die Nachricht wird *in derselben Datenbanktransaktion* wie die Bestellung in eine Tabelle `outbox` geschrieben. Ein separater Prozess (_Relay_) liest die Tabelle und veröffentlicht. Beide Schreibvorgänge liegen damit in einer Transaktion, und das Veröffentlichen wird so lange wiederholt, bis es gelingt.
+Die Lösung: Die Nachricht wird *in derselben Datenbanktransaktion* wie die Bestellung in eine Tabelle `outbox` geschrieben. Ein separater Prozess (_Relay_) liest die Tabelle und veröffentlicht @microservices-io-patterns-data-transactional-outbox-html. Beide Schreibvorgänge liegen damit in einer Transaktion, und das Veröffentlichen wird so lange wiederholt, bis es gelingt.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -45,11 +45,11 @@ async def relay(pool, js, stopp: asyncio.Event) -> None:
 ```
 ]
 
-Stürzt der Relay nach dem Senden, aber vor dem `UPDATE` ab, sendet er die Nachricht beim nächsten Durchlauf erneut. Weil die Outbox-ID als `Nats-Msg-Id` dient, erkennt JetStream das Duplikat innerhalb des Zeitfensters. Bei RabbitMQ wird dieselbe ID als `message_id` gesetzt und erst der Consumer erkennt das Duplikat. `FOR UPDATE SKIP LOCKED` erlaubt mehrere Relay-Instanzen, ohne dass sie sich dieselben Zeilen teilen.
+Stürzt der Relay nach dem Senden, aber vor dem `UPDATE` ab, sendet er die Nachricht beim nächsten Durchlauf erneut. Weil die Outbox-ID als `Nats-Msg-Id` dient, erkennt JetStream das Duplikat innerhalb des Zeitfensters @docs-nats-io-jetstream-concepts-streams. Dass der Relay eine Nachricht mehrfach veröffentlichen kann, nennt auch die Musterbeschreibung @microservices-io-patterns-data-transactional-outbox-html. Bei RabbitMQ wird dieselbe ID als `message_id` gesetzt und erst der Consumer erkennt das Duplikat. `FOR UPDATE SKIP LOCKED` erlaubt mehrere Relay-Instanzen, ohne dass sie sich dieselben Zeilen teilen @www-postgresql-org-docs-current-sql-select-html.
 
 == Idempotente Consumer
 
-Das Gegenstück auf der Empfängerseite: Der Consumer merkt sich, welche Nachrichten-IDs er verarbeitet hat, *in derselben Transaktion* wie die eigentliche Wirkung:
+Das Gegenstück auf der Empfängerseite: Der Consumer merkt sich, welche Nachrichten-IDs er verarbeitet hat, *in derselben Transaktion* wie die eigentliche Wirkung @microservices-io-patterns-communication-style-idempotent-consumer-html:
 
 #datei("provisionierung/verarbeitung.py")[
 ```python
@@ -65,16 +65,16 @@ async def verarbeiten(pool, umschlag: Umschlag) -> None:
 ```
 ]
 
-Kommt die Nachricht ein zweites Mal, scheitert das `INSERT` am Primärschlüssel, die Funktion kehrt ohne Wirkung zurück, und der Worker bestätigt die Nachricht. Wird die Transaktion durch einen Fehler abgebrochen, verschwindet auch der Eintrag in `verarbeitet`, und die nächste Zustellung versucht es erneut. Die Tabelle `verarbeitet` wird regelmäßig um Einträge bereinigt, die älter sind als die längste mögliche Wiederholungszeit.
+Kommt die Nachricht ein zweites Mal, fügt das `INSERT` wegen `ON CONFLICT DO NOTHING` keine Zeile ein und liefert deshalb nichts zurück @www-postgresql-org-docs-current-sql-insert-html, die Funktion kehrt ohne Wirkung zurück, und der Worker bestätigt die Nachricht. Wird die Transaktion durch einen Fehler abgebrochen, verschwindet auch der Eintrag in `verarbeitet` @www-postgresql-org-docs-current-tutorial-transactions-html, und die nächste Zustellung versucht es erneut. Die Tabelle `verarbeitet` wird regelmäßig um Einträge bereinigt, die älter sind als die längste mögliche Wiederholungszeit.
 
-Wo keine Datenbank beteiligt ist, lässt sich Idempotenz oft über die Operation selbst erreichen: "Setze Status auf *aktiv*" ist von Natur aus idempotent, "erhöhe Zähler um 1" nicht.
+Wo keine Datenbank beteiligt ist, lässt sich Idempotenz oft über die Operation selbst erreichen: "Setze Status auf *aktiv*" ist von Natur aus idempotent, "erhöhe Zähler um 1" nicht @www-enterpriseintegrationpatterns-com-patterns-messaging-idempotentreceiver-html.
 
 == Wiederholen, aussortieren, wieder einspielen
 
 #table(columns: (auto, 1fr),
   [Fehlerart], [Behandlung],
-  [vorübergehend (Netzwerk, Partner überlastet, Sperre in der DB)], [erneut zustellen mit wachsendem Abstand (NATS `nak(delay)`, RabbitMQ Warteschlange mit TTL)],
-  [dauerhaft (ungültiges Schema, ungültige Signatur, unbekannter Typ)], [sofort aussortieren: NATS `term()` plus eigenes Dead-Letter-Subject, RabbitMQ `reject(requeue=False)`],
+  [vorübergehend (Netzwerk, Partner überlastet, Sperre in der DB)], [erneut zustellen mit wachsendem Abstand (NATS `nak(delay)` @docs-nats-io-learn-jetstream-acknowledgment, RabbitMQ Warteschlange mit TTL @www-rabbitmq-com-docs-ttl, ab 4.3 auch _Delayed Retry_ an Quorum Queues, Kapitel 5)],
+  [dauerhaft (ungültiges Schema, ungültige Signatur, unbekannter Typ)], [sofort aussortieren @www-enterpriseintegrationpatterns-com-patterns-messaging-deadletterchannel-html: NATS `term()` @docs-nats-io-learn-jetstream-acknowledgment plus eigenes Dead-Letter-Subject, RabbitMQ `reject(requeue=False)` @www-rabbitmq-com-docs-dlx],
   [unklar (Programmfehler)], [begrenzte Wiederholungen, danach Dead Letter. Nach dem Bugfix gezielt wieder einspielen.],
 )
 

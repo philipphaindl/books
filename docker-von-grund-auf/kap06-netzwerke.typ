@@ -2,11 +2,11 @@
 
 = Netzwerke
 
-Jeder Container hat ein eigenes Netzwerk-Interface mit eigener IP-Adresse. Wie Container einander finden und wie sie von außen erreichbar werden, bestimmen Docker-Netzwerke und veröffentlichte Ports. Die beiden häufigsten Fragen, "Warum erreicht meine App die Datenbank nicht?" und "Warum ist der Port von außen nicht erreichbar?", haben hier ihre Antwort.
+Jeder Container hat ein eigenes Netzwerk-Interface mit eigener IP-Adresse @docs-docker-com-engine-network-drivers-bridge. Wie Container einander finden und wie sie von außen erreichbar werden, bestimmen Docker-Netzwerke und veröffentlichte Ports. Die beiden häufigsten Fragen, "Warum erreicht meine App die Datenbank nicht?" und "Warum ist der Port von außen nicht erreichbar?", haben hier ihre Antwort.
 
 == Eigene Netzwerke und Namensauflösung
 
-Ohne weitere Angabe landen Container im Standardnetz `bridge`. Dort erreichen sie sich nur über IP-Adressen, die sich bei jedem Neustart ändern können. In einem *selbst angelegten* Netz dagegen löst Docker die Container-Namen automatisch als Hostnamen auf:
+Ohne weitere Angabe landen Container im Standardnetz `bridge`. Dort erreichen sie sich nur über IP-Adressen, die sich bei jedem Neustart ändern können. In einem *selbst angelegten* Netz dagegen löst Docker die Container-Namen automatisch als Hostnamen auf @docs-docker-com-engine-network-drivers-bridge:
 
 ```bash
 docker network create notizen-netz
@@ -31,13 +31,13 @@ docker run -d --name api --network notizen-netz -p 8000:8000 \
   caption: [Die App erreicht die Datenbank über ihren Namen `db`. Nur die App hat einen veröffentlichten Port.],
 )
 
-Das ist das Grundmuster fast jeder Anwendung: Alle zusammengehörigen Container teilen sich ein eigenes Netz und sprechen sich mit Namen an. Nur der Container, der von außen erreichbar sein muss, veröffentlicht einen Port. Die Datenbank bleibt intern. Docker Compose legt ein solches Netz pro Projekt automatisch an (Kapitel 7).
+Das ist das Grundmuster fast jeder Anwendung: Alle zusammengehörigen Container teilen sich ein eigenes Netz und sprechen sich mit Namen an. Nur der Container, der von außen erreichbar sein muss, veröffentlicht einen Port. Die Datenbank bleibt intern. Docker Compose legt ein solches Netz pro Projekt automatisch an (Kapitel 7) @docs-docker-com-compose-how-tos-networking.
 
 #achtung[Innerhalb eines Containers bedeutet `localhost` *der Container selbst*, nicht der Host und nicht ein anderer Container. `DATABASE_URL=...@localhost:5432` funktioniert deshalb in Docker nicht, obwohl es ohne Docker klappte. Richtig ist der Name des Datenbank-Containers.]
 
 == Ports veröffentlichen
 
-`-p Host-Port:Container-Port` leitet Verbindungen zu einem Port des Hosts an den Container weiter. Dabei zählt auch die Adresse:
+`-p Host-Port:Container-Port` leitet Verbindungen zu einem Port des Hosts an den Container weiter @docs-docker-com-engine-network-port-publishing. Dabei zählt auch die Adresse:
 
 #table(columns: (auto, 1fr),
   [Angabe], [Erreichbar von],
@@ -46,29 +46,29 @@ Das ist das Grundmuster fast jeder Anwendung: Alle zusammengehörigen Container 
   [`-p 8080:80`], [Host-Port 8080 wird auf Port 80 im Container geleitet. Die Nummern müssen nicht gleich sein.],
 )
 
-Eine zweite, häufige Ursache für "nicht erreichbar" liegt in der Anwendung selbst: Sie muss im Container auf `0.0.0.0` lauschen, nicht auf `127.0.0.1`. Ein Server, der nur auf `127.0.0.1` lauscht, nimmt ausschließlich Verbindungen aus dem Container selbst an, und die Weiterleitung von Docker kommt nie an. `fastapi run` lauscht bereits auf `0.0.0.0`, `uvicorn` dagegen standardmäßig auf `127.0.0.1`, dort ist `--host 0.0.0.0` nötig.
+Eine zweite, häufige Ursache für "nicht erreichbar" liegt in der Anwendung selbst: Sie muss im Container auf `0.0.0.0` lauschen, nicht auf `127.0.0.1`. Ein Server, der nur auf `127.0.0.1` lauscht, nimmt ausschließlich Verbindungen aus dem Container selbst an, und die Weiterleitung von Docker kommt nie an. `fastapi run` lauscht bereits auf `0.0.0.0`, `uvicorn` dagegen standardmäßig auf `127.0.0.1`, dort ist `--host 0.0.0.0` nötig @fastapi-tiangolo-com-fastapi-cli @uvicorn-dev-settings.
 
-#achtung[*Veröffentlichte Ports umgehen die Firewall `ufw`.* Auf Linux-Servern trägt Docker eigene Regeln in die Paketfilter des Kernels ein, die vor den Regeln von `ufw` greifen. Ein `-p 5432:5432` macht die Datenbank deshalb aus dem Internet erreichbar, auch wenn `ufw` Port 5432 angeblich sperrt. Abhilfe: Dienste nur an `127.0.0.1` binden und über einen Reverse Proxy veröffentlichen (Kapitel 13), zusätzlich die Firewall des Hosting-Anbieters nutzen.]
+#achtung[*Veröffentlichte Ports umgehen die Firewall `ufw`.* Auf Linux-Servern trägt Docker eigene Regeln in die Paketfilter des Kernels ein, die vor den Regeln von `ufw` greifen @docs-docker-com-engine-network-packet-filtering-firewalls. Ein `-p 5432:5432` macht die Datenbank deshalb aus dem Internet erreichbar, auch wenn `ufw` Port 5432 angeblich sperrt. Abhilfe: Dienste nur an `127.0.0.1` binden und über einen Reverse Proxy veröffentlichen (Kapitel 13), zusätzlich die Firewall des Hosting-Anbieters nutzen.]
 
 == Vom Container zum Host
 
-Manchmal muss ein Container einen Dienst erreichen, der direkt auf dem Host läuft, etwa eine lokal installierte Datenbank. Für `--add-host` bietet Docker den besonderen Wert `host-gateway`, der auf die Adresse des Hosts zeigt. Der frei gewählte Hostname links davon lautet im Beispiel `host.docker.internal`:
+Manchmal muss ein Container einen Dienst erreichen, der direkt auf dem Host läuft, etwa eine lokal installierte Datenbank. Für `--add-host` bietet Docker den besonderen Wert `host-gateway`, der auf die Adresse des Hosts zeigt @docs-docker-com-reference-cli-docker-container-run. Der frei gewählte Hostname links davon lautet im Beispiel `host.docker.internal`:
 
 ```bash
 docker run --rm --add-host=host.docker.internal:host-gateway alpine \
   wget -qO- http://host.docker.internal:8080
 ```
 
-Docker Desktop richtet `host.docker.internal` automatisch ein, auf Linux-Servern braucht es das `--add-host` (in Compose: `extra_hosts`). Aktuelle Colima-Versionen stellen den Namen ebenfalls bereit; bei älteren Profilen und besonderen Netzwerkmodi kann das Verhalten abweichen. Am portabelsten ist es, auch den Zieldienst als Container im selben Netz zu betreiben.
+Docker Desktop richtet `host.docker.internal` automatisch ein @docs-docker-com-desktop-features-networking-networking-how-tos, auf Linux-Servern braucht es das `--add-host` (in Compose: `extra_hosts`) @docs-docker-com-reference-compose-file-services. Aktuelle Colima-Versionen stellen den Namen ebenfalls bereit @github-com-abiosoft-colima-blob-main-embedded-defaults-colima-yaml; bei älteren Profilen und besonderen Netzwerkmodi kann das Verhalten abweichen. Am portabelsten ist es, auch den Zieldienst als Container im selben Netz zu betreiben.
 
 == Netzwerktreiber
 
 #table(columns: (auto, 1fr),
   [Treiber], [Verwendung],
-  [`bridge`], [Standard. Eigenes, privates Netz auf einem Host. Für fast alles richtig.],
-  [`host`], [Container nutzt direkt das Netz des Hosts, ohne Isolation und ohne `-p`. Nur auf Linux sinnvoll, am Mac ist "Host" die VM.],
+  [`bridge`], [Standard. Eigenes, privates Netz auf einem Host. Für fast alles richtig @docs-docker-com-engine-network-drivers.],
+  [`host`], [Container nutzt direkt das Netz des Hosts, ohne Isolation und ohne `-p`. Volle Wirkung nur auf Linux. Docker Desktop bietet es ab Version 4.34 als optionale Einstellung @docs-docker-com-engine-network-drivers-host, bei Colima ist "Host" die VM, nicht der Mac.],
   [`none`], [kein Netzwerk, etwa für reine Rechenjobs],
-  [`overlay`], [Netz über mehrere Hosts hinweg, nur mit Swarm (Kapitel 15)],
+  [`overlay`], [Netz über mehrere Hosts hinweg, nur mit Swarm (Kapitel 15) @docs-docker-com-engine-network-drivers-overlay],
 )
 
 == Netzwerke untersuchen
@@ -79,4 +79,4 @@ docker network inspect notizen-netz                  # welche Container mit welc
 docker run --rm -it --network notizen-netz nicolaka/netshoot   # Werkzeugkasten im selben Netz
 ```
 
-Das Image `nicolaka/netshoot` enthält alle üblichen Netzwerkwerkzeuge (`dig`, `curl`, `nc`, `ping`, `tcpdump`). In dasselbe Netz gestartet, lässt sich damit prüfen, ob ein Name aufgelöst wird (`dig db`) und ob ein Port antwortet (`nc -zv db 5432`), ohne die eigenen Images mit Werkzeugen zu belasten.
+Das Image `nicolaka/netshoot` enthält alle üblichen Netzwerkwerkzeuge (`dig`, `curl`, `nc`, `ping`, `tcpdump`) @github-com-nicolaka-netshoot. In dasselbe Netz gestartet, lässt sich damit prüfen, ob ein Name aufgelöst wird (`dig db`) und ob ein Port antwortet (`nc -zv db 5432`), ohne die eigenen Images mit Werkzeugen zu belasten.

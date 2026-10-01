@@ -9,16 +9,16 @@ Das Image aus Kapitel 4 funktioniert, hat aber drei Schwächen: Es enthält Werk
 #table(columns: (auto, auto, 1fr),
   [Variante], [Größe], [Einordnung],
   [`python:3.14`], [ca. 1 GB], [Volles Debian mit Compilern. Nur als Build-Stufe sinnvoll, wenn Pakete kompiliert werden müssen.],
-  [`python:3.14-slim`], [ca. 150 MB], [Schlankes Debian mit Python. *Guter Standard.*],
-  [`python:3.14-alpine`], [ca. 50 MB], [Sehr klein, nutzt aber die C-Bibliothek musl. Viele Python-Pakete haben dafür keine fertigen Binärpakete und müssen aufwendig kompiliert werden. Für Python meist nicht die Ersparnis wert.],
-  [_distroless_ / gehärtete Images], [klein], [Nur Laufzeit, keine Shell, kein Paketmanager. Minimale Angriffsfläche, aber schwerer zu debuggen.],
+  [`python:3.14-slim`], [ca. 150 MB], [Schlankes Debian mit Python @hub-docker-com-python. *Guter Standard.*],
+  [`python:3.14-alpine`], [ca. 50 MB], [Sehr klein, nutzt aber die C-Bibliothek musl statt glibc @hub-docker-com-python. Binärpakete (Wheels) müssen dafür als `musllinux` gebaut sein @peps-python-org-pep-0656; fehlt eines, wird aus dem Quellcode kompiliert, und Software mit glibc-Annahmen kann sich anders verhalten. Für Python meist nicht die Ersparnis wert.],
+  [_distroless_ / gehärtete Images], [klein], [Nur Laufzeit, keine Shell, kein Paketmanager @github-com-googlecontainertools-distroless. Minimale Angriffsfläche, aber schwerer zu debuggen.],
 )
 
-Die Größenangaben sind Größenordnungen. Wichtiger als die letzten Megabytes ist, dass das Image nichts enthält, was nicht gebraucht wird: jedes zusätzliche Programm ist potenziell eine Sicherheitslücke.
+Die Größenangaben sind Größenordnungen für entpackte Images (wie `docker image ls` sie zeigt), Docker Hub nennt kleinere, komprimierte Werte. Wichtiger als die letzten Megabytes ist, dass das Image nichts enthält, was nicht gebraucht wird: jedes zusätzliche Programm ist potenziell eine Sicherheitslücke @docs-docker-com-build-building-best-practices.
 
 == Multi-Stage-Builds
 
-Ein Dockerfile kann mehrere `FROM`-Anweisungen enthalten. Jede beginnt eine neue *Stufe*. Nur die letzte Stufe wird zum Image, aus früheren Stufen werden gezielt Ergebnisse herüberkopiert. So bleiben Build-Werkzeuge und Caches draußen.
+Ein Dockerfile kann mehrere `FROM`-Anweisungen enthalten. Jede beginnt eine neue *Stufe*. Nur die letzte Stufe wird zum Image, aus früheren Stufen werden gezielt Ergebnisse herüberkopiert @docs-docker-com-build-building-multi-stage. So bleiben Build-Werkzeuge und Caches draußen.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -73,18 +73,18 @@ CMD ["fastapi", "run", "app/main.py", "--port", "8000"]
 
 Was die einzelnen Teile bewirken:
 
-- *`# syntax=docker/dockerfile:1`* verwendet die aktuelle Dockerfile-Syntax. Sie ist nötig für die `--mount`-Optionen.
-- *`ARG` vor dem ersten `FROM`* macht Versionen an einer Stelle änderbar, auch von außen: `docker build --build-arg PYTHON_VERSION=3.14 .`
-- *`--mount=type=cache`* hält den Download-Cache von uv zwischen Builds vor, ohne dass er im Image landet. Neue Abhängigkeiten werden nicht jedes Mal komplett neu geladen.
-- *`--mount=type=bind`* stellt `pyproject.toml` und `uv.lock` nur für diesen einen Schritt bereit, ohne eine eigene Schicht zu erzeugen.
-- *`UV_COMPILE_BYTECODE=1`* erzeugt die `.pyc`-Dateien schon beim Bauen, das beschleunigt den Start.
-- *Eigener Benutzer mit fester UID* (Kapitel 12): Der Prozess läuft nicht als `root`. Die feste Nummer erleichtert Rechte auf Volumes und Bind Mounts.
+- *`# syntax=docker/dockerfile:1`* verwendet die aktuelle Dockerfile-Syntax. Die `--mount`-Optionen setzen Dockerfile-Syntax 1.2 oder neuer voraus @docs-docker-com-reference-dockerfile.
+- *`ARG` vor dem ersten `FROM`* macht Versionen an einer Stelle änderbar, auch von außen @docs-docker-com-reference-dockerfile: `docker build --build-arg PYTHON_VERSION=3.14 .`
+- *`--mount=type=cache`* hält den Download-Cache von uv zwischen Builds vor, ohne dass er im Image landet @docs-docker-com-reference-dockerfile @docs-astral-sh-uv-guides-integration-docker. Neue Abhängigkeiten werden nicht jedes Mal komplett neu geladen.
+- *`--mount=type=bind`* stellt `pyproject.toml` und `uv.lock` nur für diesen einen Schritt bereit, ohne eine eigene Schicht zu erzeugen @docs-astral-sh-uv-guides-integration-docker.
+- *`UV_COMPILE_BYTECODE=1`* erzeugt die `.pyc`-Dateien schon beim Bauen, das beschleunigt den Start @docs-astral-sh-uv-guides-integration-docker @docs-astral-sh-uv-reference-environment.
+- *Eigener Benutzer mit fester UID* (Kapitel 12): Der Prozess läuft nicht als `root` @docs-docker-com-build-building-best-practices. Die feste Nummer erleichtert Rechte auf Volumes und Bind Mounts.
 - *`PYTHONUNBUFFERED=1`* sorgt dafür, dass Ausgaben sofort in `docker logs` erscheinen und nicht in einem Puffer hängen.
-- *`HEALTHCHECK`* lässt Docker selbst prüfen, ob die Anwendung antwortet. Das slim-Image hat kein `curl`, deshalb erledigt Python den Aufruf.
+- *`HEALTHCHECK`* lässt Docker selbst prüfen, ob die Anwendung antwortet @docs-docker-com-reference-dockerfile. Das slim-Image hat kein `curl` @hub-docker-com-python, deshalb erledigt Python den Aufruf.
 
 === Geheimnisse beim Bauen
 
-Passwörter, Tokens und SSH-Schlüssel dürfen weder über `ARG` oder `ENV` noch mit `COPY` in den Build gelangen: Sie können in Layern, Metadaten oder Cache-Exporten erhalten bleiben. BuildKit stellt sie nur für einen einzelnen `RUN`-Schritt bereit:
+Passwörter, Tokens und SSH-Schlüssel dürfen weder über `ARG` oder `ENV` noch mit `COPY` in den Build gelangen: Sie können in Layern, Metadaten oder Cache-Exporten erhalten bleiben @docs-docker-com-build-building-secrets. BuildKit stellt sie nur für einen einzelnen `RUN`-Schritt bereit @docs-docker-com-reference-dockerfile:
 
 ```dockerfile
 RUN --mount=type=secret,id=pypi_token \
@@ -96,7 +96,7 @@ RUN --mount=type=secret,id=pypi_token \
 docker build --secret id=pypi_token,src="$HOME/.config/notizen/pypi-token" .
 ```
 
-Das Geheimnis wird dabei nicht Teil des Images. Der verwendete Befehl darf es allerdings auch nicht selbst in Dateien oder Logs schreiben.
+Das Geheimnis wird dabei nicht Teil des Images @docs-docker-com-build-building-secrets. Der verwendete Befehl darf es allerdings auch nicht selbst in Dateien oder Logs schreiben.
 
 == Versionen festlegen
 
@@ -104,15 +104,15 @@ Reproduzierbare Builds brauchen feste Versionen auf jeder Ebene:
 
 #table(columns: (auto, 1fr),
   [Ebene], [Festlegung],
-  [Basis-Image], [beweglicher Versions- und Varianten-Tag (`python:3.14-slim-bookworm`) oder unveränderlicher Digest (`python:3.14-slim-bookworm@sha256:…`)],
+  [Basis-Image], [beweglicher Versions- und Varianten-Tag (`python:3.14-slim-bookworm`) oder unveränderlicher Digest (`python:3.14-slim-bookworm@sha256:…`) @docs-docker-com-build-building-best-practices],
   [Werkzeuge], [`ARG UV_VERSION=...` statt `latest`],
-  [Python-Pakete], [`uv.lock` mit `uv sync --locked`: Der Build bricht ab, wenn Lockfile und `pyproject.toml` nicht zusammenpassen.],
-  [Systempakete], [nur wenn nötig, dann mit `apt-get install --no-install-recommends` und anschließendem Aufräumen von `/var/lib/apt/lists`],
+  [Python-Pakete], [`uv.lock` mit `uv sync --locked`: Der Build bricht ab, wenn Lockfile und `pyproject.toml` nicht zusammenpassen @docs-astral-sh-uv-concepts-projects-sync.],
+  [Systempakete], [nur wenn nötig, dann mit `apt-get install --no-install-recommends` und anschließendem Aufräumen von `/var/lib/apt/lists` @docs-docker-com-build-building-best-practices],
 )
 
-Ein Tag bleibt beweglich und liefert Aktualität, aber keine bitgenaue Reproduzierbarkeit. Ein Digest ist unveränderlich, hat jedoch einen Preis: Sicherheitsupdates des Basis-Images kommen nicht mehr automatisch. Wer pinnt, braucht einen Prozess zum Aktualisieren, etwa Renovate mit Pull Requests für neue Digests. Für kleine Projekte ist ein expliziter Python- und Debian-Tag plus regelmäßiges Neubauen pragmatisch; für kontrollierte Releases wird der getestete Digest dokumentiert oder direkt gepinnt.
+Ein Tag bleibt beweglich und liefert Aktualität, aber keine bitgenaue Reproduzierbarkeit. Ein Digest ist unveränderlich, hat jedoch einen Preis: Sicherheitsupdates des Basis-Images kommen nicht mehr automatisch @docs-docker-com-build-building-best-practices. Wer pinnt, braucht einen Prozess zum Aktualisieren, etwa Renovate mit Pull Requests für neue Digests @docs-renovatebot-com-docker. Für kleine Projekte ist ein expliziter Python- und Debian-Tag plus regelmäßiges Neubauen pragmatisch; für kontrollierte Releases wird der getestete Digest dokumentiert oder direkt gepinnt.
 
-#tipp[Als weitere Option gibt es _Docker Hardened Images_: minimale, standardmäßig als Nicht-Root ausgelegte Images mit SBOM, Provenance und Signaturen. Sie reduzieren die Angriffsfläche, ersetzen aber keine Kompatibilitäts- und Funktionstests. Für das durchgängige Beispiel bleibt das offizielle Python-Image verständlicher.]
+#tipp[Als weitere Option gibt es _Docker Hardened Images_: minimale, standardmäßig als Nicht-Root ausgelegte Images mit SBOM, Provenance und Signaturen @docs-docker-com-dhi. Sie reduzieren die Angriffsfläche, ersetzen aber keine Kompatibilitäts- und Funktionstests. Für das durchgängige Beispiel bleibt das offizielle Python-Image verständlicher.]
 
 == Metadaten
 
@@ -122,4 +122,4 @@ LABEL org.opencontainers.image.source="https://gitea.example.com/team/notizen" \
       org.opencontainers.image.revision="3f2a9c1"
 ```
 
-Die standardisierten `org.opencontainers`-Labels verknüpfen ein Image mit seinem Quellcode. Version und Commit setzt man in der CI per `--label` oder `--build-arg`, damit sie nicht von Hand gepflegt werden müssen (Kapitel 14).
+Die standardisierten `org.opencontainers`-Labels verknüpfen ein Image mit seinem Quellcode @github-com-opencontainers-image-spec-blob-main-annotations-md. Version und Commit setzt man in der CI per `--label` oder `--build-arg`, damit sie nicht von Hand gepflegt werden müssen (Kapitel 14).

@@ -6,11 +6,11 @@ Ein Workflow ist nur eine Beschreibung. Damit er läuft, braucht es einen Runner
 
 == Der Runner
 
-Der Runner ist ein kleines Go-Programm, das bei Gitea nach Jobs fragt und sie in Docker-Containern oder direkt auf dem Host ausführt. Bis 2026 hieß er `act_runner` (Docker-Image `gitea/act_runner`), seit der Umbenennung heißt er `gitea-runner` (Image `gitea/runner`, Stand September 2026 Version 3.5.0). Server und Runner werden unabhängig versioniert. Beim Wechsel einer Runner-Hauptversion sind die Upgrade-Hinweise verbindlich; sowohl 2.0 als auch 3.0 brachten absichtliche Inkompatibilitäten.
+Der Runner ist ein kleines Go-Programm, das bei Gitea nach Jobs fragt @docs-gitea-com-usage-actions-design und sie in Docker-Containern oder direkt auf dem Host ausführt @docs-gitea-com-runner-labels. Bis 2026 hieß er `act_runner` (Docker-Image `gitea/act_runner`), seit der Umbenennung mit Version 1.0.0 heißt er `gitea-runner` (Image `gitea/runner`) @blog-gitea-com-release-of-runner-1-0-0. Das Buch verwendet Version 3.5.0 vom 14. September 2026; seit dem 24. September gibt es 4.0 @gitea-com-gitea-runner-releases-tag-v4-0-0. Server und Runner werden unabhängig versioniert. Beim Wechsel einer Runner-Hauptversion sind die Upgrade-Hinweise verbindlich; 2.0, 3.0 und 4.0 brachten absichtliche Inkompatibilitäten @docs-gitea-com-runner-upgrade @gitea-com-gitea-runner-releases-tag-v4-0-0.
 
 === Wo ein Runner registriert wird
 
-Ein Runner wird mit einem *Registrierungstoken* an Gitea gebunden. Wo du das Token holst, bestimmt, wem der Runner dient:
+Ein Runner wird mit einem *Registrierungstoken* an Gitea gebunden. Wo du das Token holst, bestimmt, wem der Runner dient @docs-gitea-com-runner-registration @docs-gitea-com-usage-actions-quickstart:
 
 #table(columns: (auto, auto, 1fr),
   [Ebene], [Token unter], [Runner nimmt Jobs von],
@@ -54,13 +54,13 @@ docker compose up -d
 docker compose logs -f           # auf "Runner registered successfully" bzw. "declared successfully" achten
 ```
 
-In der von `gitea-runner` erzeugten Datei sind alle Optionen auskommentiert, es gelten also die Standardwerte. Was du ändern willst, kommentierst du ein. Nach dem ersten Start liegt die Registrierung in `data/.runner`; behandle diese Datei wie ein Geheimnis und sichere sie nicht öffentlich. Entferne danach `GITEA_RUNNER_REGISTRATION_TOKEN` aus Compose und `.env`, denn das Registrierungstoken wird nicht mehr gebraucht. In Gitea erscheint der Runner in der Runner-Liste mit Status _Idle_.
+In der von `gitea-runner` erzeugten Datei sind alle Optionen auskommentiert, es gelten also die Standardwerte @docs-gitea-com-runner-configuration. Was du ändern willst, kommentierst du ein. Nach dem ersten Start liegt die Registrierung in `data/.runner` @docs-gitea-com-runner-registration; behandle diese Datei wie ein Geheimnis und sichere sie nicht öffentlich. Entferne danach `GITEA_RUNNER_REGISTRATION_TOKEN` aus Compose und `.env`, denn das Registrierungstoken wird nicht mehr gebraucht @docs-gitea-com-runner-registration; ein Job mit Zugriff auf den Docker-Socket könnte es sonst per `docker inspect` aus dem Runner-Container lesen @docs-gitea-com-runner-installation-docker. In Gitea erscheint der Runner in der Runner-Liste mit Status _Idle_.
 
 === Labels: Wie Jobs zum Runner finden
 
-Ein Label hat die Form `name:schema:argument`. `ubuntu-latest:docker://docker.gitea.com/runner-images:ubuntu-latest` bedeutet: Ein Job mit `runs-on: ubuntu-latest` läuft in einem Container aus dem Image `docker.gitea.com/runner-images:ubuntu-latest`. Diese offiziellen Images enthalten die üblichen Werkzeuge (Git, Node.js für Actions, Docker-CLI, Build-Werkzeuge). Mit dem Schema `host` (etwa `macos:host`) laufen Jobs direkt auf dem Rechner des Runners, ohne Container. So lassen sich zum Beispiel Swift- oder Xcode-Builds auf einem Mac ausführen.
+Ein Label hat die Form `name:schema:argument` @docs-gitea-com-runner-labels. `ubuntu-latest:docker://docker.gitea.com/runner-images:ubuntu-latest` bedeutet: Ein Job mit `runs-on: ubuntu-latest` läuft in einem Container aus dem Image `docker.gitea.com/runner-images:ubuntu-latest` @docs-gitea-com-runner-labels. Diese offiziellen Images enthalten die üblichen Werkzeuge (Git, Node.js für Actions, Docker-CLI, Build-Werkzeuge). Mit dem Schema `host` (etwa `macos:host`) laufen Jobs direkt auf dem Rechner des Runners, ohne Container @docs-gitea-com-runner-labels. So lassen sich zum Beispiel Swift- oder Xcode-Builds auf einem Mac ausführen.
 
-Eigene Labels sind jederzeit möglich, etwa `build:docker://python:3.13` für Jobs mit `runs-on: build`. Findet ein Job keinen Runner mit passendem Label, bleibt er dauerhaft im Zustand _Wartend_. Das ist der häufigste Grund für "die Pipeline startet nicht".
+Eigene Labels sind jederzeit möglich, etwa `build:docker://python:3.13` für Jobs mit `runs-on: build`. Ein Job läuft nur auf einem Runner, der alle Labels aus `runs-on` besitzt @docs-gitea-com-usage-actions-faq. Findet ein Job keinen Runner mit passendem Label, bleibt er dauerhaft im Zustand _Wartend_. Das ist der häufigste Grund für "die Pipeline startet nicht".
 
 === Die wichtigsten Einstellungen
 
@@ -76,13 +76,13 @@ container:
 ```
 ]
 
-Mit `gitea-runner config generate` bekommst du die vollständige, kommentierte Liste aller Optionen. Mit `capacity` solltest du bei kleinen Rechnern wie einer NAS vorsichtig sein: Zwei parallele Builds mit Docker können 4 bis 8 GB RAM belegen.
+Mit `gitea-runner config generate` bekommst du die vollständige, kommentierte Liste aller Optionen @gitea-com-gitea-runner. Mit `capacity` solltest du bei kleinen Rechnern wie einer NAS vorsichtig sein: Zwei parallele Builds mit Docker können 4 bis 8 GB RAM belegen.
 
-#achtung[Wer den Docker-Socket in einen Container einbindet, gibt diesem Container und damit jedem Job faktisch Root-Rechte auf dem Host. Ein Workflow kann über den Socket beliebige Container starten und das Host-Dateisystem einbinden. Deshalb gehört ein Runner auf einen eigenen Rechner oder in eine eigene VM, nicht auf den Server mit den produktiven Daten. Er sollte nur Workflows aus vertrauenswürdigen Repositories ausführen. Das Image existiert zusätzlich in den Varianten `latest-dind` (eigener Docker-Daemon im Container, privilegiert) und `latest-dind-rootless` (eigener Daemon ohne Root-Rechte). Die rootless-Variante reduziert das Risiko, bringt aber die üblichen Einschränkungen von rootless Docker mit.]
+#achtung[Wer den Docker-Socket in einen Container einbindet, gibt diesem Container und damit jedem Job faktisch Root-Rechte auf dem Host @cheatsheetseries-owasp-org-cheatsheets-docker-security-cheat-sheet-html. Ein Workflow kann über den Socket beliebige Container starten und das Host-Dateisystem einbinden. Deshalb gehört ein Runner auf einen eigenen Rechner oder in eine eigene VM, nicht auf den Server mit den produktiven Daten. Er sollte nur Workflows aus vertrauenswürdigen Repositories ausführen. Das Image existiert zusätzlich in den Varianten `latest-dind` (eigener Docker-Daemon im Container, privilegiert) und `latest-dind-rootless` (eigener Daemon ohne Root-Rechte) @gitea-com-gitea-runner @docs-gitea-com-runner-installation-docker. Die rootless-Variante reduziert das Risiko, bringt aber die üblichen Einschränkungen von rootless Docker (Netzwerk, cgroups, Storage-Treiber) mit @docs-gitea-com-runner-installation-docker.]
 
 == Secrets und Variablen
 
-Passwörter, Tokens und private Schlüssel gehören nie in eine Workflow-Datei, denn die liegt im Repository und ist für alle lesbar. Stattdessen hinterlegst du sie in Gitea als *Secrets*, nicht geheime Einstellungen als *Variablen*:
+Passwörter, Tokens und private Schlüssel gehören nie in eine Workflow-Datei, denn die liegt im Repository und ist für alle lesbar. Stattdessen hinterlegst du sie in Gitea als *Secrets*, nicht geheime Einstellungen als *Variablen* @docs-gitea-com-usage-actions-secrets @docs-gitea-com-usage-actions-actions-variables:
 
 #table(columns: (auto, 1fr, 1fr),
   [], [Secret], [Variable],
@@ -92,16 +92,16 @@ Passwörter, Tokens und private Schlüssel gehören nie in eine Workflow-Datei, 
   [Typische Inhalte], [SSH-Schlüssel, API-Tokens, Passwörter], [Hostnamen, Benutzernamen, URLs, `known_hosts`],
 )
 
-Beide lassen sich auf Ebene des Benutzers, der Organisation und des Repositories anlegen (_Einstellungen -> Actions -> Secrets_ bzw. _Variablen_). Gibt es denselben Namen auf mehreren Ebenen, gewinnt die spezifischere. Namen dürfen nur Buchstaben, Ziffern und Unterstriche enthalten, nicht mit einer Ziffer und nicht mit `GITEA_` oder `GITHUB_` beginnen. Groß- und Kleinschreibung wird nicht unterschieden.
+Beide lassen sich auf Ebene des Benutzers, der Organisation und des Repositories anlegen (_Einstellungen -> Actions -> Secrets_ bzw. _Variablen_) @docs-gitea-com-usage-actions-secrets @docs-gitea-com-usage-actions-actions-variables. Gibt es denselben Namen auf mehreren Ebenen, gewinnt die spezifischere @docs-gitea-com-usage-actions-secrets. Namen dürfen nur Buchstaben, Ziffern und Unterstriche enthalten, nicht mit einer Ziffer und nicht mit `GITEA_` oder `GITHUB_` beginnen (bei Variablen zusätzlich nicht mit `CI`). Groß- und Kleinschreibung wird nicht unterschieden @docs-gitea-com-usage-actions-secrets @docs-gitea-com-usage-actions-actions-variables.
 
-Zusätzlich erzeugt Gitea für jeden Lauf automatisch ein kurzlebiges Token, erreichbar als `secrets.GITEA_TOKEN` (oder `secrets.GITHUB_TOKEN`). Es erlaubt dem Workflow Zugriff auf das eigene Repository über die Gitea-API, aber, wie in Kapitel 13 erwähnt, nicht das Hochladen von Paketen und Container-Images.
+Zusätzlich erzeugt Gitea für jeden Lauf automatisch ein kurzlebiges Token, erreichbar als `secrets.GITEA_TOKEN` (oder `secrets.GITHUB_TOKEN`). Es erlaubt dem Workflow Zugriff auf das eigene Repository über die Gitea-API @docs-gitea-com-usage-actions-token-permissions, aber, wie in Kapitel 13 erwähnt, nicht das Hochladen von Paketen und Container-Images @docs-gitea-com-usage-actions-comparison.
 
 Regeln für den sicheren Umgang:
 
-- *Secrets über `env:` übergeben, nicht direkt in Befehle einsetzen.* `run: tool --token ${{ secrets.X }}` macht das Token für andere Prozesse in der Prozessliste sichtbar und kann in Fehlermeldungen landen. Besser: `env: TOKEN: ${{ secrets.X }}` und im Befehl `$TOKEN`.
-- *Nie ausgeben* oder in Dateien schreiben, die als Artefakt hochgeladen werden. Die Maskierung erkennt exakte und einige häufig kodierte Formen, aber keine beliebige Umformung, Aufteilung oder Verschlüsselung eines Secrets.
+- *Secrets über `env:` übergeben, nicht direkt in Befehle einsetzen.* `run: tool --token ${{ secrets.X }}` macht das Token für andere Prozesse in der Prozessliste sichtbar und kann in Fehlermeldungen landen. Besser: `env: TOKEN: ${{ secrets.X }}` und im Befehl `$TOKEN` @docs-github-com-en-actions-reference-security-secure-use.
+- *Nie ausgeben* oder in Dateien schreiben, die als Artefakt hochgeladen werden. Die Maskierung erkennt exakte und einige häufig kodierte Formen @gitea-com-gitea-runner-releases-tag-v3-0-0, aber keine beliebige Umformung, Aufteilung oder Verschlüsselung eines Secrets @docs-github-com-en-actions-reference-security-secure-use.
 - *Pull Requests aus Forks bekommen keine Secrets.* Das ist eine Schutzmaßnahme: Sonst könnte jeder per PR einen Workflow einschleusen, der die Secrets ausliest.
-- *Minimale Rechte und eigene Zugangsdaten pro Zweck.* Ein Token nur für die Registry, ein SSH-Schlüssel nur für das Deployment. Regelmäßig austauschen.
+- *Minimale Rechte und eigene Zugangsdaten pro Zweck.* Ein Token nur für die Registry, ein SSH-Schlüssel nur für das Deployment. Regelmäßig austauschen @docs-github-com-en-actions-reference-security-secure-use.
 
 == Deployment per SSH
 
@@ -132,7 +132,7 @@ Das Ziel: Nach einem erfolgreichen Build auf `main` soll der Runner auf dem Ziel
 ssh-keygen -t ed25519 -N "" -C "ci-deploy demo" -f ./deploy_demo
 ```
 
-Das erzeugt `deploy_demo` (privat, kommt als Secret nach Gitea) und `deploy_demo.pub` (öffentlich, kommt auf den Server). Nach dem Einrichten löschst du beide Dateien vom Mac.
+Das erzeugt `deploy_demo` (privat, kommt als Secret nach Gitea) und `deploy_demo.pub` (öffentlich, kommt auf den Server) @man-openbsd-org-ssh-keygen. Nach dem Einrichten löschst du beide Dateien vom Mac.
 
 === Schritt 2: Der Server lässt nur ein Skript zu
 
@@ -144,7 +144,7 @@ restrict,command="/srv/demo/deploy.sh" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... c
 ```
 ]
 
-`restrict` verbietet Port-Weiterleitungen, Agent-Weiterleitung und ein Terminal. `command=` erzwingt, dass bei jeder Anmeldung mit diesem Schlüssel ausschließlich das angegebene Skript läuft, egal welchen Befehl der Client mitschickt. Den mitgeschickten Befehl findet das Skript in der Variable `SSH_ORIGINAL_COMMAND` und kann ihn als Parameter nutzen, hier für die Version. Dabei muss es ihn streng prüfen:
+`restrict` verbietet Port-Weiterleitungen, Agent-Weiterleitung und ein Terminal @man-openbsd-org-sshd-8. `command=` erzwingt, dass bei jeder Anmeldung mit diesem Schlüssel ausschließlich das angegebene Skript läuft, egal welchen Befehl der Client mitschickt. Den mitgeschickten Befehl findet das Skript in der Variable `SSH_ORIGINAL_COMMAND` und kann ihn als Parameter nutzen, hier für die Version @man-openbsd-org-sshd-8. Dabei muss es ihn streng prüfen:
 
 #datei("/srv/demo/deploy.sh")[
 ```bash
@@ -185,18 +185,18 @@ sudo chmod 755 /srv/demo/deploy.sh
 sudo usermod -aG docker deploy     # siehe Hinweis unten
 ```
 
-#achtung[Mitglieder der Gruppe `docker` haben faktisch Root-Rechte. Wegen der `command=`-Einschränkung kann der Deploy-Schlüssel diese Rechte aber nur über `deploy.sh` nutzen. Noch strenger ist eine `sudo`-Regel, die dem Benutzer `deploy` nur genau dieses Skript erlaubt, statt ihn in die Docker-Gruppe aufzunehmen. `--wait` setzt funktionierende `healthcheck`-Einträge im Compose-Modell voraus; den Rollback-Pfad vor dem ersten echten Release absichtlich testen.]
+#achtung[Mitglieder der Gruppe `docker` haben faktisch Root-Rechte @docs-docker-com-engine-install-linux-postinstall. Wegen der `command=`-Einschränkung kann der Deploy-Schlüssel diese Rechte aber nur über `deploy.sh` nutzen. Noch strenger ist eine `sudo`-Regel, die dem Benutzer `deploy` nur genau dieses Skript erlaubt, statt ihn in die Docker-Gruppe aufzunehmen. `--wait` wartet, bis die Dienste laufen bzw. gesund sind @docs-docker-com-reference-cli-docker-compose-up, und setzt für Letzteres funktionierende `healthcheck`-Einträge im Compose-Modell voraus; den Rollback-Pfad vor dem ersten echten Release absichtlich testen.]
 
 === Schritt 3: Den Server-Schlüssel festnageln
 
-Damit sich niemand als Zielserver ausgeben kann, muss der Runner den Host-Schlüssel des Servers vorab kennen. Den ermittelst du einmal und prüfst den Fingerabdruck gegen den Server selbst:
+Damit sich niemand als Zielserver ausgeben kann, muss der Runner den Host-Schlüssel des Servers vorab kennen. Den ermittelst du einmal und prüfst den Fingerabdruck gegen den Server selbst, denn `ssh-keyscan` allein kann die Echtheit der Schlüssel nicht prüfen @man-openbsd-org-ssh-keyscan:
 
 ```bash
 ssh-keyscan -t ed25519 app.example.com            # Zeile für known_hosts
 ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub  # auf dem Server: Fingerabdruck zum Vergleich
 ```
 
-Die Ausgabe von `ssh-keyscan` speicherst du als Variable `DEPLOY_KNOWN_HOSTS` in Gitea. Im Workflow wird dann mit `StrictHostKeyChecking=yes` geprüft. Das häufig zu sehende `StrictHostKeyChecking=no` schaltet genau diesen Schutz ab.
+Die Ausgabe von `ssh-keyscan` speicherst du als Variable `DEPLOY_KNOWN_HOSTS` in Gitea. Im Workflow wird dann mit `StrictHostKeyChecking=yes` geprüft @man-openbsd-org-ssh-config. Das häufig zu sehende `StrictHostKeyChecking=no` schaltet genau diesen Schutz ab @man-openbsd-org-ssh-config.
 
 === Schritt 4: Secrets und Variablen in Gitea
 
@@ -233,13 +233,13 @@ Die Ausgabe von `ssh-keyscan` speicherst du als Variable `DEPLOY_KNOWN_HOSTS` in
 ```
 ]
 
-Es gibt fertige Actions für SSH-Deployments (etwa `appleboy/ssh-action`). Sie sind bequem, bedeuten aber, dass fremder Code deinen privaten Schlüssel verarbeitet. Die vier Zeilen Shell oben sind transparent und brauchen keine Abhängigkeit.
+Es gibt fertige Actions für SSH-Deployments (etwa `appleboy/ssh-action`). Sie sind bequem, bedeuten aber, dass fremder Code deinen privaten Schlüssel verarbeitet @docs-github-com-en-actions-reference-security-secure-use. Die vier Zeilen Shell oben sind transparent und brauchen keine Abhängigkeit.
 
-#praxis[Liegt der Zielserver in einem privaten Netz oder ist er nur über WireGuard erreichbar, muss der *Runner* in diesem Netz sein, nicht Gitea. Da der Runner seine Verbindungen selbst aufbaut (Kapitel 13), genügt es, den Runner-Host ins VPN zu nehmen. Gitea selbst braucht keinen Zugang zum Zielserver.]
+#praxis[Liegt der Zielserver in einem privaten Netz oder ist er nur über WireGuard erreichbar, muss der *Runner* in diesem Netz sein, nicht Gitea. Da der Runner seine Verbindungen selbst aufbaut (Kapitel 13) @docs-gitea-com-usage-actions-design, genügt es, den Runner-Host ins VPN zu nehmen. Gitea selbst braucht keinen Zugang zum Zielserver.]
 
 == Container-Images in der Gitea-Registry
 
-Gitea hat eine eingebaute Container-Registry. Images heißen dort `gitea.example.com/<besitzer>/<image>:<tag>`, also etwa `gitea.example.com/team/demo:3f2a9c1`. Weil der automatische `GITEA_TOKEN` keine Pakete hochladen darf, legst du unter _Einstellungen -> Anwendungen_ einen persönlichen Zugriffstoken mit Schreibrecht für Pakete an und speicherst ihn als Secret `REGISTRY_TOKEN`:
+Gitea hat eine eingebaute Container-Registry. Images heißen dort `gitea.example.com/<besitzer>/<image>:<tag>`, also etwa `gitea.example.com/team/demo:3f2a9c1` @docs-gitea-com-usage-packages-container. Weil der automatische `GITEA_TOKEN` keine Pakete hochladen darf @docs-gitea-com-usage-actions-comparison, legst du unter _Einstellungen -> Anwendungen_ einen persönlichen Zugriffstoken mit Schreibrecht für Pakete an @docs-gitea-com-usage-packages-container @docs-gitea-com-development-oauth2-provider und speicherst ihn als Secret `REGISTRY_TOKEN`:
 
 ```yaml
   build:
@@ -260,17 +260,17 @@ Gitea hat eine eingebaute Container-Registry. Images heißen dort `gitea.example
           docker push "$IMAGE:latest"
 ```
 
-Damit `docker build` im Job funktioniert, braucht der Job Zugriff auf einen Docker-Daemon. Beim Runner-Setup mit eingebundenem Socket ist das gegeben, die Runner-Images bringen die Docker-CLI mit. Auf dem Zielserver steht in der `docker-compose.yml` dann `image: gitea.example.com/team/demo:${IMAGE_TAG}`, und der Server braucht einmalig ein `docker login` mit einem Token, das nur Leserechte für Pakete hat. Ausgerollt wird immer der unveränderliche Commit- oder Versions-Tag; `latest` ist höchstens ein bequemer Hinweis und darf nie die Grundlage für reproduzierbare Deployments oder Rollbacks sein.
+Damit `docker build` im Job funktioniert, braucht der Job Zugriff auf einen Docker-Daemon. Beim Runner-Setup mit eingebundenem Socket ist das gegeben, die Runner-Images bringen die Docker-CLI mit. Auf dem Zielserver steht in der `docker-compose.yml` dann `image: gitea.example.com/team/demo:${IMAGE_TAG}`, und der Server braucht einmalig ein `docker login` mit einem Token, das nur Leserechte für Pakete hat @docs-gitea-com-development-oauth2-provider. Ausgerollt wird immer der unveränderliche Commit- oder Versions-Tag; `latest` ist höchstens ein bequemer Hinweis und darf nie die Grundlage für reproduzierbare Deployments oder Rollbacks sein.
 
 == SonarQube: statische Codeanalyse
 
-SonarQube untersucht den Quellcode, ohne ihn auszuführen, auf Fehlermuster, Sicherheitsprobleme (_Vulnerabilities_ und _Security Hotspots_), Wartbarkeitsmängel (_Code Smells_), Duplikate und Testabdeckung. Das Ergebnis wird an einem *Quality Gate* gemessen, einem Satz von Schwellwerten wie "keine neuen kritischen Probleme" und "mindestens 80 % Abdeckung im neuen Code".
+SonarQube untersucht den Quellcode, ohne ihn auszuführen, auf Fehlermuster, Sicherheitsprobleme (_Vulnerabilities_ und _Security Hotspots_), Wartbarkeitsmängel (_Code Smells_), Duplikate und Testabdeckung @docs-sonarsource-com-sonarqube-community-build-glossary. Das Ergebnis wird an einem *Quality Gate* gemessen, einem Satz von Schwellwerten wie "keine neuen kritischen Probleme" und "mindestens 80 % Abdeckung im neuen Code" @docs-sonarsource-com-sonarqube-community-build-glossary @docs-sonarsource-com-sonarqube-community-build-quality-standards-administration-managing-quality-gates-introduction-to-quality-gates.
 
-#merke[Die kostenlose _Community Build_ von SonarQube analysiert nur *einen* Branch pro Projekt, den Hauptbranch. Analysen von Feature-Branches und Pull Requests samt Kommentaren im PR gibt es erst in den kostenpflichtigen Editionen, und auch dort ist Gitea keine offiziell unterstützte Plattform für PR-Kommentare. Praktische Folge: In der Community Build lässt du Sonar *nur bei Pushes auf `main`* laufen. Eine Analyse eines Feature-Branches würde sonst die Ergebnisse von `main` überschreiben.]
+#merke[Die kostenlose _Community Build_ von SonarQube analysiert nur *einen* Branch pro Projekt, den Hauptbranch. Analysen von Feature-Branches und Pull Requests samt Kommentaren im PR gibt es erst in den kostenpflichtigen Editionen, und auch dort ist Gitea keine offiziell unterstützte Plattform für PR-Kommentare @sonarsource-com-blog-sonarqube-compare-editions. Praktische Folge: In der Community Build lässt du Sonar *nur bei Pushes auf `main`* laufen. Eine Analyse eines Feature-Branches würde sonst die Ergebnisse von `main` überschreiben.]
 
 === Server und Projekt
 
-SonarQube läuft als Docker-Container mit einer PostgreSQL-Datenbank und braucht spürbar Ressourcen (mindestens 2, besser 4 GB RAM). Weil es intern Elasticsearch verwendet, muss auf dem Host ein Kernel-Parameter gesetzt sein, sonst startet es nicht:
+SonarQube läuft als Docker-Container mit einer PostgreSQL-Datenbank und braucht spürbar Ressourcen (laut Dokumentation mindestens 4 GB RAM für kleine Installationen) @docs-sonarsource-com-sonarqube-community-build-server-installation-server-host-requirements. Weil es intern Elasticsearch verwendet, muss auf dem Host ein Kernel-Parameter gesetzt sein, sonst startet es nicht @docs-sonarsource-com-sonarqube-community-build-server-installation-pre-installation-linux:
 
 ```bash
 sudo sysctl -w vm.max_map_count=524288   # dauerhaft in /etc/sysctl.conf eintragen
@@ -318,4 +318,4 @@ sonar.python.coverage.reportPaths=reports/coverage.xml
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 ```
 
-Die Scan-Action lädt beim ersten Lauf den _SonarScanner_ samt Java-Laufzeit von den Servern von SonarSource herunter, der Runner braucht dafür Internetzugang. Der Quality-Gate-Schritt wartet auf das Ergebnis der Auswertung und lässt den Job fehlschlagen, wenn das Gate rot ist. Hängen spätere Jobs wie das Deployment per `needs` an `sonar`, wird bei rotem Gate nicht ausgeliefert. Die Versionsangaben `@v7` und `@v1` entsprechen der Sonar-Dokumentation von 2026. Neue Hauptversionen können Konfigurationsänderungen mitbringen, deshalb vor einem Update die Release Notes lesen.
+Die Scan-Action lädt beim ersten Lauf den _SonarScanner_ samt Java-Laufzeit herunter, der Runner braucht dafür Internetzugang @github-com-sonarsource-sonarqube-scan-action. Der Quality-Gate-Schritt wartet auf das Ergebnis der Auswertung und lässt den Job fehlschlagen, wenn das Gate rot ist @github-com-sonarsource-sonarqube-quality-gate-action. Hängen spätere Jobs wie das Deployment per `needs` an `sonar`, wird bei rotem Gate nicht ausgeliefert. Die Versionsangaben `@v7` und `@v1` sind die hier verwendeten Hauptversionen; die Scan-Action gibt es inzwischen als `v8` (Stand 30. September 2026: 8.3.0), das die Signaturprüfung des Scanners standardmäßig aktiviert @github-com-sonarsource-sonarqube-scan-action-releases. Neue Hauptversionen können Konfigurationsänderungen mitbringen, deshalb vor einem Update die Release Notes lesen.

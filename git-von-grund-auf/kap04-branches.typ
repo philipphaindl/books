@@ -2,7 +2,7 @@
 
 = Branches
 
-Branches sind in Git billig und schnell, deshalb solltest du sie großzügig einsetzen: für jede Funktion, jeden Bugfix, jedes Experiment. `main` bleibt dadurch jederzeit in einem funktionierenden Zustand, und angefangene Arbeit stört niemanden.
+Branches sind in Git billig und schnell @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell, deshalb solltest du sie großzügig einsetzen: für jede Funktion, jeden Bugfix, jedes Experiment. `main` bleibt dadurch jederzeit in einem funktionierenden Zustand, und angefangene Arbeit stört niemanden.
 
 == Anlegen und wechseln
 
@@ -14,7 +14,7 @@ git switch -c fix/typo a1b2c3d  # Branch an einem bestimmten Commit anlegen
 git switch -                    # zurück zum vorherigen Branch
 ```
 
-Früher erledigte `git checkout` all das und noch viel mehr (auch das Zurücksetzen von Dateien). Seit Git 2.23 gibt es die klareren Befehle `git switch` für Branches und `git restore` für Dateien. `git checkout -b name` funktioniert weiterhin und taucht in vielen Anleitungen auf, meint aber dasselbe wie `git switch -c name`.
+Früher erledigte `git checkout` all das und noch viel mehr (auch das Zurücksetzen von Dateien). Seit Git 2.23 gibt es die klareren Befehle `git switch` für Branches und `git restore` für Dateien @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell @git-scm-com-docs-git-restore. `git checkout -b name` funktioniert weiterhin und taucht in vielen Anleitungen auf, meint aber dasselbe wie `git switch -c name` @git-scm-com-docs-git-checkout.
 
 #figure(
   grid(columns: (1fr, 1fr, 1fr), column-gutter: 6pt,
@@ -28,31 +28,31 @@ Früher erledigte `git checkout` all das und noch viel mehr (auch das Zurückset
   caption: [Ein Branch entsteht als zweiter Zeiger auf denselben Commit. Erst beim nächsten Commit laufen die Zeiger auseinander.],
 )
 
-Beim Wechseln passt Git das Arbeitsverzeichnis an den Schnappschuss des Ziel-Branches an: Dateien werden geändert, hinzugefügt oder entfernt. Bei großen Unterschieden kann das einen Moment dauern, es passiert aber lokal ohne Netzwerk.
+Beim Wechseln passt Git das Arbeitsverzeichnis an den Schnappschuss des Ziel-Branches an: Dateien werden geändert, hinzugefügt oder entfernt @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell. Bei großen Unterschieden kann das einen Moment dauern, es passiert aber lokal ohne Netzwerk.
 
 == Branches verwalten
 
 #table(columns: (auto, 1fr),
   [Befehl], [Wirkung],
-  [`git branch`], [lokale Branches auflisten, der aktuelle ist mit `*` markiert],
-  [`git branch -vv`], [zusätzlich letzter Commit, Upstream und ahead/behind],
-  [`git branch -a`], [auch Remote-Tracking-Branches (`origin/...`) anzeigen],
-  [`git branch --merged`], [Branches, deren Commits vollständig im aktuellen Branch enthalten sind],
-  [`git branch --no-merged`], [Branches mit noch nicht integrierten Commits],
-  [`git branch -d feature`], [löschen, aber nur wenn gemergt (sicher)],
-  [`git branch -D feature`], [löschen erzwingen, auch mit ungemergten Commits],
-  [`git branch -m alt neu`], [umbenennen (`-m neu` allein benennt den aktuellen Branch um)],
+  [`git branch`], [lokale Branches auflisten, der aktuelle ist mit `*` markiert @git-scm-com-docs-git-branch],
+  [`git branch -vv`], [zusätzlich letzter Commit, Upstream und ahead/behind @git-scm-com-docs-git-branch],
+  [`git branch -a`], [auch Remote-Tracking-Branches (`origin/...`) anzeigen @git-scm-com-docs-git-branch],
+  [`git branch --merged`], [Branches, deren Commits vollständig im aktuellen Branch enthalten sind @git-scm-com-docs-git-branch],
+  [`git branch --no-merged`], [Branches mit noch nicht integrierten Commits @git-scm-com-docs-git-branch],
+  [`git branch -d feature`], [löschen, aber nur wenn gemergt (sicher) @git-scm-com-docs-git-branch],
+  [`git branch -D feature`], [löschen erzwingen, auch mit ungemergten Commits @git-scm-com-docs-git-branch],
+  [`git branch -m alt neu`], [umbenennen (`-m neu` allein benennt den aktuellen Branch um) @git-scm-com-docs-git-branch],
 )
 
-Beim Löschen eines Branches wird nur der Zeiger entfernt, die Commits bleiben in der Datenbank und sind über das Reflog noch Wochen lang auffindbar (Kapitel 9). `-D` ist also weniger gefährlich, als es klingt, sollte aber trotzdem nur mit Absicht verwendet werden.
+Beim Löschen eines Branches wird nur der Zeiger samt seinem eigenen Reflog entfernt @git-scm-com-docs-git-branch. Die Commits bleiben zunächst in der Datenbank und sind, sofern du sie ausgecheckt hattest, über das Reflog von `HEAD` noch Wochen lang auffindbar @git-scm-com-docs-git-reflog @git-scm-com-docs-git-gc (Kapitel 9). `-D` ist also weniger gefährlich, als es klingt, sollte aber trotzdem nur mit Absicht verwendet werden.
 
-#tipp[Nach einem gemergten Pull Request räumst du lokal so auf: `git switch main`, `git pull`, `git branch -d feature/login`. Weigert sich Git mit "not fully merged", obwohl der PR gemergt ist, wurde vermutlich per Squash oder Rebase gemergt: Die Commits in `main` sind dann neue Kopien, nicht deine ursprünglichen Commits. Hier ist `-D` korrekt.]
+#tipp[Nach einem gemergten Pull Request räumst du lokal so auf: `git switch main`, `git pull`, `git branch -d feature/login`. Weigert sich Git mit "not fully merged" @git-scm-com-book-en-v2-git-branching-branch-management, obwohl der PR gemergt ist, wurde vermutlich per Squash oder Rebase gemergt @git-scm-com-docs-git-merge: Die Commits in `main` sind dann neue Kopien, nicht deine ursprünglichen Commits. Hier ist `-D` korrekt.]
 
 == Wechseln mit ungesicherten Änderungen
 
-Hast du Dateien geändert und willst den Branch wechseln, gibt es zwei Fälle. Betreffen deine Änderungen Dateien, die sich zwischen den Branches nicht unterscheiden, nimmt Git sie einfach mit. Das ist praktisch, wenn du merkst, dass du auf dem falschen Branch angefangen hast: `git switch -c richtiger-branch` nimmt alle Änderungen mit in den neuen Branch.
+Hast du Dateien geändert und willst den Branch wechseln, gibt es zwei Fälle. Betreffen deine Änderungen Dateien, die sich zwischen den Branches nicht unterscheiden, nimmt Git sie einfach mit @git-scm-com-docs-git-switch. Das ist praktisch, wenn du merkst, dass du auf dem falschen Branch angefangen hast: `git switch -c richtiger-branch` nimmt alle Änderungen mit in den neuen Branch.
 
-Würden deine Änderungen dagegen überschrieben, verweigert Git den Wechsel:
+Würden deine Änderungen dagegen überschrieben, verweigert Git den Wechsel @git-scm-com-docs-git-switch:
 
 ```out
 error: Your local changes to the following files would be overwritten by checkout:
@@ -64,7 +64,7 @@ Dann hast du drei Möglichkeiten: die Arbeit als Zwischenstand committen (und sp
 
 == Detached HEAD
 
-Normalerweise zeigt `HEAD` auf einen Branch. Wechselst du direkt zu einem Commit oder Tag, zeigt `HEAD` dagegen unmittelbar auf einen Commit. Git warnt dann mit _You are in 'detached HEAD' state_.
+Normalerweise zeigt `HEAD` auf einen Branch. Wechselst du direkt zu einem Commit oder Tag, zeigt `HEAD` dagegen unmittelbar auf einen Commit @git-scm-com-docs-gitglossary @git-scm-com-docs-git-checkout. Git warnt dann mit _You are in 'detached HEAD' state_.
 
 ```bash
 git switch --detach v1.0     # alten Stand ansehen
@@ -77,7 +77,7 @@ git switch --detach v1.0     # alten Stand ansehen
   caption: [Detached HEAD: Ein neuer Commit `X` hängt an keinem Branch.],
 )
 
-Zum Ansehen, Testen oder Bauen eines alten Standes ist das völlig in Ordnung. Problematisch wird es nur, wenn du dort committest und dann wegwechselst: Dann zeigt nichts mehr auf die neuen Commits. Die Lösung ist einfach, solange du noch dort stehst:
+Zum Ansehen, Testen oder Bauen eines alten Standes ist das völlig in Ordnung. Problematisch wird es nur, wenn du dort committest und dann wegwechselst: Dann zeigt nichts mehr auf die neuen Commits, und die Garbage Collection kann sie irgendwann entfernen @git-scm-com-docs-git-checkout. Die Lösung ist einfach, solange du noch dort stehst:
 
 ```bash
 git switch -c rettung        # macht aus dem losen Stand einen richtigen Branch
@@ -85,4 +85,4 @@ git switch -c rettung        # macht aus dem losen Stand einen richtigen Branch
 
 == Namenskonventionen
 
-Branch-Namen dürfen Schrägstriche enthalten, was sich für Gruppierungen anbietet: `feature/login`, `fix/csv-import`, `hotfix/2.3.1`, `docs/api`. Bewährt haben sich Kleinbuchstaben, Bindestriche statt Leerzeichen und, wo vorhanden, die Issue-Nummer: `feature/42-login-sperre`. Gitea und die Tab-Vervollständigung sortieren und gruppieren dann sinnvoll.
+Branch-Namen dürfen Schrägstriche enthalten @git-scm-com-docs-git-check-ref-format, was sich für Gruppierungen anbietet: `feature/login`, `fix/csv-import`, `hotfix/2.3.1`, `docs/api`. Bewährt haben sich Kleinbuchstaben, Bindestriche statt Leerzeichen und, wo vorhanden, die Issue-Nummer: `feature/42-login-sperre`. Gitea und die Tab-Vervollständigung sortieren und gruppieren dann sinnvoll.

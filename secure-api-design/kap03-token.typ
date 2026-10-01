@@ -2,30 +2,30 @@
 
 = Tokens in FastAPI prüfen
 
-Token-Prüfung ist mehr als Dekodieren: Die API muss kryptografisch und semantisch beweisen, dass das Token vom erwarteten Aussteller stammt, für genau diese API bestimmt, noch gültig und tatsächlich ein Access-Token ist.
+Token-Prüfung ist mehr als Dekodieren: Die API muss kryptografisch und semantisch beweisen, dass das Token vom erwarteten Aussteller stammt, für genau diese API bestimmt, noch gültig und tatsächlich ein Access-Token ist @rfc8725.
 
 == Der Prüfvertrag
 
 #table(columns: (auto, 1fr),
   [Prüfung], [Warum],
-  [*Signatur* mit einem bekannten öffentlichen Schlüssel], [Nur der erwartete Authorization Server kann gültige Tokens erzeugen.],
-  [*Algorithmus* aus einer festen Liste], [Verhindert `alg: none` und Algorithmus-Verwechslungen.],
-  [*Issuer* (`iss`) exakt], [Kein Token eines anderen Providers derselben Instanz.],
-  [*Audience* (`aud`) der API], [Kein Token für eine andere Anwendung.],
-  [*Typ* des Tokens], [ID-Token und andere JWT-Arten dürfen nie als Access-Token gelten.],
-  [*Zeit* (`exp`, ggf. `nbf`, `iat`)], [Abgelaufene oder noch nicht gültige Tokens werden abgewiesen; kleine Toleranz nur für Uhrabweichung.],
+  [*Signatur* mit einem bekannten öffentlichen Schlüssel], [Nur der erwartete Authorization Server kann gültige Tokens erzeugen @rfc8725.],
+  [*Algorithmus* aus einer festen Liste], [Verhindert `alg: none` und Algorithmus-Verwechslungen @rfc8725.],
+  [*Issuer* (`iss`) exakt], [Kein Token eines anderen Providers derselben Instanz @rfc8725.],
+  [*Audience* (`aud`) der API], [Kein Token für eine andere Anwendung @rfc8725.],
+  [*Typ* des Tokens], [ID-Token und andere JWT-Arten dürfen nie als Access-Token gelten @rfc8725 @rfc9068.],
+  [*Zeit* (`exp`, ggf. `nbf`, `iat`)], [Abgelaufene oder noch nicht gültige Tokens werden abgewiesen; kleine Toleranz nur für Uhrabweichung @rfc7519.],
   [*Claim-Formate*], [`sub`, `scope` und `groups` haben den erwarteten Typ und Inhalt.],
   [*Berechtigungen*], [Scopes und Objekt-/Funktionsrechte werden pro Endpunkt geprüft.],
 )
 
-RFC 8725 verlangt feste Algorithmen und voneinander getrennte Validierungsregeln für unterschiedliche JWT-Arten. RFC 9068 definiert für standardkonforme JWT-Access-Tokens den Header `typ: at+jwt` und eine API-spezifische Audience.
+RFC 8725 verlangt feste Algorithmen und voneinander getrennte Validierungsregeln für unterschiedliche JWT-Arten @rfc8725. RFC 9068 definiert für standardkonforme JWT-Access-Tokens den Header `typ: at+jwt` und eine API-spezifische Audience @rfc9068.
 
-#achtung[*Stand Authentik 2026.8:* Authentik erzeugt noch keine RFC-9068-konformen Access-Tokens mit `typ: at+jwt`. Ein lokal geprüftes Authentik-JWT lässt sich daher nicht allein anhand des Standard-Headers zweifelsfrei von einem ID-Token unterscheiden. Das ist keine Kleinigkeit: Ist die Audience gleich, kann ein gültiges ID-Token sonst den lokalen Prüfvertrag erfüllen.]
+#achtung[*Stand Authentik 2026.8:* Authentik erzeugt noch keine RFC-9068-konformen Access-Tokens mit `typ: at+jwt` @github-com-goauthentik-authentik-issues-22070. Ein lokal geprüftes Authentik-JWT lässt sich daher nicht allein anhand des Standard-Headers zweifelsfrei von einem ID-Token unterscheiden. Das ist keine Kleinigkeit: Ist die Audience gleich, kann ein gültiges ID-Token sonst den lokalen Prüfvertrag erfüllen @github-com-goauthentik-authentik-issues-22070.]
 
 Für Authentik gibt es drei belastbare Betriebsvarianten:
 
-+ *API-spezifischer Provider/Audience* und Token Exchange: Die API akzeptiert nur Tokens des Ziel-Providers; ein Integrationstest muss ein echtes ID-Token ausdrücklich ablehnen.
-+ *Opaque Token beziehungsweise Introspection:* Die API fragt den vertraulichen Provider am Introspection-Endpunkt nach Aktivität und Token-Metadaten. Das erleichtert Widerruf, kostet aber Verfügbarkeit und Latenz.
++ *API-spezifischer Provider/Audience* und Token Exchange: Die API akzeptiert nur Tokens des Ziel-Providers @docs-goauthentik-io-add-secure-apps-providers-oauth2-token-exchange; ein Integrationstest muss ein echtes ID-Token ausdrücklich ablehnen.
++ *Opaque Token beziehungsweise Introspection:* Die API fragt den vertraulichen Provider am Introspection-Endpunkt nach Aktivität und Token-Metadaten @rfc7662 @docs-goauthentik-io-add-secure-apps-providers-oauth2. Das erleichtert Widerruf, kostet aber Verfügbarkeit und Latenz.
 + *Lokaler, installationsspezifischer Access-Token-Claim:* etwa `token_use=access`, der nachweislich nur im Access-Token vorkommt. Das ist kein Standardersatz für RFC 9068 und muss nach jedem IdP-Update mit echten Token-Proben getestet werden.
 
 == Lokale JWT-Prüfung
@@ -107,11 +107,11 @@ def aktueller_benutzer(
 ```
 ]
 
-Der Claim `token_use` ist hier ein *bewusstes lokales Vertragsmerkmal*. Das zugehörige Authentik-Scope-Mapping darf nicht ins ID-Token übernommen werden. Ein Test mit real ausgestellten Access- und ID-Tokens ist Teil des Deployments. Sobald Authentik RFC 9068 unterstützt, wird stattdessen vor dem Dekodieren der unverified Header gelesen, ausschließlich `typ` geprüft und nur `at+jwt` beziehungsweise `application/at+jwt` akzeptiert.
+Der Claim `token_use` ist hier ein *bewusstes lokales Vertragsmerkmal*. Das zugehörige Authentik-Scope-Mapping darf nicht ins ID-Token übernommen werden. Ein Test mit real ausgestellten Access- und ID-Tokens ist Teil des Deployments. Sobald Authentik RFC 9068 unterstützt, wird stattdessen vor dem Dekodieren der unverified Header gelesen, ausschließlich `typ` geprüft und nur `at+jwt` beziehungsweise `application/at+jwt` akzeptiert @rfc9068.
 
-`PyJWKClient` hält in dieser Konfiguration das *JWKS-Set* fünf Minuten im Cache. `cache_keys=True` wird bewusst nicht verwendet: Diese Option würde einzelne Schlüssel zusätzlich ohne Zeitablauf per LRU cachen. Eine unbekannte `kid` löst, durch eine Abkühlzeit gegen Missbrauch begrenzt, eine Aktualisierung aus. Ist der IdP nicht erreichbar und kein passender Schlüssel verfügbar, gilt _fail closed_: 401.
+`PyJWKClient` hält in dieser Konfiguration das *JWKS-Set* fünf Minuten im Cache @pyjwt-readthedocs-io-en-stable-api-html. `cache_keys=True` wird bewusst nicht verwendet: Diese Option würde einzelne Schlüssel zusätzlich ohne Zeitablauf per LRU cachen. Eine unbekannte `kid` löst, durch eine Abkühlzeit gegen Missbrauch begrenzt, eine Aktualisierung aus @pyjwt-readthedocs-io-en-stable-usage-html. Ist der IdP nicht erreichbar und kein passender Schlüssel verfügbar, gilt _fail closed_: 401.
 
-Alle Systeme synchronisieren ihre Uhr. `leeway=30` ist eine kleine, begründete Toleranz, keine Verlängerung der Token-Laufzeit. Die API folgt niemals `jku` oder `x5u` aus einem Token; der JWKS-Endpunkt kommt ausschließlich aus vertrauenswürdiger Konfiguration.
+Alle Systeme synchronisieren ihre Uhr. `leeway=30` ist eine kleine, begründete Toleranz, keine Verlängerung der Token-Laufzeit @rfc7519. Die API folgt niemals `jku` oder `x5u` aus einem Token @rfc8725; der JWKS-Endpunkt kommt ausschließlich aus vertrauenswürdiger Konfiguration.
 
 == Scopes und Gruppen prüfen
 
@@ -151,10 +151,10 @@ app.include_router(notizen)
 ```
 ]
 
-Die Router-Abhängigkeit schützt neue Endpunkte standardmäßig; öffentliche Endpunkte gehören auf einen eigenen Router. FastAPI cached denselben Dependency-Aufruf innerhalb einer Anfrage, daher wird `aktueller_benutzer` trotz der zusätzlichen Scope-Abhängigkeit nicht doppelt ausgeführt.
+Die Router-Abhängigkeit schützt neue Endpunkte standardmäßig; öffentliche Endpunkte gehören auf einen eigenen Router. FastAPI cached denselben Dependency-Aufruf innerhalb einer Anfrage, daher wird `aktueller_benutzer` trotz der zusätzlichen Scope-Abhängigkeit nicht doppelt ausgeführt @fastapi-tiangolo-com-tutorial-dependencies-sub-dependencies.
 
 == Widerruf und gebundene Tokens
 
-Ein lokal geprüftes JWT bleibt grundsätzlich bis `exp` gültig. Deshalb sind Access-Tokens kurzlebig. Für sofortigen Widerruf wird Introspection mit kurzem, begrenztem Cache eingesetzt; Client-Credentials dafür liegen als Secret vor, Fehler schließen den Zugriff. Öffentliche Clients müssen Refresh-Tokens nach RFC 9700 rotieren oder sendergebunden einsetzen. Authentik rotiert Refresh-Tokens automatisch, wenn es im Provider konfiguriert ist.
+Ein lokal geprüftes JWT bleibt grundsätzlich bis `exp` gültig @rfc7519. Deshalb sind Access-Tokens kurzlebig. Für sofortigen Widerruf wird Introspection mit kurzem, begrenztem Cache eingesetzt @rfc7662; Client-Credentials dafür liegen als Secret vor, Fehler schließen den Zugriff. Öffentliche Clients müssen Refresh-Tokens nach RFC 9700 rotieren oder sendergebunden einsetzen @rfc9700. Authentik rotiert Refresh-Tokens automatisch, wenn es im Provider konfiguriert ist @docs-goauthentik-io-add-secure-apps-providers-oauth2.
 
-Für Hochrisiko-APIs können mTLS-gebundene Tokens (RFC 8705) oder DPoP (RFC 9449) den Token-Diebstahl erschweren. Das Verfahren muss Access-Token, Client und API durchgängig unterstützen; ein `bound_key`-Scope, der nur ein ID-Token bindet, genügt dafür nicht.
+Für Hochrisiko-APIs können mTLS-gebundene Tokens (RFC 8705) oder DPoP (RFC 9449) den Token-Diebstahl erschweren @rfc8705 @rfc9449. Das Verfahren muss Access-Token, Client und API durchgängig unterstützen; ein `bound_key`-Scope, der nur ein ID-Token bindet, genügt dafür nicht @docs-goauthentik-io-add-secure-apps-providers-oauth2.

@@ -22,7 +22,7 @@ TLS schützt die Strecke, Rechte begrenzen, wer was senden darf. Zwei Lücken bl
 
 == Signieren mit Ed25519
 
-Jeder Producer bekommt ein eigenes Schlüsselpaar. Der private Schlüssel bleibt beim Dienst (als Secret), die öffentlichen Schlüssel aller Producer sind den Consumern bekannt, zusammen mit der Angabe, *welche Ereignistypen* der jeweilige Producer erzeugen darf. Die Bibliothek `cryptography` bringt Ed25519 mit, ein modernes, schnelles Signaturverfahren mit kurzen Schlüsseln:
+Jeder Producer bekommt ein eigenes Schlüsselpaar. Der private Schlüssel bleibt beim Dienst (als Secret), die öffentlichen Schlüssel aller Producer sind den Consumern bekannt, zusammen mit der Angabe, *welche Ereignistypen* der jeweilige Producer erzeugen darf. Die Bibliothek `cryptography` bringt Ed25519 mit, ein modernes, schnelles Signaturverfahren mit kurzen Schlüsseln @rfc8032 @cryptography-io-en-latest-hazmat-primitives-asymmetric-ed25519:
 
 #datei("gemeinsam/signatur.py")[
 ```python
@@ -69,7 +69,7 @@ Die Prüfung gehört an den Anfang der Verarbeitung, *vor* die Schema-Validierun
 
 == Inhalte verschlüsseln
 
-Enthält eine Nachricht unvermeidlich sensible Inhalte, werden die Nutzdaten zusätzlich verschlüsselt, sodass weder Broker noch Backups noch Verwaltungsoberflächen sie lesen können. AES-GCM verschlüsselt und schützt gleichzeitig gegen Veränderung. Die Nachrichten-ID und der Typ werden als _zusätzliche authentifizierte Daten_ (AAD) eingebunden, damit ein Chiffrat nicht in eine andere Nachricht verpflanzt werden kann:
+Enthält eine Nachricht unvermeidlich sensible Inhalte, werden die Nutzdaten zusätzlich verschlüsselt, sodass weder Broker noch Backups noch Verwaltungsoberflächen sie lesen können. AES-GCM verschlüsselt und schützt gleichzeitig gegen Veränderung @rfc5116 @nist-sp-800-38d. Die Nachrichten-ID und der Typ werden als _zusätzliche authentifizierte Daten_ (AAD) eingebunden, damit ein Chiffrat nicht in eine andere Nachricht verpflanzt werden kann @cryptography-io-en-latest-hazmat-primitives-aead:
 
 #datei("gemeinsam/verschluesselung.py")[
 ```python
@@ -87,6 +87,6 @@ def entschluesseln(schluessel: bytes, typ: str, nachricht_id: str, daten: bytes)
 ```
 ]
 
-Der Schlüssel (32 zufällige Bytes, `AESGCM.generate_key(bit_length=256)`) wird pro Ereignistyp oder pro Empfängergruppe vergeben und nur den Diensten bereitgestellt, die die Inhalte lesen müssen. Für Schlüsselwechsel trägt jede Nachricht eine Schlüssel-ID im Header, und Empfänger halten während einer Übergangszeit den alten und den neuen Schlüssel vor.
+Der Schlüssel (32 zufällige Bytes, `AESGCM.generate_key(bit_length=256)` @cryptography-io-en-latest-hazmat-primitives-aead) wird pro Ereignistyp oder pro Empfängergruppe vergeben und nur den Diensten bereitgestellt, die die Inhalte lesen müssen. Bei zufällig gewählten 96-Bit-Nonces darf ein Schlüssel für höchstens 2#super[32] Verschlüsselungen verwendet werden @nist-sp-800-38d. Für Schlüsselwechsel trägt jede Nachricht eine Schlüssel-ID im Header, und Empfänger halten während einer Übergangszeit den alten und den neuen Schlüssel vor.
 
-#achtung[Kryptographie auf Nachrichtenebene verschiebt das Problem in die Schlüsselverwaltung: Wer die Schlüssel hat, kann alles. Private Schlüssel und AES-Schlüssel sind Secrets wie Datenbankpasswörter (Docker-Secrets, nie im Repository, nie in Logs), brauchen einen Plan für Austausch und Widerruf und sollten pro Umgebung verschieden sein. Für viele Systeme ist *Datensparsamkeit* (Kapitel 6: IDs statt Inhalten) die einfachere und wirksamere Maßnahme als Verschlüsselung.]
+#achtung[Kryptographie auf Nachrichtenebene verschiebt das Problem in die Schlüsselverwaltung: Wer die Schlüssel hat, kann alles. Private Schlüssel und AES-Schlüssel sind Secrets wie Datenbankpasswörter (Docker-Secrets, nie im Repository, nie in Logs), brauchen einen Plan für Austausch und Widerruf und sollten pro Umgebung verschieden sein @cheatsheetseries-owasp-org-cheatsheets-secrets-management-cheat-sheet-html @cheatsheetseries-owasp-org-cheatsheets-key-management-cheat-sheet-html. Für viele Systeme ist *Datensparsamkeit* (Kapitel 6: IDs statt Inhalten) die einfachere und wirksamere Maßnahme als Verschlüsselung.]

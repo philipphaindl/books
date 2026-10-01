@@ -8,7 +8,7 @@ Docker wirkt wie eine leichte virtuelle Maschine, ist aber etwas grundlegend and
 
 Eine Anwendung braucht mehr als ihren Quellcode: eine bestimmte Python-Version, Systembibliotheken, Python-Pakete in exakten Versionen, Konfiguration. Auf dem eigenen Mac ist all das irgendwann über Monate gewachsen, auf dem Server anders, beim Kollegen wieder anders. Das Ergebnis ist der Klassiker "läuft bei mir".
 
-Docker verpackt die Anwendung mit ihren Benutzerland-Bibliotheken und Werkzeugen in ein Image. Kernel, CPU-Architektur und einige Host-Funktionen kommen weiterhin vom Zielsystem. Innerhalb einer unterstützten Plattform läuft dasselbe Image deshalb weitgehend gleich: am Mac, im CI-Runner und auf dem Produktionsserver. Die Laufzeitumgebung wird damit zu einem versionierbaren Artefakt statt zu schwer nachvollziehbarem Zustand eines Rechners.
+Docker verpackt die Anwendung mit ihren Benutzerland-Bibliotheken und Werkzeugen in ein Image @docs-docker-com-get-started-docker-concepts-the-basics-what-is-an-image @docs-docker-com-get-started-docker-overview. Kernel, CPU-Architektur und einige Host-Funktionen kommen weiterhin vom Zielsystem @docs-docker-com-get-started-docker-concepts-the-basics-what-is-a-container @souppaya-2017-application. Innerhalb einer unterstützten Plattform läuft dasselbe Image deshalb weitgehend gleich: am Mac, im CI-Runner und auf dem Produktionsserver @merkel-2014-docker. Die Laufzeitumgebung wird damit zu einem versionierbaren Artefakt statt zu schwer nachvollziehbarem Zustand eines Rechners.
 
 == Container sind keine virtuellen Maschinen
 
@@ -28,7 +28,7 @@ Docker verpackt die Anwendung mit ihren Benutzerland-Bibliotheken und Werkzeugen
   caption: [Eine VM bringt ein komplettes Betriebssystem mit eigenem Kernel mit. Container teilen sich den Kernel des Hosts.],
 )
 
-Eine virtuelle Maschine emuliert einen ganzen Rechner, inklusive eigenem Betriebssystem-Kernel. Sie braucht Sekunden bis Minuten zum Starten und reserviert Arbeitsspeicher für ein komplettes System. Ein Container dagegen ist *ein ganz normaler Prozess auf dem Linux-Host*, den der Kernel so abschottet, dass er glaubt, allein zu sein. Er startet in Millisekunden und braucht nur so viel Speicher wie die Anwendung selbst.
+Eine virtuelle Maschine emuliert einen ganzen Rechner, inklusive eigenem Betriebssystem-Kernel @docs-docker-com-get-started-docker-concepts-the-basics-what-is-a-container @merkel-2014-docker. Sie bootet dafür ein eigenes Betriebssystem und reserviert Arbeitsspeicher für ein komplettes System. Ein Container dagegen ist *ein ganz normaler Prozess auf dem Linux-Host*, den der Kernel so abschottet, dass er glaubt, allein zu sein @docs-docker-com-get-started-docker-concepts-the-basics-what-is-a-container @man7-org-linux-man-pages-man7-namespaces-7-html. Er startet deshalb meist deutlich schneller und braucht kaum mehr Speicher als die Anwendung selbst.
 
 == Was ein Container technisch ist
 
@@ -36,22 +36,22 @@ Drei Kernel-Mechanismen machen aus einem Prozess einen Container:
 
 #table(columns: (auto, 1fr),
   [Mechanismus], [Wirkung],
-  [*Namespaces*], [Eigene Sicht auf das System: eigene Prozessliste (der Hauptprozess hat PID 1), eigenes Netzwerk mit eigener IP, eigene Mount-Punkte, eigener Hostname, optional eigene Benutzer-IDs.],
-  [*cgroups*], [Begrenzung und Messung von Ressourcen: CPU, Arbeitsspeicher, Anzahl der Prozesse, Ein-/Ausgabe.],
-  [*Eigenes Dateisystem*], [Der Prozess sieht als Wurzelverzeichnis `/` nicht das Dateisystem des Hosts, sondern den Inhalt des Images.],
+  [*Namespaces*], [Eigene Sicht auf das System: eigene Prozessliste (der Hauptprozess hat PID 1), eigenes Netzwerk mit eigener IP, eigene Mount-Punkte, eigener Hostname, optional eigene Benutzer-IDs @man7-org-linux-man-pages-man7-namespaces-7-html @man7-org-linux-man-pages-man7-pid-namespaces-7-html.],
+  [*cgroups*], [Begrenzung und Messung von Ressourcen: CPU, Arbeitsspeicher, Anzahl der Prozesse, Ein-/Ausgabe @man7-org-linux-man-pages-man7-cgroups-7-html.],
+  [*Eigenes Dateisystem*], [Der Prozess sieht als Wurzelverzeichnis `/` nicht das Dateisystem des Hosts, sondern den Inhalt des Images @docs-docker-com-engine-storage-drivers.],
 )
 
 Daraus folgen drei Eigenschaften, die man im Alltag ständig braucht:
 
-+ *Ein Container lebt genau so lange wie sein Hauptprozess.* Beendet sich der Prozess (weil das Programm fertig ist oder abstürzt), ist der Container beendet. Ein Container ohne dauerhaft laufenden Prozess "startet und ist sofort wieder weg".
-+ *Container brauchen einen Linux-Kernel.* Auf macOS gibt es keinen, deshalb läuft Docker am Mac immer in einer kleinen Linux-VM (Kapitel 2).
-+ *Die Isolation ist gut, aber nicht so stark wie bei einer VM.* Alle Container teilen sich einen Kernel. Wer im Container Root-Rechte hat und aus ihm ausbricht, steht auf dem Host (Kapitel 12).
++ *Ein Container lebt genau so lange wie sein Hauptprozess.* Beendet sich der Prozess (weil das Programm fertig ist oder abstürzt), ist der Container beendet @man7-org-linux-man-pages-man7-pid-namespaces-7-html. Ein Container ohne dauerhaft laufenden Prozess "startet und ist sofort wieder weg".
++ *Container brauchen einen Linux-Kernel.* Auf macOS gibt es keinen, deshalb läuft Docker am Mac immer in einer kleinen Linux-VM (Kapitel 2) @docs-docker-com-desktop-features-vmm.
++ *Die Isolation ist gut, aber nicht so stark wie bei einer VM.* Alle Container teilen sich einen Kernel @souppaya-2017-application. Wer im Container Root-Rechte hat und aus ihm ausbricht, steht auf dem Host @docs-docker-com-engine-security (Kapitel 12).
 
 == Image und Container
 
-Das wichtigste Begriffspaar: Ein *Image* ist eine unveränderliche Vorlage, ein *Container* ist eine laufende (oder gestoppte) Instanz davon. Die Beziehung entspricht der zwischen Klasse und Objekt: Aus einem Image lassen sich beliebig viele Container starten.
+Das wichtigste Begriffspaar: Ein *Image* ist eine unveränderliche Vorlage, ein *Container* ist eine laufende (oder gestoppte) Instanz davon @docs-docker-com-get-started-docker-concepts-the-basics-what-is-an-image @docs-docker-com-get-started-docker-concepts-the-basics-what-is-a-container. Die Beziehung entspricht der zwischen Klasse und Objekt: Aus einem Image lassen sich beliebig viele Container starten.
 
-Ein Image besteht aus übereinander liegenden, schreibgeschützten *Schichten* (_layers_). Jede Anweisung im Dockerfile, die Dateien verändert, erzeugt eine Schicht. Startet man einen Container, legt Docker darüber eine dünne, beschreibbare Schicht, die nur diesem Container gehört.
+Ein Image besteht aus übereinander liegenden, schreibgeschützten *Schichten* (_layers_). Jede Anweisung im Dockerfile, die Dateien verändert, erzeugt eine Schicht. Startet man einen Container, legt Docker darüber eine dünne, beschreibbare Schicht, die nur diesem Container gehört @docs-docker-com-engine-storage-drivers.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -68,13 +68,13 @@ Ein Image besteht aus übereinander liegenden, schreibgeschützten *Schichten* (
   caption: [Beide Container teilen sich die Schichten des Images. Jeder hat seine eigene Schreibschicht.],
 )
 
-Ändert ein Container eine Datei aus dem Image, kopiert Docker sie zuerst in seine Schreibschicht (_copy-on-write_). Das Image selbst bleibt unverändert. Daraus folgt die wichtigste Regel für den Umgang mit Daten:
+Ändert ein Container eine Datei aus dem Image, kopiert Docker sie zuerst in seine Schreibschicht (_copy-on-write_) @docs-docker-com-engine-storage-drivers. Das Image selbst bleibt unverändert. Daraus folgt die wichtigste Regel für den Umgang mit Daten:
 
-#merke[Die Schreibschicht wird zusammen mit dem Container gelöscht. Alles, was einen Neustart mit neuem Image überleben soll (Datenbankdateien, Uploads), gehört in ein *Volume* (Kapitel 5). Container sind Wegwerfware, Daten nicht.]
+#merke[Die Schreibschicht wird zusammen mit dem Container gelöscht @docs-docker-com-engine-storage-drivers. Alles, was einen Neustart mit neuem Image überleben soll (Datenbankdateien, Uploads), gehört in ein *Volume* (Kapitel 5). Container sind Wegwerfware, Daten nicht.]
 
 == Registry, Namen, Tags und Digests
 
-Images werden in einer *Registry* gespeichert und von dort geladen: Docker Hub ist die Standard-Registry, Gitea bringt eine eigene mit (Kapitel 11). Ein vollständiger Image-Name besteht aus mehreren Teilen:
+Images werden in einer *Registry* gespeichert und von dort geladen: Docker Hub ist die Standard-Registry @docs-docker-com-get-started-docker-overview, Gitea bringt eine eigene mit (Kapitel 11). Ein vollständiger Image-Name besteht aus mehreren Teilen:
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -98,11 +98,11 @@ Images werden in einer *Registry* gespeichert und von dort geladen: Docker Hub i
   caption: [Aufbau eines Image-Namens. Fehlt die Registry, ist Docker Hub gemeint.],
 )
 
-Kurzformen werden ergänzt: `python:3.14-slim` bedeutet vollständig `docker.io/library/python:3.14-slim`. Fehlt der Tag, nimmt Docker `latest`.
+Kurzformen werden ergänzt: `python:3.14-slim` bedeutet vollständig `docker.io/library/python:3.14-slim`. Fehlt der Tag, nimmt Docker `latest` @docs-docker-com-reference-cli-docker-image-pull.
 
-Wer das Git-Handbuch kennt, findet hier eine vertraute Unterscheidung wieder: Ein *Tag* ist ein beweglicher Name wie ein Branch. `python:3.14-slim` zeigt heute auf ein anderes Image als in drei Monaten, weil Sicherheitsupdates eingespielt werden. Ein *Digest* (`@sha256:…`) ist dagegen die Prüfsumme des Inhalts, unveränderlich wie ein Commit-Hash. Wer exakt reproduzierbar bauen will, pinnt auf den Digest und aktualisiert ihn kontrolliert.
+Wer das Git-Handbuch kennt, findet hier eine vertraute Unterscheidung wieder: Ein *Tag* ist ein beweglicher Name wie ein Branch. `python:3.14-slim` zeigt heute auf ein anderes Image als in drei Monaten, weil Sicherheitsupdates eingespielt werden @docs-docker-com-build-building-best-practices. Ein *Digest* (`@sha256:…`) ist dagegen die Prüfsumme des Inhalts, unveränderlich wie ein Commit-Hash @docs-docker-com-reference-cli-docker-image-pull. Wer exakt reproduzierbar bauen will, pinnt auf den Digest und aktualisiert ihn kontrolliert @docs-docker-com-build-building-best-practices.
 
-#achtung[`latest` bedeutet nicht "neueste Version", sondern nur "der Tag, der verwendet wird, wenn keiner angegeben ist". Was sich dahinter verbirgt, entscheidet der Herausgeber. In Produktion und in Dockerfiles immer eine konkrete Version angeben.]
+#achtung[`latest` bedeutet nicht "neueste Version", sondern nur "der Tag, der verwendet wird, wenn keiner angegeben ist" @docs-docker-com-reference-cli-docker-image-pull. Was sich dahinter verbirgt, entscheidet der Herausgeber. In Produktion und in Dockerfiles immer eine konkrete Version angeben.]
 
 == Die Architektur hinter dem `docker`-Befehl
 
@@ -121,8 +121,8 @@ Wer das Git-Handbuch kennt, findet hier eine vertraute Unterscheidung wieder: Ei
   caption: [Der `docker`-Befehl ist nur ein Client. Die eigentliche Arbeit erledigt der Daemon.],
 )
 
-Das Programm `docker`, das du im Terminal aufrufst, ist nur ein *Client*. Es schickt jeden Befehl über eine Programmierschnittstelle an den *Docker-Daemon* `dockerd`, der Images verwaltet, Netzwerke und Volumes anlegt und Container über `containerd` und `runc` startet. Die Verbindung läuft über einen Unix-Socket (auf Linux `/var/run/docker.sock`).
+Das Programm `docker`, das du im Terminal aufrufst, ist nur ein *Client*. Es schickt jeden Befehl über eine Programmierschnittstelle an den *Docker-Daemon* `dockerd`, der Images verwaltet, Netzwerke und Volumes anlegt und Container über `containerd` und `runc` startet @docs-docker-com-get-started-docker-overview. Die Verbindung läuft über einen Unix-Socket (auf Linux `/var/run/docker.sock`) @docs-docker-com-reference-cli-dockerd.
 
-Das erklärt zwei Dinge. Erstens kann der Client auf einem anderen Rechner laufen als der Daemon: am Mac läuft der Client unter macOS, der Daemon in der Linux-VM. Zweitens ist *Zugriff auf den Socket gleichbedeutend mit Root-Rechten* auf dem Rechner des Daemons, denn wer Container starten darf, kann beliebige Verzeichnisse des Hosts einbinden (Kapitel 12).
+Das erklärt zwei Dinge. Erstens kann der Client auf einem anderen Rechner laufen als der Daemon: am Mac läuft der Client unter macOS, der Daemon in der Linux-VM. Zweitens ist *Zugriff auf den Socket gleichbedeutend mit Root-Rechten* auf dem Rechner des Daemons, denn wer Container starten darf, kann beliebige Verzeichnisse des Hosts einbinden @docs-docker-com-engine-security (Kapitel 12).
 
 #merke[Das Modell in fünf Sätzen: *(1)* Ein Container ist ein abgeschotteter Linux-Prozess. *(2)* Er entsteht aus einem unveränderlichen, geschichteten Image. *(3)* Seine eigenen Änderungen landen in einer Schreibschicht, die mit ihm verschwindet. *(4)* Images liegen in Registries und werden über Name, Tag oder Digest angesprochen. *(5)* Der `docker`-Befehl ist nur ein Client für den Daemon.]

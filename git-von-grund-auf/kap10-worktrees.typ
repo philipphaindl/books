@@ -14,7 +14,7 @@ Du bist mitten in einem Feature, der Code kompiliert gerade nicht, Dateien sind 
 
 == Das Konzept
 
-Ein Worktree ist ein *zusätzliches Arbeitsverzeichnis, das an dasselbe Repository angeschlossen ist*. Alle Worktrees teilen sich eine gemeinsame Objektdatenbank und dieselben Branches. Standardmäßig teilen sie auch die Repository-Konfiguration; bei Bedarf kann Git einzelne Werte pro Worktree speichern. Jeder Worktree hat seinen eigenen ausgecheckten Branch, seinen eigenen Index und seine eigenen Dateien.
+Ein Worktree ist ein *zusätzliches Arbeitsverzeichnis, das an dasselbe Repository angeschlossen ist*. Alle Worktrees teilen sich eine gemeinsame Objektdatenbank und dieselben Branches. Standardmäßig teilen sie auch die Repository-Konfiguration; bei Bedarf kann Git einzelne Werte pro Worktree speichern. Jeder Worktree hat seinen eigenen ausgecheckten Branch, seinen eigenen Index und seine eigenen Dateien @git-scm-com-docs-git-worktree @git-scm-com-docs-gitglossary.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -37,29 +37,29 @@ Ein Worktree ist ein *zusätzliches Arbeitsverzeichnis, das an dasselbe Reposito
   caption: [Ein Repository, drei Arbeitsverzeichnisse. Ein Commit in einem Worktree ist sofort in allen anderen sichtbar.],
 )
 
-In einem verknüpften Worktree ist `.git` kein Verzeichnis, sondern eine kleine Textdatei mit dem Verweis auf das Hauptrepository (`gitdir: /Users/.../demo/.git/worktrees/demo-hotfix`). Deshalb kostet ein zusätzlicher Worktree nur den Platz der ausgecheckten Dateien, nicht den der gesamten Historie.
+In einem verknüpften Worktree ist `.git` kein Verzeichnis, sondern eine kleine Textdatei mit dem Verweis auf das Hauptrepository (`gitdir: /Users/.../demo/.git/worktrees/demo-hotfix`) @git-scm-com-docs-gitglossary @git-scm-com-docs-gitrepository-layout. Deshalb kostet ein zusätzlicher Worktree nur den Platz der ausgecheckten Dateien, nicht den der gesamten Historie.
 
 #table(columns: (1fr, 1fr),
   [Gemeinsam für alle Worktrees], [Pro Worktree getrennt],
-  [Commits und Objektdatenbank], [ausgecheckter Branch (`HEAD`)],
-  [Branches, Tags, Remote-Tracking-Branches], [Index (Staging Area)],
-  [Konfiguration (`.git/config`) und standardmäßig Hooks], [Dateien im Arbeitsverzeichnis],
-  [Stash, Reflog der Branches], [laufender Merge, Rebase oder Cherry-Pick],
+  [Commits und Objektdatenbank @git-scm-com-docs-gitrepository-layout], [ausgecheckter Branch (`HEAD`) @git-scm-com-docs-gitglossary],
+  [Branches, Tags, Remote-Tracking-Branches @git-scm-com-docs-git-worktree], [Index (Staging Area) @git-scm-com-docs-gitglossary],
+  [Konfiguration (`.git/config`) und standardmäßig Hooks @git-scm-com-docs-git-worktree @git-scm-com-docs-gitrepository-layout], [Dateien im Arbeitsverzeichnis],
+  [Stash, Reflog der Branches @git-scm-com-docs-git-worktree @git-scm-com-docs-gitrepository-layout], [laufender Merge, Rebase oder Cherry-Pick @git-scm-com-docs-gitglossary],
 )
 
 == Die Befehle
 
 #table(columns: (auto, 1fr),
   [Befehl], [Wirkung],
-  [`git worktree add ../demo-hotfix -b hotfix/csrf main`], [neuen Worktree mit neuem Branch `hotfix/csrf` anlegen, abgezweigt von `main`],
-  [`git worktree add ../demo-login feature/login`], [Worktree für einen bestehenden Branch. Existiert der Branch nur auf dem Server, legt Git automatisch einen lokalen Tracking-Branch an.],
-  [`git worktree add --detach ../demo-v1 v1.0`], [Worktree auf einem Tag oder Commit, ohne Branch (etwa zum Vergleichen)],
+  [`git worktree add ../demo-hotfix -b hotfix/csrf main`], [neuen Worktree mit neuem Branch `hotfix/csrf` anlegen, abgezweigt von `main` @git-scm-com-docs-git-worktree],
+  [`git worktree add ../demo-login feature/login`], [Worktree für einen bestehenden Branch. Existiert der Branch nur auf dem Server, legt Git automatisch einen lokalen Tracking-Branch an @git-scm-com-docs-git-worktree.],
+  [`git worktree add --detach ../demo-v1 v1.0`], [Worktree auf einem Tag oder Commit, ohne Branch (etwa zum Vergleichen) @git-scm-com-docs-git-worktree],
   [`git worktree list`], [alle Worktrees mit Pfad, Commit und Branch],
-  [`git worktree remove ../demo-hotfix`], [Worktree entfernen. Verweigert, wenn dort uncommittete Änderungen liegen (`--force` erzwingt es).],
-  [`git worktree prune`], [Verwaltungsdaten von Worktrees entfernen, deren Ordner manuell gelöscht wurde],
+  [`git worktree remove ../demo-hotfix`], [Worktree entfernen. Verweigert, wenn dort uncommittete Änderungen liegen (`--force` erzwingt es) @git-scm-com-docs-git-worktree.],
+  [`git worktree prune`], [Verwaltungsdaten von Worktrees entfernen, deren Ordner manuell gelöscht wurde @git-scm-com-docs-git-worktree],
   [`git worktree move alt neu`], [Worktree-Ordner verschieben],
-  [`git worktree lock pfad --reason "..."`], [vor versehentlichem Aufräumen schützen, etwa auf einer externen Platte],
-  [`git worktree repair`], [Verknüpfungen reparieren, nachdem Ordner von Hand verschoben wurden],
+  [`git worktree lock pfad --reason "..."`], [vor versehentlichem Aufräumen schützen, etwa auf einer externen Platte @git-scm-com-docs-git-worktree],
+  [`git worktree repair`], [Verknüpfungen reparieren, nachdem Ordner von Hand verschoben wurden @git-scm-com-docs-git-worktree],
 )
 
 == Beispiel: Hotfix mitten im Feature
@@ -83,7 +83,7 @@ Das Feature wurde nie angefasst: kein Stash, kein WIP-Commit, keine geänderten 
 
 == Beispiel: Pull Request lokal prüfen
 
-Gitea stellt jeden Pull Request unter einer eigenen Referenz bereit (Kapitel 12). Damit lässt sich ein fremder PR in einem eigenen Worktree ausprobieren, ohne die eigene Arbeit zu unterbrechen:
+Gitea stellt jeden Pull Request unter einer eigenen Referenz bereit (Kapitel 12) @github-com-go-gitea-gitea-issues-12074. Damit lässt sich ein fremder PR in einem eigenen Worktree ausprobieren, ohne die eigene Arbeit zu unterbrechen:
 
 ```bash
 git fetch origin pull/17/head:pr-17        # PR Nr. 17 als lokalen Branch pr-17 holen
@@ -93,7 +93,7 @@ cd ../demo-review && make test
 
 == Beispiel: parallele Arbeitsstränge mit KI-Agenten
 
-Worktrees passen hervorragend zu Coding-Agenten wie Claude Code. Zwei Agenten im selben Arbeitsverzeichnis würden sich gegenseitig Dateien überschreiben und Tests des jeweils anderen zerschießen. In getrennten Worktrees arbeitet jeder auf seinem eigenen Branch, und du führst die Ergebnisse später über Pull Requests zusammen:
+Worktrees passen hervorragend zu Coding-Agenten wie Claude Code @code-claude-com-docs-en-common-workflows. Zwei Agenten im selben Arbeitsverzeichnis würden sich gegenseitig Dateien überschreiben und Tests des jeweils anderen zerschießen. In getrennten Worktrees arbeitet jeder auf seinem eigenen Branch, und du führst die Ergebnisse später über Pull Requests zusammen:
 
 ```bash
 git worktree add ../demo-agent-a -b agent/export-csv main
@@ -103,12 +103,12 @@ git worktree add ../demo-agent-b -b agent/refactor-auth main
 
 == Stolpersteine
 
-- *Ein Branch kann nur in einem Worktree ausgecheckt sein.* Versuchst du es ein zweites Mal, meldet Git _'main' is already used by worktree at ..._. Das ist Absicht, denn zwei Arbeitsverzeichnisse auf demselben Branch würden sich gegenseitig die Grundlage verschieben. Lösung: einen neuen Branch anlegen oder `--detach` verwenden.
+- *Ein Branch kann nur in einem Worktree ausgecheckt sein.* Versuchst du es ein zweites Mal, meldet Git _'main' is already used by worktree at ..._ @git-scm-com-docs-git-worktree. Das ist Absicht, denn zwei Arbeitsverzeichnisse auf demselben Branch würden sich gegenseitig die Grundlage verschieben. Lösung: einen neuen Branch anlegen oder `--detach` verwenden.
 - *Unversionierte Dateien werden nicht mitkopiert.* Ein neuer Worktree enthält nur, was in Git ist. `.env`, virtuelle Python-Umgebungen, `node_modules` und Build-Ordner müssen pro Worktree neu angelegt oder kopiert werden. Ein kleines Skript wie `make setup` im Projekt lohnt sich.
-- *Ordner nicht einfach löschen.* Wer einen Worktree-Ordner im Finder löscht, hinterlässt Verwaltungsdaten, und der Branch gilt weiterhin als ausgecheckt. `git worktree prune` räumt auf, besser ist gleich `git worktree remove`.
-- *Stash und Hooks sind gemeinsam.* Ein `git stash pop` im falschen Worktree holt den Stash eines anderen Arbeitsstrangs. Das ist ein weiterer Grund, in Worktrees lieber zu committen.
-- *Konfiguration lässt sich bei Bedarf trennen.* Mit `git config extensions.worktreeConfig true` aktivierst du zusätzliche Konfiguration pro Worktree; danach setzt `git config --worktree <schlüssel> <wert>` einen lokalen Wert. Das ist etwa für `core.sparseCheckout` nützlich. Ältere Git-Versionen, die diese Erweiterung nicht kennen, verweigern den Zugriff auf das Repository.
-- *Submodule* sind pro Worktree auszuchecken: `git submodule update --init --recursive`. Ein Worktree mit Submodulen lässt sich nicht mit `git worktree move` verschieben; notfalls verschiebst du ihn manuell und reparierst die Verknüpfung mit `git worktree repair`.
+- *Ordner nicht einfach löschen.* Wer einen Worktree-Ordner im Finder löscht, hinterlässt Verwaltungsdaten, und der Branch gilt weiterhin als ausgecheckt. `git worktree prune` räumt auf, besser ist gleich `git worktree remove` @git-scm-com-docs-git-worktree.
+- *Stash und Hooks sind gemeinsam.* @git-scm-com-docs-git-worktree @git-scm-com-docs-gitrepository-layout Ein `git stash pop` im falschen Worktree holt den Stash eines anderen Arbeitsstrangs. Das ist ein weiterer Grund, in Worktrees lieber zu committen.
+- *Konfiguration lässt sich bei Bedarf trennen.* Mit `git config extensions.worktreeConfig true` aktivierst du zusätzliche Konfiguration pro Worktree; danach setzt `git config --worktree <schlüssel> <wert>` einen lokalen Wert @git-scm-com-docs-git-worktree @git-scm-com-docs-git-config. Das ist etwa für `core.sparseCheckout` nützlich. Ältere Git-Versionen, die diese Erweiterung nicht kennen, verweigern den Zugriff auf das Repository @git-scm-com-docs-git-worktree.
+- *Submodule* sind pro Worktree auszuchecken: `git submodule update --init --recursive`. Ein Worktree mit Submodulen lässt sich nicht mit `git worktree move` verschieben @git-scm-com-docs-git-worktree; notfalls verschiebst du ihn manuell und reparierst die Verknüpfung mit `git worktree repair`.
 
 == Eine sinnvolle Ordnerstruktur
 

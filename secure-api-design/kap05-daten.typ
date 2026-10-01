@@ -2,7 +2,7 @@
 
 = Datenmodelle: was hinein und was hinaus darf
 
-Platz 3 der OWASP-Liste, _Broken Object Property Level Authorization_, fasst zwei früher getrennte Risiken zusammen: Eine API liefert *mehr Felder* aus, als der Aufrufer sehen darf (_Excessive Data Exposure_), oder sie übernimmt *mehr Felder* aus der Anfrage, als der Aufrufer setzen darf (_Mass Assignment_). Beides lässt sich mit getrennten, expliziten Pydantic-Modellen fast vollständig ausschließen.
+Platz 3 der OWASP-Liste, _Broken Object Property Level Authorization_, fasst zwei früher getrennte Risiken zusammen: Eine API liefert *mehr Felder* aus, als der Aufrufer sehen darf (_Excessive Data Exposure_), oder sie übernimmt *mehr Felder* aus der Anfrage, als der Aufrufer setzen darf (_Mass Assignment_) @api-security-owasp-org-editions-2023-en-0xa3-broken-object-property-level-authorization. Beides lässt sich mit getrennten, expliziten Pydantic-Modellen fast vollständig ausschließen.
 
 == Ein Modell pro Richtung
 
@@ -47,9 +47,9 @@ class NotizAusgabe(BaseModel):
 ```
 ]
 
-- *`extra="forbid"`* lässt jede Anfrage mit unbekannten Feldern scheitern (422). Ein Angreifer, der `"besitzer_id": "..."` oder `"ist_admin": true` mitschickt, bekommt einen Fehler, statt dass das Feld stillschweigend ignoriert oder, schlimmer, übernommen wird.
-- *Kein `**daten.model_dump()` direkt ins Datenbankmodell.* Felder wie `besitzer_id` setzt der Server aus dem Token, nie aus der Anfrage.
-- *Das Ausgabemodell* legt über `response_model=NotizAusgabe` fest, welche Felder den Server verlassen. Kommt später ein internes Feld zum Datenbankmodell hinzu, taucht es nicht automatisch in der API auf.
+- *`extra="forbid"`* lässt jede Anfrage mit unbekannten Feldern scheitern (422) @pydantic-dev-docs-validation-latest-concepts-models @fastapi-tiangolo-com-tutorial-handling-errors. Ein Angreifer, der `"besitzer_id": "..."` oder `"ist_admin": true` mitschickt, bekommt einen Fehler, statt dass das Feld stillschweigend ignoriert oder, schlimmer, übernommen wird.
+- *Kein `**daten.model_dump()` direkt ins Datenbankmodell.* Felder wie `besitzer_id` setzt der Server aus dem Token, nie aus der Anfrage @api-security-owasp-org-editions-2023-en-0xa3-broken-object-property-level-authorization.
+- *Das Ausgabemodell* legt über `response_model=NotizAusgabe` fest, welche Felder den Server verlassen @fastapi-tiangolo-com-tutorial-response-model. Kommt später ein internes Feld zum Datenbankmodell hinzu, taucht es nicht automatisch in der API auf.
 
 #datei("app/main.py")[
 ```python
@@ -67,28 +67,28 @@ Unterscheiden sich die Rechte *pro Feld* (Administratoren dürfen `interne_notiz
 
 == Eingaben begrenzen und validieren
 
-Jedes Feld braucht eine Obergrenze: Länge von Zeichenketten, Anzahl von Listenelementen, Wertebereich von Zahlen. Ohne sie kann ein einzelner Request mit einem 500-MB-Textfeld oder einer Liste mit einer Million Einträgen Speicher und Datenbank überlasten (Kapitel 6).
+Jedes Feld braucht eine Obergrenze: Länge von Zeichenketten, Anzahl von Listenelementen, Wertebereich von Zahlen @api-security-owasp-org-editions-2023-en-0xa4-unrestricted-resource-consumption. Ohne sie kann ein einzelner Request mit einem 500-MB-Textfeld oder einer Liste mit einer Million Einträgen Speicher und Datenbank überlasten (Kapitel 6).
 
 #table(columns: (auto, 1fr),
   [Pydantic-Mittel], [Einsatz],
-  [`Field(max_length=...)`, `min_length`], [Zeichenketten und Listen],
-  [`Field(ge=1, le=100)`], [Zahlen, z.B. Seitengröße],
+  [`Field(max_length=...)`, `min_length`], [Zeichenketten und Listen @pydantic-dev-docs-validation-latest-api-pydantic-fields],
+  [`Field(ge=1, le=100)`], [Zahlen, z.B. Seitengröße @pydantic-dev-docs-validation-latest-api-pydantic-fields],
   [`Literal["privat", "team"]`, `Enum`], [feste Wertelisten statt freier Zeichenketten],
-  [`EmailStr`, `HttpUrl`, `UUID`], [Formate, die Pydantic selbst prüft],
-  [`Field(pattern=r"^[a-z0-9-]{3,40}$")`], [Kennungen mit festem Aufbau],
-  [`model_config = ConfigDict(strict=True)`], [keine automatische Umwandlung, etwa von `"1"` in `1`],
+  [`EmailStr`, `HttpUrl`, `UUID`], [Formate, die Pydantic selbst prüft @pydantic-dev-docs-validation-latest-api-pydantic-networks],
+  [`Field(pattern=r"^[a-z0-9-]{3,40}$")`], [Kennungen mit festem Aufbau @pydantic-dev-docs-validation-latest-api-pydantic-fields],
+  [`model_config = ConfigDict(strict=True)`], [keine automatische Umwandlung, etwa von `"1"` in `1` @pydantic-dev-docs-validation-latest-concepts-strict-mode],
 )
 
-Die Validierung ersetzt keine sichere Weiterverarbeitung: Datenbankabfragen laufen *immer* parametrisiert (SQLAlchemy macht das automatisch, solange keine Zeichenketten zu SQL zusammengesetzt werden), Ausgaben in HTML werden escaped, Dateinamen aus Anfragen nie direkt als Pfad verwendet.
+Die Validierung ersetzt keine sichere Weiterverarbeitung: Datenbankabfragen laufen *immer* parametrisiert @cheatsheetseries-owasp-org-cheatsheets-sql-injection-prevention-cheat-sheet-html (SQLAlchemy macht das automatisch, solange keine Zeichenketten zu SQL zusammengesetzt werden @docs-sqlalchemy-org-en-20-tutorial-data-select), Ausgaben in HTML werden escaped @cheatsheetseries-owasp-org-cheatsheets-cross-site-scripting-prevention-cheat-sheet-html, Dateinamen aus Anfragen nie direkt als Pfad verwendet @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html.
 
-#achtung[`text(f"SELECT * FROM notizen WHERE titel = '{titel}'")` ist auch mit SQLAlchemy eine SQL-Injection. Richtig: `text("SELECT * FROM notizen WHERE titel = :titel").bindparams(titel=titel)` oder die Abfrage-API von SQLAlchemy.]
+#achtung[`text(f"SELECT * FROM notizen WHERE titel = '{titel}'")` ist auch mit SQLAlchemy eine SQL-Injection @docs-sqlalchemy-org-en-20-tutorial-dbapi-transactions. Richtig: `text("SELECT * FROM notizen WHERE titel = :titel").bindparams(titel=titel)` oder die Abfrage-API von SQLAlchemy.]
 
 == Datei-Uploads
 
-- Größe begrenzen, bevor die Datei vollständig eingelesen wird (am Reverse Proxy und in der Anwendung).
-- Dateityp am Inhalt prüfen, nicht an Endung oder `Content-Type` des Clients; nur eine kleine Allowlist zulassen.
-- Erst in *Quarantäne* unter einem zufälligen, serverseitig erzeugten Namen speichern. Vor Freigabe Malware-Scan und – falls Archive erlaubt sind – Grenzen für Dateianzahl, entpackte Größe und Verschachtelung anwenden.
-- Außerhalb des Webroots oder in privatem Object Storage speichern. Downloads autorisieren, kurzlebige signierte URLs verwenden und möglichst über eine eigene Download-Domain ohne Cookies ausliefern.
-- Beim Ausliefern `Content-Disposition: attachment` mit sicher kodiertem Dateinamen, `X-Content-Type-Options: nosniff` und einen serverseitig bestimmten Typ setzen. Benutzerdateinamen werden nie als Pfad oder Header-Rohwert übernommen.
+- Größe begrenzen, bevor die Datei vollständig eingelesen wird (am Reverse Proxy und in der Anwendung) @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html.
+- Dateityp am Inhalt prüfen, nicht an Endung oder `Content-Type` des Clients; nur eine kleine Allowlist zulassen @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html.
+- Erst in *Quarantäne* unter einem zufälligen, serverseitig erzeugten Namen speichern. Vor Freigabe Malware-Scan und – falls Archive erlaubt sind – Grenzen für Dateianzahl, entpackte Größe und Verschachtelung anwenden @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html.
+- Außerhalb des Webroots oder in privatem Object Storage speichern @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html. Downloads autorisieren, kurzlebige signierte URLs verwenden @docs-aws-amazon-com-amazons3-latest-userguide-using-presigned-url-html und möglichst über eine eigene Download-Domain ohne Cookies ausliefern.
+- Beim Ausliefern `Content-Disposition: attachment` mit sicher kodiertem Dateinamen @developer-mozilla-org-en-us-docs-web-http-reference-headers-content-disposition, `X-Content-Type-Options: nosniff` @developer-mozilla-org-en-us-docs-web-http-reference-headers-x-content-type-options und einen serverseitig bestimmten Typ setzen. Benutzerdateinamen werden nie als Pfad oder Header-Rohwert übernommen.
 
-Nicht jedes Format ist gleich: SVG, HTML, Office-Dokumente und PDFs können aktive Inhalte oder externe Referenzen enthalten. Wenn die Funktion sie nicht zwingend braucht, werden sie nicht akzeptiert; sonst erfolgt eine formatspezifische Bereinigung beziehungsweise Konvertierung in einer isolierten Umgebung.
+Nicht jedes Format ist gleich: SVG, HTML, Office-Dokumente und PDFs können aktive Inhalte oder externe Referenzen enthalten @developer-mozilla-org-en-us-docs-web-svg-reference-element-script @cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html. Wenn die Funktion sie nicht zwingend braucht, werden sie nicht akzeptiert; sonst erfolgt eine formatspezifische Bereinigung beziehungsweise Konvertierung in einer isolierten Umgebung.

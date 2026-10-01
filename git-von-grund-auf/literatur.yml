@@ -1,0 +1,1876 @@
+blog-gitea-com-release-of-1-26-0:
+  author:
+  - name: lunny
+  - name: bircni
+  date: 2026-04-18
+  publisher: Gitea Blog
+  title: Gitea 1.26.0 is released
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://blog.gitea.com/release-of-1.26.0/
+blog-gitea-com-release-of-1-27-0:
+  type: Web
+  title: Gitea 1.27.0 is released
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Blog
+  url:
+    value: https://blog.gitea.com/release-of-1.27.0/
+    date: 2026-10-01
+blog-gitea-com-release-of-1-27-3:
+  type: Web
+  title: Gitea 1.27.3 is released
+  author:
+  - name: Gitea
+  publisher: Gitea Blog
+  date: 2026-08-29
+  url:
+    value: https://blog.gitea.com/release-of-1.27.3/
+    date: 2026-10-01
+blog-gitea-com-release-of-runner-1-0-0:
+  author:
+  - name: bircni
+  date: 2026-05-05
+  publisher: Gitea Blog
+  title: Gitea Runner 1.0.0 is released
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://blog.gitea.com/release-of-runner-1.0.0/
+blog-gitea-com-release-of-runner-2-0-0:
+  type: Web
+  title: Gitea Runner 2.0.0 is released
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Blog
+  url:
+    value: https://blog.gitea.com/release-of-runner-2.0.0/
+    date: 2026-10-01
+blog-gitea-com-release-of-runner-3-0-0:
+  type: Web
+  title: Gitea Runner 3.0.0 is released
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Blog
+  url:
+    value: https://blog.gitea.com/release-of-runner-3.0.0/
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-docker-security-cheat-sheet-html:
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  title: Docker Security Cheat Sheet
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
+code-claude-com-docs-en-common-workflows:
+  type: Web
+  title: Common workflows
+  author:
+  - name: Anthropic
+  publisher: Claude Code Docs
+  url:
+    value: https://code.claude.com/docs/en/common-workflows
+    date: 2026-10-01
+code-visualstudio-com-docs-editor-command-line:
+  type: Web
+  title: Command Line Interface (CLI)
+  author:
+  - name: Microsoft
+  publisher: Visual Studio Code Documentation
+  url:
+    value: https://code.visualstudio.com/docs/editor/command-line
+    date: 2026-10-01
+code-visualstudio-com-docs-setup-mac:
+  type: Web
+  title: Installing Visual Studio Code on macOS
+  author:
+  - name: Microsoft
+  publisher: Visual Studio Code Documentation
+  url:
+    value: https://code.visualstudio.com/docs/setup/mac
+    date: 2026-10-01
+code-visualstudio-com-docs-sourcecontrol-merge-conflicts:
+  type: Web
+  title: Resolve merge conflicts in VS Code
+  author:
+  - name: Microsoft
+  publisher: Visual Studio Code Documentation
+  url:
+    value: https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts
+    date: 2026-10-01
+code-visualstudio-com-docs-sourcecontrol-overview:
+  type: Web
+  title: Source control in VS Code
+  author:
+  - name: Microsoft
+  publisher: Visual Studio Code Documentation
+  url:
+    value: https://code.visualstudio.com/docs/sourcecontrol/overview
+    date: 2026-10-01
+conventionalcommits-org-en-v1-0-0:
+  type: Web
+  title: Conventional Commits
+  author:
+  - name: Conventional Commits
+  publisher: conventionalcommits.org
+  url:
+    value: https://www.conventionalcommits.org/en/v1.0.0/
+    date: 2026-10-01
+developer-apple-com-library-archive-technotes-tn2449-index-html:
+  type: Web
+  title: 'Technical Note TN2449: OpenSSH updates in macOS 10.12.2'
+  author:
+  - name: Apple Inc.
+  publisher: Apple Developer Documentation Archive
+  url:
+    value: https://developer.apple.com/library/archive/technotes/tn2449/_index.html
+    date: 2026-10-01
+docs-brew-sh-installation:
+  type: Web
+  title: Installation
+  author:
+  - name: Homebrew
+  publisher: Homebrew Documentation
+  url:
+    value: https://docs.brew.sh/Installation
+    date: 2026-10-01
+docs-docker-com-build-building-best-practices:
+  type: Web
+  title: Building best practices
+  author:
+  - name: Docker, Inc.
+  publisher: Docker Docs
+  url:
+    value: https://docs.docker.com/build/building/best-practices/
+    date: 2026-10-01
+docs-docker-com-engine-install-linux-postinstall:
+  author:
+  - name: Docker Inc.
+  publisher: Docker Docs
+  title: Linux post-installation steps for Docker Engine
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.docker.com/engine/install/linux-postinstall/
+docs-docker-com-engine-security:
+  type: Web
+  title: Docker Engine security
+  author:
+  - name: Docker Inc.
+  publisher: Docker Docs
+  url:
+    value: https://docs.docker.com/engine/security/
+    date: 2026-10-01
+docs-docker-com-reference-cli-docker-buildx-build:
+  type: Web
+  title: docker buildx build
+  author:
+  - name: Docker, Inc.
+  publisher: Docker Docs
+  url:
+    value: https://docs.docker.com/reference/cli/docker/buildx/build/
+    date: 2026-10-01
+docs-docker-com-reference-cli-docker-compose-up:
+  author:
+  - name: Docker Inc.
+  publisher: Docker Docs
+  title: docker compose up
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.docker.com/reference/cli/docker/compose/up/
+docs-gitea-com:
+  type: Web
+  title: What is Gitea?
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/
+    date: 2026-10-01
+docs-gitea-com-administration-config-cheat-sheet:
+  type: Web
+  title: Configuration Cheat Sheet
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/administration/config-cheat-sheet/
+    date: 2026-10-01
+docs-gitea-com-administration-git-lfs-setup:
+  type: Web
+  title: Git LFS setup
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/administration/git-lfs-setup
+    date: 2026-10-01
+docs-gitea-com-administration-signing:
+  type: Web
+  title: Signing
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/administration/signing
+    date: 2026-10-01
+docs-gitea-com-api-operations-repo-create-key:
+  type: Web
+  title: Add a key to a repository
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/api/operations/repo-create-key/
+    date: 2026-10-01
+docs-gitea-com-api-operations-repo-merge-pull-request:
+  type: Web
+  title: Merge a pull request
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/api/operations/repo-merge-pull-request/
+    date: 2026-10-01
+docs-gitea-com-development-oauth2-provider:
+  author: &id001
+  - name: Gitea
+  publisher: Gitea Documentation
+  title: OAuth2 Provider
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/development/oauth2-provider
+docs-gitea-com-help-faq:
+  type: Web
+  title: FAQ
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/help/faq/
+    date: 2026-10-01
+docs-gitea-com-runner-cache:
+  type: Web
+  title: Caching
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/runner/cache
+    date: 2026-10-01
+docs-gitea-com-runner-configuration:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Configuration
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/runner/configuration
+docs-gitea-com-runner-installation-docker:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Install with Docker
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/runner/installation/docker
+docs-gitea-com-runner-labels:
+  type: Web
+  title: Labels
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/runner/labels
+    date: 2026-10-01
+docs-gitea-com-runner-registration:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Registering a runner
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/runner/registration
+docs-gitea-com-runner-upgrade:
+  type: Web
+  title: Upgrading
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/runner/upgrade
+    date: 2026-10-01
+docs-gitea-com-usage-access-control-protected-branches:
+  type: Web
+  title: Protected branches
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/access-control/protected-branches/
+    date: 2026-10-01
+docs-gitea-com-usage-access-control-protected-tags:
+  type: Web
+  title: Protected Tags
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/access-control/protected-tags
+    date: 2026-10-01
+docs-gitea-com-usage-actions-act-runner:
+  type: Web
+  title: Gitea Runner
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/act-runner
+    date: 2026-10-01
+docs-gitea-com-usage-actions-actions-variables:
+  type: Web
+  title: Variables
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/actions-variables
+    date: 2026-10-01
+docs-gitea-com-usage-actions-comparison:
+  type: Web
+  title: Compared to GitHub Actions
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/comparison
+    date: 2026-10-01
+docs-gitea-com-usage-actions-design:
+  type: Web
+  title: Design of Gitea Actions
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/design
+    date: 2026-10-01
+docs-gitea-com-usage-actions-faq:
+  type: Web
+  title: Frequently Asked Questions
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/faq
+    date: 2026-10-01
+docs-gitea-com-usage-actions-overview:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Overview
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/usage/actions/overview
+docs-gitea-com-usage-actions-quickstart:
+  type: Web
+  title: Quick Start
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/quickstart
+    date: 2026-10-01
+docs-gitea-com-usage-actions-runner:
+  type: Web
+  title: Gitea Runner
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/runner
+    date: 2026-10-01
+docs-gitea-com-usage-actions-scoped-workflows:
+  type: Web
+  title: Scoped Workflows
+  author:
+  - name: Gitea
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/scoped-workflows
+    date: 2026-10-01
+docs-gitea-com-usage-actions-secrets:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Secrets
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/usage/actions/secrets
+docs-gitea-com-usage-actions-token-permissions:
+  type: Web
+  title: Actions job token permissions (GITEA_TOKEN)
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/actions/token-permissions
+    date: 2026-10-01
+docs-gitea-com-usage-issue-pull-request-templates:
+  type: Web
+  title: Issue and Pull Request templates
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/issue-pull-request-templates
+    date: 2026-10-01
+docs-gitea-com-usage-issues-prs-automatically-linked-references:
+  type: Web
+  title: Automatically Linked References
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/issues-prs/automatically-linked-references
+    date: 2026-10-01
+docs-gitea-com-usage-packages-container:
+  author: *id001
+  publisher: Gitea Documentation
+  title: Container Registry
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.gitea.com/usage/packages/container
+docs-gitea-com-usage-permissions:
+  type: Web
+  title: Permissions
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/permissions
+    date: 2026-10-01
+docs-gitea-com-usage-protected-tags:
+  type: Web
+  title: Protected tags
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/protected-tags
+    date: 2026-10-01
+docs-gitea-com-usage-pull-request:
+  type: Web
+  title: Pull Request
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Documentation
+  url:
+    value: https://docs.gitea.com/usage/pull-request
+    date: 2026-10-01
+docs-github-com-en-actions-concepts-workflows-and-actions-workflow-artifacts:
+  type: Web
+  title: Workflow artifacts
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/concepts/workflows-and-actions/workflow-artifacts
+    date: 2026-10-01
+docs-github-com-en-actions-reference-security-secure-use:
+  type: Web
+  title: Secure use reference
+  author:
+  - name: GitHub, Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/security/secure-use
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-contexts:
+  type: Web
+  title: Contexts reference
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows:
+  type: Web
+  title: Events that trigger workflows
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-expressions:
+  type: Web
+  title: Evaluate expressions in workflows and actions
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/expressions
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-variables:
+  type: Web
+  title: Variables reference
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/variables
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-workflow-commands:
+  type: Web
+  title: Workflow commands for GitHub Actions
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands
+    date: 2026-10-01
+docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax:
+  type: Web
+  title: Workflow syntax for GitHub Actions
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
+    date: 2026-10-01
+docs-github-com-en-authentication-connecting-to-github-with-ssh-generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent:
+  type: Web
+  title: Generating a new SSH key and adding it to the ssh-agent
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+    date: 2026-10-01
+docs-github-com-en-authentication-keeping-your-account-and-data-secure-removing-sensitive-data-from-a-repository:
+  type: Web
+  title: Removing sensitive data from a repository
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+    date: 2026-10-01
+docs-github-com-en-get-started-using-github-github-flow:
+  type: Web
+  title: GitHub flow
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/get-started/using-github/github-flow
+    date: 2026-10-01
+docs-renovatebot-com:
+  type: Web
+  title: Renovate documentation
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/
+    date: 2026-10-01
+docs-renovatebot-com-config-validation:
+  type: Web
+  title: Config Validation
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/config-validation/
+    date: 2026-10-01
+docs-renovatebot-com-configuration-options:
+  type: Web
+  title: Configuration Options
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/configuration-options/
+    date: 2026-10-01
+docs-renovatebot-com-docker:
+  type: Web
+  title: Docker
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/docker/
+    date: 2026-10-01
+docs-renovatebot-com-getting-started-installing-onboarding:
+  type: Web
+  title: Installing & onboarding
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/getting-started/installing-onboarding/
+    date: 2026-10-01
+docs-renovatebot-com-getting-started-running:
+  type: Web
+  title: Running Renovate
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/getting-started/running/
+    date: 2026-10-01
+docs-renovatebot-com-key-concepts-dashboard:
+  type: Web
+  title: Dependency Dashboard
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/key-concepts/dashboard/
+    date: 2026-10-01
+docs-renovatebot-com-modules-manager:
+  type: Web
+  title: Managers
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/modules/manager/
+    date: 2026-10-01
+docs-renovatebot-com-modules-manager-github-actions:
+  type: Web
+  title: Automated Dependency Updates for GitHub Actions
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/modules/manager/github-actions/
+    date: 2026-10-01
+docs-renovatebot-com-modules-platform-gitea:
+  type: Web
+  title: Gitea
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/modules/platform/gitea/
+    date: 2026-10-01
+docs-renovatebot-com-self-hosted-configuration:
+  type: Web
+  title: Self-Hosted configuration
+  author:
+  - name: Renovate
+  publisher: Renovate Docs
+  url:
+    value: https://docs.renovatebot.com/self-hosted-configuration/
+    date: 2026-10-01
+docs-semgrep-dev-cli-reference:
+  type: Web
+  title: CLI Reference
+  author:
+  - name: Semgrep, Inc.
+  publisher: Semgrep Documentation
+  url:
+    value: https://docs.semgrep.dev/cli-reference
+    date: 2026-10-01
+docs-semgrep-dev-getting-started-cli:
+  type: Web
+  title: Local scans with Semgrep
+  author:
+  - name: Semgrep, Inc.
+  publisher: Semgrep Documentation
+  url:
+    value: https://docs.semgrep.dev/getting-started/cli
+    date: 2026-10-01
+docs-sonarsource-com-sonarqube-community-build-glossary:
+  author:
+  - name: Sonar
+  publisher: SonarQube Community Build Documentation
+  title: SonarQube glossary
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.sonarsource.com/sonarqube-community-build/glossary
+? docs-sonarsource-com-sonarqube-community-build-quality-standards-administration-managing-quality-gates-introduction-to-quality-gates
+: author:
+  - name: Sonar
+  publisher: SonarQube Community Build Documentation
+  title: Introduction to quality gates
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.sonarsource.com/sonarqube-community-build/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates
+docs-sonarsource-com-sonarqube-community-build-server-installation-pre-installation-linux:
+  author:
+  - name: Sonar
+  publisher: SonarQube Community Build Documentation
+  title: Linux
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.sonarsource.com/sonarqube-community-build/server-installation/pre-installation/linux
+docs-sonarsource-com-sonarqube-community-build-server-installation-server-host-requirements:
+  author:
+  - name: Sonar
+  publisher: SonarQube Community Build Documentation
+  title: Server host requirements
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://docs.sonarsource.com/sonarqube-community-build/server-installation/server-host-requirements
+docs-sonarsource-com-sonarqube-community-build-user-guide-about-new-code:
+  type: Web
+  title: Quality standards and new code
+  author:
+  - name: Sonar
+  publisher: SonarQube Community Build Documentation
+  url:
+    value: https://docs.sonarsource.com/sonarqube-community-build/user-guide/about-new-code
+    date: 2026-10-01
+formulae-brew-sh-formula-git-filter-repo:
+  type: Web
+  title: git-filter-repo
+  author:
+  - name: Homebrew
+  publisher: Homebrew Formulae
+  url:
+    value: https://formulae.brew.sh/formula/git-filter-repo
+    date: 2026-10-01
+git-lfs-com:
+  type: Web
+  title: Git Large File Storage
+  author:
+  - name: GitHub Inc.
+  publisher: git-lfs.com
+  url:
+    value: https://git-lfs.com/
+    date: 2026-10-01
+git-scm-com-book-en-v2-appendix-a-3a-git-in-other-environments-git-in-zsh:
+  type: Web
+  title: Git in Zsh
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh
+    date: 2026-10-01
+git-scm-com-book-en-v2-distributed-git-contributing-to-a-project:
+  type: Web
+  title: Contributing to a Project
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project
+    date: 2026-10-01
+git-scm-com-book-en-v2-getting-started-installing-git:
+  type: Web
+  title: Installing Git
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+    date: 2026-10-01
+git-scm-com-book-en-v2-getting-started-what-is-git-3f:
+  type: Web
+  title: What is Git?
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-basics-getting-a-git-repository:
+  type: Web
+  title: Getting a Git Repository
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-basics-recording-changes-to-the-repository:
+  type: Web
+  title: Recording Changes to the Repository
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-basics-tagging:
+  type: Web
+  title: Git Basics - Tagging
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-basics-working-with-remotes:
+  type: Web
+  title: Git Basics - Working with Remotes
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-branching-basic-branching-and-merging:
+  type: Web
+  title: Git Branching - Basic Branching and Merging
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-branching-branch-management:
+  type: Web
+  title: Git Branching - Branch Management
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Branching-Branch-Management
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell:
+  type: Web
+  title: Git Branching - Branches in a Nutshell
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-branching-rebasing:
+  type: Web
+  title: Git Branching - Rebasing
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-branching-remote-branches:
+  type: Web
+  title: Git Branching - Remote Branches
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-internals-git-objects:
+  type: Web
+  title: Git Objects
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-internals-git-references:
+  type: Web
+  title: Git References
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Internals-Git-References
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-internals-maintenance-and-data-recovery:
+  type: Web
+  title: Git Internals - Maintenance and Data Recovery
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-internals-the-refspec:
+  type: Web
+  title: Git Internals - The Refspec
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Internals-The-Refspec
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-tools-interactive-staging:
+  type: Web
+  title: Interactive Staging
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-tools-revision-selection:
+  type: Web
+  title: Git Tools - Revision Selection
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection
+    date: 2026-10-01
+git-scm-com-book-en-v2-git-tools-rewriting-history:
+  type: Web
+  title: Git Tools - Rewriting History
+  author:
+  - Chacon, Scott
+  - Straub, Ben
+  publisher: Pro Git, 2nd Edition (git-scm.com)
+  url:
+    value: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+    date: 2026-10-01
+git-scm-com-docs-breakingchanges:
+  type: Web
+  title: BreakingChanges Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/BreakingChanges
+    date: 2026-10-01
+git-scm-com-docs-diff-options:
+  type: Web
+  title: diff-options Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/diff-options
+    date: 2026-10-01
+git-scm-com-docs-git:
+  type: Web
+  title: git Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git
+    date: 2026-10-01
+git-scm-com-docs-git-add:
+  type: Web
+  title: git-add Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-add
+    date: 2026-10-01
+git-scm-com-docs-git-archive:
+  type: Web
+  title: git-archive Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-archive
+    date: 2026-10-01
+git-scm-com-docs-git-bisect:
+  type: Web
+  title: git-bisect Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-bisect
+    date: 2026-10-01
+git-scm-com-docs-git-blame:
+  type: Web
+  title: git-blame Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-blame
+    date: 2026-10-01
+git-scm-com-docs-git-branch:
+  type: Web
+  title: git-branch Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-branch
+    date: 2026-10-01
+git-scm-com-docs-git-check-ignore:
+  type: Web
+  title: git-check-ignore Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-check-ignore
+    date: 2026-10-01
+git-scm-com-docs-git-check-ref-format:
+  type: Web
+  title: git-check-ref-format Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-check-ref-format
+    date: 2026-10-01
+git-scm-com-docs-git-checkout:
+  type: Web
+  title: git-checkout Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-checkout
+    date: 2026-10-01
+git-scm-com-docs-git-cherry:
+  type: Web
+  title: git-cherry Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-cherry
+    date: 2026-10-01
+git-scm-com-docs-git-cherry-pick:
+  type: Web
+  title: git-cherry-pick Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-cherry-pick
+    date: 2026-10-01
+git-scm-com-docs-git-clean:
+  type: Web
+  title: git-clean Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-clean
+    date: 2026-10-01
+git-scm-com-docs-git-clone:
+  type: Web
+  title: git-clone Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-clone
+    date: 2026-10-01
+git-scm-com-docs-git-commit:
+  type: Web
+  title: git-commit Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-commit
+    date: 2026-10-01
+git-scm-com-docs-git-config:
+  type: Web
+  title: git-config Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-config
+    date: 2026-10-01
+git-scm-com-docs-git-count-objects:
+  type: Web
+  title: git-count-objects Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-count-objects
+    date: 2026-10-01
+git-scm-com-docs-git-describe:
+  type: Web
+  title: git-describe Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-describe
+    date: 2026-10-01
+git-scm-com-docs-git-diff:
+  type: Web
+  title: git-diff Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-diff
+    date: 2026-10-01
+git-scm-com-docs-git-fetch:
+  type: Web
+  title: git-fetch Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-fetch
+    date: 2026-10-01
+git-scm-com-docs-git-filter-branch:
+  type: Web
+  title: git-filter-branch Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-filter-branch
+    date: 2026-10-01
+git-scm-com-docs-git-gc:
+  type: Web
+  title: git-gc Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-gc
+    date: 2026-10-01
+git-scm-com-docs-git-help:
+  type: Web
+  title: git-help Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-help
+    date: 2026-10-01
+git-scm-com-docs-git-init:
+  type: Web
+  title: git-init Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-init
+    date: 2026-10-01
+git-scm-com-docs-git-interpret-trailers:
+  type: Web
+  title: git-interpret-trailers Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-interpret-trailers
+    date: 2026-10-01
+git-scm-com-docs-git-log:
+  type: Web
+  title: git-log Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-log
+    date: 2026-10-01
+git-scm-com-docs-git-maintenance:
+  type: Web
+  title: git-maintenance Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-maintenance
+    date: 2026-10-01
+git-scm-com-docs-git-merge:
+  type: Web
+  title: git-merge Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-merge
+    date: 2026-10-01
+git-scm-com-docs-git-merge-base:
+  type: Web
+  title: git-merge-base Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-merge-base
+    date: 2026-10-01
+git-scm-com-docs-git-mergetool:
+  type: Web
+  title: git-mergetool Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-mergetool
+    date: 2026-10-01
+git-scm-com-docs-git-notes:
+  type: Web
+  title: git-notes Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-notes
+    date: 2026-10-01
+git-scm-com-docs-git-pull:
+  type: Web
+  title: git-pull Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-pull
+    date: 2026-10-01
+git-scm-com-docs-git-push:
+  type: Web
+  title: git-push Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-push
+    date: 2026-10-01
+git-scm-com-docs-git-rebase:
+  type: Web
+  title: git-rebase Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-rebase
+    date: 2026-10-01
+git-scm-com-docs-git-reflog:
+  type: Web
+  title: git-reflog Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-reflog
+    date: 2026-10-01
+git-scm-com-docs-git-remote:
+  type: Web
+  title: git-remote Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-remote
+    date: 2026-10-01
+git-scm-com-docs-git-rerere:
+  type: Web
+  title: git-rerere Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-rerere
+    date: 2026-10-01
+git-scm-com-docs-git-reset:
+  type: Web
+  title: git-reset Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-reset
+    date: 2026-10-01
+git-scm-com-docs-git-restore:
+  type: Web
+  title: git-restore Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-restore
+    date: 2026-10-01
+git-scm-com-docs-git-revert:
+  type: Web
+  title: git-revert Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-revert
+    date: 2026-10-01
+git-scm-com-docs-git-rm:
+  type: Web
+  title: git-rm Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-rm
+    date: 2026-10-01
+git-scm-com-docs-git-shortlog:
+  type: Web
+  title: git-shortlog Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-shortlog
+    date: 2026-10-01
+git-scm-com-docs-git-show:
+  type: Web
+  title: git-show Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-show
+    date: 2026-10-01
+git-scm-com-docs-git-stash:
+  type: Web
+  title: git-stash Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-stash
+    date: 2026-10-01
+git-scm-com-docs-git-status:
+  type: Web
+  title: git-status Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-status
+    date: 2026-10-01
+git-scm-com-docs-git-switch:
+  type: Web
+  title: git-switch Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-switch
+    date: 2026-10-01
+git-scm-com-docs-git-tag:
+  type: Web
+  title: git-tag Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-tag
+    date: 2026-10-01
+git-scm-com-docs-git-var:
+  type: Web
+  title: git-var Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-var
+    date: 2026-10-01
+git-scm-com-docs-git-worktree:
+  type: Web
+  title: git-worktree Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/git-worktree
+    date: 2026-10-01
+git-scm-com-docs-gitattributes:
+  type: Web
+  title: gitattributes Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitattributes
+    date: 2026-10-01
+git-scm-com-docs-gitcli:
+  type: Web
+  title: gitcli Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitcli
+    date: 2026-10-01
+git-scm-com-docs-gitglossary:
+  type: Web
+  title: gitglossary Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitglossary
+    date: 2026-10-01
+git-scm-com-docs-gitignore:
+  type: Web
+  title: gitignore Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitignore
+    date: 2026-10-01
+git-scm-com-docs-gitmailmap:
+  type: Web
+  title: gitmailmap Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitmailmap
+    date: 2026-10-01
+git-scm-com-docs-gitrepository-layout:
+  type: Web
+  title: gitrepository-layout Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitrepository-layout
+    date: 2026-10-01
+git-scm-com-docs-gitrevisions:
+  type: Web
+  title: gitrevisions Documentation
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/docs/gitrevisions
+    date: 2026-10-01
+git-scm-com-install-mac:
+  type: Web
+  title: Install for macOS
+  author:
+  - name: Git Project
+  publisher: git-scm.com
+  url:
+    value: https://git-scm.com/install/mac
+    date: 2026-10-01
+gitea-com-gitea-runner:
+  author:
+  - name: Gitea
+  publisher: Gitea
+  title: 'gitea/runner: Official runner for Gitea'
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://gitea.com/gitea/runner
+gitea-com-gitea-runner-releases-tag-v2-0-0:
+  author:
+  - name: Gitea
+  publisher: Gitea
+  title: Gitea Runner v2.0.0 Release Notes
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://gitea.com/gitea/runner/releases/tag/v2.0.0
+gitea-com-gitea-runner-releases-tag-v3-0-0:
+  author:
+  - name: Gitea
+  publisher: Gitea
+  title: Gitea Runner v3.0.0 Release Notes
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://gitea.com/gitea/runner/releases/tag/v3.0.0
+gitea-com-gitea-runner-releases-tag-v4-0-0:
+  author:
+  - name: Gitea
+  date: 2026-09-24
+  publisher: Gitea
+  title: Gitea Runner v4.0.0 Release Notes
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://gitea.com/gitea/runner/releases/tag/v4.0.0
+github-com-actions-cache:
+  type: Web
+  title: 'actions/cache: Cache dependencies and build outputs in GitHub Actions'
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub
+  url:
+    value: https://github.com/actions/cache
+    date: 2026-10-01
+github-com-actions-checkout:
+  type: Web
+  title: 'actions/checkout: Action for checking out a repo'
+  author:
+  - name: GitHub Inc.
+  publisher: GitHub
+  url:
+    value: https://github.com/actions/checkout
+    date: 2026-10-01
+github-com-git-git-blob-master-documentation-howto-revert-a-faulty-merge-adoc:
+  type: Web
+  title: Revert a faulty merge
+  author:
+  - name: Git Project
+  publisher: Git Documentation (GitHub)
+  url:
+    value: https://github.com/git/git/blob/master/Documentation/howto/revert-a-faulty-merge.adoc
+    date: 2026-10-01
+github-com-git-git-blob-master-mergetools-opendiff:
+  type: Web
+  title: mergetools/opendiff
+  author:
+  - name: Git Project
+  publisher: GitHub (git/git)
+  url:
+    value: https://github.com/git/git/blob/master/mergetools/opendiff
+    date: 2026-10-01
+github-com-git-lfs-git-lfs-blob-main-docs-man-git-lfs-migrate-adoc:
+  type: Web
+  title: git-lfs-migrate(1)
+  author:
+  - name: Git LFS Authors
+  publisher: GitHub, git-lfs/git-lfs
+  url:
+    value: https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc
+    date: 2026-10-01
+github-com-git-lfs-git-lfs-blob-main-docs-man-git-lfs-track-adoc:
+  type: Web
+  title: git-lfs-track(1)
+  author:
+  - name: Git LFS Authors
+  publisher: GitHub, git-lfs/git-lfs
+  url:
+    value: https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-track.adoc
+    date: 2026-10-01
+github-com-go-gitea-gitea-issues-12074:
+  type: Web
+  title: Pull Request ref not available immediatly after pushing
+  author:
+  - name: go-gitea/gitea
+  publisher: GitHub
+  url:
+    value: https://github.com/go-gitea/gitea/issues/12074
+    date: 2026-10-01
+github-com-go-gitea-gitea-issues-35145:
+  type: Web
+  title: '[Intentional] Secrets are not visible in forks · Issue #35145 · go-gitea/gitea'
+  author:
+  - name: Gitea Authors
+  publisher: GitHub
+  url:
+    value: https://github.com/go-gitea/gitea/issues/35145
+    date: 2026-10-01
+github-com-go-gitea-gitea-pull-16125:
+  type: Web
+  title: 'Add option to update pull request by rebase · Pull Request #16125 · go-gitea/gitea'
+  author:
+  - name: Gitea Authors
+  publisher: GitHub
+  url:
+    value: https://github.com/go-gitea/gitea/pull/16125
+    date: 2026-10-01
+github-com-go-gitea-gitea-pull-22803:
+  type: Web
+  title: 'Require approval to run actions for fork pull request · Pull Request #22803 · go-gitea/gitea'
+  author:
+  - name: Gitea Authors
+  publisher: GitHub
+  url:
+    value: https://github.com/go-gitea/gitea/pull/22803
+    date: 2026-10-01
+github-com-go-gitea-gitea-pull-23786:
+  type: Web
+  title: 'Refactor commit status for Actions jobs · Pull Request #23786 · go-gitea/gitea'
+  author:
+  - name: Gitea Authors
+  publisher: GitHub
+  url:
+    value: https://github.com/go-gitea/gitea/pull/23786
+    date: 2026-10-01
+github-com-nektos-act:
+  author:
+  - name: nektos
+  publisher: GitHub
+  title: 'nektos/act: Run your GitHub Actions locally'
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://github.com/nektos/act
+github-com-newren-git-filter-repo:
+  type: Web
+  title: 'git-filter-repo: Quickly rewrite git repository history (git-filter-branch replacement)'
+  author:
+  - Newren, Elijah
+  publisher: GitHub
+  url:
+    value: https://github.com/newren/git-filter-repo
+    date: 2026-10-01
+github-com-sonarsource-sonarqube-quality-gate-action:
+  author:
+  - name: SonarSource
+  publisher: GitHub
+  title: SonarSource/sonarqube-quality-gate-action
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://github.com/SonarSource/sonarqube-quality-gate-action
+github-com-sonarsource-sonarqube-scan-action:
+  author:
+  - name: SonarSource
+  publisher: GitHub
+  title: SonarSource/sonarqube-scan-action
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://github.com/SonarSource/sonarqube-scan-action
+github-com-sonarsource-sonarqube-scan-action-releases:
+  author:
+  - name: SonarSource
+  publisher: GitHub
+  title: 'Releases: SonarSource/sonarqube-scan-action'
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://github.com/SonarSource/sonarqube-scan-action/releases
+gnu-org-software-diffutils-manual-html-node-detailed-unified-html:
+  type: Web
+  title: Detailed Description of Unified Format
+  author:
+  - name: Free Software Foundation
+  publisher: GNU Diffutils Manual
+  url:
+    value: https://www.gnu.org/software/diffutils/manual/html_node/Detailed-Unified.html
+    date: 2026-10-01
+man-openbsd-org-ssh-config:
+  type: Web
+  title: ssh_config(5)
+  author:
+  - name: OpenBSD Project
+  publisher: OpenBSD manual pages
+  url:
+    value: https://man.openbsd.org/ssh_config
+    date: 2026-10-01
+man-openbsd-org-ssh-keygen:
+  author:
+  - name: OpenBSD Project
+  publisher: OpenBSD manual pages
+  title: ssh-keygen(1)
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://man.openbsd.org/ssh-keygen
+man-openbsd-org-ssh-keyscan:
+  author:
+  - name: OpenBSD Project
+  publisher: OpenBSD manual pages
+  title: ssh-keyscan(1)
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://man.openbsd.org/ssh-keyscan
+man-openbsd-org-sshd-8:
+  type: Web
+  title: sshd(8) - OpenBSD manual pages
+  author:
+  - name: OpenBSD
+  publisher: OpenBSD manual pages
+  url:
+    value: https://man.openbsd.org/sshd.8
+    date: 2026-10-01
+man7-org-linux-man-pages-man1-less-1-html:
+  type: Web
+  title: less(1) - Linux manual page
+  author:
+  - name: Linux man-pages project
+  publisher: man7.org
+  url:
+    value: https://man7.org/linux/man-pages/man1/less.1.html
+    date: 2026-10-01
+marketplace-visualstudio-com-items-itemname-redhat-vscode-yaml:
+  type: Web
+  title: YAML - Visual Studio Marketplace
+  author:
+  - name: Red Hat
+  publisher: Visual Studio Marketplace
+  url:
+    value: https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+    date: 2026-10-01
+nano-editor-org-dist-latest-cheatsheet-html:
+  type: Web
+  title: Cheatsheet for GNU nano
+  author:
+  - name: GNU nano
+  publisher: nano-editor.org
+  url:
+    value: https://www.nano-editor.org/dist/latest/cheatsheet.html
+    date: 2026-10-01
+raw-githubusercontent-com-go-gitea-gitea-main-models-actions-schedule-spec-go:
+  type: Web
+  title: models/actions/schedule_spec.go
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Quellcode (GitHub)
+  url:
+    value: https://raw.githubusercontent.com/go-gitea/gitea/main/models/actions/schedule_spec.go
+    date: 2026-10-01
+raw-githubusercontent-com-go-gitea-gitea-main-modules-git-ref-go:
+  type: Web
+  title: gitea/modules/git/ref.go (main)
+  author:
+  - name: Gitea Authors
+  publisher: GitHub (go-gitea/gitea)
+  url:
+    value: https://raw.githubusercontent.com/go-gitea/gitea/main/modules/git/ref.go
+    date: 2026-10-01
+raw-githubusercontent-com-go-gitea-gitea-main-routers-private-hook-post-receive-go:
+  type: Web
+  title: gitea/routers/private/hook_post_receive.go (main)
+  author:
+  - name: Gitea Authors
+  publisher: GitHub (go-gitea/gitea)
+  url:
+    value: https://raw.githubusercontent.com/go-gitea/gitea/main/routers/private/hook_post_receive.go
+    date: 2026-10-01
+raw-githubusercontent-com-go-gitea-gitea-main-templates-repo-settings-deploy-keys-tmpl:
+  type: Web
+  title: templates/repo/settings/deploy_keys.tmpl
+  author:
+  - name: Gitea Authors
+  publisher: Gitea Quellcode (GitHub)
+  url:
+    value: https://raw.githubusercontent.com/go-gitea/gitea/main/templates/repo/settings/deploy_keys.tmpl
+    date: 2026-10-01
+semver-org-lang-de:
+  type: Web
+  title: Semantic Versioning 2.0.0
+  author:
+  - Preston-Werner, Tom
+  publisher: semver.org
+  url:
+    value: https://semver.org/lang/de/
+    date: 2026-10-01
+sonarsource-com-blog-sonarqube-compare-editions:
+  author:
+  - Curlee, Robert
+  date: 2025-10-27
+  publisher: Sonar Blog
+  title: SonarQube Compare Community vs Developer vs Enterprise vs Data Center
+  type: Web
+  url:
+    date: 2026-10-01
+    value: https://www.sonarsource.com/blog/sonarqube-compare-editions/
+sonarsource-com-products-sonarqube-downloads:
+  type: Web
+  title: SonarQube Server Download & Install
+  author:
+  - name: Sonar
+  publisher: sonarsource.com
+  url:
+    value: https://www.sonarsource.com/products/sonarqube/downloads/
+    date: 2026-10-01
+starship-rs:
+  type: Web
+  title: Starship
+  author:
+  - name: Starship Contributors
+  publisher: starship.rs
+  url:
+    value: https://starship.rs/
+    date: 2026-10-01
+support-apple-com-en-us-102360:
+  type: Web
+  title: Use zsh as the default shell on Mac
+  author:
+  - name: Apple Inc.
+  publisher: Apple Support
+  url:
+    value: https://support.apple.com/en-us/102360
+    date: 2026-10-01
+support-apple-com-guide-disk-utility-file-system-formats-dsku19ed921c-mac:
+  type: Web
+  title: File system formats available in Disk Utility on Mac
+  author:
+  - name: Apple Inc.
+  publisher: Apple Support
+  url:
+    value: https://support.apple.com/guide/disk-utility/file-system-formats-dsku19ed921c/mac
+    date: 2026-10-01
+trivy-dev-latest-docs-configuration-filtering:
+  type: Web
+  title: Filtering
+  author:
+  - name: Aqua Security
+  publisher: Trivy Documentation
+  url:
+    value: https://trivy.dev/latest/docs/configuration/filtering/
+    date: 2026-10-01
+trivy-dev-latest-docs-target-container-image:
+  type: Web
+  title: Container Image
+  author:
+  - name: Aqua Security
+  publisher: Trivy Documentation
+  url:
+    value: https://trivy.dev/latest/docs/target/container_image/
+    date: 2026-10-01
+trivy-dev-latest-docs-target-filesystem:
+  type: Web
+  title: Filesystem
+  author:
+  - name: Aqua Security
+  publisher: Trivy Documentation
+  url:
+    value: https://trivy.dev/latest/docs/target/filesystem/
+    date: 2026-10-01
+trunkbaseddevelopment-com:
+  type: Web
+  title: Trunk Based Development
+  author:
+  - name: trunkbaseddevelopment.com
+  publisher: trunkbaseddevelopment.com
+  url:
+    value: https://trunkbaseddevelopment.com/
+    date: 2026-10-01
+yaml-org-spec-1-2-2:
+  type: Web
+  title: YAML Ain't Markup Language (YAML) Version 1.2.2
+  author:
+  - Ben-Kiki, Oren
+  - Evans, Clark
+  - döt Net, Ingy
+  publisher: yaml.org
+  url:
+    value: https://yaml.org/spec/1.2.2/
+    date: 2026-10-01
+zsh-sourceforge-io-doc-release-user-contributions-html:
+  type: Web
+  title: User Contributions (zsh manual)
+  author:
+  - name: Zsh Development Group
+  publisher: The Z Shell Manual
+  url:
+    value: https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
+    date: 2026-10-01

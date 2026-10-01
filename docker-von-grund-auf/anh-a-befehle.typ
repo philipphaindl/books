@@ -3,6 +3,8 @@
 #set page(margin: (x: 1.7cm, top: 2.2cm, bottom: 1.9cm))
 = Befehlsübersicht
 
+#text(size: 7.6pt)[Vollständige Optionen: Referenz der Docker-CLI @docs-docker-com-reference-cli-docker.]
+
 #let blk(titel, ..rows) = block(breakable: false, below: 0.75em, width: 100%)[
   #text(size: 8pt, weight: "bold", fill: c-accent, upper(titel))
   #v(-0.45em)

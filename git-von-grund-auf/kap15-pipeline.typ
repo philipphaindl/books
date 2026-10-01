@@ -74,7 +74,7 @@ jobs:
 ```
 ]
 
-`lint` und `test` laufen parallel, weil keiner vom anderen abhängt. So kommt das Ergebnis schneller. In Gitea trägst du im Branch-Schutz von `main` die Statusprüfungen mit dem Muster `ci / *` als erforderlich ein (Kapitel 12). Ab dann lässt sich kein PR mehr mergen, dessen Lint oder Tests rot sind.
+`lint` und `test` laufen parallel, weil keiner vom anderen abhängt. So kommt das Ergebnis schneller. In Gitea trägst du im Branch-Schutz von `main` die Statusprüfungen mit dem Muster `ci / *` als erforderlich ein (Kapitel 12) @docs-gitea-com-usage-access-control-protected-branches. Ab dann lässt sich kein PR mehr mergen, dessen Lint oder Tests rot sind @docs-gitea-com-usage-access-control-protected-branches.
 
 Pushes auf einen Branch mit offenem PR lösen hier beide Ereignisse aus (`push` und `pull_request`), die Prüfung läuft dann doppelt. Wer das vermeiden will, lässt den `push`-Block weg und prüft nur PRs.
 
@@ -191,10 +191,10 @@ jobs:
 
 Einige Entscheidungen in dieser Datei sind bewusst getroffen:
 
-- *Staging und Produktion haben getrennte Schlüssel und Variablen.* Weil Gitea `environment` ignoriert, übernehmen die Namenspräfixe `STAGING_` und `PROD_` diese Trennung. Ein erbeuteter Staging-Schlüssel öffnet nicht die Produktion.
+- *Staging und Produktion haben getrennte Schlüssel und Variablen.* Weil Gitea `environment` ignoriert @docs-gitea-com-usage-actions-comparison, übernehmen die Namenspräfixe `STAGING_` und `PROD_` diese Trennung. Ein erbeuteter Staging-Schlüssel öffnet nicht die Produktion.
 - *Produktion nur über Tags.* Ein Merge nach `main` landet automatisch auf Staging. Für die Produktion setzt du bewusst einen Versions-Tag. Das Image wird dabei unter dem Versionsnamen gebaut, sodass `deploy.sh` auf dem Server genau diese Version startet.
-- *Ein Release-Tag muss aus `main` stammen.* Der Build holt `origin/main` und prüft mit `git merge-base --is-ancestor`, dass der getaggte Commit darin enthalten ist. Zusammen mit einem geschützten Tag-Muster `v*` verhindert das, dass ein beliebiger Commit den PR- und Review-Weg umgeht.
-- *Sonar nur auf `main`*, passend zur Einschränkung der Community Build aus Kapitel 14. Auf Tags wird nicht erneut analysiert, der getaggte Commit hat die Analyse schon auf `main` durchlaufen.
+- *Ein Release-Tag muss aus `main` stammen.* Der Build holt `origin/main` @git-scm-com-docs-git-fetch und prüft mit `git merge-base --is-ancestor`, dass der getaggte Commit darin enthalten ist @git-scm-com-docs-git-merge-base. Zusammen mit einem geschützten Tag-Muster `v*` @docs-gitea-com-usage-access-control-protected-tags verhindert das, dass ein beliebiger Commit den PR- und Review-Weg umgeht.
+- *Sonar nur auf `main`*, passend zur Einschränkung der Community Build aus Kapitel 14 @sonarsource-com-blog-sonarqube-compare-editions. Auf Tags wird nicht erneut analysiert, der getaggte Commit hat die Analyse schon auf `main` durchlaufen.
 - *Jeder Job checkt selbst aus.* Jobs teilen keine Dateien. Das Image ist das Artefakt, das vom Build zum Deployment wandert, und zwar über die Registry.
 
 == Ein Feature von Anfang bis Ende
@@ -231,16 +231,16 @@ git push origin v1.3.0
 
 #table(columns: (1fr, 1.3fr),
   [Symptom], [Ursache und Lösung],
-  [Workflow erscheint nicht im Tab _Actions_], [Datei nicht in `.gitea/workflows/` oder falsche Endung. Actions im Repository deaktiviert. YAML-Fehler (Gitea zeigt ihn im Tab _Actions_ an). Das Ereignis passt nicht zu den Filtern unter `on:`.],
+  [Workflow erscheint nicht im Tab _Actions_], [Datei nicht in `.gitea/workflows/` oder falsche Endung @docs-gitea-com-usage-actions-quickstart. Actions im Repository deaktiviert @docs-gitea-com-usage-actions-quickstart. YAML-Fehler (Gitea zeigt ihn im Tab _Actions_ an). Das Ereignis passt nicht zu den Filtern unter `on:`.],
   [Job bleibt auf _Wartend_], [Kein Runner mit passendem Label online. `runs-on` vertippt. Runner nur für ein anderes Repository oder eine andere Organisation registriert.],
-  [Checkout schlägt fehl (_could not resolve host_, _connection refused_)], [Der Job-Container erreicht Gitea nicht unter dessen `ROOT_URL`. Häufig steht dort `localhost`, oder der Name ist nur im Heimnetz auflösbar. `ROOT_URL` korrigieren oder `container.network` des Runners anpassen.],
+  [Checkout schlägt fehl (_could not resolve host_, _connection refused_)], [Der Job-Container erreicht Gitea nicht unter dessen `ROOT_URL`. Häufig steht dort `localhost`, oder der Name ist nur im Heimnetz auflösbar @docs-gitea-com-usage-actions-design @docs-gitea-com-usage-actions-quickstart. `ROOT_URL` korrigieren oder `container.network` des Runners anpassen.],
   [Secret ist leer], [Name vertippt, auf der falschen Ebene angelegt, als Variable statt als Secret gespeichert (oder umgekehrt), oder der PR stammt aus einem Fork.],
   [_Permission denied (publickey)_], [Privater Schlüssel unvollständig eingefügt (BEGIN/END-Zeilen fehlen), öffentlicher Schlüssel nicht in `authorized_keys`, falsche Rechte auf `~/.ssh` beim Zielbenutzer.],
   [_Host key verification failed_], [`known_hosts`-Variable fehlt oder ist veraltet, etwa nach einer Neuinstallation des Servers. Fingerabdruck neu prüfen und Variable aktualisieren.],
   [_Cannot connect to the Docker daemon_], [Der Runner hat keinen Zugriff auf einen Docker-Daemon, oder das Job-Image enthält keine Docker-CLI.],
   [Sonar: _Not authorized_ oder Timeout beim Quality Gate], [Token falsch oder abgelaufen, `projectKey` passt nicht, oder `SONAR_HOST_URL` ist aus dem Job-Container nicht erreichbar.],
-  [Tag löst keinen Workflow aus], [Tag nur lokal angelegt (Tags werden nicht automatisch gepusht), oder das Muster unter `tags:` passt nicht.],
-  [`concurrency`, `timeout-minutes` wirken nicht], [Gitea-Version zu alt, die Schlüssel werden dort stillschweigend ignoriert.],
+  [Tag löst keinen Workflow aus], [Tag nur lokal angelegt (Tags werden nicht automatisch gepusht @git-scm-com-book-en-v2-git-basics-tagging), oder das Muster unter `tags:` passt nicht.],
+  [`concurrency`, `timeout-minutes` wirken nicht], [Gitea-Version zu alt (`concurrency` gibt es ab Gitea 1.26 @blog-gitea-com-release-of-1-26-0, `timeout-minutes` ab Runner 2.0 @gitea-com-gitea-runner-releases-tag-v2-0-0), die Schlüssel werden dort stillschweigend ignoriert.],
 )
 
 === Lokal testen, bevor gepusht wird
@@ -248,5 +248,5 @@ git push origin v1.3.0
 Jeder Fehlversuch in der CI kostet einen Commit und ein paar Minuten. Drei Hilfen verkürzen die Schleife:
 
 - Die Prüfungen über das Makefile lokal ausführen (`make lint && make test`). Das fängt die meisten Fehler ab.
-- Workflows lokal in Docker ausführen, ohne Gitea: mit `gitea-runner exec` (früher `act_runner exec`) oder dem Werkzeug `act` (`brew install act`), auf dem der Runner ursprünglich basiert. Am Mac braucht beides einen kompatiblen laufenden Docker-Daemon, etwa Colima, Docker Desktop oder OrbStack; Details liefert `--help`. Das ist ein schneller Test, aber keine vollständige Simulation von Giteas Ereignisdaten, Berechtigungen und Netzwerk.
-- Neue Workflows zuerst nur mit `workflow_dispatch` anlegen und über die Schaltfläche im Tab _Actions_ starten, bis sie funktionieren. Erst dann die echten Auslöser eintragen.
+- Workflows lokal in Docker ausführen, ohne Gitea: mit `gitea-runner exec` (früher `act_runner exec`) @gitea-com-gitea-runner oder dem Werkzeug `act` (`brew install act`) @github-com-nektos-act, auf dem der Runner ursprünglich basiert @docs-gitea-com-usage-actions-overview. Am Mac braucht beides einen kompatiblen laufenden Docker-Daemon, etwa Colima, Docker Desktop oder OrbStack; Details liefert `--help`. Das ist ein schneller Test, aber keine vollständige Simulation von Giteas Ereignisdaten, Berechtigungen und Netzwerk.
+- Neue Workflows zuerst nur mit `workflow_dispatch` anlegen @docs-gitea-com-usage-actions-faq und über die Schaltfläche im Tab _Actions_ starten, bis sie funktionieren. Erst dann die echten Auslöser eintragen.

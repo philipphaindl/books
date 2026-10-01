@@ -6,7 +6,7 @@ Dieses Kapitel deckt ab, was du jeden Tag brauchst: ein Repository anlegen oder 
 
 == Repository anlegen oder klonen
 
-Ein neues Projekt machst du mit `git init` zu einem Repository. Das legt nur den Ordner `.git` an, deine Dateien bleiben unberührt. Ein bestehendes Projekt vom Server holst du mit `git clone`:
+Ein neues Projekt machst du mit `git init` zu einem Repository. Das legt nur den Ordner `.git` an, deine Dateien bleiben unberührt @git-scm-com-docs-git-init. Ein bestehendes Projekt vom Server holst du mit `git clone`:
 
 ```bash
 # Neues Projekt
@@ -18,11 +18,11 @@ git clone gitea:team/demo.git
 git clone gitea:team/demo.git anderer-ordnername
 ```
 
-`git clone` erledigt vier Dinge auf einmal: Es legt das Verzeichnis und `.git` an, lädt alle Commits herunter, registriert die Quelle unter dem Namen `origin` und checkt den Standard-Branch des Servers (meist `main`) aus.
+`git clone` erledigt vier Dinge auf einmal: Es legt das Verzeichnis und `.git` an, lädt alle Commits herunter, registriert die Quelle unter dem Namen `origin` und checkt den Standard-Branch des Servers (meist `main`) aus @git-scm-com-docs-git-clone @git-scm-com-book-en-v2-git-basics-getting-a-git-repository.
 
 == Den Zustand lesen: `git status`
 
-`git status` ist der Befehl, den du am häufigsten ausführen solltest, am besten vor und nach jedem anderen Befehl. Die Kurzform ist kompakter und für den Alltag meist besser:
+`git status` ist der Befehl, den du am häufigsten ausführen solltest, am besten vor und nach jedem anderen Befehl. Die Kurzform ist kompakter und für den Alltag meist besser @git-scm-com-docs-git-status:
 
 ```bash
 git status -sb
@@ -36,7 +36,7 @@ A  src/token.py
 ?? notizen.txt
 ```
 
-Die erste Zeile zeigt den Branch, seinen Upstream und ob du Commits voraus (_ahead_) oder hinterher (_behind_) bist. Darunter stehen zwei Statusspalten: *links der Index, rechts das Arbeitsverzeichnis.*
+Die erste Zeile zeigt den Branch, seinen Upstream und ob du Commits voraus (_ahead_) oder hinterher (_behind_) bist. Darunter stehen zwei Statusspalten: *links der Index, rechts das Arbeitsverzeichnis* @git-scm-com-docs-git-status.
 
 #table(columns: (auto, 1fr),
   [Code], [Bedeutung],
@@ -45,9 +45,9 @@ Die erste Zeile zeigt den Branch, seinen Upstream und ob du Commits voraus (_ahe
   [`MM`], [Vorgemerkt und danach erneut geändert. Im Index liegt die ältere Fassung!],
   [`A `], [Neue Datei, vorgemerkt.],
   [`D `, ` D`], [Gelöscht (vorgemerkt bzw. nur im Arbeitsverzeichnis).],
-  [`R `], [Umbenannt (Git erkennt Umbenennungen über ähnlichen Inhalt).],
+  [`R `], [Umbenannt (Git erkennt Umbenennungen über ähnlichen Inhalt @git-scm-com-book-en-v2-git-basics-recording-changes-to-the-repository).],
   [`??`], [Unbekannte Datei, die Git noch nie im Index hatte (_untracked_).],
-  [`UU`], [Konflikt, beide Seiten haben die Datei geändert (Kapitel 6).],
+  [`UU`], [Konflikt, beide Seiten haben die Datei geändert (Kapitel 6) @git-scm-com-docs-git-status.],
 )
 
 == Änderungen vormerken
@@ -60,7 +60,7 @@ git add -p                  # stückweise, interaktiv (sehr empfehlenswert)
 git restore --staged datei  # Vormerkung zurücknehmen, Änderung bleibt erhalten
 ```
 
-`git add -p` (_patch_) zeigt jede Änderung als einzelnen Abschnitt (_hunk_) und fragt, ob er in den Index soll. So baust du saubere Commits auch dann, wenn du in einer Datei mehrere unabhängige Dinge geändert hast:
+`git add -p` (_patch_) zeigt jede Änderung als einzelnen Abschnitt (_hunk_) und fragt, ob er in den Index soll @git-scm-com-docs-git-add. So baust du saubere Commits auch dann, wenn du in einer Datei mehrere unabhängige Dinge geändert hast @git-scm-com-book-en-v2-git-tools-interactive-staging:
 
 #table(columns: (auto, 1fr, auto, 1fr),
   [Taste], [Wirkung], [Taste], [Wirkung],
@@ -81,7 +81,7 @@ git commit -am "Titel"      # add + commit für bereits bekannte Dateien (nicht 
 
 === Gute Commits
 
-Ein guter Commit enthält *eine logische Änderung*: einen Bugfix, eine Funktion, eine Umbenennung. Er sollte für sich verständlich sein und das Projekt in einem funktionierenden Zustand hinterlassen. Das zahlt sich beim Review, bei `git revert` und bei `git bisect` aus. Faustregel: Wenn du im Titel "und" schreiben musst, sind es vermutlich zwei Commits.
+Ein guter Commit enthält *eine logische Änderung*: einen Bugfix, eine Funktion, eine Umbenennung @git-scm-com-book-en-v2-distributed-git-contributing-to-a-project. Er sollte für sich verständlich sein und das Projekt in einem funktionierenden Zustand hinterlassen. Das zahlt sich beim Review, bei `git revert` und bei `git bisect` aus. Faustregel: Wenn du im Titel "und" schreiben musst, sind es vermutlich zwei Commits.
 
 Für die Nachricht hat sich eine feste Form durchgesetzt:
 
@@ -98,15 +98,15 @@ Refs: #42
 ```
 ]
 
-- *Titelzeile:* höchstens etwa 50 Zeichen, ohne Punkt am Ende, im Imperativ ("einführen", nicht "eingeführt"; englisch "Add", nicht "Added"). Sie erscheint in `git log --oneline` und in Gitea-Listen.
-- *Leerzeile*, dann der *Textkörper* mit Zeilen bis etwa 72 Zeichen. Er erklärt *warum* etwas geändert wurde. Das *Was* steht ohnehin im Diff.
-- *Trailer* am Ende wie `Refs: #42` oder `Co-authored-by: Name <mail>` verknüpfen den Commit mit Issues oder Mitautoren.
+- *Titelzeile:* höchstens etwa 50 Zeichen @git-scm-com-docs-git-commit, ohne Punkt am Ende, im Imperativ ("einführen", nicht "eingeführt"; englisch "Add", nicht "Added") @git-scm-com-book-en-v2-distributed-git-contributing-to-a-project. Sie erscheint in `git log --oneline` und in Gitea-Listen @git-scm-com-docs-git-commit.
+- *Leerzeile*, dann der *Textkörper* mit Zeilen bis etwa 72 Zeichen @git-scm-com-book-en-v2-distributed-git-contributing-to-a-project. Er erklärt *warum* etwas geändert wurde @git-scm-com-book-en-v2-distributed-git-contributing-to-a-project. Das *Was* steht ohnehin im Diff.
+- *Trailer* am Ende wie `Refs: #42` oder `Co-authored-by: Name <mail>` verknüpfen den Commit mit Issues oder Mitautoren @git-scm-com-docs-git-interpret-trailers.
 
-Viele Teams nutzen zusätzlich _Conventional Commits_, bei denen der Titel mit einem Typ beginnt: `feat: Login-Sperre einführen`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`. Das erleichtert automatisch erzeugte Changelogs, ist aber Geschmackssache. Wichtiger als das Format ist, dass es im Projekt einheitlich ist.
+Viele Teams nutzen zusätzlich _Conventional Commits_, bei denen der Titel mit einem Typ beginnt: `feat: Login-Sperre einführen`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`. Das erleichtert automatisch erzeugte Changelogs @conventionalcommits-org-en-v1-0-0, ist aber Geschmackssache. Wichtiger als das Format ist, dass es im Projekt einheitlich ist.
 
 == Diffs lesen
 
-`git diff` vergleicht immer zwei Zustände. Welche, hängt von den Argumenten ab, und genau das verwirrt am Anfang:
+`git diff` vergleicht immer zwei Zustände. Welche, hängt von den Argumenten ab, und genau das verwirrt am Anfang @git-scm-com-docs-git-diff:
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -135,15 +135,15 @@ git diff --stat             # nur Übersicht: welche Dateien, wie viele Zeilen
 git diff --word-diff        # wortweise statt zeilenweise (ideal für LaTeX, Typst, Markdown)
 ```
 
-Ein Diff-Abschnitt beginnt mit einer Kopfzeile wie `@@ -12,7 +12,9 @@`: Im alten Stand ging es um 7 Zeilen ab Zeile 12, im neuen um 9 Zeilen ab Zeile 12. Zeilen mit `-` wurden entfernt, mit `+` hinzugefügt, ohne Präfix sind sie unveränderter Kontext.
+Ein Diff-Abschnitt beginnt mit einer Kopfzeile wie `@@ -12,7 +12,9 @@`: Im alten Stand ging es um 7 Zeilen ab Zeile 12, im neuen um 9 Zeilen ab Zeile 12. Zeilen mit `-` wurden entfernt, mit `+` hinzugefügt, ohne Präfix sind sie unveränderter Kontext @gnu-org-software-diffutils-manual-html-node-detailed-unified-html.
 
-#tipp[Für Texte (Paper, Skripte, Folien in LaTeX oder Typst) ist `git diff --word-diff` Gold wert, denn ein einziges geändertes Wort markiert sonst den ganzen Absatz. Noch besser funktioniert das, wenn im Quelltext jeder Satz in einer eigenen Zeile steht.]
+#tipp[Für Texte (Paper, Skripte, Folien in LaTeX oder Typst) ist `git diff --word-diff` Gold wert @git-scm-com-docs-diff-options, denn ein einziges geändertes Wort markiert sonst den ganzen Absatz. Noch besser funktioniert das, wenn im Quelltext jeder Satz in einer eigenen Zeile steht.]
 
 == Die Historie ansehen
 
 #table(columns: (auto, 1fr),
   [Befehl], [Zeigt],
-  [`git log`], [alle Commits des aktuellen Branches, neueste zuerst],
+  [`git log`], [alle Commits des aktuellen Branches, neueste zuerst @git-scm-com-docs-git-log],
   [`git log --oneline --graph --all`], [kompakter Graph aller Branches (als Alias `git lga`)],
   [`git log -p`], [jeden Commit mit vollständigem Diff],
   [`git log --stat`], [jeden Commit mit Liste der geänderten Dateien],
@@ -151,12 +151,12 @@ Ein Diff-Abschnitt beginnt mit einer Kopfzeile wie `@@ -12,7 +12,9 @@`: Im alten
   [`git log --since="2 weeks ago"`], [Commits der letzten zwei Wochen],
   [`git log --author="Haindl"`], [nur Commits eines Autors],
   [`git log -- src/login.py`], [nur Commits, die diese Datei betreffen],
-  [`git log --follow -- datei`], [Datei-Historie auch über Umbenennungen hinweg],
-  [`git show a1b2c3d`], [einen einzelnen Commit mit Nachricht und Diff],
-  [`git show HEAD:src/app.py`], [eine Datei so, wie sie im letzten Commit aussah],
+  [`git log --follow -- datei`], [Datei-Historie auch über Umbenennungen hinweg @git-scm-com-docs-git-log],
+  [`git show a1b2c3d`], [einen einzelnen Commit mit Nachricht und Diff @git-scm-com-docs-git-show],
+  [`git show HEAD:src/app.py`], [eine Datei so, wie sie im letzten Commit aussah @git-scm-com-docs-git-show],
 )
 
-Das doppelte `--` trennt Optionen von Dateipfaden. Es ist nur nötig, wenn ein Pfad mit einem Branch-Namen verwechselt werden könnte, schadet aber nie.
+Das doppelte `--` trennt Optionen von Dateipfaden. Es ist nur nötig, wenn ein Pfad mit einem Branch-Namen verwechselt werden könnte, schadet aber nie @git-scm-com-docs-gitcli.
 
 == Dateien löschen, verschieben, ignorieren
 
@@ -166,7 +166,7 @@ git rm --cached .env        # nicht mehr versionieren, Datei aber behalten
 git mv alt.py neu.py        # umbenennen und vormerken
 ```
 
-Welche Dateien Git gar nicht erst beachten soll, steht in der Datei `.gitignore` im Projekt. Sie wird selbst committet, damit sie für alle gilt:
+Welche Dateien Git gar nicht erst beachten soll, steht in der Datei `.gitignore` im Projekt. Sie wird selbst committet, damit sie für alle gilt @git-scm-com-docs-gitignore:
 
 #table(columns: (auto, 1fr),
   [Muster], [Bedeutung],
@@ -178,13 +178,13 @@ Welche Dateien Git gar nicht erst beachten soll, steht in der Datei `.gitignore`
   [`.env`], [lokale Umgebungsvariablen und Geheimnisse],
 )
 
-Wenn eine Datei trotz Eintrag nicht ignoriert wird, ist sie meistens schon versioniert: `.gitignore` wirkt nur auf Dateien, die Git noch nicht kennt. Dann hilft `git rm --cached datei`. Warum eine Datei ignoriert wird, verrät `git check-ignore -v datei`.
+Wenn eine Datei trotz Eintrag nicht ignoriert wird, ist sie meistens schon versioniert: `.gitignore` wirkt nur auf Dateien, die Git noch nicht kennt @git-scm-com-docs-gitignore. Dann hilft `git rm --cached datei` @git-scm-com-docs-git-rm. Warum eine Datei ignoriert wird, verrät `git check-ignore -v datei` @git-scm-com-docs-git-check-ignore.
 
-#achtung[Wurde eine Datei mit Passwörtern oder Tokens (etwa `.env`) jemals committet und gepusht, steht sie in der Historie, auch wenn du sie danach löschst. Das Geheimnis gilt als kompromittiert und muss *sofort ausgetauscht* werden. Das Umschreiben der Historie (Kapitel 8) ist erst der zweite Schritt.]
+#achtung[Wurde eine Datei mit Passwörtern oder Tokens (etwa `.env`) jemals committet und gepusht, steht sie in der Historie, auch wenn du sie danach löschst. Das Geheimnis gilt als kompromittiert und muss *sofort ausgetauscht* werden @docs-github-com-en-authentication-keeping-your-account-and-data-secure-removing-sensitive-data-from-a-repository. Das Umschreiben der Historie (Kapitel 8) ist erst der zweite Schritt.]
 
 === Zeilenenden und Binärdateien mit `.gitattributes`
 
-`.gitignore` entscheidet, *was* Git verfolgt; `.gitattributes` legt fest, *wie* Git bestimmte Dateien behandelt. Das ist besonders wichtig, wenn macOS-, Linux- und Windows-Rechner zusammenarbeiten:
+`.gitignore` entscheidet, *was* Git verfolgt; `.gitattributes` legt fest, *wie* Git bestimmte Dateien behandelt @git-scm-com-docs-gitattributes. Das ist besonders wichtig, wenn macOS-, Linux- und Windows-Rechner zusammenarbeiten:
 
 #datei(".gitattributes")[
 ```text
@@ -195,11 +195,11 @@ Wenn eine Datei trotz Eintrag nicht ignoriert wird, ist sie meistens schon versi
 ```
 ]
 
-`text=auto` normalisiert erkannte Textdateien im Repository auf LF. Für Shell-Skripte erzwingt `eol=lf` zusätzlich LF im Arbeitsverzeichnis, damit sie in Linux-Containern nicht an unsichtbaren CRLF-Zeichen scheitern. `binary` verhindert sinnlose Text-Diffs. Nach dem erstmaligen Einführen prüfst du die einmalige Normalisierung mit `git add --renormalize .` und `git diff --staged`, bevor du sie committest.
+`text=auto` normalisiert erkannte Textdateien im Repository auf LF @git-scm-com-docs-gitattributes. Für Shell-Skripte erzwingt `eol=lf` zusätzlich LF im Arbeitsverzeichnis @git-scm-com-docs-gitattributes, damit sie in Linux-Containern nicht an unsichtbaren CRLF-Zeichen scheitern. `binary` verhindert sinnlose Text-Diffs @git-scm-com-docs-gitattributes. Nach dem erstmaligen Einführen prüfst du die einmalige Normalisierung mit `git add --renormalize .` @git-scm-com-docs-git-add und `git diff --staged`, bevor du sie committest.
 
 === Große Binärdateien mit Git LFS
 
-Git speichert jede Version einer Datei in der Historie. Große, häufig geänderte Binärdateien wie Videos, Datensätze oder Photoshop-Dateien blähen deshalb jeden Klon dauerhaft auf. Git LFS speichert im Repository nur kleine Zeiger und die eigentlichen Dateien in einem getrennten LFS-Speicher:
+Git speichert jede Version einer Datei in der Historie. Große, häufig geänderte Binärdateien wie Videos, Datensätze oder Photoshop-Dateien blähen deshalb jeden Klon dauerhaft auf. Git LFS speichert im Repository nur kleine Zeiger und die eigentlichen Dateien in einem getrennten LFS-Speicher @git-lfs-com:
 
 ```bash
 brew install git-lfs
@@ -208,7 +208,7 @@ git lfs track "*.psd"
 git add .gitattributes
 ```
 
-Vorher prüfen, ob der Git-Server LFS unterstützt und genügend Speicher hat. `git lfs track` wirkt nur auf künftige Commits. Bereits vorhandene große Dateien migriert `git lfs migrate import` nur durch Umschreiben der Historie; das ist eine Team-Entscheidung und verlangt anschließend koordinierte neue Klone oder Force-Pushes.
+Vorher prüfen, ob der Git-Server LFS unterstützt und genügend Speicher hat @docs-gitea-com-administration-git-lfs-setup. `git lfs track` wirkt nur auf künftige Commits @github-com-git-lfs-git-lfs-blob-main-docs-man-git-lfs-track-adoc. Bereits vorhandene große Dateien migriert `git lfs migrate import` nur durch Umschreiben der Historie @github-com-git-lfs-git-lfs-blob-main-docs-man-git-lfs-migrate-adoc; das ist eine Team-Entscheidung und verlangt anschließend koordinierte neue Klone oder Force-Pushes.
 
 == Der Kreislauf im Überblick
 

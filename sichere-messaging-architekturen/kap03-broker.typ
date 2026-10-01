@@ -6,7 +6,7 @@ Beide Broker lösen dieselben Aufgaben, denken aber in unterschiedlichen Begriff
 
 == NATS und JetStream
 
-NATS ist ein sehr schlanker Nachrichtenserver. In seiner Grundform (_Core NATS_) leitet er Nachrichten nur an gerade verbundene Empfänger weiter, ohne sie zu speichern (at-most-once). *JetStream* ist die eingebaute Persistenzschicht darüber: Ein *Stream* speichert alle Nachrichten zu bestimmten *Subjects*, *Consumer* sind benannte Lesepositionen auf einem Stream.
+NATS ist ein sehr schlanker Nachrichtenserver @github-com-nats-io-nats-server. In seiner Grundform (_Core NATS_) leitet er Nachrichten nur an gerade verbundene Empfänger weiter, ohne sie zu speichern (at-most-once) @docs-nats-io-learn-core-nats. *JetStream* ist die eingebaute Persistenzschicht darüber: Ein *Stream* speichert alle Nachrichten zu bestimmten *Subjects*, *Consumer* sind benannte Lesepositionen auf einem Stream @docs-nats-io-concepts-jetstream.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -26,14 +26,14 @@ NATS ist ein sehr schlanker Nachrichtenserver. In seiner Grundform (_Core NATS_)
   caption: [Ein Stream speichert, jeder Consumer liest unabhängig. Mehrere Instanzen eines Consumers teilen sich die Nachrichten.],
 )
 
-- *Subjects* sind hierarchische Namen mit Punkten. `*` steht für genau ein Glied (`bestellung.*`), `>` für beliebig viele am Ende (`bestellung.>`).
-- Ein *Stream* legt fest, welche Subjects er speichert, wie lange (`max_age`, `max_msgs`, `max_bytes`) und nach welcher Regel (_retention_): `limits` (bis zur Grenze behalten, für Ereignishistorien), `workqueue` (löschen, sobald bestätigt) oder `interest` (löschen, wenn alle Consumer bestätigt haben).
-- Ein *Consumer* ist dauerhaft (_durable_) und merkt sich, was bestätigt wurde. _Pull-Consumer_ holen Nachrichten aktiv in Stapeln ab, das ist die empfohlene Form für Worker.
-- *Deduplizierung* ist eingebaut: Nachrichten mit gleicher `Nats-Msg-Id` innerhalb eines Zeitfensters (`duplicate_window`) speichert der Stream nur einmal.
+- *Subjects* sind hierarchische Namen mit Punkten. `*` steht für genau ein Glied (`bestellung.*`), `>` für ein oder mehrere am Ende (`bestellung.>`) @docs-nats-io-concepts-subjects.
+- Ein *Stream* legt fest, welche Subjects er speichert, wie lange (`max_age`, `max_msgs`, `max_bytes`) und nach welcher Regel (_retention_): `limits` (bis zur Grenze behalten, für Ereignishistorien), `workqueue` (löschen, sobald bestätigt) oder `interest` (löschen, wenn alle Consumer bestätigt haben) @docs-nats-io-learn-jetstream-your-first-stream @docs-nats-io-learn-jetstream-retention-policies.
+- Ein *Consumer* ist dauerhaft (_durable_) und merkt sich, was bestätigt wurde @docs-nats-io-learn-jetstream-reading-back. _Pull-Consumer_ holen Nachrichten aktiv in Stapeln ab, das ist die gängige Form für Worker @docs-nats-io-learn-jetstream-pull-consumers.
+- *Deduplizierung* ist eingebaut: Nachrichten mit gleicher `Nats-Msg-Id` innerhalb eines Zeitfensters (`duplicate_window`) speichert der Stream nur einmal @docs-nats-io-learn-jetstream-publishing @docs-nats-io-learn-jetstream-your-first-stream.
 
 == RabbitMQ
 
-RabbitMQ implementiert das Protokoll AMQP 0-9-1 (und AMQP 1.0). Producer senden nie direkt an eine Queue, sondern an einen *Exchange*. Der Exchange verteilt anhand von *Bindings* und dem _Routing Key_ der Nachricht an Queues, aus denen Consumer lesen.
+RabbitMQ implementiert das Protokoll AMQP 0-9-1 (und AMQP 1.0) @www-rabbitmq-com-docs-amqp. Producer senden nie direkt an eine Queue, sondern an einen *Exchange*. Der Exchange verteilt anhand von *Bindings* und dem _Routing Key_ der Nachricht an Queues, aus denen Consumer lesen @www-rabbitmq-com-tutorials-amqp-concepts.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -52,25 +52,25 @@ RabbitMQ implementiert das Protokoll AMQP 0-9-1 (und AMQP 1.0). Producer senden 
   caption: [Der Exchange verteilt nach Bindings an Queues. Jede Queue hat ihre eigenen Consumer.],
 )
 
-- *Exchange-Typen:* `direct` (Routing Key muss exakt passen), `topic` (Muster mit `*` für ein Wort und `#` für beliebig viele), `fanout` (an alle gebundenen Queues), `headers` (nach Header-Werten).
-- *Queue-Typen:* _Quorum Queues_ sind repliziert, dauerhaft und seit RabbitMQ 4.0 der empfohlene Standard. Die alte Spiegelung klassischer Queues wurde in 4.0 entfernt, klassische Queues sind nur noch unrepliziert. _Streams_ bieten Log-Semantik wie JetStream.
-- *Virtual Hosts* (vhosts) trennen Anwendungen oder Umgebungen innerhalb eines Servers vollständig voneinander, samt Rechten.
+- *Exchange-Typen:* `direct` (Routing Key muss exakt passen), `topic` (Muster mit `*` für ein Wort und `#` für beliebig viele), `fanout` (an alle gebundenen Queues), `headers` (nach Header-Werten) @www-rabbitmq-com-tutorials-amqp-concepts @www-rabbitmq-com-tutorials-tutorial-five-python.
+- *Queue-Typen:* _Quorum Queues_ sind repliziert, dauerhaft und die Standardwahl, wenn eine replizierte, hochverfügbare Queue gebraucht wird @www-rabbitmq-com-docs-quorum-queues. Die alte Spiegelung klassischer Queues wurde in 4.0 entfernt, klassische Queues sind nur noch unrepliziert @www-rabbitmq-com-docs-3-13-ha @github-com-rabbitmq-rabbitmq-server-blob-v4-0-x-release-notes-4-0-1-md. _Streams_ bieten Log-Semantik wie JetStream @www-rabbitmq-com-docs-streams.
+- *Virtual Hosts* (vhosts) trennen Anwendungen oder Umgebungen innerhalb eines Servers logisch voneinander, samt Rechten @www-rabbitmq-com-docs-vhosts.
 
 == Gegenüberstellung
 
 #table(columns: (auto, 1fr, 1fr),
   [], [NATS JetStream], [RabbitMQ],
-  [Adressierung], [Subject (`bestellung.eingegangen`)], [Exchange + Routing Key -> Queue],
-  [Speicher], [Stream (Log) mit Consumer-Positionen], [Queue (Nachricht weg nach ack), optional Streams],
-  [Wiederholtes Lesen], [ja, Consumer ab beliebiger Position], [nur mit Streams],
-  [Deduplizierung beim Senden], [eingebaut (`Nats-Msg-Id`)], [nicht eingebaut, im Consumer lösen],
-  [Grenze wiederholter Zustellung], [`max_deliver` am Consumer], [`x-delivery-limit` (Quorum Queue, Standard 20)],
-  [Dead Letters], [über Advisories oder in der Anwendung], [eingebaut: Dead-Letter-Exchange],
-  [Standard-Maximalgröße einer Nachricht], [1 MB (`max_payload`)], [16 MiB (seit 4.0)],
-  [Mandanten-Trennung], [Accounts], [Virtual Hosts],
-  [Rechte], [Publish/Subscribe pro Subject], [configure/write/read pro Ressource, Topic-Rechte],
-  [Betrieb], [ein kleines Binary, sehr ressourcenschonend], [Erlang-basiert, umfangreiche Verwaltungsoberfläche],
-  [Python-Client], [`nats-py`], [`aio-pika` (asynchron), `pika` (synchron)],
+  [Adressierung], [Subject (`bestellung.eingegangen`) @docs-nats-io-concepts-subjects], [Exchange + Routing Key -> Queue @www-rabbitmq-com-tutorials-amqp-concepts],
+  [Speicher], [Stream (Log) mit Consumer-Positionen @docs-nats-io-concepts-jetstream], [Queue (Nachricht weg nach ack), optional Streams @www-rabbitmq-com-docs-streams],
+  [Wiederholtes Lesen], [ja, Consumer ab beliebiger Position @docs-nats-io-learn-jetstream-reading-back], [nur mit Streams @www-rabbitmq-com-docs-streams],
+  [Deduplizierung beim Senden], [eingebaut (`Nats-Msg-Id`) @docs-nats-io-learn-jetstream-publishing], [nur bei Streams eingebaut, sonst im Consumer lösen @www-rabbitmq-com-docs-streams @www-rabbitmq-com-docs-reliability],
+  [Grenze wiederholter Zustellung], [`max_deliver` am Consumer @docs-nats-io-learn-jetstream-acknowledgment], [`x-delivery-limit` (Quorum Queue, Standard 20) @www-rabbitmq-com-docs-quorum-queues],
+  [Dead Letters], [über Advisories oder in der Anwendung @docs-nats-io-learn-monitoring-advisories-and-events], [eingebaut: Dead-Letter-Exchange @www-rabbitmq-com-docs-dlx],
+  [Standard-Maximalgröße einer Nachricht], [1 MB (`max_payload`) @docs-nats-io-reference-config], [16 MiB (seit 4.0) @github-com-rabbitmq-rabbitmq-server-blob-v4-0-x-release-notes-4-0-1-md],
+  [Mandanten-Trennung], [Accounts @docs-nats-io-learn-security-accounts-and-multitenancy], [Virtual Hosts @www-rabbitmq-com-docs-vhosts],
+  [Rechte], [Publish/Subscribe pro Subject @docs-nats-io-learn-security-authorization], [configure/write/read pro Ressource, Topic-Rechte @www-rabbitmq-com-docs-access-control],
+  [Betrieb], [ein kleines Binary, sehr ressourcenschonend @github-com-nats-io-nats-server], [Erlang-basiert @www-rabbitmq-com-docs-which-erlang, umfangreiche Verwaltungsoberfläche @www-rabbitmq-com-docs-management],
+  [Python-Client], [`nats-py` @github-com-nats-io-nats-py], [`aio-pika` (asynchron) @docs-aio-pika-com, `pika` (synchron) @www-rabbitmq-com-client-libraries-devtools @docs-aio-pika-com],
 )
 
 Beide sind für die Beispiele dieses Buchs gleichermaßen geeignet. NATS spielt seine Stärken bei hohem Durchsatz, Streams mit Wiederholung und sehr geringem Betriebsaufwand aus, RabbitMQ bei komplexem Routing, eingebauten Dead Letters und seiner ausgereiften Verwaltungsoberfläche.

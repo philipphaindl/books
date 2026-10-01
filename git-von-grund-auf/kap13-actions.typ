@@ -2,7 +2,7 @@
 
 = Gitea Actions: die `ci.yml` verstehen
 
-CI/CD steht für _Continuous Integration_ und _Continuous Delivery/Deployment_: Bei jedem Push prüft eine Maschine automatisch, ob der Code gebaut werden kann und die Tests bestehen (CI), und liefert ihn bei Erfolg aus (CD). In Gitea übernimmt das _Gitea Actions_. Die Workflows werden als YAML-Dateien im Repository beschrieben, und die Syntax ist bewusst mit GitHub Actions kompatibel. Viele Anleitungen und fertige Bausteine aus der GitHub-Welt funktionieren deshalb auch hier — Unterschiede müssen aber geprüft werden.
+CI/CD steht für _Continuous Integration_ und _Continuous Delivery/Deployment_: Bei jedem Push prüft eine Maschine automatisch, ob der Code gebaut werden kann und die Tests bestehen (CI), und liefert ihn bei Erfolg aus (CD). In Gitea übernimmt das _Gitea Actions_. Die Workflows werden als YAML-Dateien im Repository beschrieben, und die Syntax ist bewusst mit GitHub Actions kompatibel @docs-gitea-com-usage-actions-comparison. Viele Anleitungen und fertige Bausteine aus der GitHub-Welt funktionieren deshalb auch hier — Unterschiede müssen aber geprüft werden.
 
 == Wie Gitea Actions funktioniert
 
@@ -30,23 +30,23 @@ CI/CD steht für _Continuous Integration_ und _Continuous Delivery/Deployment_: 
 )
 
 + Du pushst einen Commit. Gitea liest die Workflow-Dateien des Commits und prüft, welche davon auf das Ereignis reagieren (etwa _push auf main_ oder _Pull Request geöffnet_). Für jeden passenden Job legt es einen Eintrag in einer Warteschlange an.
-+ Ein *Runner* fragt regelmäßig bei Gitea nach Arbeit. Der Runner ist ein eigenes Programm (`gitea-runner`, früher `act_runner`), das auf einem beliebigen Rechner mit Docker läuft (Kapitel 14).
-+ Passt ein Job zu den _Labels_ des Runners, bekommt der Runner die Job-Beschreibung samt der benötigten Secrets.
-+ Bei einem Docker-Label startet der Runner für den Job einen frischen Container, der den Code aus Gitea auscheckt und die Schritte ausführt. Ein `host`-Label führt die Schritte dagegen direkt auf dem Runner-Rechner aus und bietet deutlich weniger Isolation.
++ Ein *Runner* fragt regelmäßig bei Gitea nach Arbeit @docs-gitea-com-usage-actions-act-runner. Der Runner ist ein eigenes Programm (`gitea-runner`, früher `act_runner` @blog-gitea-com-release-of-runner-1-0-0), das auf einem beliebigen Rechner mit Docker läuft @docs-gitea-com-usage-actions-act-runner (Kapitel 14).
++ Passt ein Job zu den _Labels_ des Runners, bekommt der Runner die Job-Beschreibung samt der benötigten Secrets @docs-gitea-com-usage-actions-design.
++ Bei einem Docker-Label startet der Runner für den Job einen frischen Container, der den Code aus Gitea auscheckt und die Schritte ausführt @docs-gitea-com-runner-labels @docs-gitea-com-usage-actions-design. Ein `host`-Label führt die Schritte dagegen direkt auf dem Runner-Rechner aus und bietet deutlich weniger Isolation @docs-gitea-com-runner-labels.
 + Logs und Ergebnis gehen zurück an Gitea und erscheinen im Tab _Actions_ sowie als Häkchen oder Kreuz am Commit und im Pull Request.
 
-#merke[Weil der Runner die Verbindung zu Gitea aufbaut und nicht umgekehrt, kann er hinter einem Router, in einem Heimnetz oder in einem VPN stehen. Er braucht nur ausgehenden Zugriff auf Gitea (und auf das Internet, wenn Actions oder Docker-Images heruntergeladen werden).]
+#merke[Weil der Runner die Verbindung zu Gitea aufbaut und nicht umgekehrt, kann er hinter einem Router, in einem Heimnetz oder in einem VPN stehen. Er braucht nur ausgehenden Zugriff auf Gitea (und auf das Internet, wenn Actions oder Docker-Images heruntergeladen werden) @docs-gitea-com-usage-actions-act-runner.]
 
 === Voraussetzungen
 
-- Actions ist in aktuellen Gitea-Versionen serverweit aktiv. Falls nicht, muss in der `app.ini` im Abschnitt `[actions]` der Wert `ENABLED = true` stehen.
-- Im Repository muss die Einheit _Actions_ eingeschaltet sein (_Einstellungen -> Erweiterte Einstellungen_). Dann erscheint der Tab _Actions_.
+- Actions ist in aktuellen Gitea-Versionen serverweit aktiv. Falls nicht, muss in der `app.ini` im Abschnitt `[actions]` der Wert `ENABLED = true` stehen @docs-gitea-com-usage-actions-quickstart @docs-gitea-com-administration-config-cheat-sheet.
+- Im Repository muss die Einheit _Actions_ eingeschaltet sein (_Einstellungen -> Erweiterte Einstellungen_) @docs-gitea-com-usage-actions-quickstart. Dann erscheint der Tab _Actions_.
 - Mindestens ein Runner muss registriert und online sein, dessen Labels zu `runs-on` passen.
-- Workflows liegen als `.yml`- oder `.yaml`-Dateien im Ordner `.gitea/workflows/`. Existiert dieser Ordner nicht, liest Gitea ersatzweise `.github/workflows/`. Der Dateiname ist frei wählbar, `ci.yml` ist nur eine Konvention.
+- Workflows liegen als `.yml`- oder `.yaml`-Dateien im Ordner `.gitea/workflows/`. Existiert dieser Ordner nicht, liest Gitea ersatzweise `.github/workflows/` @docs-gitea-com-administration-config-cheat-sheet. Der Dateiname ist frei wählbar, `ci.yml` ist nur eine Konvention.
 
 == YAML in zehn Minuten
 
-Workflow-Dateien sind in YAML geschrieben, einem Format für verschachtelte Daten, dessen Struktur allein durch *Einrückung* entsteht. Fast alle Fehler in Workflows sind Einrückungsfehler.
+Workflow-Dateien sind in YAML geschrieben, einem Format für verschachtelte Daten, dessen Struktur allein durch *Einrückung* entsteht @yaml-org-spec-1-2-2. Fast alle Fehler in Workflows sind Einrückungsfehler.
 
 #datei("yaml-grundlagen.yml")[
 ```yaml
@@ -73,9 +73,9 @@ version: "3.10"              # Anführungszeichen, sonst würde daraus die Zahl 
 ```
 ]
 
-Die wichtigsten Regeln: Einrückung *nur mit Leerzeichen*, nie mit Tabulatoren. Alles auf derselben Einrückungsebene gehört zusammen. Ein `-` leitet ein Listenelement ein, und alles, was zu diesem Element gehört, steht um zwei Leerzeichen weiter eingerückt als das `-`. Im Zweifel Werte in Anführungszeichen setzen, besonders Versionsnummern, Zeiten und alles mit `:` oder `#`.
+Die wichtigsten Regeln: Einrückung *nur mit Leerzeichen*, nie mit Tabulatoren @yaml-org-spec-1-2-2. Alles auf derselben Einrückungsebene gehört zusammen. Ein `-` leitet ein Listenelement ein, und alles, was zu diesem Element gehört, steht um zwei Leerzeichen weiter eingerückt als das `-`. Im Zweifel Werte in Anführungszeichen setzen, besonders Versionsnummern, Zeiten und alles mit `:` oder `#`.
 
-#tipp[VS Code mit der Erweiterung _YAML_ von Red Hat markiert Einrückungsfehler sofort. Mit dem Schema für GitHub-Workflows (das für Gitea weitgehend passt) gibt es sogar Autovervollständigung für Schlüssel wie `runs-on` und `steps`.]
+#tipp[VS Code mit der Erweiterung _YAML_ von Red Hat markiert Einrückungsfehler sofort @marketplace-visualstudio-com-items-itemname-redhat-vscode-yaml. Mit dem Schema für GitHub-Workflows (das für Gitea weitgehend passt) gibt es sogar Autovervollständigung für Schlüssel wie `runs-on` und `steps`.]
 
 == Der erste Workflow
 
@@ -99,9 +99,9 @@ jobs:                             # WAS läuft? Eine Sammlung von Jobs
 ```
 ]
 
-Zeile für Zeile passiert Folgendes: Bei einem Push auf `main` oder einem PR startet Gitea den Workflow `ci`. Er besteht aus einem Job `test`, der auf einem Runner mit dem Label `ubuntu-latest` in einem frischen Container läuft. Der erste Schritt holt den Code, der zweite führt die Tests aus. Schlägt ein Schritt fehl, bricht der Job ab und wird rot markiert. Im Pull Request erscheint die Prüfung unter dem Namen `ci / test (pull_request)`, also _Workflow / Job (Ereignis)_.
+Zeile für Zeile passiert Folgendes: Bei einem Push auf `main` oder einem PR startet Gitea den Workflow `ci`. Er besteht aus einem Job `test`, der auf einem Runner mit dem Label `ubuntu-latest` in einem frischen Container läuft. Der erste Schritt holt den Code, der zweite führt die Tests aus. Schlägt ein Schritt fehl, bricht der Job ab und wird rot markiert. Im Pull Request erscheint die Prüfung unter dem Namen `ci / test (pull_request)`, also _Workflow / Job (Ereignis)_ @github-com-go-gitea-gitea-pull-23786.
 
-#achtung[Ohne `actions/checkout` ist der Container leer! Der Code wird nicht automatisch bereitgestellt. Der Checkout-Schritt ist deshalb in fast jedem Job der erste.]
+#achtung[Ohne `actions/checkout` ist der Container leer! Der Code wird nicht automatisch bereitgestellt @github-com-actions-checkout. Der Checkout-Schritt ist deshalb in fast jedem Job der erste.]
 
 == Die Anatomie: Workflow, Jobs, Steps
 
@@ -131,19 +131,19 @@ Zeile für Zeile passiert Folgendes: Bei einem Push auf `main` oder einem PR sta
 
 Diese Struktur ist das Wichtigste am ganzen Kapitel:
 
-- Ein *Workflow* ist eine Datei. Er wird durch Ereignisse ausgelöst und enthält einen oder mehrere Jobs.
-- Ein *Job* läuft auf einem Runner in einem *eigenen, frischen Container*. Jobs laufen standardmäßig *parallel*. Mit `needs` legst du Abhängigkeiten fest. Jobs teilen *keine Dateien* miteinander, dafür gibt es Artefakte, Caches und Job-Ausgaben.
-- Ein *Step* ist entweder ein Shell-Befehl (`run`) oder eine wiederverwendbare *Action* (`uses`). Steps eines Jobs laufen nacheinander im selben Container und teilen sich das Arbeitsverzeichnis. Schlägt ein Step fehl, werden die folgenden übersprungen.
+- Ein *Workflow* ist eine Datei. Er wird durch Ereignisse ausgelöst und enthält einen oder mehrere Jobs @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
+- Ein *Job* läuft auf einem Runner in einem *eigenen, frischen Container*. Jobs laufen standardmäßig *parallel*. Mit `needs` legst du Abhängigkeiten fest @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax. Jobs teilen *keine Dateien* miteinander, dafür gibt es Artefakte, Caches und Job-Ausgaben @docs-github-com-en-actions-concepts-workflows-and-actions-workflow-artifacts.
+- Ein *Step* ist entweder ein Shell-Befehl (`run`) oder eine wiederverwendbare *Action* (`uses`). Steps eines Jobs laufen nacheinander im selben Container und teilen sich das Arbeitsverzeichnis. Schlägt ein Step fehl, werden die folgenden übersprungen @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
 
 == Auslöser: `on`
 
 #table(columns: (auto, 1fr),
   [Auslöser], [Beispiel und Bedeutung],
-  [`push`], [`branches: [main]`, `tags: ['v*']`, `paths: ['src/**']`, `paths-ignore: ['docs/**']`. Filter werden kombiniert: Push auf passenden Branch *und* passende Pfade.],
-  [`pull_request`], [`types: [opened, synchronize, reopened]` (Standard). `branches: [main]` filtert nach dem *Ziel*-Branch des PRs.],
-  [`workflow_dispatch`], [Manuell starten über eine Schaltfläche im Tab _Actions_, optional mit Eingaben (`inputs`).],
-  [`schedule`], [Zeitgesteuert: `- cron: '0 3 * * 1'` (montags 3 Uhr, UTC). Gitea versteht zusätzlich `@daily`, `@weekly` usw.],
-  [`release`], [beim Veröffentlichen eines Releases in Gitea],
+  [`push`], [`branches: [main]`, `tags: ['v*']`, `paths: ['src/**']`, `paths-ignore: ['docs/**']`. Filter werden kombiniert: Push auf passenden Branch *und* passende Pfade @docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows.],
+  [`pull_request`], [`types: [opened, synchronize, reopened]` (Standard). `branches: [main]` filtert nach dem *Ziel*-Branch des PRs @docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows.],
+  [`workflow_dispatch`], [Manuell starten über eine Schaltfläche im Tab _Actions_, optional mit Eingaben (`inputs`) @docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows.],
+  [`schedule`], [Zeitgesteuert: `- cron: '0 3 * * 1'` (montags 3 Uhr, UTC) @docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows. Gitea versteht zusätzlich `@daily`, `@weekly` usw. @docs-gitea-com-usage-actions-comparison],
+  [`release`], [beim Veröffentlichen eines Releases in Gitea @docs-github-com-en-actions-reference-workflows-and-actions-events-that-trigger-workflows],
 )
 
 ```yaml
@@ -189,12 +189,12 @@ jobs:
       - run: echo "Deployment ..."
 ```
 
-- *`runs-on`* wählt den Runner über sein Label. Gitea unterstützt hier nur einen einfachen Namen oder eine einfache Liste, keine Gruppen-Syntax.
-- *`needs`* baut aus Jobs einen Ablaufgraphen. Schlägt ein benötigter Job fehl, werden die abhängigen übersprungen.
-- *`if`* entscheidet, ob ein Job oder Step überhaupt läuft. Innerhalb von `if` darf man die `${{ }}`-Klammern weglassen.
-- *`strategy.matrix`* vervielfacht einen Job, etwa für mehrere Sprachversionen.
-- *`services`* startet Hilfscontainer (Datenbank, Redis). Der Job erreicht sie über ihren Namen als Hostnamen, hier `db`.
-- *`container`* (nicht gezeigt) lässt den Job statt im Standard-Image in einem eigenen Image laufen, etwa `container: python:3.13-slim`.
+- *`runs-on`* wählt den Runner über sein Label. Gitea unterstützt hier nur einen einfachen Namen oder eine einfache Liste, keine Gruppen-Syntax @docs-gitea-com-usage-actions-comparison.
+- *`needs`* baut aus Jobs einen Ablaufgraphen. Schlägt ein benötigter Job fehl, werden die abhängigen übersprungen @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
+- *`if`* entscheidet, ob ein Job oder Step überhaupt läuft. Innerhalb von `if` darf man die `${{ }}`-Klammern weglassen @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
+- *`strategy.matrix`* vervielfacht einen Job, etwa für mehrere Sprachversionen @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
+- *`services`* startet Hilfscontainer (Datenbank, Redis). Der Job erreicht sie über ihren Namen als Hostnamen, hier `db` @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
+- *`container`* (nicht gezeigt) lässt den Job statt im Standard-Image in einem eigenen Image laufen, etwa `container: python:3.13-slim` @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax.
 
 == Steps im Detail
 
@@ -222,19 +222,19 @@ jobs:
         run: make clean
 ```
 
-`run`-Schritte werden mit `bash -e` ausgeführt: Der erste fehlschlagende Befehl beendet den Schritt mit Fehler. Ausgaben eines Schrittes schreibt man in die Datei, auf die `$GITHUB_OUTPUT` zeigt, im Format `name=wert`. Folgende Schritte lesen sie über `steps.<id>.outputs.<name>`. Auf dieselbe Weise setzt `echo "NAME=wert" >> "$GITHUB_ENV"` eine Umgebungsvariable für alle folgenden Schritte.
+`run`-Schritte werden mit `bash -e` ausgeführt: Der erste fehlschlagende Befehl beendet den Schritt mit Fehler @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax. Ausgaben eines Schrittes schreibt man in die Datei, auf die `$GITHUB_OUTPUT` zeigt, im Format `name=wert`. Folgende Schritte lesen sie über `steps.<id>.outputs.<name>` @docs-github-com-en-actions-reference-workflows-and-actions-workflow-commands. Auf dieselbe Weise setzt `echo "NAME=wert" >> "$GITHUB_ENV"` eine Umgebungsvariable für alle folgenden Schritte @docs-github-com-en-actions-reference-workflows-and-actions-workflow-commands.
 
-#tipp[Actions werden über `uses: besitzer/name@version` eingebunden und standardmäßig von github.com geladen. Die Beispiele verwenden Hauptversions-Tags, damit sie lesbar bleiben. In produktiven Workflows pinnt man fremde Actions nach Prüfung auf einen vollen Commit-Hash (`actions/checkout@<40 Zeichen>`) und lässt Abhängigkeitsupdates bewusst prüfen. Gitea erlaubt außerdem absolute URLs, etwa `uses: https://gitea.example.com/team/meine-action@v1`, womit man geprüfte Actions auf dem eigenen Server spiegeln kann.]
+#tipp[Actions werden über `uses: besitzer/name@version` eingebunden und standardmäßig von github.com geladen @docs-gitea-com-usage-actions-comparison. Die Beispiele verwenden Hauptversions-Tags, damit sie lesbar bleiben. In produktiven Workflows pinnt man fremde Actions nach Prüfung auf einen vollen Commit-Hash (`actions/checkout@<40 Zeichen>`) @docs-github-com-en-actions-reference-security-secure-use und lässt Abhängigkeitsupdates bewusst prüfen. Gitea erlaubt außerdem absolute URLs, etwa `uses: https://gitea.example.com/team/meine-action@v1`, womit man geprüfte Actions auf dem eigenen Server spiegeln kann @docs-gitea-com-usage-actions-comparison.]
 
 == Ausdrücke und Kontexte
 
-Alles zwischen `${{` und `}}` ist ein Ausdruck, den Gitea vor dem Ausführen auswertet. Die Daten kommen aus _Kontexten_:
+Alles zwischen `${{` und `}}` ist ein Ausdruck, den Gitea vor dem Ausführen auswertet @docs-github-com-en-actions-reference-workflows-and-actions-expressions. Die Daten kommen aus _Kontexten_ @docs-github-com-en-actions-reference-workflows-and-actions-contexts:
 
 #table(columns: (auto, 1fr),
   [Kontext], [Inhalt (Beispiele)],
-  [`gitea` / `github`], [Metadaten des Laufs, beide Namen funktionieren: `gitea.ref` (`refs/heads/main`), `gitea.ref_name` (`main`), `gitea.sha`, `gitea.event_name` (`push`, `pull_request`), `gitea.actor`, `gitea.repository` (`team/demo`), `gitea.server_url`, `gitea.run_number`],
-  [`secrets`], [geheime Werte, z.B. `secrets.SONAR_TOKEN`, dazu automatisch `secrets.GITEA_TOKEN` (Kapitel 14)],
-  [`vars`], [nicht geheime Konfigurationsvariablen, z.B. `vars.DEPLOY_HOST`],
+  [`gitea` / `github`], [Metadaten des Laufs, beide Namen funktionieren @docs-gitea-com-usage-actions-faq: `gitea.ref` (`refs/heads/main`), `gitea.ref_name` (`main`), `gitea.sha`, `gitea.event_name` (`push`, `pull_request`), `gitea.actor`, `gitea.repository` (`team/demo`), `gitea.server_url`, `gitea.run_number`],
+  [`secrets`], [geheime Werte, z.B. `secrets.SONAR_TOKEN`, dazu automatisch `secrets.GITEA_TOKEN` @docs-gitea-com-usage-actions-token-permissions (Kapitel 14)],
+  [`vars`], [nicht geheime Konfigurationsvariablen, z.B. `vars.DEPLOY_HOST` @docs-gitea-com-usage-actions-actions-variables],
   [`env`], [Umgebungsvariablen aus `env:`-Blöcken],
   [`steps`], [Ausgaben und Ergebnis früherer Schritte: `steps.version.outputs.tag`, `steps.x.outcome`],
   [`needs`], [Ausgaben und Ergebnis benötigter Jobs: `needs.build.outputs.image`, `needs.test.result`],
@@ -242,9 +242,9 @@ Alles zwischen `${{` und `}}` ist ein Ausdruck, den Gitea vor dem Ausführen aus
   [`runner`], [Informationen über den Runner: `runner.os`, `runner.temp`],
 )
 
-Dazu gibt es Operatoren (`==`, `!=`, `&&`, `||`, `!`) und Funktionen wie `contains(...)`, `startsWith(gitea.ref, 'refs/tags/v')` und `format(...)`. Für Bedingungen auf den bisherigen Verlauf dient `always()`. Für die übrigen Statusfunktionen nennt die Gitea-Dokumentation Einschränkungen. Ungewöhnliche Bedingungen testest du am besten einmal gezielt mit einem kleinen Workflow und `workflow_dispatch`.
+Dazu gibt es Operatoren (`==`, `!=`, `&&`, `||`, `!`) und Funktionen wie `contains(...)`, `startsWith(gitea.ref, 'refs/tags/v')` und `format(...)` @docs-github-com-en-actions-reference-workflows-and-actions-expressions. Für Bedingungen auf den bisherigen Verlauf dient `always()` @docs-github-com-en-actions-reference-workflows-and-actions-expressions. Für die übrigen Statusfunktionen nennt die Gitea-Dokumentation Einschränkungen. Ungewöhnliche Bedingungen testest du am besten einmal gezielt mit einem kleinen Workflow und `workflow_dispatch`.
 
-Zusätzlich stehen in jedem Schritt Umgebungsvariablen bereit, darunter `GITHUB_SHA`, `GITHUB_REF`, `GITHUB_REF_NAME`, `GITHUB_WORKSPACE` (Arbeitsverzeichnis mit dem ausgecheckten Code), `CI=true` und `GITEA_ACTIONS=true`, an dem ein Skript erkennen kann, dass es in Gitea läuft.
+Zusätzlich stehen in jedem Schritt Umgebungsvariablen bereit, darunter `GITHUB_SHA`, `GITHUB_REF`, `GITHUB_REF_NAME`, `GITHUB_WORKSPACE` (Arbeitsverzeichnis mit dem ausgecheckten Code) @docs-github-com-en-actions-reference-workflows-and-actions-variables, `CI=true` und `GITEA_ACTIONS=true`, an dem ein Skript erkennen kann, dass es in Gitea läuft @docs-gitea-com-usage-actions-actions-variables.
 
 == Daten zwischen Jobs: Artefakte und Caches
 
@@ -262,31 +262,31 @@ Weil jeder Job in einem neuen Container startet, muss alles, was ein späterer J
           name: paket
 ```
 
-Artefakte erscheinen auch zum Herunterladen in der Oberfläche des Laufs, ideal für Testberichte. *Caches* (`actions/cache@v4`) sind dagegen dafür da, Abhängigkeiten wie Paket-Downloads zwischen Läufen wiederzuverwenden. Der Runner bringt dafür einen eigenen Cache-Server mit. Gitea Runner 3.x verwendet das Cache-v2-Protokoll; die normalen `actions/cache@v4` sowie `actions/upload-artifact` und `actions/download-artifact` ab v4.4 funktionieren damit. Beim Umstieg von `act_runner` oder Runner 2.x zuerst die Upgrade-Hinweise lesen: Runner 3.0 änderte Cache-Verhalten, Sicherheitsfilter für Container-Optionen und die Verwaltung mehrerer Registrierungen.
+Artefakte erscheinen auch zum Herunterladen in der Oberfläche des Laufs, ideal für Testberichte. *Caches* (`actions/cache@v4`) sind dagegen dafür da, Abhängigkeiten wie Paket-Downloads zwischen Läufen wiederzuverwenden @github-com-actions-cache. Der Runner bringt dafür einen eigenen Cache-Server mit @docs-gitea-com-runner-cache. Gitea Runner 3.x verwendet das Cache-v2-Protokoll; die normalen `actions/cache@v4` sowie `actions/upload-artifact` und `actions/download-artifact` ab v4.4 funktionieren damit @blog-gitea-com-release-of-runner-3-0-0 @docs-gitea-com-runner-cache. Beim Umstieg von `act_runner` oder Runner 2.x zuerst die Upgrade-Hinweise lesen: Runner 3.0 änderte Cache-Verhalten, Sicherheitsfilter für Container-Optionen und die Verwaltung mehrerer Registrierungen @docs-gitea-com-runner-upgrade.
 
 == Unterschiede zu GitHub Actions
 
 Gitea Actions ist kompatibel, aber nicht identisch. Stand Gitea 1.27.3 und Runner 3.5 gilt laut Dokumentation:
 
-- `jobs.<id>.environment` (Deployment-Umgebungen mit Freigaben) wird ignoriert. Unterschiedliche Ziele bildet man über getrennte Variablen oder Workflows ab (Kapitel 15).
-- `runs-on` akzeptiert nur einfache Labels, keine Gruppen oder komplexen Ausdrücke.
-- _Problem Matchers_ und Fehler-Annotationen im Code werden ignoriert.
-- Der automatische `GITEA_TOKEN` darf keine Pakete in die Gitea-Registry hochladen. Dafür braucht man einen persönlichen Zugriffstoken als Secret.
-- `concurrency` und `permissions` werden seit 1.26 unterstützt, `timeout-minutes` und `continue-on-error` seit 1.27. *Ältere Versionen ignorieren diese Schlüssel stillschweigend.* Wer eine ältere Gitea-Version betreibt, sollte sich nicht darauf verlassen.
-- Zusätzlich kann Gitea Actions per absoluter URL aus beliebigen Git-Repositories laden und versteht `@daily` & Co. bei `schedule`.
+- `jobs.<id>.environment` (Deployment-Umgebungen mit Freigaben) wird ignoriert @docs-gitea-com-usage-actions-comparison. Unterschiedliche Ziele bildet man über getrennte Variablen oder Workflows ab (Kapitel 15).
+- `runs-on` akzeptiert nur einfache Labels, keine Gruppen oder komplexen Ausdrücke @docs-gitea-com-usage-actions-comparison.
+- _Problem Matchers_ und Fehler-Annotationen im Code werden ignoriert @docs-gitea-com-usage-actions-comparison.
+- Der automatische `GITEA_TOKEN` darf keine Pakete in die Gitea-Registry hochladen. Dafür braucht man einen persönlichen Zugriffstoken als Secret @docs-gitea-com-usage-actions-comparison.
+- `concurrency` und `permissions` werden seit Gitea 1.26 unterstützt @blog-gitea-com-release-of-1-26-0, `continue-on-error` seit Gitea 1.27 @blog-gitea-com-release-of-1-27-0, `timeout-minutes` seit Runner 2.0 (unabhängig von der Gitea-Version) @blog-gitea-com-release-of-runner-2-0-0. *Ältere Versionen ignorieren diese Schlüssel stillschweigend.* Wer eine ältere Gitea-Version betreibt, sollte sich nicht darauf verlassen.
+- Zusätzlich kann Gitea Actions per absoluter URL aus beliebigen Git-Repositories laden und versteht `@daily` & Co. bei `schedule` @docs-gitea-com-usage-actions-comparison.
 
-Gitea 1.27 zeigt mit Runner 2.0 oder neuer außerdem Job-Zusammenfassungen aus `$GITHUB_STEP_SUMMARY`, einen eigenen Zustand _Cancelling_ und korrekt aggregiertes `continue-on-error`. Server und Runner werden unabhängig versioniert; eine hohe Runner-Version bedeutet daher nicht, dass die Gitea-Instanz alle Syntaxmerkmale unterstützt.
+Gitea 1.27 zeigt mit Runner 2.0 oder neuer außerdem Job-Zusammenfassungen aus `$GITHUB_STEP_SUMMARY`, einen eigenen Zustand _Cancelling_ und korrekt aggregiertes `continue-on-error` @blog-gitea-com-release-of-1-27-0. Server und Runner werden unabhängig versioniert @blog-gitea-com-release-of-runner-1-0-0; eine hohe Runner-Version bedeutet daher nicht, dass die Gitea-Instanz alle Syntaxmerkmale unterstützt.
 
 == Vertrauensgrenzen von Workflows
 
-Ein Workflow ist ausführbarer Code. Wer eine Workflow-Datei, ein eingebundenes Skript oder eine nicht gepinnte Action verändern kann, kann grundsätzlich alle Rechte des Jobs nutzen. Auf einem selbst gehosteten Runner mit Docker-Socket reicht das bis zu Root-Rechten auf dem Runner-Host.
+Ein Workflow ist ausführbarer Code. Wer eine Workflow-Datei, ein eingebundenes Skript oder eine nicht gepinnte Action verändern kann, kann grundsätzlich alle Rechte des Jobs nutzen. Auf einem selbst gehosteten Runner mit Docker-Socket reicht das bis zu Root-Rechten auf dem Runner-Host @docs-docker-com-engine-security.
 
-- Workflows aus Forks erhalten keine Secrets, können aber trotzdem schädlichen Code auf dem Runner ausführen. Öffentliche Repositories deshalb nur auf kurzlebigen, isolierten Runnern ausführen und Läufe neuer Fork-Beiträge freigabepflichtig lassen.
+- Workflows aus Forks erhalten keine Secrets @github-com-go-gitea-gitea-issues-35145, können aber trotzdem schädlichen Code auf dem Runner ausführen @github-com-go-gitea-gitea-pull-22803. Öffentliche Repositories deshalb nur auf kurzlebigen, isolierten Runnern ausführen @docs-github-com-en-actions-reference-security-secure-use und Läufe neuer Fork-Beiträge freigabepflichtig lassen @github-com-go-gitea-gitea-pull-22803.
 - Niemals untrusted PR-Code in einem privilegierten Deployment-Job ausführen. Build/Tests und Deployment auf getrennte Runner-Gruppen oder mindestens getrennte Workflows und Zugangsdaten aufteilen.
-- Actions auf unveränderliche Commit-Hashes pinnen, Workflow-Dateien per Branch-Schutz absichern und ausgehenden Netzwerkzugriff sowie erlaubte Volumes minimieren.
-- Die Log-Maskierung ist nur ein Auffangnetz. Auch wenn aktuelle Runner mehrere übliche Kodierungen erkennen, können umgeformte, aufgeteilte oder in Artefakten gespeicherte Secrets weiterhin sichtbar werden.
+- Actions auf unveränderliche Commit-Hashes pinnen @docs-github-com-en-actions-reference-security-secure-use, Workflow-Dateien per Branch-Schutz absichern und ausgehenden Netzwerkzugriff sowie erlaubte Volumes minimieren.
+- Die Log-Maskierung ist nur ein Auffangnetz. Auch wenn aktuelle Runner mehrere übliche Kodierungen erkennen @blog-gitea-com-release-of-runner-3-0-0, können umgeformte, aufgeteilte oder in Artefakten gespeicherte Secrets weiterhin sichtbar werden @docs-github-com-en-actions-reference-security-secure-use.
 
-Mit `concurrency` lassen sich überholte Läufe automatisch abbrechen, etwa wenn du mehrmals kurz hintereinander auf denselben PR-Branch pushst:
+Mit `concurrency` lassen sich überholte Läufe automatisch abbrechen, etwa wenn du mehrmals kurz hintereinander auf denselben PR-Branch pushst @docs-github-com-en-actions-reference-workflows-and-actions-workflow-syntax:
 
 ```yaml
 concurrency:

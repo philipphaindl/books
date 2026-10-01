@@ -2,11 +2,11 @@
 
 = Autorisierung: Objekte und Funktionen
 
-Authentifizierung beantwortet "Wer bist du?", Autorisierung "Darfst du *das*?". Die OWASP-Liste führt zwei Autorisierungsfehler auf den Plätzen 1 und 5, weil sie so häufig und so folgenreich sind: Zugriff auf fremde *Objekte* (BOLA) und Zugriff auf fremde *Funktionen*.
+Authentifizierung beantwortet "Wer bist du?", Autorisierung "Darfst du *das*?". Die OWASP-Liste führt zwei Autorisierungsfehler auf den Plätzen 1 und 5, weil sie so häufig und so folgenreich sind: Zugriff auf fremde *Objekte* (BOLA) @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization und Zugriff auf fremde *Funktionen* @api-security-owasp-org-editions-2023-en-0xa5-broken-function-level-authorization.
 
 == BOLA: Broken Object Level Authorization
 
-Das Muster ist fast immer dasselbe: Ein Endpunkt bekommt die ID eines Objekts, prüft, dass jemand angemeldet ist, und liefert das Objekt aus, ohne zu prüfen, ob es diesem Jemand gehört.
+Das Muster ist fast immer dasselbe: Ein Endpunkt bekommt die ID eines Objekts, prüft, dass jemand angemeldet ist, und liefert das Objekt aus, ohne zu prüfen, ob es diesem Jemand gehört @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization.
 
 #datei("app/main.py")[
 ```python
@@ -50,13 +50,13 @@ def lesen(notiz_id: UUID, benutzer: Benutzer = Depends(braucht_scope("notizen:le
 
 Drei Punkte dazu:
 
-- *404 statt 403* für fremde Objekte. Ein 403 verrät, dass es das Objekt gibt. Das hilft beim Ausspähen, etwa von E-Mail-Adressen oder Kundennummern.
-- *Zufällige IDs (UUIDs) sind kein Schutz.* Sie erschweren das Raten, aber IDs gelangen über geteilte Links, Logs, Referer-Header oder andere Endpunkte nach außen. Die Prüfung muss trotzdem stattfinden.
-- *Jeder Zugriffsweg braucht die Prüfung:* Lesen, Ändern, Löschen, Exportieren, Anhänge herunterladen, Unterobjekte (`/notizen/{id}/kommentare`). Besonders leicht vergessen werden Massenoperationen und Suchendpunkte.
+- *404 statt 403* für fremde Objekte. Ein 403 verrät, dass es das Objekt gibt; HTTP erlaubt es ausdrücklich, die Existenz eines Objekts mit 404 zu verbergen @rfc9110. Das hilft beim Ausspähen, etwa von E-Mail-Adressen oder Kundennummern.
+- *Zufällige IDs (UUIDs) sind kein Schutz.* Sie erschweren das Raten, aber IDs gelangen über geteilte Links, Logs, Referer-Header oder andere Endpunkte nach außen. Die Prüfung muss trotzdem stattfinden @cheatsheetseries-owasp-org-cheatsheets-insecure-direct-object-reference-prevention-cheat-sheet-html @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization.
+- *Jeder Zugriffsweg braucht die Prüfung:* Lesen, Ändern, Löschen, Exportieren, Anhänge herunterladen, Unterobjekte (`/notizen/{id}/kommentare`) @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization. Besonders leicht vergessen werden Massenoperationen und Suchendpunkte.
 
 === Autorisierung zentralisieren
 
-Wenn Notizen geteilt werden können, wird die Regel komplexer: lesen darf der Besitzer, wer eine Freigabe hat, und ein Administrator. Solche Regeln gehören an *eine* Stelle, nicht verstreut in jeden Endpunkt:
+Wenn Notizen geteilt werden können, wird die Regel komplexer: lesen darf der Besitzer, wer eine Freigabe hat, und ein Administrator. Solche Regeln gehören an *eine* Stelle, nicht verstreut in jeden Endpunkt @cheatsheetseries-owasp-org-cheatsheets-authorization-cheat-sheet-html:
 
 #datei("app/rechte.py")[
 ```python
@@ -77,11 +77,11 @@ def darf_aendern(benutzer: Benutzer, notiz: Notiz) -> bool:
 
 Jeder Endpunkt beginnt dann mit `sichtbare_notizen(benutzer)` und schränkt weiter ein. Eine Änderung der Regel wirkt überall gleichzeitig.
 
-#tipp[Als zusätzliche Verteidigungslinie kann PostgreSQL die Besitzregel selbst durchsetzen: Mit _Row Level Security_ (`ALTER TABLE notizen ENABLE ROW LEVEL SECURITY` und einer Policy auf eine Sitzungsvariable mit der Benutzer-ID) liefert die Datenbank fremde Zeilen gar nicht erst aus, auch wenn im Code eine Prüfung fehlt. Der Aufwand lohnt sich bei mandantenfähigen Anwendungen mit vielen Endpunkten.]
+#tipp[Als zusätzliche Verteidigungslinie kann PostgreSQL die Besitzregel selbst durchsetzen: Mit _Row Level Security_ (`ALTER TABLE notizen ENABLE ROW LEVEL SECURITY` und einer Policy auf eine Sitzungsvariable mit der Benutzer-ID) liefert die Datenbank fremde Zeilen gar nicht erst aus @postgresql-org-docs-current-ddl-rowsecurity-html, auch wenn im Code eine Prüfung fehlt. Der Aufwand lohnt sich bei mandantenfähigen Anwendungen mit vielen Endpunkten.]
 
 == Autorisierung auf Funktionsebene
 
-Der zweite Klassiker: Administrative Funktionen sind nur in der Oberfläche versteckt, die API prüft aber nicht, wer sie aufruft. Wer die Endpunkte kennt (etwa aus der öffentlichen OpenAPI-Dokumentation oder dem JavaScript der Web-App), ruft sie einfach direkt auf.
+Der zweite Klassiker: Administrative Funktionen sind nur in der Oberfläche versteckt, die API prüft aber nicht, wer sie aufruft. Wer die Endpunkte kennt (etwa aus der öffentlichen OpenAPI-Dokumentation oder dem JavaScript der Web-App), ruft sie einfach direkt auf @api-security-owasp-org-editions-2023-en-0xa5-broken-function-level-authorization.
 
 #datei("app/admin.py")[
 ```python
@@ -95,11 +95,11 @@ def alle_loeschen(benutzer_id: str): ...
 ```
 ]
 
-Die Regel ist dieselbe wie bei der Anmeldung: Rechte auf Router-Ebene vergeben, damit neue Endpunkte automatisch geschützt sind. Achtung auch bei HTTP-Methoden: Ist `GET /notizen/{id}` korrekt geschützt, heißt das nichts über `PUT`, `PATCH` und `DELETE` auf derselben Adresse.
+Die Regel ist dieselbe wie bei der Anmeldung: Rechte auf Router-Ebene vergeben, damit neue Endpunkte automatisch geschützt sind @fastapi-tiangolo-com-tutorial-bigger-applications. Achtung auch bei HTTP-Methoden @api-security-owasp-org-editions-2023-en-0xa5-broken-function-level-authorization: Ist `GET /notizen/{id}` korrekt geschützt, heißt das nichts über `PUT`, `PATCH` und `DELETE` auf derselben Adresse.
 
 == Autorisierung testen
 
-Autorisierungsfehler findet kein Scanner, aber ein einfacher Test mit zwei Benutzern findet fast alle. FastAPI erlaubt, die Anmelde-Abhängigkeit im Test durch feste Benutzer zu ersetzen:
+Autorisierungsfehler findet kein Scanner, aber ein einfacher Test mit zwei Benutzern findet fast alle. FastAPI erlaubt, die Anmelde-Abhängigkeit im Test durch feste Benutzer zu ersetzen @fastapi-tiangolo-com-advanced-testing-dependencies:
 
 #datei("tests/test_rechte.py")[
 ```python
@@ -149,4 +149,4 @@ def test_bob_kann_notiz_von_alice_nicht_aendern(client, methode):
 
 Der Override wird nach jedem Block sicher zurückgesetzt; sonst beeinflusst ein Test den nächsten. Ein `405` wäre hier kein Erfolg: Er würde nur beweisen, dass die Methode fehlt, nicht dass ihre Objektberechtigung stimmt. Für jeden real vorhandenen Lese-, Änderungs-, Lösch-, Export- und Unterobjekt-Endpunkt gehört ein exakter "fremder Benutzer"-Test zur Definition of Done.
 
-#merke[In mandantenfähigen Systemen gehört neben der Besitzer-ID immer auch die Mandanten-ID in jede Abfrage. Bei PostgreSQL-RLS werden Mandant und Benutzer transaktionslokal gesetzt; der Anwendungs-DB-Account darf die Policy weder umgehen noch Tabellen besitzen. RLS ergänzt die Anwendungstests, ersetzt sie aber nicht.]
+#merke[In mandantenfähigen Systemen gehört neben der Besitzer-ID immer auch die Mandanten-ID in jede Abfrage. Bei PostgreSQL-RLS werden Mandant und Benutzer transaktionslokal gesetzt @postgresql-org-docs-current-sql-set-html; der Anwendungs-DB-Account darf die Policy weder umgehen noch Tabellen besitzen @postgresql-org-docs-current-ddl-rowsecurity-html. RLS ergänzt die Anwendungstests, ersetzt sie aber nicht.]

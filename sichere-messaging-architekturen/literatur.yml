@@ -1,0 +1,1038 @@
+cheatsheetseries-owasp-org-cheatsheets-key-management-cheat-sheet-html:
+  type: Web
+  title: Key Management - OWASP Cheat Sheet Series
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html
+    date: '2026-10-01'
+cheatsheetseries-owasp-org-cheatsheets-secrets-management-cheat-sheet-html:
+  type: Web
+  title: Secrets Management - OWASP Cheat Sheet Series
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    date: '2026-10-01'
+cryptography-io-en-latest-hazmat-primitives-aead:
+  type: Web
+  title: Authenticated encryption
+  author:
+  - name: The Cryptography Developers
+  publisher: cryptography documentation
+  url:
+    value: https://cryptography.io/en/latest/hazmat/primitives/aead/
+    date: '2026-10-01'
+cryptography-io-en-latest-hazmat-primitives-asymmetric-ed25519:
+  type: Web
+  title: Ed25519 signing
+  author:
+  - name: The Cryptography Developers
+  publisher: cryptography documentation
+  url:
+    value: https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/
+    date: '2026-10-01'
+docs-aio-pika-com:
+  type: Web
+  title: aio-pika
+  author:
+  - name: aio-pika contributors
+  publisher: aio-pika Documentation
+  url:
+    value: https://docs.aio-pika.com/
+    date: '2026-10-01'
+docs-aio-pika-com-apidoc-html:
+  type: Web
+  title: 'API Reference: aio-pika'
+  author:
+  - name: aio-pika contributors
+  publisher: aio-pika Documentation
+  url:
+    value: https://docs.aio-pika.com/apidoc.html
+    date: '2026-10-01'
+docs-confluent-io-platform-current-schema-registry-fundamentals-schema-evolution-html:
+  type: Web
+  title: Schema Evolution and Compatibility for Schema Registry on Confluent Platform
+  author:
+  - name: Confluent, Inc.
+  publisher: Confluent Documentation
+  url:
+    value: https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html
+    date: '2026-10-01'
+docs-nats-io-concepts-ecosystem:
+  type: Web
+  title: The NATS Ecosystem
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/concepts/ecosystem
+    date: '2026-10-01'
+docs-nats-io-concepts-jetstream:
+  type: Web
+  title: JetStream
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/concepts/jetstream
+    date: '2026-10-01'
+docs-nats-io-concepts-subjects:
+  type: Web
+  title: Subjects
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/concepts/subjects
+    date: '2026-10-01'
+docs-nats-io-jetstream-concepts-streams:
+  type: Web
+  title: 'JetStream: Streams'
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/jetstream/concepts/streams
+    date: '2026-10-01'
+docs-nats-io-learn-backup-recovery-disaster-recovery:
+  type: Web
+  title: Disaster recovery
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/backup-recovery/disaster-recovery
+    date: '2026-10-01'
+docs-nats-io-learn-backup-recovery-stream-backup-restore:
+  type: Web
+  title: Stream backup and restore
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/backup-recovery/stream-backup-restore
+    date: '2026-10-01'
+docs-nats-io-learn-core-nats:
+  type: Web
+  title: Core NATS Deep Dive
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/core-nats
+    date: '2026-10-01'
+docs-nats-io-learn-core-nats-request-reply:
+  type: Web
+  title: Request-reply
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/core-nats/request-reply
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-acknowledgment:
+  type: Web
+  title: Ack responses and redelivery
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/acknowledgment
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-delivery-and-acknowledgment:
+  type: Web
+  title: Delivery and acknowledgment
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/delivery-and-acknowledgment
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-policies:
+  type: Web
+  title: Stream and consumer policies
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/policies
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-publishing:
+  type: Web
+  title: Publishing
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/publishing
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-pull-consumers:
+  type: Web
+  title: Pull consumers in depth
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/pull-consumers
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-reading-back:
+  type: Web
+  title: Reading back the stream
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/reading-back
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-retention-policies:
+  type: Web
+  title: Retention policies
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/retention-policies
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-shaping-the-stream:
+  type: Web
+  title: Shaping the stream
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/shaping-the-stream
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-surviving-node-loss:
+  type: Web
+  title: Surviving node loss
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/surviving-node-loss
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-worker-pool:
+  type: Web
+  title: Scaling a consumer
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/worker-pool
+    date: '2026-10-01'
+docs-nats-io-learn-jetstream-your-first-stream:
+  type: Web
+  title: Your first stream
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/jetstream/your-first-stream
+    date: '2026-10-01'
+docs-nats-io-learn-monitoring-advisories-and-events:
+  type: Web
+  title: Advisories & events
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/monitoring/advisories-and-events
+    date: '2026-10-01'
+docs-nats-io-learn-monitoring-monitoring-endpoints:
+  type: Web
+  title: Monitoring endpoints
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/monitoring/monitoring-endpoints
+    date: '2026-10-01'
+docs-nats-io-learn-resilient-clients-drain-and-shutdown:
+  type: Web
+  title: Drain & Shutdown
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/resilient-clients/drain-and-shutdown
+    date: '2026-10-01'
+docs-nats-io-learn-security-accounts-and-multitenancy:
+  type: Web
+  title: Accounts and multitenancy
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/security/accounts-and-multitenancy
+    date: '2026-10-01'
+docs-nats-io-learn-security-authentication-basics:
+  type: Web
+  title: Authentication basics
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/security/authentication-basics
+    date: '2026-10-01'
+docs-nats-io-learn-security-authorization:
+  type: Web
+  title: Authorization
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/security/authorization
+    date: '2026-10-01'
+docs-nats-io-learn-security-decentralized-auth:
+  type: Web
+  title: Decentralized authentication
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/security/decentralized-auth
+    date: '2026-10-01'
+docs-nats-io-learn-security-encryption:
+  type: Web
+  title: Encryption & TLS
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/security/encryption
+    date: '2026-10-01'
+docs-nats-io-learn-topologies-jetstream-in-a-cluster:
+  type: Web
+  title: JetStream in a cluster
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/learn/topologies/jetstream-in-a-cluster
+    date: '2026-10-01'
+docs-nats-io-nats-concepts-jetstream:
+  type: Web
+  title: JetStream
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/nats-concepts/jetstream
+    date: '2026-10-01'
+docs-nats-io-nats-concepts-jetstream-streams:
+  type: Web
+  title: Streams
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/nats-concepts/jetstream/streams
+    date: '2026-10-01'
+docs-nats-io-reference-config:
+  type: Web
+  title: Configuration
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/reference/config
+    date: '2026-10-01'
+docs-nats-io-reference-jetstream-advisory-max-deliver:
+  type: Web
+  title: max deliver
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/reference/jetstream/advisory/max-deliver
+    date: '2026-10-01'
+docs-nats-io-reference-jetstream-api-consumer:
+  type: Web
+  title: Consumer
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/reference/jetstream/api/consumer/
+    date: '2026-10-01'
+docs-nats-io-reference-jetstream-api-consumer-info:
+  type: Web
+  title: Consumer Info
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/reference/jetstream/api/consumer/info
+    date: '2026-10-01'
+docs-nats-io-reference-jetstream-api-headers:
+  type: Web
+  title: JetStream API headers (Nats-Msg-Id)
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://docs.nats.io/reference/jetstream/api/headers
+    date: '2026-10-01'
+docs-python-org-3-13-library-ssl-html:
+  type: Web
+  title: ssl — TLS/SSL wrapper for socket objects
+  author:
+  - name: Python Software Foundation
+  publisher: Python 3.13 Documentation
+  url:
+    value: https://docs.python.org/3.13/library/ssl.html
+    date: '2026-10-01'
+examples-nats-io-examples-auth-private-inbox-cli:
+  type: Web
+  title: NATS by Example - Private Inbox (CLI)
+  author:
+  - name: NATS Project
+  publisher: NATS by Example
+  url:
+    value: https://examples.nats.io/examples/auth/private-inbox/cli
+    date: '2026-10-01'
+gdpr-info-eu-art-17-gdpr:
+  type: Web
+  title: Art. 17 GDPR - Right to erasure ('right to be forgotten')
+  author:
+  - name: Intersoft Consulting
+  publisher: GDPR-info.eu
+  url:
+    value: https://gdpr-info.eu/art-17-gdpr/
+    date: '2026-10-01'
+gdpr-info-eu-art-5-gdpr:
+  type: Web
+  title: Art. 5 GDPR - Principles relating to processing of personal data
+  author:
+  - name: Intersoft Consulting
+  publisher: GDPR-info.eu
+  url:
+    value: https://gdpr-info.eu/art-5-gdpr/
+    date: '2026-10-01'
+github-com-cloudevents-spec-blob-main-cloudevents-spec-md:
+  type: Web
+  title: CloudEvents - Version 1.0.3-wip
+  author:
+  - name: CloudEvents Project (CNCF)
+  publisher: Cloud Native Computing Foundation
+  url:
+    value: https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md
+    date: '2026-10-01'
+github-com-nats-io-nats-architecture-and-design-blob-main-adr-adr-15-md:
+  type: Web
+  title: 'ADR-15: JetStream Subscribe Workflow'
+  author:
+  - name: NATS Project
+  publisher: GitHub (nats-io/nats-architecture-and-design)
+  url:
+    value: https://github.com/nats-io/nats-architecture-and-design/blob/main/adr/ADR-15.md
+    date: '2026-10-01'
+github-com-nats-io-nats-py:
+  type: Web
+  title: nats-io/nats.py
+  author:
+  - name: NATS Project
+  publisher: GitHub
+  url:
+    value: https://github.com/nats-io/nats.py
+    date: '2026-10-01'
+github-com-nats-io-nats-server:
+  type: Web
+  title: nats-io/nats-server
+  author:
+  - name: NATS Project
+  publisher: GitHub
+  url:
+    value: https://github.com/nats-io/nats-server
+    date: '2026-10-01'
+github-com-nats-io-natscli-blob-main-cli-consumer-command-go:
+  type: Web
+  title: 'natscli: cli/consumer_command.go'
+  author:
+  - name: NATS Project
+  publisher: GitHub
+  url:
+    value: https://github.com/nats-io/natscli/blob/main/cli/consumer_command.go
+    date: '2026-10-01'
+github-com-nats-io-natscli-blob-main-cli-stream-command-go:
+  type: Web
+  title: 'natscli: cli/stream_command.go'
+  author:
+  - name: NATS Project
+  publisher: GitHub
+  url:
+    value: https://github.com/nats-io/natscli/blob/main/cli/stream_command.go
+    date: '2026-10-01'
+github-com-nats-io-prometheus-nats-exporter:
+  type: Web
+  title: 'prometheus-nats-exporter: A Prometheus exporter for NATS metrics'
+  author:
+  - name: NATS Project
+  publisher: GitHub (nats-io/prometheus-nats-exporter)
+  url:
+    value: https://github.com/nats-io/prometheus-nats-exporter
+    date: '2026-10-01'
+github-com-rabbitmq-rabbitmq-server-blob-v4-0-x-release-notes-4-0-1-md:
+  type: Web
+  title: RabbitMQ 4.0.1 (Release Notes)
+  author:
+  - name: RabbitMQ Project
+  publisher: GitHub, rabbitmq/rabbitmq-server
+  url:
+    value: https://github.com/rabbitmq/rabbitmq-server/blob/v4.0.x/release-notes/4.0.1.md
+    date: '2026-10-01'
+hohpe-2003-eip:
+  type: Book
+  title: 'Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions'
+  author:
+  - Hohpe, Gregor
+  - Woolf, Bobby
+  publisher: Addison-Wesley
+  date: 2003
+  serial-number:
+    isbn: 0321200683
+jepsen-io-analyses-nats-2-12-1:
+  type: Web
+  title: 'Jepsen: NATS 2.12.1'
+  author:
+  - Kingsbury, Kyle
+  publisher: Jepsen
+  date: 2025-12-08
+  url:
+    value: https://jepsen.io/analyses/nats-2.12.1
+    date: '2026-10-01'
+microservices-io-patterns-communication-style-idempotent-consumer-html:
+  type: Web
+  title: 'Pattern: Idempotent Consumer'
+  author:
+  - Richardson, Chris
+  publisher: microservices.io
+  url:
+    value: https://microservices.io/patterns/communication-style/idempotent-consumer.html
+    date: '2026-10-01'
+microservices-io-patterns-data-transactional-outbox-html:
+  type: Web
+  title: 'Pattern: Transactional outbox'
+  author:
+  - Richardson, Chris
+  publisher: microservices.io
+  url:
+    value: https://microservices.io/patterns/data/transactional-outbox.html
+    date: '2026-10-01'
+nats-io-download:
+  type: Web
+  title: Download
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://nats.io/download/
+    date: '2026-10-01'
+nats-io-github-io-nats-py-modules-html:
+  type: Web
+  title: 'nats.py documentation: Modules'
+  author:
+  - name: NATS Project
+  publisher: NATS Documentation
+  url:
+    value: https://nats-io.github.io/nats.py/modules.html
+    date: '2026-10-01'
+nist-sp-800-38d:
+  type: Report
+  title: 'Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC'
+  author:
+  - Dworkin, Morris
+  serial-number: NIST Special Publication 800-38D
+  publisher: National Institute of Standards and Technology
+  date: 2007-11
+  url:
+    value: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf
+    date: '2026-10-01'
+opentelemetry-io-docs-specs-semconv-messaging-messaging-spans:
+  type: Web
+  title: Semantic conventions for messaging spans
+  author:
+  - name: OpenTelemetry Authors
+  publisher: OpenTelemetry
+  url:
+    value: https://opentelemetry.io/docs/specs/semconv/messaging/messaging-spans/
+    date: '2026-10-01'
+pika-readthedocs-io-en-stable:
+  type: Web
+  title: Introduction to Pika
+  author:
+  - name: Pika contributors
+  publisher: Read the Docs
+  url:
+    value: https://pika.readthedocs.io/en/stable/
+    date: '2026-10-01'
+pydantic-dev-docs-validation-latest-api-pydantic-base-model:
+  type: Web
+  title: BaseModel
+  author:
+  - name: Pydantic Services Inc.
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/base_model/
+    date: '2026-10-01'
+pydantic-dev-docs-validation-latest-api-pydantic-config:
+  type: Web
+  title: Configuration (ConfigDict)
+  author:
+  - name: Pydantic Services Inc.
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/config/
+    date: '2026-10-01'
+pydantic-dev-docs-validation-latest-api-pydantic-fields:
+  type: Web
+  title: Fields (Field)
+  author:
+  - name: Pydantic Services Inc.
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/fields/
+    date: '2026-10-01'
+rfc5116:
+  type: Report
+  title: An Interface and Algorithms for Authenticated Encryption
+  author:
+  - McGrew, David
+  serial-number: RFC 5116
+  date: 2008-01
+  doi: 10.17487/RFC5116
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc5116
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc8032:
+  type: Report
+  title: Edwards-Curve Digital Signature Algorithm (EdDSA)
+  author:
+  - Josefsson, Simon
+  - Liusvaara, Ilari
+  serial-number: RFC 8032
+  date: 2017-01
+  doi: 10.17487/RFC8032
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8032
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+smallstep-com-docs-step-ca:
+  type: Web
+  title: step-ca Certificate Authority Overview
+  author:
+  - name: Smallstep
+  publisher: Smallstep Documentation
+  url:
+    value: https://smallstep.com/docs/step-ca/
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-commandmessage-html:
+  type: Web
+  title: Command Message
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/CommandMessage.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-competingconsumers-html:
+  type: Web
+  title: Competing Consumers
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/CompetingConsumers.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-deadletterchannel-html:
+  type: Web
+  title: Dead Letter Channel
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/DeadLetterChannel.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-eventmessage-html:
+  type: Web
+  title: Event Message
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/EventMessage.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-idempotentreceiver-html:
+  type: Web
+  title: Idempotent Receiver
+  author:
+  - Hohpe, Gregor
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/IdempotentReceiver.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-messaging-html:
+  type: Web
+  title: Messaging
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/Messaging.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-pointtopointchannel-html:
+  type: Web
+  title: Point-to-Point Channel
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/PointToPointChannel.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-publishsubscribechannel-html:
+  type: Web
+  title: Publish-Subscribe Channel
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/PublishSubscribeChannel.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-requestreply-html:
+  type: Web
+  title: Request-Reply
+  author:
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/RequestReply.html
+    date: '2026-10-01'
+www-enterpriseintegrationpatterns-com-patterns-messaging-storeinlibrary-html:
+  type: Web
+  title: Claim Check
+  author:
+  - Hohpe, Gregor
+  - Woolf, Bobby
+  publisher: Enterprise Integration Patterns
+  url:
+    value: https://www.enterpriseintegrationpatterns.com/patterns/messaging/StoreInLibrary.html
+    date: '2026-10-01'
+www-postgresql-org-docs-current-sql-insert-html:
+  type: Web
+  title: 'PostgreSQL Documentation: INSERT'
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL 18 Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/sql-insert.html
+    date: '2026-10-01'
+www-postgresql-org-docs-current-sql-select-html:
+  type: Web
+  title: 'PostgreSQL Documentation: SELECT (The Locking Clause)'
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL 18 Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/sql-select.html
+    date: '2026-10-01'
+www-postgresql-org-docs-current-tutorial-transactions-html:
+  type: Web
+  title: 'PostgreSQL Documentation: Transactions'
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL 18 Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/tutorial-transactions.html
+    date: '2026-10-01'
+www-rabbitmq-com-blog-2024-08-28-quorum-queues-in-4-0:
+  type: Web
+  title: 'RabbitMQ 4.0: New Quorum Queue Features'
+  author:
+  - Kuratczyk, Michał
+  publisher: RabbitMQ Blog
+  date: 2024-08-28
+  url:
+    value: https://www.rabbitmq.com/blog/2024/08/28/quorum-queues-in-4.0
+    date: '2026-10-01'
+www-rabbitmq-com-client-libraries-devtools:
+  type: Web
+  title: Clients Libraries and Developer Tools
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/client-libraries/devtools
+    date: '2026-10-01'
+www-rabbitmq-com-docs-3-13-ha:
+  type: Web
+  title: Classic Queue Mirroring (Deprecated)
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/3.13/ha
+    date: '2026-10-01'
+www-rabbitmq-com-docs-access-control:
+  type: Web
+  title: Authentication, Authorisation, Access Control
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/access-control
+    date: '2026-10-01'
+www-rabbitmq-com-docs-alarms:
+  type: Web
+  title: Memory and Disk Alarms
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/alarms
+    date: '2026-10-01'
+www-rabbitmq-com-docs-amqp:
+  type: Web
+  title: AMQP 1.0
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/amqp
+    date: '2026-10-01'
+www-rabbitmq-com-docs-backup:
+  type: Web
+  title: Backup and Restore
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/backup
+    date: '2026-10-01'
+www-rabbitmq-com-docs-confirms:
+  type: Web
+  title: Consumer Acknowledgements and Publisher Confirms
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/confirms
+    date: '2026-10-01'
+www-rabbitmq-com-docs-consumer-prefetch:
+  type: Web
+  title: Consumer Prefetch
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/consumer-prefetch
+    date: '2026-10-01'
+www-rabbitmq-com-docs-definitions:
+  type: Web
+  title: Definition Export and Import
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/definitions
+    date: '2026-10-01'
+www-rabbitmq-com-docs-dlx:
+  type: Web
+  title: Dead Letter Exchanges
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/dlx
+    date: '2026-10-01'
+www-rabbitmq-com-docs-ldap:
+  type: Web
+  title: LDAP Support
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/ldap
+    date: '2026-10-01'
+www-rabbitmq-com-docs-management:
+  type: Web
+  title: Management Plugin
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/management
+    date: '2026-10-01'
+www-rabbitmq-com-docs-monitoring:
+  type: Web
+  title: Monitoring
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/monitoring
+    date: '2026-10-01'
+www-rabbitmq-com-docs-networking:
+  type: Web
+  title: Networking and RabbitMQ
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/networking
+    date: '2026-10-01'
+www-rabbitmq-com-docs-oauth2:
+  type: Web
+  title: OAuth 2.0 Authentication Backend
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/oauth2
+    date: '2026-10-01'
+www-rabbitmq-com-docs-production-checklist:
+  type: Web
+  title: Production Deployment Guidelines
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/production-checklist
+    date: '2026-10-01'
+www-rabbitmq-com-docs-prometheus:
+  type: Web
+  title: Monitoring with Prometheus and Grafana
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/prometheus
+    date: '2026-10-01'
+www-rabbitmq-com-docs-publishers:
+  type: Web
+  title: Publishers
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/publishers
+    date: '2026-10-01'
+www-rabbitmq-com-docs-queues:
+  type: Web
+  title: Queues
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/queues
+    date: '2026-10-01'
+www-rabbitmq-com-docs-quorum-queues:
+  type: Web
+  title: Quorum Queues
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/quorum-queues
+    date: '2026-10-01'
+www-rabbitmq-com-docs-reliability:
+  type: Web
+  title: Reliability Guide
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/reliability
+    date: '2026-10-01'
+www-rabbitmq-com-docs-ssl:
+  type: Web
+  title: TLS Support
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/ssl
+    date: '2026-10-01'
+www-rabbitmq-com-docs-streams:
+  type: Web
+  title: Streams and Superstreams (Partitioned Streams)
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/streams
+    date: '2026-10-01'
+www-rabbitmq-com-docs-ttl:
+  type: Web
+  title: Time-To-Live and Expiration
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/ttl
+    date: '2026-10-01'
+www-rabbitmq-com-docs-vhosts:
+  type: Web
+  title: Virtual Hosts
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/vhosts
+    date: '2026-10-01'
+www-rabbitmq-com-docs-which-erlang:
+  type: Web
+  title: Erlang Version Requirements
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/docs/which-erlang
+    date: '2026-10-01'
+www-rabbitmq-com-tutorials-amqp-concepts:
+  type: Web
+  title: AMQP 0-9-1 Model Explained
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/tutorials/amqp-concepts
+    date: '2026-10-01'
+www-rabbitmq-com-tutorials-tutorial-five-python:
+  type: Web
+  title: RabbitMQ tutorial - Topics
+  author:
+  - name: RabbitMQ Project
+  publisher: RabbitMQ Documentation
+  url:
+    value: https://www.rabbitmq.com/tutorials/tutorial-five-python
+    date: '2026-10-01'
+www-synadia-com-blog-jetstream-reliable-delivery-dlq-replay:
+  type: Web
+  title: Reliable Message Delivery in NATS JetStream
+  author:
+  - Connolly, Andrew
+  publisher: Synadia
+  date: 2026-07-24
+  url:
+    value: https://www.synadia.com/blog/jetstream-reliable-delivery-dlq-replay
+    date: '2026-10-01'
+www-w3-org-tr-trace-context:
+  type: Web
+  title: Trace Context
+  author:
+  - Kanzhelev, Sergey
+  - McLean, Morgan
+  - Reitbauer, Alois
+  - Drutu, Bogdan
+  - Molnar, Nik
+  - Shkuro, Yuri
+  publisher: W3C
+  date: 2021-11-23
+  url:
+    value: https://www.w3.org/TR/trace-context/
+    date: '2026-10-01'

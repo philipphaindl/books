@@ -1,0 +1,503 @@
+# Literaturverzeichnis (Hayagriva), gerendert im IEEE-Stil über literatur.typ
+# Zugriffsdatum aller Online-Quellen: 2026-10-01
+# Zitieren im Text mit @schluessel
+
+# ---------- Anthropic: Claude Code ----------
+cc-model:
+  type: web
+  title: "Model configuration"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/model-config", date: 2026-10-01}
+cc-goal:
+  type: web
+  title: "Keep Claude working toward a goal"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/goal", date: 2026-10-01}
+cc-week20:
+  type: web
+  title: "Week 20 · May 11–15, 2026"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs: What's new"}
+  url: {value: "https://code.claude.com/docs/en/whats-new/2026-w20", date: 2026-10-01}
+cc-security:
+  type: web
+  title: "Security"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/security", date: 2026-10-01}
+cc-sandbox:
+  type: web
+  title: "Configure the sandboxed Bash tool"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/sandboxing", date: 2026-10-01}
+cc-permissions:
+  type: web
+  title: "Choose a permission mode"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/permission-modes", date: 2026-10-01}
+cc-worktrees:
+  type: web
+  title: "Run parallel sessions with worktrees"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/worktrees", date: 2026-10-01}
+cc-subagents:
+  type: web
+  title: "Subagents"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/sub-agents", date: 2026-10-01}
+cc-hooks:
+  type: web
+  title: "Hooks reference"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/hooks", date: 2026-10-01}
+cc-memory:
+  type: web
+  title: "How Claude remembers your project"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Code Docs"}
+  url: {value: "https://code.claude.com/docs/en/memory", date: 2026-10-01}
+
+# ---------- Anthropic: Claude Platform ----------
+an-models:
+  type: web
+  title: "Models overview"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/models/overview", date: 2026-10-01}
+an-effort:
+  type: web
+  title: "Effort"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/build-with-claude/effort", date: 2026-10-01}
+an-prompting:
+  type: web
+  title: "Prompting best practices"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices", date: 2026-10-01}
+an-opus55:
+  type: web
+  title: "Prompting Claude Opus 5.5"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5", date: 2026-10-01}
+an-fable:
+  type: web
+  title: "Prompting Claude Fable 5.1"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1", date: 2026-10-01}
+an-migration:
+  type: web
+  title: "Migrating to Claude Opus 5.5"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide", date: 2026-10-01}
+an-caching:
+  type: web
+  title: "Prompt caching"
+  author: {name: "Anthropic"}
+  parent: {type: web, title: "Claude Docs"}
+  url: {value: "https://platform.claude.com/docs/en/build-with-claude/prompt-caching", date: 2026-10-01}
+an-agents:
+  type: web
+  title: "Building effective agents"
+  author: ["Schluntz, Erik", "Zhang, Barry"]
+  parent: {type: web, title: "Anthropic Engineering"}
+  date: 2024-12-19
+  url: {value: "https://www.anthropic.com/engineering/building-effective-agents", date: 2026-10-01}
+
+# ---------- OpenAI: Codex und API ----------
+oa-models:
+  type: web
+  title: "Codex models"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/models", date: 2026-10-01}
+oa-config:
+  type: web
+  title: "Config basics"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/config-file/config-basic", date: 2026-10-01}
+oa-configref:
+  type: web
+  title: "Configuration reference"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/config-file/config-reference", date: 2026-10-01}
+oa-agentsmd:
+  type: web
+  title: "AGENTS.md"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/agent-configuration/agents-md", date: 2026-10-01}
+oa-commands:
+  type: web
+  title: "Developer commands"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/developer-commands?surface=cli", date: 2026-10-01}
+oa-hooks:
+  type: web
+  title: "Hooks"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/hooks", date: 2026-10-01}
+oa-approvals:
+  type: web
+  title: "Agent approvals & security"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "Codex Docs"}
+  url: {value: "https://learn.chatgpt.com/docs/agent-approvals-security", date: 2026-10-01}
+oa-goals:
+  type: web
+  title: "Using Goals in Codex"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "OpenAI Cookbook"}
+  url: {value: "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex", date: 2026-10-01}
+oa-docsmcp:
+  type: web
+  title: "Docs MCP"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "OpenAI Developers"}
+  url: {value: "https://developers.openai.com/learn/docs-mcp", date: 2026-10-01}
+oa-latest:
+  type: web
+  title: "Latest model guide"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "OpenAI API Docs"}
+  url: {value: "https://developers.openai.com/api/docs/guides/latest-model", date: 2026-10-01}
+oa-reasoning:
+  type: web
+  title: "Reasoning models"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "OpenAI API Docs"}
+  url: {value: "https://developers.openai.com/api/docs/guides/reasoning", date: 2026-10-01}
+oa-release-0154:
+  type: web
+  title: "Codex release 0.154.0"
+  author: {name: "OpenAI"}
+  parent: {type: web, title: "GitHub: openai/codex"}
+  date: 2026-09-09
+  url: {value: "https://github.com/openai/codex/releases/tag/rust-v0.154.0", date: 2026-10-01}
+
+# ---------- Sicherheit ----------
+willison:
+  type: web
+  title: "The lethal trifecta for AI agents: private data, untrusted content, and external communication"
+  author: "Willison, Simon"
+  parent: {type: web, title: "Simon Willison's Weblog"}
+  date: 2025-06-16
+  url: {value: "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/", date: 2026-10-01}
+greshake:
+  type: article
+  title: "Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection"
+  author: ["Greshake, Kai", "Abdelnabi, Sahar", "Mishra, Shailesh", "Endres, Christoph", "Holz, Thorsten", "Fritz, Mario"]
+  date: 2023
+  parent: {type: web, title: "arXiv preprint"}
+  serial-number: {arxiv: "2302.12173"}
+  url: "https://arxiv.org/abs/2302.12173"
+spracklen:
+  type: article
+  title: "We have a package for you! A comprehensive analysis of package hallucinations by code generating LLMs"
+  author: ["Spracklen, Joseph", "Wijewickrama, Raveen", "Sakib, A H M Nazmus", "Maiti, Anindya", "Viswanath, Bimal", "Jadliwala, Murtuza"]
+  date: 2025
+  parent: {type: proceedings, title: "Proc. 34th USENIX Security Symposium"}
+  serial-number: {arxiv: "2406.10279"}
+  url: "https://arxiv.org/abs/2406.10279"
+claburn:
+  type: web
+  title: "LLMs can't stop making up software dependencies and sabotaging everything"
+  author: "Claburn, Thomas"
+  parent: {type: web, title: "The Register"}
+  date: 2025-04-12
+  url: {value: "https://www.theregister.com/2025/04/12/ai_code_suggestions_sabotage_supply_chain/", date: 2026-10-01}
+cve-59536:
+  type: web
+  title: "CVE-2025-59536: Claude Code's startup trust dialog could lead to command execution"
+  author: {name: "MITRE"}
+  parent: {type: web, title: "CVE Program"}
+  url: {value: "https://www.cve.org/CVERecord?id=CVE-2025-59536", date: 2026-10-01}
+
+# ---------- Agenten und Sprachmodelle ----------
+react:
+  type: article
+  title: "ReAct: Synergizing reasoning and acting in language models"
+  author: ["Yao, Shunyu", "Zhao, Jeffrey", "Yu, Dian", "Du, Nan", "Shafran, Izhak", "Narasimhan, Karthik", "Cao, Yuan"]
+  date: 2023
+  parent: {type: proceedings, title: "Proc. 11th Int. Conf. Learning Representations (ICLR)"}
+  serial-number: {arxiv: "2210.03629"}
+  url: "https://arxiv.org/abs/2210.03629"
+ji-hallucination:
+  type: article
+  title: "Survey of hallucination in natural language generation"
+  author: ["Ji, Ziwei", "Lee, Nayeon", "Frieske, Rita", "Yu, Tiezheng", "Su, Dan", "Xu, Yan", "Ishii, Etsuko", "Bang, Ye Jin", "Chen, Delong", "Dai, Wenliang", "Chan, Ho Shu", "Madotto, Andrea", "Fung, Pascale"]
+  date: 2023
+  parent: {type: periodical, title: "ACM Computing Surveys", volume: 55, issue: 12}
+  page-range: "1-38"
+  serial-number: {doi: "10.1145/3571730"}
+liu-lost:
+  type: article
+  title: "Lost in the middle: How language models use long contexts"
+  author: ["Liu, Nelson F.", "Lin, Kevin", "Hewitt, John", "Paranjape, Ashwin", "Bevilacqua, Michele", "Petroni, Fabio", "Liang, Percy"]
+  date: 2024
+  parent: {type: periodical, title: "Transactions of the Association for Computational Linguistics", volume: 12}
+  page-range: "157-173"
+  url: "https://arxiv.org/abs/2307.03172"
+holtzman:
+  type: article
+  title: "The curious case of neural text degeneration"
+  author: ["Holtzman, Ari", "Buys, Jan", "Du, Li", "Forbes, Maxwell", "Choi, Yejin"]
+  date: 2020
+  parent: {type: proceedings, title: "Proc. 8th Int. Conf. Learning Representations (ICLR)"}
+  serial-number: {arxiv: "1904.09751"}
+  url: "https://arxiv.org/abs/1904.09751"
+min-p:
+  type: article
+  title: "Turning up the heat: Min-p sampling for creative and coherent LLM outputs"
+  author: ["Nguyen, Minh Nhat", "Baker, Andrew", "Neo, Clement", "Roush, Allen", "Kirsch, Andreas", "Shwartz-Ziv, Ravid"]
+  date: 2025
+  parent: {type: proceedings, title: "Proc. 13th Int. Conf. Learning Representations (ICLR)"}
+  serial-number: {arxiv: "2407.01082"}
+  url: "https://arxiv.org/abs/2407.01082"
+shazeer-moe:
+  type: article
+  title: "Outrageously large neural networks: The sparsely-gated mixture-of-experts layer"
+  author: ["Shazeer, Noam", "Mirhoseini, Azalia", "Maziarz, Krzysztof", "Davis, Andy", "Le, Quoc", "Hinton, Geoffrey", "Dean, Jeff"]
+  date: 2017
+  parent: {type: proceedings, title: "Proc. 5th Int. Conf. Learning Representations (ICLR)"}
+  serial-number: {arxiv: "1701.06538"}
+  url: "https://arxiv.org/abs/1701.06538"
+kwon-vllm:
+  type: article
+  title: "Efficient memory management for large language model serving with PagedAttention"
+  author: ["Kwon, Woosuk", "Li, Zhuohan", "Zhuang, Siyuan", "Sheng, Ying", "Zheng, Lianmin", "Yu, Cody Hao", "Gonzalez, Joseph E.", "Zhang, Hao", "Stoica, Ion"]
+  date: 2023
+  parent: {type: proceedings, title: "Proc. 29th ACM Symp. Operating Systems Principles (SOSP)"}
+  serial-number: {arxiv: "2309.06180"}
+  url: "https://arxiv.org/abs/2309.06180"
+gptq:
+  type: article
+  title: "GPTQ: Accurate post-training quantization for generative pre-trained transformers"
+  author: ["Frantar, Elias", "Ashkboos, Saleh", "Hoefler, Torsten", "Alistarh, Dan"]
+  date: 2023
+  parent: {type: proceedings, title: "Proc. 11th Int. Conf. Learning Representations (ICLR)"}
+  serial-number: {arxiv: "2210.17323"}
+  url: "https://arxiv.org/abs/2210.17323"
+awq:
+  type: article
+  title: "AWQ: Activation-aware weight quantization for LLM compression and acceleration"
+  author: ["Lin, Ji", "Tang, Jiaming", "Tang, Haotian", "Yang, Shang", "Chen, Wei-Ming", "Wang, Wei-Chen", "Xiao, Guangxuan", "Dang, Xingyu", "Gan, Chuang", "Han, Song"]
+  date: 2024
+  parent: {type: proceedings, title: "Proc. 7th Conf. Machine Learning and Systems (MLSys)"}
+  serial-number: {arxiv: "2306.00978"}
+  url: "https://arxiv.org/abs/2306.00978"
+qwen3:
+  type: report
+  title: "Qwen3 technical report"
+  author: {name: "Qwen Team"}
+  date: 2025
+  serial-number: {arxiv: "2505.09388"}
+  url: "https://arxiv.org/abs/2505.09388"
+qwen3-card:
+  type: web
+  title: "Qwen3-32B: Best practices"
+  author: {name: "Qwen Team"}
+  parent: {type: web, title: "Hugging Face Model Card"}
+  url: {value: "https://huggingface.co/Qwen/Qwen3-32B", date: 2026-10-01}
+krippendorff:
+  type: book
+  title: "Content Analysis: An Introduction to Its Methodology"
+  author: "Krippendorff, Klaus"
+  edition: 4
+  publisher: {name: "SAGE Publications", location: "Thousand Oaks, CA, USA"}
+  date: 2018
+
+# ---------- Anforderungen, Architektur, Tests ----------
+nygard:
+  type: web
+  title: "Documenting architecture decisions"
+  author: "Nygard, Michael"
+  parent: {type: web, title: "Cognitect Blog"}
+  date: 2011-11-15
+  url: {value: "https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions", date: 2026-10-01}
+madr:
+  type: web
+  title: "MADR: Markdown Architectural Decision Records"
+  author: {name: "ADR GitHub Organization"}
+  url: {value: "https://adr.github.io/madr/", date: 2026-10-01}
+speckit:
+  type: web
+  title: "Spec Kit: Toolkit for spec-driven development"
+  author: {name: "GitHub"}
+  parent: {type: web, title: "GitHub repository"}
+  url: {value: "https://github.com/github/spec-kit", date: 2026-10-01}
+kiro:
+  type: web
+  title: "Specs"
+  author: {name: "Kiro"}
+  parent: {type: web, title: "Kiro Docs"}
+  url: {value: "https://kiro.dev/docs/specs/", date: 2026-10-01}
+rfc9457:
+  type: report
+  title: "Problem Details for HTTP APIs"
+  author: ["Nottingham, Mark", "Wilde, Erik", "Dalal, Sanjay"]
+  organization: "Internet Engineering Task Force (IETF)"
+  serial-number: "RFC 9457"
+  date: 2023-07
+  url: "https://www.rfc-editor.org/info/rfc9457"
+c4:
+  type: web
+  title: "The C4 model for visualising software architecture"
+  author: "Brown, Simon"
+  url: {value: "https://c4model.com", date: 2026-10-01}
+jia-harman:
+  type: article
+  title: "An analysis and survey of the development of mutation testing"
+  author: ["Jia, Yue", "Harman, Mark"]
+  date: 2011-09
+  parent: {type: periodical, title: "IEEE Transactions on Software Engineering", volume: 37, issue: 5}
+  page-range: "649-678"
+  serial-number: {doi: "10.1109/TSE.2010.62"}
+foster-meta:
+  type: article
+  title: "Mutation-guided LLM-based test generation at Meta"
+  author: ["Foster, Christopher", "Gulati, Abhishek", "Harman, Mark", "Harper, Inna", "Mao, Ke", "Ritchey, Jillian", "Robert, Hervé", "Sengupta, Shubho"]
+  date: 2025
+  parent: {type: proceedings, title: "Proc. ACM Int. Conf. Foundations of Software Engineering (FSE), Industry Track"}
+  serial-number: {arxiv: "2501.12862"}
+  url: "https://arxiv.org/abs/2501.12862"
+mutmut:
+  type: web
+  title: "mutmut: Python mutation testing system"
+  author: {name: "boxed"}
+  parent: {type: web, title: "GitHub repository"}
+  url: {value: "https://github.com/boxed/mutmut", date: 2026-10-01}
+import-linter:
+  type: web
+  title: "Import Linter"
+  author: {name: "Import Linter contributors"}
+  url: {value: "https://import-linter.readthedocs.io", date: 2026-10-01}
+pytest-markers:
+  type: web
+  title: "How to mark test functions with attributes"
+  author: {name: "pytest development team"}
+  parent: {type: web, title: "pytest Documentation"}
+  url: {value: "https://docs.pytest.org/en/stable/how-to/mark.html", date: 2026-10-01}
+ruff:
+  type: web
+  title: "Ruff"
+  author: {name: "Astral"}
+  url: {value: "https://docs.astral.sh/ruff/", date: 2026-10-01}
+uv:
+  type: web
+  title: "uv"
+  author: {name: "Astral"}
+  url: {value: "https://docs.astral.sh/uv/", date: 2026-10-01}
+mypy:
+  type: web
+  title: "Mypy documentation"
+  author: {name: "Mypy contributors"}
+  url: {value: "https://mypy.readthedocs.io/en/stable/", date: 2026-10-01}
+pip-audit:
+  type: web
+  title: "pip-audit: Audit Python environments and dependency trees for known vulnerabilities"
+  author: {name: "Python Packaging Authority"}
+  parent: {type: web, title: "GitHub repository"}
+  url: {value: "https://github.com/pypa/pip-audit", date: 2026-10-01}
+locust:
+  type: web
+  title: "Locust documentation"
+  author: {name: "Locust contributors"}
+  url: {value: "https://docs.locust.io/en/stable/", date: 2026-10-01}
+git-worktree:
+  type: web
+  title: "git-worktree: Manage multiple working trees"
+  author: {name: "Git development community"}
+  parent: {type: web, title: "Git Documentation"}
+  url: {value: "https://git-scm.com/docs/git-worktree", date: 2026-10-01}
+
+# ---------- Lokale Modelle ----------
+safetensors:
+  type: web
+  title: "Safetensors"
+  author: {name: "Hugging Face"}
+  parent: {type: web, title: "Hugging Face Documentation"}
+  url: {value: "https://huggingface.co/docs/safetensors/index", date: 2026-10-01}
+gguf:
+  type: web
+  title: "GGUF"
+  author: {name: "Hugging Face"}
+  parent: {type: web, title: "Hugging Face Hub Documentation"}
+  url: {value: "https://huggingface.co/docs/hub/gguf", date: 2026-10-01}
+llamacpp:
+  type: web
+  title: "llama.cpp: LLM inference in C/C++"
+  author: {name: "ggml-org"}
+  parent: {type: web, title: "GitHub repository"}
+  url: {value: "https://github.com/ggml-org/llama.cpp", date: 2026-10-01}
+mlx-lm:
+  type: web
+  title: "MLX LM: Run LLMs with MLX"
+  author: {name: "ml-explore"}
+  parent: {type: web, title: "GitHub repository"}
+  url: {value: "https://github.com/ml-explore/mlx-lm", date: 2026-10-01}
+ollama-faq:
+  type: web
+  title: "FAQ"
+  author: {name: "Ollama"}
+  parent: {type: web, title: "Ollama Docs"}
+  url: {value: "https://docs.ollama.com/faq", date: 2026-10-01}
+ollama-mlx:
+  type: web
+  title: "Ollama is now powered by MLX on Apple Silicon in preview"
+  author: {name: "Ollama"}
+  parent: {type: web, title: "Ollama Blog"}
+  date: 2026-03-30
+  url: {value: "https://ollama.com/blog/mlx", date: 2026-10-01}
+lmstudio-mlx:
+  type: web
+  title: "LM Studio 0.3.4 ships with Apple MLX"
+  author: {name: "LM Studio"}
+  url: {value: "https://lmstudio.ai/mlx", date: 2026-10-01}
+lmstudio-claude:
+  type: web
+  title: "Claude Code"
+  author: {name: "LM Studio"}
+  parent: {type: web, title: "LM Studio Docs: Integrations"}
+  url: {value: "https://lmstudio.ai/docs/integrations/claude-code", date: 2026-10-01}
+terminalbytes:
+  type: web
+  title: "Ollama vs llama.cpp vs MLX on a Mac Studio, measured"
+  author: {name: "TerminalBytes"}
+  date: 2026-09-20
+  url: {value: "https://terminalbytes.com/ollama-vs-llama-cpp-vs-mlx-mac-2026/", date: 2026-10-01}
+
+# ---------- Begleitbände ----------
+buch-git:
+  type: book
+  title: "Git von Grund auf"
+  author: "Haindl, Philipp"
+  publisher: "Persönliches Handbuch, unveröffentlicht"
+  date: 2026-09
+buch-api:
+  type: book
+  title: "Secure API Design mit Python"
+  author: "Haindl, Philipp"
+  publisher: "Persönliches Handbuch, unveröffentlicht"
+  date: 2026-09
+buch-docker:
+  type: book
+  title: "Docker von Grund auf"
+  author: "Haindl, Philipp"
+  publisher: "Persönliches Handbuch, unveröffentlicht"
+  date: 2026-09

@@ -2,16 +2,16 @@
 
 = Das mentale Modell
 
-Git wirkt kompliziert, weil es über 150 Befehle mit unzähligen Optionen hat. Der Kern ist aber erstaunlich klein: eine Datenbank aus unveränderlichen Schnappschüssen, die zu einem Graphen verkettet sind, plus ein paar verschiebbare Namensschilder, die auf Punkte in diesem Graphen zeigen. Wer diese drei Dinge verstanden hat (Schnappschüsse, Graph, Namensschilder), kann fast jeden Befehl selbst herleiten.
+Git wirkt kompliziert, weil es über 150 Befehle mit unzähligen Optionen hat @git-scm-com-docs-git. Der Kern ist aber erstaunlich klein: eine Datenbank aus unveränderlichen Schnappschüssen, die zu einem Graphen verkettet sind, plus ein paar verschiebbare Namensschilder, die auf Punkte in diesem Graphen zeigen. Wer diese drei Dinge verstanden hat (Schnappschüsse, Graph, Namensschilder), kann fast jeden Befehl selbst herleiten.
 
 == Schnappschüsse statt Änderungen
 
-Viele ältere Versionsverwaltungen speichern pro Version die Änderungen gegenüber der Vorversion. Git speichert dagegen bei jedem Commit *den vollständigen Zustand aller Dateien* des Projekts. Das klingt verschwenderisch, ist es aber nicht: Unveränderte Dateien werden nicht neu abgelegt, sondern der neue Schnappschuss verweist auf die bereits vorhandene Version. Eine Änderungsansicht (ein _Diff_) berechnet Git erst dann, wenn du sie anforderst, indem es zwei Schnappschüsse vergleicht.
+Viele ältere Versionsverwaltungen speichern pro Version die Änderungen gegenüber der Vorversion. Git speichert dagegen bei jedem Commit *den vollständigen Zustand aller Dateien* des Projekts @git-scm-com-book-en-v2-getting-started-what-is-git-3f. Das klingt verschwenderisch, ist es aber nicht: Unveränderte Dateien werden nicht neu abgelegt, sondern der neue Schnappschuss verweist auf die bereits vorhandene Version @git-scm-com-book-en-v2-getting-started-what-is-git-3f. Eine Änderungsansicht (ein _Diff_) berechnet Git erst dann, wenn du sie anforderst, indem es zwei Schnappschüsse vergleicht.
 
 Daraus folgen zwei Eigenschaften, die später immer wieder wichtig werden:
 
-+ *Commits sind unveränderlich.* Ein Commit wird über eine Prüfsumme seines Inhalts identifiziert. Ändert man auch nur ein Zeichen der Nachricht, entsteht ein neuer Commit mit neuer Prüfsumme. "Einen Commit ändern" heißt in Git immer: einen neuen, korrigierten Commit erzeugen und den alten links liegen lassen.
-+ *Nichts geht leicht verloren.* Was einmal committet wurde, bleibt in der Objektdatenbank, auch wenn kein Branch mehr darauf zeigt. Erst nach Wochen räumt Git solche verwaisten Objekte automatisch weg. Das ist die Grundlage aller Rettungsaktionen in Kapitel 9.
++ *Commits sind unveränderlich.* Ein Commit wird über eine Prüfsumme seines Inhalts identifiziert @git-scm-com-book-en-v2-git-internals-git-objects. Ändert man auch nur ein Zeichen der Nachricht, entsteht ein neuer Commit mit neuer Prüfsumme. "Einen Commit ändern" heißt in Git immer: einen neuen, korrigierten Commit erzeugen und den alten links liegen lassen.
++ *Nichts geht leicht verloren.* Was einmal committet wurde, bleibt in der Objektdatenbank, auch wenn kein Branch mehr darauf zeigt. Erst nach Wochen räumt Git solche verwaisten Objekte automatisch weg @git-scm-com-docs-git-gc. Das ist die Grundlage aller Rettungsaktionen in Kapitel 9.
 
 == Die drei Bereiche
 
@@ -35,24 +35,24 @@ Wenn du an einem Git-Projekt arbeitest, gibt es drei Orte, an denen eine Datei i
   caption: [Die drei Bereiche und die Befehle, die Inhalte zwischen ihnen bewegen.],
 )
 
-- Das *Arbeitsverzeichnis* (_working tree_) ist der normale Projektordner mit den Dateien, die du im Editor öffnest.
-- Der *Index* (_staging area_) ist ein Zwischenbereich. Er enthält den Stand, der beim nächsten `git commit` festgeschrieben wird. Mit `git add` kopierst du den aktuellen Inhalt einer Datei in den Index. Änderst du die Datei danach noch einmal, liegt im Index weiterhin die ältere Fassung, bis du erneut `git add` ausführst.
-- Das *Repository* ist der versteckte Ordner `.git` im Projektverzeichnis. Dort liegen alle Commits, Branches und Einstellungen. Löschst du `.git`, ist das Projekt kein Git-Projekt mehr, die Dateien im Arbeitsverzeichnis bleiben aber erhalten.
+- Das *Arbeitsverzeichnis* (_working tree_) ist der normale Projektordner mit den Dateien, die du im Editor öffnest @git-scm-com-docs-gitglossary.
+- Der *Index* (_staging area_) ist ein Zwischenbereich. Er enthält den Stand, der beim nächsten `git commit` festgeschrieben wird @git-scm-com-book-en-v2-getting-started-what-is-git-3f. Mit `git add` kopierst du den aktuellen Inhalt einer Datei in den Index. Änderst du die Datei danach noch einmal, liegt im Index weiterhin die ältere Fassung, bis du erneut `git add` ausführst @git-scm-com-docs-git-add.
+- Das *Repository* ist der versteckte Ordner `.git` im Projektverzeichnis. Dort liegen alle Commits, Branches und Einstellungen @git-scm-com-book-en-v2-getting-started-what-is-git-3f. Löschst du `.git`, ist das Projekt kein Git-Projekt mehr, die Dateien im Arbeitsverzeichnis bleiben aber erhalten.
 
 Der Index erscheint anfangs überflüssig, ist aber eines der nützlichsten Werkzeuge: Er erlaubt, aus einem Durcheinander von Änderungen gezielt nur einen Teil zu committen, etwa den Bugfix, aber nicht die Debug-Ausgaben daneben (siehe `git add -p` in Kapitel 3).
 
-#merke[`git status` zeigt dir jederzeit die Unterschiede zwischen diesen drei Bereichen: _Changes to be committed_ sind Unterschiede zwischen Index und letztem Commit, _Changes not staged for commit_ sind Unterschiede zwischen Arbeitsverzeichnis und Index, _Untracked files_ sind Dateien, die Git noch nie im Index hatte.]
+#merke[`git status` zeigt dir jederzeit die Unterschiede zwischen diesen drei Bereichen: _Changes to be committed_ sind Unterschiede zwischen Index und letztem Commit, _Changes not staged for commit_ sind Unterschiede zwischen Arbeitsverzeichnis und Index, _Untracked files_ sind Dateien, die Git noch nie im Index hatte @git-scm-com-docs-git-status.]
 
 == Das Objektmodell
 
-Im Ordner `.git/objects` speichert Git vier Arten von Objekten. Jedes wird über den SHA-1-Hash seines Inhalts adressiert, eine 40-stellige Hexadezimalzahl wie `3f2a9c1e...`. Meist reichen die ersten sieben Zeichen, um ein Objekt eindeutig anzusprechen.
+Im Ordner `.git/objects` speichert Git vier Arten von Objekten. Jedes wird über den SHA-1-Hash seines Inhalts adressiert, eine 40-stellige Hexadezimalzahl wie `3f2a9c1e...` @git-scm-com-book-en-v2-git-internals-git-objects @git-scm-com-book-en-v2-getting-started-what-is-git-3f. Meist reichen die ersten sieben Zeichen, um ein Objekt eindeutig anzusprechen @git-scm-com-book-en-v2-git-tools-revision-selection.
 
 #table(columns: (auto, 1fr),
   [Objekt], [Inhalt],
-  [*blob*], [Der Inhalt einer Datei, ohne Namen und ohne Rechte. Zwei Dateien mit identischem Inhalt teilen sich einen Blob.],
-  [*tree*], [Ein Verzeichnis: eine Liste von Namen, Dateirechten und Verweisen auf Blobs (Dateien) oder weitere Trees (Unterordner).],
-  [*commit*], [Ein Verweis auf den Wurzel-Tree des Projekts, dazu die Elterncommits, Autor, Committer, Zeitstempel und die Nachricht.],
-  [*tag*], [Ein annotierter Tag: Verweis auf einen Commit plus Name, Autor, Datum und Nachricht (siehe Kapitel 11).],
+  [*blob*], [Der Inhalt einer Datei, ohne Namen und ohne Rechte. Zwei Dateien mit identischem Inhalt teilen sich einen Blob @git-scm-com-book-en-v2-git-internals-git-objects.],
+  [*tree*], [Ein Verzeichnis: eine Liste von Namen, Dateirechten und Verweisen auf Blobs (Dateien) oder weitere Trees (Unterordner) @git-scm-com-book-en-v2-git-internals-git-objects.],
+  [*commit*], [Ein Verweis auf den Wurzel-Tree des Projekts, dazu die Elterncommits, Autor, Committer, Zeitstempel und die Nachricht @git-scm-com-book-en-v2-git-internals-git-objects.],
+  [*tag*], [Ein annotierter Tag: Verweis auf einen Commit plus Name, Autor, Datum und Nachricht (siehe Kapitel 11) @git-scm-com-docs-gitglossary.],
 )
 
 #figure(
@@ -93,13 +93,13 @@ committer Philipp Haindl <philipp@example.com> 1790251200 +0200
 Login-Formular
 ```
 
-Weil der Hash eines Commits über Tree, Eltern, Autor, Zeit und Nachricht berechnet wird, hängt er indirekt von der gesamten Vorgeschichte ab. Ändert sich ein früherer Commit, ändern sich zwangsläufig die Hashes aller späteren. Genau deshalb bekommen beim Rebase oder beim Ändern einer alten Commit-Nachricht alle nachfolgenden Commits neue Hashes.
+Weil der Hash eines Commits über Tree, Eltern, Autor, Zeit und Nachricht berechnet wird, hängt er indirekt von der gesamten Vorgeschichte ab @git-scm-com-book-en-v2-git-internals-git-objects. Ändert sich ein früherer Commit, ändern sich zwangsläufig die Hashes aller späteren. Genau deshalb bekommen beim Rebase oder beim Ändern einer alten Commit-Nachricht alle nachfolgenden Commits neue Hashes @git-scm-com-book-en-v2-git-tools-rewriting-history.
 
-#tipp[Git 3.0, das für Ende 2026 erwartet wird, stellt neue Repositories standardmäßig auf SHA-256 um (64 statt 40 Hex-Zeichen) und nennt den Standard-Branch `main` statt `master`. Bestehende Repositories funktionieren unverändert weiter. Für das Verständnis ändert sich nichts.]
+#tipp[Git 3.0, für das noch kein Veröffentlichungstermin feststeht, soll neue Repositories standardmäßig auf SHA-256 umstellen (64 statt 40 Hex-Zeichen) und den Standard-Branch `main` statt `master` nennen @git-scm-com-docs-breakingchanges. Bestehende Repositories funktionieren unverändert weiter. Für das Verständnis ändert sich nichts.]
 
 == Der Commit-Graph
 
-Jeder Commit (außer dem allerersten) verweist auf mindestens einen Elterncommit. Ein gewöhnlicher Commit hat genau ein Elternteil, ein Merge-Commit hat zwei (selten mehr). So entsteht ein gerichteter, azyklischer Graph (_DAG_): Man kann immer nur rückwärts in die Vergangenheit laufen, nie im Kreis.
+Jeder Commit (außer dem allerersten) verweist auf mindestens einen Elterncommit. Ein gewöhnlicher Commit hat genau ein Elternteil, ein Merge-Commit hat zwei (selten mehr) @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell. So entsteht ein gerichteter, azyklischer Graph (_DAG_) @git-scm-com-docs-gitglossary: Man kann immer nur rückwärts in die Vergangenheit laufen, nie im Kreis.
 
 #figure(
   gitgraph(
@@ -110,13 +110,13 @@ Jeder Commit (außer dem allerersten) verweist auf mindestens einen Elterncommit
   caption: [Ein Graph mit Verzweigung. `M` ist ein Merge-Commit mit den Eltern `C` und `E`.],
 )
 
-Ein wichtiger Begriff ist die *Erreichbarkeit*: Ein Commit gehört "zu einem Branch", wenn man ihn vom Branch-Ende aus entlang der Pfeile erreichen kann. In der Abbildung sind von `M` aus alle Commits erreichbar. Diese Idee steckt hinter Fragen wie "Ist mein Feature schon in `main`?" (`git branch --merged`) oder "Welche Commits hat `feature`, die `main` noch nicht hat?" (`git log main..feature`, Kapitel 11).
+Ein wichtiger Begriff ist die *Erreichbarkeit*: Ein Commit gehört "zu einem Branch", wenn man ihn vom Branch-Ende aus entlang der Pfeile erreichen kann @git-scm-com-docs-gitglossary. In der Abbildung sind von `M` aus alle Commits erreichbar. Diese Idee steckt hinter Fragen wie "Ist mein Feature schon in `main`?" (`git branch --merged` @git-scm-com-docs-git-branch) oder "Welche Commits hat `feature`, die `main` noch nicht hat?" (`git log main..feature`, Kapitel 11 @git-scm-com-docs-gitrevisions).
 
 == Branches sind nur Zeiger
 
-Ein Branch ist in Git kein Ordner und keine Kopie, sondern *eine Datei, die einen einzigen Commit-Hash enthält*. Der Branch `main` ist die Datei `.git/refs/heads/main` mit 41 Bytes Inhalt. Einen Branch anzulegen kostet deshalb praktisch nichts, und es ist völlig normal, Dutzende davon zu haben.
+Ein Branch ist in Git kein Ordner und keine Kopie, sondern *eine Datei, die einen einzigen Commit-Hash enthält*. Der Branch `main` ist die Datei `.git/refs/heads/main` mit 41 Bytes Inhalt @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell @git-scm-com-book-en-v2-git-internals-git-references. Einen Branch anzulegen kostet deshalb praktisch nichts, und es ist völlig normal, Dutzende davon zu haben.
 
-Woher weiß Git, auf welchem Branch du gerade arbeitest? Dafür gibt es `HEAD`, eine weitere kleine Datei (`.git/HEAD`), die normalerweise nicht auf einen Commit, sondern auf einen Branch verweist:
+Woher weiß Git, auf welchem Branch du gerade arbeitest? Dafür gibt es `HEAD`, eine weitere kleine Datei (`.git/HEAD`), die normalerweise nicht auf einen Commit, sondern auf einen Branch verweist @git-scm-com-book-en-v2-git-internals-git-references:
 
 ```bash
 cat .git/HEAD
@@ -127,7 +127,7 @@ ref: refs/heads/main
 3f2a9c1e0b8d4f6a7c2e9b1d0a5f8e3c7b6d4a21
 ```
 
-Beim Committen passiert Folgendes: Git erzeugt aus dem Index einen neuen Commit, dessen Elternteil der bisherige Commit von `HEAD` ist, und schiebt dann den Branch, auf den `HEAD` zeigt, auf den neuen Commit weiter. `HEAD` selbst bewegt sich dabei nicht, denn er zeigt ja auf den Branch, und der Branch wandert mit.
+Beim Committen passiert Folgendes: Git erzeugt aus dem Index einen neuen Commit, dessen Elternteil der bisherige Commit von `HEAD` ist, und schiebt dann den Branch, auf den `HEAD` zeigt, auf den neuen Commit weiter @git-scm-com-book-en-v2-git-internals-git-references @git-scm-com-book-en-v2-git-branching-branches-in-a-nutshell. `HEAD` selbst bewegt sich dabei nicht, denn er zeigt ja auf den Branch, und der Branch wandert mit.
 
 #figure(
   vorher-nachher(

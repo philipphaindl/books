@@ -2,11 +2,11 @@
 
 = Rebase im Detail
 
-Rebase ist das mächtigste Werkzeug, um Historie zu gestalten, und gleichzeitig das, vor dem am häufigsten gewarnt wird. Beides hat denselben Grund: Rebase erzeugt neue Commits und verwirft die alten. Wer versteht, was dabei genau passiert, kann es gezielt und gefahrlos einsetzen.
+Rebase ist das mächtigste Werkzeug, um Historie zu gestalten, und gleichzeitig das, vor dem am häufigsten gewarnt wird. Beides hat denselben Grund: Rebase erzeugt neue Commits und verwirft die alten @git-scm-com-book-en-v2-git-branching-rebasing. Wer versteht, was dabei genau passiert, kann es gezielt und gefahrlos einsetzen.
 
 == Was Rebase tut
 
-`git rebase main` (ausgeführt auf `feature`) bedeutet: "Nimm alle Commits, die `feature` hat und `main` nicht, und spiele sie der Reihe nach auf dem aktuellen Ende von `main` neu ab." Git berechnet dafür für jeden Commit den Diff zu seinem Elternteil, wendet ihn auf der neuen Basis an und erzeugt einen neuen Commit mit gleicher Nachricht und gleichem Autor, aber neuem Elternteil und damit *neuem Hash*.
+`git rebase main` (ausgeführt auf `feature`) bedeutet: "Nimm alle Commits, die `feature` hat und `main` nicht, und spiele sie der Reihe nach auf dem aktuellen Ende von `main` neu ab." Git berechnet dafür für jeden Commit den Diff zu seinem Elternteil, wendet ihn auf der neuen Basis an und erzeugt einen neuen Commit mit gleicher Nachricht und gleichem Autor, aber neuem Elternteil und damit *neuem Hash* @git-scm-com-docs-git-rebase @git-scm-com-book-en-v2-git-branching-rebasing.
 
 ```bash
 git switch feature
@@ -25,21 +25,21 @@ git rebase main
   caption: [`C` und `D` werden als neue Commits `C'` und `D'` auf `E` gesetzt. Die Originale bleiben unerreichbar zurück.],
 )
 
-Danach kann `main` per Fast-Forward nachgezogen werden, die Historie ist linear. Die ursprünglichen Commits `C` und `D` existieren noch (über das Reflog auffindbar), gehören aber zu keinem Branch mehr.
+Danach kann `main` per Fast-Forward nachgezogen werden, die Historie ist linear. Die ursprünglichen Commits `C` und `D` existieren noch (über das Reflog auffindbar), gehören aber zu keinem Branch mehr @git-scm-com-docs-git-reflog.
 
 == Die goldene Regel
 
-#achtung[*Rebase keine Commits, auf denen andere bereits aufbauen.* Wer deine alten Commits `C` und `D` schon geholt hat und darauf weiterarbeitet, hat nach deinem Rebase eine Historie, die nicht mehr zu deiner passt. Das Ergebnis sind doppelte Commits und verwirrende Konflikte.]
+#achtung[*Rebase keine Commits, auf denen andere bereits aufbauen.* Wer deine alten Commits `C` und `D` schon geholt hat und darauf weiterarbeitet, hat nach deinem Rebase eine Historie, die nicht mehr zu deiner passt. Das Ergebnis sind doppelte Commits und verwirrende Konflikte @git-scm-com-book-en-v2-git-branching-rebasing @git-scm-com-docs-git-rebase.]
 
 In der Praxis heißt das:
 
 - Eigene, noch nicht gepushte Commits darfst du beliebig umbauen.
-- Einen eigenen Feature-Branch, den du nur für den Pull Request gepusht hast, darfst du ebenfalls umbauen. Danach ist ein `git push --force-with-lease` nötig (Kapitel 8). Arbeitet jemand anderes auf demselben Branch mit, sprich das vorher ab.
-- Gemeinsame Branches wie `main` werden nie umgeschrieben. Gitea verhindert das zusätzlich über Branch-Schutzregeln (Kapitel 12).
+- Einen eigenen Feature-Branch, den du nur für den Pull Request gepusht hast, darfst du ebenfalls umbauen. Danach ist ein `git push --force-with-lease` nötig @git-scm-com-docs-git-push (Kapitel 8). Arbeitet jemand anderes auf demselben Branch mit, sprich das vorher ab.
+- Gemeinsame Branches wie `main` werden nie umgeschrieben. Gitea verhindert das zusätzlich über Branch-Schutzregeln @docs-gitea-com-usage-access-control-protected-branches (Kapitel 12).
 
 == Interaktiver Rebase
 
-Mit `-i` (_interactive_) zeigt Git vor dem Abspielen eine Liste der betroffenen Commits im Editor. Durch Bearbeiten dieser Liste bestimmst du, was mit jedem Commit geschieht:
+Mit `-i` (_interactive_) zeigt Git vor dem Abspielen eine Liste der betroffenen Commits im Editor @git-scm-com-docs-git-rebase @git-scm-com-book-en-v2-git-tools-rewriting-history. Durch Bearbeiten dieser Liste bestimmst du, was mit jedem Commit geschieht:
 
 ```bash
 git rebase -i HEAD~4       # die letzten vier Commits bearbeiten
@@ -60,7 +60,7 @@ pick e5f6b72 Tests für Login
 ```
 ]
 
-#merke[Die Liste steht in *chronologischer Reihenfolge*, der älteste Commit oben. Das ist genau umgekehrt zu `git log`, das den neuesten zuerst zeigt.]
+#merke[Die Liste steht in *chronologischer Reihenfolge*, der älteste Commit oben. Das ist genau umgekehrt zu `git log`, das den neuesten zuerst zeigt @git-scm-com-docs-git-rebase @git-scm-com-book-en-v2-git-tools-rewriting-history.]
 
 #table(columns: (auto, auto, 1fr),
   [Befehl], [Kurz], [Wirkung],
@@ -69,8 +69,8 @@ pick e5f6b72 Tests für Login
   [`edit`], [`e`], [Nach diesem Commit anhalten, um ihn zu verändern (Dateien, Aufteilen). Weiter mit `git rebase --continue`.],
   [`squash`], [`s`], [Mit dem vorherigen Commit verschmelzen, beide Nachrichten im Editor zusammenführen.],
   [`fixup`], [`f`], [Mit dem vorherigen Commit verschmelzen, die eigene Nachricht verwerfen.],
-  [`fixup -C`], [], [Verschmelzen und stattdessen die Nachricht *dieses* Commits verwenden.],
-  [`drop`], [`d`], [Commit weglassen (eine Zeile zu löschen wirkt genauso).],
+  [`fixup -C`], [], [Verschmelzen und stattdessen die Nachricht *dieses* Commits verwenden @git-scm-com-docs-git-rebase.],
+  [`drop`], [`d`], [Commit weglassen (eine Zeile zu löschen wirkt genauso) @git-scm-com-docs-git-rebase @git-scm-com-book-en-v2-git-tools-rewriting-history.],
   [`exec`], [`x`], [Einen Shell-Befehl ausführen, z.B. `x make test` nach jedem Commit.],
   [`break`], [`b`], [An dieser Stelle anhalten, weiter mit `--continue`.],
 )
@@ -88,7 +88,7 @@ Nach dem Speichern und Schließen des Editors arbeitet Git die Liste ab. Aus vie
 
 == Der Fixup-Workflow
 
-Noch eleganter ist es, Korrekturen gleich beim Committen als solche zu markieren. Angenommen, du bemerkst einen Fehler in einem früheren Commit `3a1f2c0` deines Branches:
+Noch eleganter ist es, Korrekturen gleich beim Committen als solche zu markieren @git-scm-com-docs-git-commit @git-scm-com-docs-git-rebase. Angenommen, du bemerkst einen Fehler in einem früheren Commit `3a1f2c0` deines Branches:
 
 ```bash
 git add src/login.py
@@ -102,7 +102,7 @@ Du musst in der Liste nur noch speichern. Dieses Muster ist ideal für Review-An
 
 == Branches umhängen: `--onto`
 
-Manchmal baut ein Branch auf einem anderen auf, der inzwischen per Squash gemergt wurde. Ein einfaches `git rebase main` würde dann versuchen, auch die schon enthaltenen Commits erneut anzuwenden. Mit `--onto` sagst du Git genau, welche Commits es wohin setzen soll:
+Manchmal baut ein Branch auf einem anderen auf, der inzwischen per Squash gemergt wurde. Ein einfaches `git rebase main` würde dann versuchen, auch die schon enthaltenen Commits erneut anzuwenden. Mit `--onto` sagst du Git genau, welche Commits es wohin setzen soll @git-scm-com-docs-git-rebase @git-scm-com-book-en-v2-git-branching-rebasing:
 
 ```bash
 git rebase --onto main feature-1 feature-2
@@ -120,11 +120,11 @@ git rebase --onto main feature-1 feature-2
   caption: [`feature-1` wurde als Squash-Commit `S` gemergt. Nur `F` und `G` werden auf `main` übertragen.],
 )
 
-Arbeitest du mit mehreren aufeinander aufbauenden Branches (_stacked branches_), verschiebt die Einstellung `rebase.updateRefs = true` aus Kapitel 2 beim Rebase des obersten Branches automatisch alle darunterliegenden Branch-Zeiger mit.
+Arbeitest du mit mehreren aufeinander aufbauenden Branches (_stacked branches_), verschiebt die Einstellung `rebase.updateRefs = true` aus Kapitel 2 beim Rebase des obersten Branches automatisch alle darunterliegenden Branch-Zeiger mit @git-scm-com-docs-git-rebase.
 
 == Während eines Rebase
 
-Ein Rebase kann an jedem Commit anhalten: bei `edit`, `break` oder einem Konflikt. `git status` zeigt dann an, wo du stehst (_interactive rebase in progress; onto 5e1d2f3_), und der Prompt aus Kapitel 2 zeigt `rebase-i`.
+Ein Rebase kann an jedem Commit anhalten: bei `edit`, `break` oder einem Konflikt @git-scm-com-docs-git-rebase. `git status` zeigt dann an, wo du stehst (_interactive rebase in progress; onto 5e1d2f3_), und der Prompt aus Kapitel 2 zeigt `rebase-i`.
 
 #table(columns: (auto, 1fr),
   [Befehl], [Wirkung],
@@ -133,4 +133,4 @@ Ein Rebase kann an jedem Commit anhalten: bei `edit`, `break` oder einem Konflik
   [`git rebase --abort`], [Alles rückgängig machen, zurück zum Zustand vor dem Rebase.],
 )
 
-Weil ein Rebase Commit für Commit vorgeht, kann derselbe Konflikt in mehreren Commits hintereinander auftauchen. Das ist lästig, aber normal. Hier hilft `rerere`. Und falls das Ergebnis nach Abschluss doch nicht gefällt: Git merkt sich den Stand vor dem Rebase in `ORIG_HEAD`, `git reset --hard ORIG_HEAD` stellt ihn wieder her (solange du seitdem nichts anderes Größeres gemacht hast, sonst über das Reflog, Kapitel 9).
+Weil ein Rebase Commit für Commit vorgeht, kann derselbe Konflikt in mehreren Commits hintereinander auftauchen. Das ist lästig, aber normal. Hier hilft `rerere` @git-scm-com-docs-git-rerere. Und falls das Ergebnis nach Abschluss doch nicht gefällt: Git merkt sich den Stand vor dem Rebase in `ORIG_HEAD`, `git reset --hard ORIG_HEAD` stellt ihn wieder her @git-scm-com-docs-git-rebase (solange du seitdem nichts anderes Größeres gemacht hast, sonst über das Reflog, Kapitel 9).

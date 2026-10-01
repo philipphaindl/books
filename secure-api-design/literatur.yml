@@ -1,0 +1,1172 @@
+api-security-owasp-org-editions-2023-en-0x11-t10:
+  type: Web
+  title: OWASP Top 10 API Security Risks - 2023
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Project
+  date: '2023'
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0x11-t10
+    date: '2026-10-01'
+api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization:
+  type: Web
+  title: API1:2023 Broken Object Level Authorization
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Project
+  date: '2023'
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/
+    date: '2026-10-01'
+api-security-owasp-org-editions-2023-en-0xa2-broken-authentication:
+  type: Web
+  title: API2:2023 Broken Authentication
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Project
+  date: '2023'
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa2-broken-authentication/
+    date: '2026-10-01'
+api-security-owasp-org-editions-2023-en-0xa3-broken-object-property-level-authorization:
+  type: Web
+  title: API3:2023 Broken Object Property Level Authorization
+  author:
+  - name: OWASP API Security Project
+  publisher: OWASP API Security Top 10 (2023)
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa3-broken-object-property-level-authorization
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa4-unrestricted-resource-consumption:
+  type: Web
+  title: API4:2023 Unrestricted Resource Consumption
+  author:
+  - name: OWASP API Security Project
+  publisher: OWASP API Security Top 10 (2023)
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa5-broken-function-level-authorization:
+  type: Web
+  title: API5:2023 Broken Function Level Authorization
+  author:
+  - name: OWASP API Security Project
+  publisher: OWASP API Security Top 10 (2023)
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa5-broken-function-level-authorization
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa6-unrestricted-access-to-sensitive-business-flows:
+  type: Web
+  title: API6:2023 Unrestricted Access to Sensitive Business Flows
+  author:
+  - name: OWASP API Security Project
+  publisher: OWASP API Security Top 10 (2023)
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa6-unrestricted-access-to-sensitive-business-flows
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery:
+  type: Web
+  title: API7:2023 Server Side Request Forgery
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Top 10
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa7-server-side-request-forgery
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa8-security-misconfiguration:
+  type: Web
+  title: API8:2023 Security Misconfiguration
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Top 10
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa8-security-misconfiguration
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xa9-improper-inventory-management:
+  type: Web
+  title: API9:2023 Improper Inventory Management
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Top 10 (2023)
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xa9-improper-inventory-management
+    date: 2026-10-01
+api-security-owasp-org-editions-2023-en-0xaa-unsafe-consumption-of-apis:
+  type: Web
+  title: API10:2023 Unsafe Consumption of APIs
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP API Security Top 10
+  date: 2023
+  url:
+    value: https://api-security.owasp.org/editions/2023/en/0xaa-unsafe-consumption-of-apis
+    date: 2026-10-01
+aws-amazon-com-blogs-architecture-exponential-backoff-and-jitter:
+  type: Web
+  title: Exponential Backoff And Jitter
+  author:
+  - Brooker, Marc
+  publisher: AWS Architecture Blog
+  date: 2015-03-04
+  url:
+    value: https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+    date: 2026-10-01
+caddyserver-com-docs-automatic-https:
+  type: Web
+  title: Automatic HTTPS
+  author:
+  - name: Caddy
+  publisher: Caddy Documentation
+  url:
+    value: https://caddyserver.com/docs/automatic-https
+    date: 2026-10-01
+caddyserver-com-docs-caddyfile-directives-header:
+  type: Web
+  title: header (Caddyfile Directive)
+  author:
+  - name: Caddy
+  publisher: Caddy Documentation
+  url:
+    value: https://caddyserver.com/docs/caddyfile/directives/header
+    date: 2026-10-01
+caddyserver-com-docs-caddyfile-directives-request-body:
+  type: Web
+  title: request_body (Caddyfile directive)
+  author:
+  - name: Caddy
+  publisher: Caddy Documentation
+  url:
+    value: https://caddyserver.com/docs/caddyfile/directives/request_body
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-authorization-cheat-sheet-html:
+  type: Web
+  title: Authorization Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-cross-site-request-forgery-prevention-cheat-sheet-html:
+  type: Web
+  title: Cross-Site Request Forgery Prevention Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-cross-site-scripting-prevention-cheat-sheet-html:
+  type: Web
+  title: Cross Site Scripting Prevention Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-file-upload-cheat-sheet-html:
+  type: Web
+  title: File Upload Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-insecure-direct-object-reference-prevention-cheat-sheet-html:
+  type: Web
+  title: Insecure Direct Object Reference Prevention Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html:
+  type: Web
+  title: Logging Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-rest-security-cheat-sheet-html:
+  type: Web
+  title: REST Security Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-secrets-management-cheat-sheet-html:
+  type: Web
+  title: Secrets Management Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-server-side-request-forgery-prevention-cheat-sheet-html:
+  type: Web
+  title: Server-Side Request Forgery Prevention Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+    date: 2026-10-01
+cheatsheetseries-owasp-org-cheatsheets-sql-injection-prevention-cheat-sheet-html:
+  type: Web
+  title: SQL Injection Prevention Cheat Sheet
+  author:
+  - name: OWASP Foundation
+  publisher: OWASP Cheat Sheet Series
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    date: 2026-10-01
+cyclonedx-bom-tool-readthedocs-io-en-latest-usage-html:
+  type: Web
+  title: Usage
+  author:
+  - name: CycloneDX
+  publisher: CycloneDX Python SBOM Tool
+  url:
+    value: https://cyclonedx-bom-tool.readthedocs.io/en/latest/usage.html
+    date: 2026-10-01
+datatracker-ietf-org-doc-draft-ietf-httpapi-idempotency-key-header:
+  type: Report
+  title: The Idempotency-Key HTTP Header Field (Internet-Draft, abgelaufen)
+  author:
+  - Jena, Jayadeba
+  - Dalal, Sanjay
+  publisher: Internet Engineering Task Force (IETF)
+  serial-number: draft-ietf-httpapi-idempotency-key-header-07
+  date: 2025-10-15
+  url:
+    value: https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-guides-cors:
+  type: Web
+  title: Cross-Origin Resource Sharing (CORS)
+  author:
+  - name: MDN contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-cache-control:
+  type: Web
+  title: Cache-Control
+  author:
+  - name: MDN contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-content-disposition:
+  type: Web
+  title: Content-Disposition header
+  author:
+  - name: MDN Contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-content-security-policy-frame-ancestors:
+  type: Web
+  title: 'Content-Security-Policy: frame-ancestors'
+  author:
+  - name: MDN contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-set-cookie:
+  type: Web
+  title: Set-Cookie
+  author:
+  - name: MDN contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-strict-transport-security:
+  type: Web
+  title: Strict-Transport-Security
+  author:
+  - name: MDN contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-x-content-type-options:
+  type: Web
+  title: X-Content-Type-Options header
+  author:
+  - name: MDN Contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-http-reference-headers-x-forwarded-for:
+  type: Web
+  title: X-Forwarded-For header
+  author:
+  - name: MDN Contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Forwarded-For
+    date: 2026-10-01
+developer-mozilla-org-en-us-docs-web-svg-reference-element-script:
+  type: Web
+  title: <script> - SVG
+  author:
+  - name: MDN Contributors
+  publisher: MDN Web Docs
+  url:
+    value: https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/script
+    date: 2026-10-01
+docs-astral-sh-ruff-rules:
+  type: Web
+  title: Rules
+  author:
+  - name: Astral
+  publisher: Ruff Documentation
+  url:
+    value: https://docs.astral.sh/ruff/rules/
+    date: 2026-10-01
+docs-astral-sh-uv-concepts-projects-sync:
+  type: Web
+  title: Locking and syncing
+  author:
+  - name: Astral
+  publisher: uv Documentation
+  url:
+    value: https://docs.astral.sh/uv/concepts/projects/sync/
+    date: 2026-10-01
+docs-aws-amazon-com-amazons3-latest-userguide-using-presigned-url-html:
+  type: Web
+  title: Download and upload objects with presigned URLs
+  author:
+  - name: Amazon Web Services
+  publisher: Amazon S3 User Guide
+  url:
+    value: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html
+    date: 2026-10-01
+docs-aws-amazon-com-awsec2-latest-userguide-instancedata-data-retrieval:
+  type: Web
+  title: Access instance metadata for an EC2 instance
+  author:
+  - name: Amazon Web Services
+  publisher: Amazon EC2 User Guide
+  url:
+    value: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html
+    date: 2026-10-01
+docs-aws-amazon-com-prescriptive-guidance-latest-cloud-design-patterns-retry-backoff-html:
+  type: Web
+  title: Retry with backoff pattern
+  author:
+  - name: Amazon Web Services
+  publisher: AWS Prescriptive Guidance
+  url:
+    value: https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/retry-backoff.html
+    date: 2026-10-01
+docs-docker-com-build-building-best-practices:
+  type: Web
+  title: Building best practices
+  author:
+  - name: Docker Inc.
+  publisher: Docker Docs
+  url:
+    value: https://docs.docker.com/build/building/best-practices/
+    date: 2026-10-01
+docs-github-com-en-actions-reference-security-secure-use:
+  type: Web
+  title: Secure use reference
+  author:
+  - name: GitHub
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/actions/reference/security/secure-use
+    date: 2026-10-01
+docs-github-com-en-webhooks-using-webhooks-best-practices-for-using-webhooks:
+  type: Web
+  title: Best practices for using webhooks
+  author:
+  - name: GitHub
+  publisher: GitHub Docs
+  url:
+    value: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+    date: 2026-10-01
+docs-goauthentik-io:
+  type: Web
+  title: Welcome to authentik
+  author:
+  - name: authentik Security Inc.
+  publisher: authentik Documentation
+  url:
+    value: https://docs.goauthentik.io/
+    date: '2026-10-01'
+docs-goauthentik-io-add-secure-apps-providers-oauth2:
+  type: Web
+  title: OAuth 2.0 provider
+  author:
+  - name: authentik Security Inc.
+  publisher: authentik Documentation (Version 2026.8)
+  url:
+    value: https://docs.goauthentik.io/add-secure-apps/providers/oauth2/
+    date: '2026-10-01'
+docs-goauthentik-io-add-secure-apps-providers-oauth2-machine-to-machine:
+  type: Web
+  title: Machine-to-machine (M2M) authentication
+  author:
+  - name: authentik Security Inc.
+  publisher: authentik Documentation (Version 2026.8)
+  url:
+    value: https://docs.goauthentik.io/add-secure-apps/providers/oauth2/machine_to_machine
+    date: '2026-10-01'
+docs-goauthentik-io-add-secure-apps-providers-oauth2-token-exchange:
+  type: Web
+  title: Token exchange
+  author:
+  - name: authentik Security Inc.
+  publisher: authentik Documentation (Version 2026.8)
+  url:
+    value: https://docs.goauthentik.io/add-secure-apps/providers/oauth2/token_exchange/
+    date: '2026-10-01'
+docs-goauthentik-io-customize-policies-types-reputation:
+  type: Web
+  title: Reputation Policy
+  author:
+  - name: authentik
+  publisher: authentik Documentation
+  url:
+    value: https://docs.goauthentik.io/customize/policies/types/reputation/
+    date: 2026-10-01
+docs-goauthentik-io-releases-2024-2:
+  type: Web
+  title: Release 2024.2
+  author:
+  - name: authentik Security Inc.
+  publisher: authentik Documentation
+  date: 2024-02
+  url:
+    value: https://docs.goauthentik.io/releases/2024.2/
+    date: '2026-10-01'
+docs-sqlalchemy-org-en-20-tutorial-data-select:
+  type: Web
+  title: Using SELECT Statements
+  author:
+  - name: SQLAlchemy
+  publisher: SQLAlchemy 2.0 Documentation
+  url:
+    value: https://docs.sqlalchemy.org/en/20/tutorial/data_select.html
+    date: 2026-10-01
+docs-sqlalchemy-org-en-20-tutorial-dbapi-transactions:
+  type: Web
+  title: Working with Transactions and the DBAPI
+  author:
+  - name: SQLAlchemy
+  publisher: SQLAlchemy 2.0 Documentation
+  url:
+    value: https://docs.sqlalchemy.org/en/20/tutorial/dbapi_transactions.html
+    date: 2026-10-01
+docs-stripe-com-webhooks:
+  type: Web
+  title: Registrieren Sie Stripe-Ereignisse in Ihrem Webhook-Endpoint
+  author:
+  - name: Stripe
+  publisher: Stripe Documentation
+  url:
+    value: https://docs.stripe.com/webhooks
+    date: 2026-10-01
+fastapi-tiangolo-com-advanced-behind-a-proxy:
+  type: Web
+  title: Behind a Proxy
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/advanced/behind-a-proxy/
+    date: 2026-10-01
+fastapi-tiangolo-com-advanced-sub-applications:
+  type: Web
+  title: Sub Applications - Mounts
+  author:
+  - name: Ramírez, Sebastián
+  publisher: FastAPI
+  url:
+    value: https://fastapi.tiangolo.com/advanced/sub-applications/
+    date: 2026-10-01
+fastapi-tiangolo-com-advanced-testing-dependencies:
+  type: Web
+  title: Testing Dependencies with Overrides
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/advanced/testing-dependencies/
+    date: 2026-10-01
+fastapi-tiangolo-com-fastapi-cli:
+  type: Web
+  title: FastAPI CLI
+  author:
+  - name: FastAPI
+  publisher: FastAPI
+  url:
+    value: https://fastapi.tiangolo.com/fastapi-cli/
+    date: 2026-10-01
+fastapi-tiangolo-com-how-to-extending-openapi:
+  type: Web
+  title: Extending OpenAPI
+  author:
+  - name: Ramírez, Sebastián
+  publisher: FastAPI
+  url:
+    value: https://fastapi.tiangolo.com/how-to/extending-openapi/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-bigger-applications:
+  type: Web
+  title: Bigger Applications - Multiple Files
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/bigger-applications/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-cors:
+  type: Web
+  title: CORS (Cross-Origin Resource Sharing)
+  author:
+  - name: FastAPI
+  publisher: FastAPI
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/cors/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-dependencies-sub-dependencies:
+  type: Web
+  title: Sub-dependencies
+  author:
+  - name: FastAPI contributors
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/dependencies/sub-dependencies/
+    date: '2026-10-01'
+fastapi-tiangolo-com-tutorial-handling-errors:
+  type: Web
+  title: Handling Errors
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/handling-errors/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-metadata:
+  type: Web
+  title: Metadata and Docs URLs
+  author:
+  - name: FastAPI
+  publisher: FastAPI
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/metadata/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-path-params-numeric-validations:
+  type: Web
+  title: Path Parameters and Numeric Validations
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/
+    date: 2026-10-01
+fastapi-tiangolo-com-tutorial-response-model:
+  type: Web
+  title: Response Model - Return Type
+  author:
+  - name: FastAPI
+  publisher: FastAPI Documentation
+  url:
+    value: https://fastapi.tiangolo.com/tutorial/response-model/
+    date: 2026-10-01
+gdpr-info-eu-art-5-gdpr:
+  type: Web
+  title: 'Regulation (EU) 2016/679 (General Data Protection Regulation), Art. 5: Principles relating to processing of personal data'
+  author:
+  - name: European Parliament and Council of the European Union
+  publisher: gdpr-info.eu (inoffizielle Wiedergabe)
+  date: 2016-04-27
+  url:
+    value: https://gdpr-info.eu/art-5-gdpr/
+    date: 2026-10-01
+github-com-astral-sh-setup-uv:
+  type: Web
+  title: setup-uv
+  author:
+  - name: Astral
+  publisher: GitHub
+  url:
+    value: https://github.com/astral-sh/setup-uv
+    date: 2026-10-01
+github-com-goauthentik-authentik-issues-22070:
+  type: Web
+  title: 'Add Option to issue RFC9068 compliant access tokens (Issue #22070)'
+  author:
+  - name: goauthentik contributors
+  publisher: GitHub, goauthentik/authentik
+  date: '2026-05-05'
+  url:
+    value: https://github.com/goauthentik/authentik/issues/22070
+    date: '2026-10-01'
+martinfowler-com-bliki-circuitbreaker-html:
+  type: Web
+  title: Circuit Breaker
+  author:
+  - Fowler, Martin
+  publisher: martinfowler.com
+  date: 2014-03-06
+  url:
+    value: https://martinfowler.com/bliki/CircuitBreaker.html
+    date: 2026-10-01
+microservices-io-patterns-data-transactional-outbox-html:
+  type: Web
+  title: 'Pattern: Transactional outbox'
+  author:
+  - Richardson, Chris
+  publisher: Microservices.io
+  url:
+    value: https://microservices.io/patterns/data/transactional-outbox.html
+    date: 2026-10-01
+openid-net-specs-openid-connect-core-1-0-html:
+  type: Web
+  title: OpenID Connect Core 1.0 incorporating errata set 2
+  author:
+  - Sakimura, Nat
+  - Bradley, John
+  - Jones, Michael B.
+  - de Medeiros, Breno
+  - Mortimore, Chuck
+  publisher: OpenID Foundation
+  date: '2023-12-15'
+  url:
+    value: https://openid.net/specs/openid-connect-core-1_0.html
+    date: '2026-10-01'
+opentelemetry-io-docs-concepts-context-propagation:
+  type: Web
+  title: Context propagation
+  author:
+  - name: OpenTelemetry Authors
+  publisher: OpenTelemetry
+  url:
+    value: https://opentelemetry.io/docs/concepts/context-propagation/
+    date: 2026-10-01
+postgresql-org-docs-current-ddl-rowsecurity-html:
+  type: Web
+  title: Row Security Policies
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/ddl-rowsecurity.html
+    date: 2026-10-01
+postgresql-org-docs-current-index-unique-checks-html:
+  type: Web
+  title: Index Uniqueness Checks
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/index-unique-checks.html
+    date: 2026-10-01
+postgresql-org-docs-current-runtime-config-client-html:
+  type: Web
+  title: Client Connection Defaults
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/runtime-config-client.html
+    date: 2026-10-01
+postgresql-org-docs-current-sql-insert-html:
+  type: Web
+  title: INSERT
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/sql-insert.html
+    date: 2026-10-01
+postgresql-org-docs-current-sql-set-html:
+  type: Web
+  title: SET
+  author:
+  - name: PostgreSQL Global Development Group
+  publisher: PostgreSQL Documentation
+  url:
+    value: https://www.postgresql.org/docs/current/sql-set.html
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-api-pydantic-fields:
+  type: Web
+  title: Fields (API)
+  author:
+  - name: Pydantic
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/fields/
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-api-pydantic-networks:
+  type: Web
+  title: Network Types
+  author:
+  - name: Pydantic
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/networks/
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-api-pydantic-types:
+  type: Web
+  title: Pydantic Types
+  author:
+  - name: Pydantic
+  publisher: Pydantic Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/api/pydantic/types/
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-concepts-models:
+  type: Web
+  title: Models
+  author:
+  - name: Pydantic
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/concepts/models/
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-concepts-pydantic-settings:
+  type: Web
+  title: Settings Management
+  author:
+  - name: Pydantic
+  publisher: Pydantic Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/concepts/pydantic_settings/
+    date: 2026-10-01
+pydantic-dev-docs-validation-latest-concepts-strict-mode:
+  type: Web
+  title: Strict Mode
+  author:
+  - name: Pydantic
+  publisher: Pydantic Validation Documentation
+  url:
+    value: https://pydantic.dev/docs/validation/latest/concepts/strict_mode/
+    date: 2026-10-01
+pyjwt-readthedocs-io-en-stable-api-html:
+  type: Web
+  title: API Reference
+  author:
+  - name: PyJWT contributors
+  publisher: PyJWT Documentation
+  url:
+    value: https://pyjwt.readthedocs.io/en/stable/api.html
+    date: '2026-10-01'
+pyjwt-readthedocs-io-en-stable-usage-html:
+  type: Web
+  title: Usage Examples
+  author:
+  - name: PyJWT contributors
+  publisher: PyJWT Documentation
+  url:
+    value: https://pyjwt.readthedocs.io/en/stable/usage.html
+    date: '2026-10-01'
+pypi-org-project-pip-audit:
+  type: Web
+  title: pip-audit
+  author:
+  - name: Python Packaging Authority
+  publisher: Python Package Index (PyPI)
+  url:
+    value: https://pypi.org/project/pip-audit/
+    date: 2026-10-01
+rfc10017:
+  type: Report
+  title: OAuth 2.0 for Browser-Based Applications
+  author:
+  - Parecki, Aaron
+  - De Ryck, Philippe
+  - Waite, David
+  serial-number: RFC 10017
+  date: 2026-08
+  doi: 10.17487/RFC10017
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc10017
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc5829:
+  type: Report
+  title: Link Relation Types for Simple Version Navigation between Web Resources
+  author:
+  - Brown, Andy
+  - Clemm, Geoff
+  - Reschke, Julian
+  serial-number: RFC 5829
+  date: 2010-04
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc5829
+    date: 2026-10-01
+  publisher: Internet Engineering Task Force (IETF)
+rfc6585:
+  type: Report
+  title: Additional HTTP Status Codes
+  author:
+  - Nottingham, Mark
+  - Fielding, Roy
+  publisher: Internet Engineering Task Force (IETF)
+  serial-number: RFC 6585
+  date: 2012-04
+  doi: 10.17487/RFC6585
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc6585
+    date: 2026-10-01
+rfc6749:
+  type: Report
+  title: The OAuth 2.0 Authorization Framework
+  author:
+  - Hardt, Dick
+  serial-number: RFC 6749
+  date: 2012-10
+  doi: 10.17487/RFC6749
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc6749
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc6797:
+  type: Report
+  title: HTTP Strict Transport Security (HSTS)
+  author:
+  - Hodges, Jeff
+  - Jackson, Collin
+  - Barth, Adam
+  serial-number: RFC 6797
+  date: 2012-11
+  doi: 10.17487/RFC6797
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc6797
+    date: 2026-10-01
+  publisher: Internet Engineering Task Force (IETF)
+rfc7519:
+  type: Report
+  title: JSON Web Token (JWT)
+  author:
+  - Jones, Michael B.
+  - Bradley, John
+  - Sakimura, Nat
+  serial-number: RFC 7519
+  date: 2015-05
+  doi: 10.17487/RFC7519
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc7519
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc7636:
+  type: Report
+  title: Proof Key for Code Exchange by OAuth Public Clients
+  author:
+  - Sakimura, Nat
+  - Bradley, John
+  - Agarwal, Naveen
+  serial-number: RFC 7636
+  date: 2015-09
+  doi: 10.17487/RFC7636
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc7636
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc7662:
+  type: Report
+  title: OAuth 2.0 Token Introspection
+  author:
+  - Richer, Justin
+  serial-number: RFC 7662
+  date: 2015-10
+  doi: 10.17487/RFC7662
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc7662
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc8594:
+  type: Report
+  title: The Sunset HTTP Header Field
+  author:
+  - Wilde, Erik
+  serial-number: RFC 8594
+  date: 2019-05
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8594
+    date: 2026-10-01
+  publisher: Internet Engineering Task Force (IETF)
+rfc8628:
+  type: Report
+  title: OAuth 2.0 Device Authorization Grant
+  author:
+  - Denniss, William
+  - Bradley, John
+  - Jones, Michael B.
+  - Tschofenig, Hannes
+  serial-number: RFC 8628
+  date: 2019-08
+  doi: 10.17487/RFC8628
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8628
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc8693:
+  type: Report
+  title: OAuth 2.0 Token Exchange
+  author:
+  - Jones, Michael B.
+  - Nadalin, Anthony
+  - Campbell, Brian
+  - Bradley, John
+  - Mortimore, Chuck
+  serial-number: RFC 8693
+  date: 2020-01
+  doi: 10.17487/RFC8693
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8693
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc8705:
+  type: Report
+  title: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+  author:
+  - Campbell, Brian
+  - Bradley, John
+  - Sakimura, Nat
+  - Lodderstedt, Torsten
+  serial-number: RFC 8705
+  date: 2020-02
+  doi: 10.17487/RFC8705
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8705
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc8725:
+  type: Report
+  title: JSON Web Token Best Current Practices
+  author:
+  - Sheffer, Yaron
+  - Hardt, Dick
+  - Jones, Michael B.
+  serial-number: RFC 8725
+  date: 2020-02
+  doi: 10.17487/RFC8725
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc8725
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc9068:
+  type: Report
+  title: JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens
+  author:
+  - Bertocci, Vittorio
+  serial-number: RFC 9068
+  date: 2021-10
+  doi: 10.17487/RFC9068
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9068
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc9110:
+  type: Report
+  title: HTTP Semantics
+  author:
+  - Fielding, Roy T.
+  - Nottingham, Mark
+  - Reschke, Julian
+  publisher: Internet Engineering Task Force (IETF)
+  serial-number: RFC 9110
+  date: 2022-06
+  doi: 10.17487/RFC9110
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9110
+    date: 2026-10-01
+rfc9449:
+  type: Report
+  title: OAuth 2.0 Demonstrating Proof of Possession (DPoP)
+  author:
+  - Fett, Daniel
+  - Campbell, Brian
+  - Bradley, John
+  - Lodderstedt, Torsten
+  - Jones, Michael B.
+  - Waite, David
+  serial-number: RFC 9449
+  date: 2023-09
+  doi: 10.17487/RFC9449
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9449
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc9457:
+  type: Report
+  title: Problem Details for HTTP APIs
+  author:
+  - Nottingham, Mark
+  - Wilde, Erik
+  - Dalal, Sanjay
+  serial-number: RFC 9457
+  date: 2023
+  doi: 10.17487/RFC9457
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9457
+    date: 2026-10-01
+  publisher: Internet Engineering Task Force (IETF)
+rfc9700:
+  type: Report
+  title: Best Current Practice for OAuth 2.0 Security
+  author:
+  - Lodderstedt, Torsten
+  - Bradley, John
+  - Labunets, Andrey
+  - Fett, Daniel
+  serial-number: RFC 9700
+  date: 2025-01
+  doi: 10.17487/RFC9700
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9700
+    date: '2026-10-01'
+  publisher: Internet Engineering Task Force (IETF)
+rfc9745:
+  type: Report
+  title: The Deprecation HTTP Response Header Field
+  author:
+  - Dalal, Sanjay
+  - Wilde, Erik
+  serial-number: RFC 9745
+  date: 2025
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9745
+    date: 2026-10-01
+  publisher: Internet Engineering Task Force (IETF)
+schemathesis-readthedocs-io-en-stable:
+  type: Web
+  title: Schemathesis Documentation
+  author:
+  - name: Schemathesis
+  publisher: Read the Docs
+  url:
+    value: https://schemathesis.readthedocs.io/en/stable/
+    date: 2026-10-01
+schemathesis-readthedocs-io-en-stable-reference-cli:
+  type: Web
+  title: Command-Line Interface
+  author:
+  - name: Schemathesis
+  publisher: Schemathesis Documentation
+  url:
+    value: https://schemathesis.readthedocs.io/en/stable/reference/cli/
+    date: 2026-10-01
+slowapi-readthedocs-io-en-latest:
+  type: Web
+  title: SlowApi
+  author:
+  - name: SlowApi
+  publisher: SlowApi Documentation
+  url:
+    value: https://slowapi.readthedocs.io/en/latest/
+    date: 2026-10-01
+slowapi-readthedocs-io-en-latest-api:
+  type: Web
+  title: API reference
+  author:
+  - name: SlowApi
+  publisher: SlowApi Documentation
+  url:
+    value: https://slowapi.readthedocs.io/en/latest/api/
+    date: 2026-10-01
+uvicorn-dev-settings:
+  type: Web
+  title: Settings
+  author:
+  - name: Uvicorn
+  publisher: Uvicorn
+  url:
+    value: https://uvicorn.dev/settings/
+    date: 2026-10-01
+www-oasdiff-com:
+  type: Web
+  title: oasdiff
+  author:
+  - name: oasdiff
+  publisher: oasdiff
+  url:
+    value: https://www.oasdiff.com/
+    date: 2026-10-01
+www-python-httpx-org-quickstart:
+  type: Web
+  title: QuickStart
+  author:
+  - name: Encode
+  publisher: HTTPX
+  url:
+    value: https://www.python-httpx.org/quickstart/
+    date: 2026-10-01
+www-starlette-dev-exceptions:
+  type: Web
+  title: Exceptions
+  author:
+  - name: Starlette
+  publisher: Starlette
+  url:
+    value: https://www.starlette.dev/exceptions/
+    date: 2026-10-01
+www-w3-org-tr-trace-context:
+  type: Web
+  title: Trace Context
+  author:
+  - Kanzhelev, Sergey
+  - McLean, Morgan
+  - Reitbauer, Alois
+  - Drutu, Bogdan
+  - Molnar, Nik
+  - Shkuro, Yuri
+  publisher: W3C
+  date: 2021-11-23
+  url:
+    value: https://www.w3.org/TR/trace-context/
+    date: 2026-10-01
+www-zaproxy-org-docs-docker-about:
+  type: Web
+  title: ZAP Docker
+  author:
+  - name: ZAP
+  publisher: ZAP Documentation
+  url:
+    value: https://www.zaproxy.org/docs/docker/about/
+    date: 2026-10-01
+www-zaproxy-org-docs-docker-api-scan:
+  type: Web
+  title: ZAP API Scan
+  author:
+  - name: ZAP
+  publisher: ZAP Documentation
+  url:
+    value: https://www.zaproxy.org/docs/docker/api-scan/
+    date: 2026-10-01
+www-zaproxy-org-getting-started:
+  type: Web
+  title: Getting Started with ZAP
+  author:
+  - name: ZAP
+  publisher: ZAP Documentation
+  url:
+    value: https://www.zaproxy.org/getting-started/
+    date: 2026-10-01

@@ -10,6 +10,8 @@ Die Schriften Inter und JetBrains Mono liegen im Ordner `fonts/` (beide unter SI
 Aufbau:
 - `main.typ`  Layout, Titelseite, Inhaltsverzeichnis, Reihenfolge der Kapitel
 - `lib.typ`   Farben, Commit-Graph-Funktion `gitgraph`, Docker-Diagrammhelfer `stapel` und `rahmen`, Hinweiskästen (`merke`, `achtung`, `tipp`, `mac`, `praxis`), `datei`, `kasten`, `pfeil`
-- `kap00` bis `kap15`, `anh-a`, `anh-b`  die Kapitel
+- `kap00` bis `kap11`, `anh-a`, `anh-b`  die Kapitel
 
 Zum Live-Bearbeiten: `typst watch --font-path fonts main.typ`
+- `literatur.typ`, `literatur.yml`  Literaturverzeichnis (IEEE-Stil, Zitate im Text als `@schluessel`)
+- `QUELLENPRUEFUNG.md`  Ergebnis der Quellenprüfung: geänderte und unbelegte Aussagen (nicht Teil des Buchs)

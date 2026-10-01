@@ -20,11 +20,11 @@ docker build --platform linux/amd64 -t notizen:amd64 .     # für x86 bauen (emu
 docker run --rm --platform linux/amd64 notizen:amd64 uname -m   # x86_64
 ```
 
-Am Mac übernimmt Rosetta (Kapitel 2) oder QEMU die Emulation. Das funktioniert zuverlässig, ist aber spürbar langsamer als ein nativer Build, bei großen Kompilierungen um ein Vielfaches.
+Am Mac übernimmt Rosetta (Kapitel 2) oder QEMU die Emulation @developer-apple-com-documentation-virtualization-running-intel-binaries-in-linux-vms. Das funktioniert zuverlässig, ist aber spürbar langsamer als ein nativer Build, bei großen Kompilierungen um ein Vielfaches @docs-docker-com-build-building-multi-platform.
 
 == Ein Name, mehrere Plattformen
 
-Offizielle Images wie `python:3.14-slim` gibt es für viele Architekturen unter *einem* Namen. Dahinter steckt ein _Image-Index_ (auch _Manifest List_): Der Tag zeigt auf eine Liste, und Docker lädt automatisch die Variante, die zum eigenen Rechner passt.
+Offizielle Images wie `python:3.14-slim` gibt es für viele Architekturen unter *einem* Namen @hub-docker-com-python. Dahinter steckt ein _Image-Index_ (auch _Manifest List_): Der Tag zeigt auf eine Liste @github-com-opencontainers-image-spec-blob-main-image-index-md @github-com-distribution-distribution-blob-main-docs-content-spec-manifest-v2-2-md, und Docker lädt automatisch die Variante, die zum eigenen Rechner passt.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -40,7 +40,7 @@ Offizielle Images wie `python:3.14-slim` gibt es für viele Architekturen unter 
   caption: [Ein Tag kann auf einen Index zeigen, der je eine Variante pro Architektur enthält.],
 )
 
-Eigene Multi-Plattform-Images baut `docker buildx`. Bei frischen Installationen ab Docker Engine 29 ist der containerd Image Store Standard und kann einen mehrplattformigen Index auch lokal verwalten. Aktualisierte Installationen können weiterhin den klassischen Image-Speicher nutzen; dieser kann solche Indizes nicht lokal laden. Ein `docker-container`-Builder mit direktem Push funktioniert in beiden Fällen und ist daher für CI gut geeignet:
+Eigene Multi-Plattform-Images baut `docker buildx` @docs-docker-com-build-building-multi-platform. Bei frischen Installationen ab Docker Engine 29 ist der containerd Image Store Standard und kann einen mehrplattformigen Index auch lokal verwalten @docs-docker-com-engine-storage-containerd @docs-docker-com-engine-release-notes-29. Aktualisierte Installationen können weiterhin den klassischen Image-Speicher nutzen; dieser kann solche Indizes nicht lokal laden @docs-docker-com-engine-storage-containerd. Ein `docker-container`-Builder mit direktem Push funktioniert in beiden Fällen und ist daher für CI gut geeignet @docs-docker-com-build-builders-drivers-docker-container:
 
 ```bash
 docker buildx create --name multi --driver docker-container --use    # einmalig
@@ -54,7 +54,7 @@ docker buildx imagetools inspect gitea.example.com/team/notizen:1.4.0   # Varian
 == Empfehlung für die Praxis
 
 - *Am Mac* nativ für `arm64` bauen und testen. Das ist schnell und deckt fast alle Fehler ab.
-- *Für den Server* in der CI auf einem `amd64`-Runner bauen (Kapitel 14). Der baut nativ, schnell und ohne Emulation. Nach dem Build wird genau dieses Image als Container getestet und anschließend unter seinem Digest veröffentlicht.
+- *Für den Server* in der CI auf einem `amd64`-Runner bauen (Kapitel 14). Der baut nativ, schnell und ohne Emulation @docs-docker-com-build-building-multi-platform. Nach dem Build wird genau dieses Image als Container getestet und anschließend unter seinem Digest veröffentlicht.
 - *Multi-Plattform-Images* nur dann, wenn sie wirklich auf beiden Architekturen laufen müssen, etwa wenn Kollegen mit ARM-Macs das fertige Produktions-Image lokal starten sollen oder ein ARM-Server im Spiel ist.
 
-#tipp[Wer eine Compose-Datei hat, die am Mac ein bestimmtes `amd64`-Image nutzen muss (etwa weil es kein ARM-Image gibt), kann die Plattform pro Dienst festlegen: `platform: linux/amd64`. Compose lädt dann diese Variante und Colima führt sie über Rosetta aus.]
+#tipp[Wer eine Compose-Datei hat, die am Mac ein bestimmtes `amd64`-Image nutzen muss (etwa weil es kein ARM-Image gibt), kann die Plattform pro Dienst festlegen: `platform: linux/amd64`. Compose lädt dann diese Variante @docs-docker-com-reference-compose-file-services und Colima führt sie über Rosetta aus @colima-run-docs-configuration.]

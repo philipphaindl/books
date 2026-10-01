@@ -2,11 +2,11 @@
 
 = RabbitMQ mit Python
 
-Für RabbitMQ gibt es zwei verbreitete Python-Clients: `pika` (synchron) und `aio-pika` (asynchron, `uv add aio-pika`). Dieses Kapitel verwendet `aio-pika`, damit die Beispiele denen für NATS entsprechen. Aufgebaut wird dieselbe Strecke: `shop` sendet, `provisionierung` verarbeitet, gescheiterte Nachrichten landen in einer Dead-Letter-Queue.
+Für RabbitMQ gibt es zwei verbreitete Python-Clients: `pika` (synchron) @pika-readthedocs-io-en-stable und `aio-pika` (asynchron, `uv add aio-pika`) @docs-aio-pika-com. Dieses Kapitel verwendet `aio-pika`, damit die Beispiele denen für NATS entsprechen. Aufgebaut wird dieselbe Strecke: `shop` sendet, `provisionierung` verarbeitet, gescheiterte Nachrichten landen in einer Dead-Letter-Queue.
 
 == Topologie anlegen
 
-Wie bei NATS gehören Exchanges, Queues und Bindings nicht in den Startcode der Dienste, sondern in die Einrichtung. RabbitMQ kann die gesamte Topologie beim Start aus einer Definitionsdatei laden (`load_definitions` in `rabbitmq.conf`), alternativ legt ein Einrichtungsskript mit Administratorrechten sie an:
+Wie bei NATS gehören Exchanges, Queues und Bindings nicht in den Startcode der Dienste, sondern in die Einrichtung. RabbitMQ kann die gesamte Topologie beim Start aus einer Definitionsdatei laden (`definitions.import_backend` und `definitions.local.path` in `rabbitmq.conf`) @www-rabbitmq-com-docs-definitions, alternativ legt ein Einrichtungsskript mit Administratorrechten sie an:
 
 #datei("einrichtung/rabbitmq_topologie.py")[
 ```python
@@ -32,7 +32,7 @@ async def einrichten(url: str) -> None:
 ```
 ]
 
-Die Nachricht durchläuft damit: Exchange `ereignisse` -> Queue `provisionierung` -> (nach fünf gescheiterten Zustellungen oder einem `reject` ohne Requeue) Exchange `dlx` -> Queue `provisionierung.dlq`.
+Die Nachricht durchläuft damit: Exchange `ereignisse` -> Queue `provisionierung` -> (nach fünf gescheiterten Zustellungen oder einem `reject` ohne Requeue) Exchange `dlx` -> Queue `provisionierung.dlq` @www-rabbitmq-com-docs-dlx @www-rabbitmq-com-docs-quorum-queues.
 
 == Der Producer
 
@@ -61,9 +61,9 @@ async def bestellung_melden(verbindung, bestellung_id: str, positionen: list[dic
 ```
 ]
 
-- *Publisher Confirms:* Mit `publisher_confirms=True` (bei `aio-pika` der Standard) wartet `publish` auf die Bestätigung des Brokers, dass die Nachricht angenommen und bei Quorum Queues repliziert gespeichert wurde. Bleibt sie aus, gibt es eine Ausnahme und der Producer sendet erneut.
-- *`mandatory=True`:* Passt keine Queue zum Routing Key, meldet RabbitMQ die Nachricht als unzustellbar zurück, statt sie stillschweigend zu verwerfen. Mit `on_return_raises=True` am Kanal wird daraus eine Ausnahme beim `publish`. Ohne beides würde ein Tippfehler im Routing Key zu unbemerktem Datenverlust führen.
-- *`message_id`:* RabbitMQ dedupliziert nicht selbst. Die ID ermöglicht dem Consumer, Duplikate zu erkennen (Kapitel 7).
+- *Publisher Confirms:* Mit `publisher_confirms=True` (bei `aio-pika` der Standard) wartet `publish` auf die Bestätigung des Brokers, dass die Nachricht angenommen und bei Quorum Queues repliziert gespeichert wurde @docs-aio-pika-com-apidoc-html @www-rabbitmq-com-docs-confirms. Bleibt sie aus, gibt es eine Ausnahme und der Producer sendet erneut.
+- *`mandatory=True`:* Passt keine Queue zum Routing Key, meldet RabbitMQ die Nachricht als unzustellbar zurück, statt sie stillschweigend zu verwerfen @www-rabbitmq-com-docs-publishers. Mit `on_return_raises=True` am Kanal wird daraus eine Ausnahme beim `publish` @docs-aio-pika-com-apidoc-html. Ohne beides würde ein Tippfehler im Routing Key zu unbemerktem Datenverlust führen.
+- *`message_id`:* RabbitMQ dedupliziert nicht selbst. Die ID (eine frei wählbare Nachrichteneigenschaft @www-rabbitmq-com-docs-publishers) ermöglicht dem Consumer, Duplikate zu erkennen (Kapitel 7).
 
 == Der Consumer
 
@@ -87,7 +87,7 @@ async def worker(url: str, stopp: asyncio.Event) -> None:
                     await verarbeiten(json.loads(msg.body))
                     await msg.ack()
                 except VoruebergehenderFehler:
-                    await msg.nack(requeue=True)               # erneut zustellen, zählt zum Limit
+                    await msg.reject(requeue=True)             # erneut zustellen, zählt zum Limit
                 except (DauerhafterFehler, json.JSONDecodeError):
                     log.error("aussortiert: %s", msg.message_id)
                     await msg.reject(requeue=False)            # direkt in die Dead-Letter-Queue
@@ -98,14 +98,14 @@ async def worker(url: str, stopp: asyncio.Event) -> None:
 
 #table(columns: (auto, 1fr),
   [Aufruf], [Wirkung],
-  [`msg.ack()`], [erfolgreich verarbeitet, RabbitMQ löscht die Nachricht aus der Queue],
-  [`msg.nack(requeue=True)`], [zurück in die Queue, erneute Zustellung (zählt bei Quorum Queues zur `x-delivery-limit`)],
-  [`msg.reject(requeue=False)`], [endgültig abgelehnt, wird an den Dead-Letter-Exchange weitergeleitet],
-  [`kanal.set_qos(prefetch_count=10)`], [Obergrenze für gleichzeitig zugestellte, unbestätigte Nachrichten pro Consumer],
+  [`msg.ack()`], [erfolgreich verarbeitet, RabbitMQ löscht die Nachricht aus der Queue @www-rabbitmq-com-docs-confirms],
+  [`msg.reject(requeue=True)`], [zurück in die Queue, erneute Zustellung (zählt bei Quorum Queues zur `x-delivery-limit`, ein `nack` mit Requeue zählt ab RabbitMQ 4.3 nicht mehr dazu) @www-rabbitmq-com-docs-quorum-queues],
+  [`msg.reject(requeue=False)`], [endgültig abgelehnt, wird an den Dead-Letter-Exchange weitergeleitet (falls konfiguriert, sonst verworfen) @www-rabbitmq-com-docs-confirms @www-rabbitmq-com-docs-dlx],
+  [`kanal.set_qos(prefetch_count=10)`], [Obergrenze für gleichzeitig zugestellte, unbestätigte Nachrichten pro Consumer @www-rabbitmq-com-docs-confirms @www-rabbitmq-com-docs-consumer-prefetch],
 )
 
-Ohne `prefetch_count` schiebt RabbitMQ einem Consumer beliebig viele Nachrichten zu, die dann im Speicher des Consumers liegen und für andere Instanzen blockiert sind. Ein Wert zwischen 10 und 100 ist ein guter Start.
+Ohne `prefetch_count` (der Wert 0 heißt unbegrenzt) schiebt RabbitMQ einem Consumer beliebig viele Nachrichten zu (bei Quorum Queues höchstens 2000), die dann im Speicher des Consumers liegen und für andere Instanzen blockiert sind @www-rabbitmq-com-docs-confirms. Für den Durchsatz nennt die RabbitMQ-Dokumentation Werte zwischen 100 und 300 als meist optimal @www-rabbitmq-com-docs-confirms. Bei langer Verarbeitungszeit pro Nachricht ist ein kleinerer Wert wie 10 besser, damit sich die Arbeit auf mehrere Instanzen verteilt.
 
-#tipp[Anders als JetStream kennt RabbitMQ kein `nak` mit Verzögerung. Für wachsende Abstände zwischen Wiederholungen legt man eine Warteschlange mit Ablaufzeit (`x-message-ttl`) an, deren Dead-Letter-Ziel wieder die Arbeitsqueue ist: Der Consumer lehnt ab, die Nachricht wartet in der Warteschlange und kehrt nach Ablauf zurück. Für einfache Fälle genügt das sofortige Requeue mit der Obergrenze aus `x-delivery-limit`.]
+#tipp[Anders als JetStream kennt RabbitMQ erst ab Version 4.3 eine Verzögerung für zurückgegebene Nachrichten: Quorum Queues halten sie dann auf Wunsch mit linear wachsendem Abstand zurück (_Delayed Retry_ über `x-delayed-retry-type`, `x-delayed-retry-min` und `x-delayed-retry-max`) @www-rabbitmq-com-docs-quorum-queues. Für ältere Versionen legt man eine Warteschlange mit Ablaufzeit (`x-message-ttl`) an, deren Dead-Letter-Ziel wieder die Arbeitsqueue ist @www-rabbitmq-com-docs-ttl @www-rabbitmq-com-docs-dlx: Der Consumer lehnt ab, die Nachricht wartet in der Warteschlange und kehrt nach Ablauf zurück. Für einfache Fälle genügt das sofortige Requeue mit der Obergrenze aus `x-delivery-limit`.]
 
-#achtung[Seit RabbitMQ 4.0 haben Quorum Queues standardmäßig eine Zustellobergrenze von 20. Ist kein Dead-Letter-Exchange konfiguriert, werden Nachrichten nach 20 gescheiterten Zustellungen *gelöscht*. Jede Quorum Queue braucht deshalb ein Dead-Letter-Ziel, am besten per Policy für alle Queues eines vhosts.]
+#achtung[Seit RabbitMQ 4.0 haben Quorum Queues standardmäßig eine Zustellobergrenze von 20. Ist kein Dead-Letter-Exchange konfiguriert, werden Nachrichten nach 20 gescheiterten Zustellungen *gelöscht* @www-rabbitmq-com-docs-quorum-queues. Jede Quorum Queue braucht deshalb ein Dead-Letter-Ziel, am besten per Policy für alle Queues eines vhosts @www-rabbitmq-com-docs-quorum-queues @www-rabbitmq-com-docs-dlx.]

@@ -34,7 +34,7 @@ uv run pip-audit                        # bekannte Schwachstellen in installiert
 uv run cyclonedx-py environment -o sbom.json
 ```
 
-Die `S`-Regeln von Ruff finden unter anderem hart codierte Passwörter, `verify=False`, unsichere Deserialisierung und `subprocess` mit `shell=True`. `pip-audit` prüft den *aufgelösten, gesperrten* Abhängigkeitsstand; die CycloneDX-SBOM macht ihn für Betrieb und Incident Response nachvollziehbar. Secret-Scanning läuft zusätzlich vor dem Commit und in CI. Ausnahmen werden mit Ticket, Begründung und Ablaufdatum dokumentiert.
+Die `S`-Regeln von Ruff finden unter anderem hart codierte Passwörter, `verify=False`, unsichere Deserialisierung und `subprocess` mit `shell=True` @docs-astral-sh-ruff-rules. `pip-audit` prüft die *installierten* Pakete gegen Datenbanken bekannter Schwachstellen @pypi-org-project-pip-audit; nach `uv sync --locked` @docs-astral-sh-uv-concepts-projects-sync ist das der aufgelöste, gesperrte Stand. Die CycloneDX-SBOM entsteht aus den tatsächlich installierten Paketen und macht diesen Stand für Betrieb und Incident Response nachvollziehbar @cyclonedx-bom-tool-readthedocs-io-en-latest-usage-html. Secret-Scanning läuft zusätzlich vor dem Commit und in CI @cheatsheetseries-owasp-org-cheatsheets-secrets-management-cheat-sheet-html. Ausnahmen werden mit Ticket, Begründung und Ablaufdatum dokumentiert.
 
 == Rechte als Tabelle testen
 
@@ -67,11 +67,11 @@ def test_rechtematrix(client_fuer, methode, pfad, rolle, status):
 ```
 ]
 
-Die Matrix ist projektspezifisch vollständig zu halten; Platzhalter wie `/x/` werden durch Testdaten ersetzt. Der Ausführungstest ist der eigentliche Wert, die Routenprüfung verhindert nur vergessene Einträge. Zusätzlich gehören negative Tokenfälle in die Suite: `alg=none`, falscher Issuer/Audience, abgelaufen, noch nicht gültig, unbekannte `kid`, fehlende/falsch typisierte Claims und insbesondere ein echtes ID-Token.
+Die Matrix ist projektspezifisch vollständig zu halten; Platzhalter wie `/x/` werden durch Testdaten ersetzt. Der Ausführungstest ist der eigentliche Wert, die Routenprüfung verhindert nur vergessene Einträge. Zusätzlich gehören negative Tokenfälle in die Suite: `alg=none`, falscher Issuer/Audience, abgelaufen, noch nicht gültig, unbekannte `kid`, fehlende/falsch typisierte Claims und insbesondere ein echtes ID-Token. Warum `alg=none` sowie Issuer und Audience dazugehören, beschreibt RFC 8725 @rfc8725.
 
 == Fuzzing aus der OpenAPI-Beschreibung
 
-_Schemathesis_ liest die OpenAPI-Beschreibung und erzeugt daraus automatisch tausende Anfragen mit Grenzwerten, falschen Typen, sehr langen Zeichenketten und unerwarteten Kombinationen. Es meldet Serverfehler (500), Antworten, die nicht zum Schema passen, und fehlende Validierung:
+_Schemathesis_ liest die OpenAPI-Beschreibung und erzeugt daraus automatisch viele Anfragen mit Grenzwerten, falschen Typen, sehr langen Zeichenketten und unerwarteten Kombinationen @schemathesis-readthedocs-io-en-stable. Es meldet Serverfehler (5xx), Antworten, die nicht zum Schema passen, und fehlende Validierung (unzulässige Eingaben, die nicht abgelehnt werden) @schemathesis-readthedocs-io-en-stable-reference-cli:
 
 ```bash
 uv run schemathesis run http://localhost:8000/openapi.json \
@@ -82,7 +82,7 @@ Ein 500er bei Schemathesis ist fast immer ein echter Fehler: eine fehlende Läng
 
 == Dynamischer Scan mit OWASP ZAP
 
-OWASP ZAP bringt einen eigenen Modus für APIs mit, der die OpenAPI-Beschreibung einliest und bekannte Angriffsmuster gegen alle Endpunkte ausprobiert:
+OWASP ZAP bringt einen eigenen Modus für APIs mit, der die OpenAPI-Beschreibung einliest und gegen die gefundenen Endpunkte einen aktiven Scan ausführt @www-zaproxy-org-docs-docker-api-scan:
 
 ```bash
 docker run --rm --network notizen_default -v "$PWD:/zap/wrk" \
@@ -90,7 +90,7 @@ docker run --rm --network notizen_default -v "$PWD:/zap/wrk" \
   zap-api-scan.py -t http://api:8000/openapi.json -f openapi -r zap-bericht.html
 ```
 
-Der Bericht landet als `zap-bericht.html` im aktuellen Verzeichnis. Der Digest wird automatisiert aktualisiert und im Review geprüft; ein beweglicher `latest`-ähnlicher Tag wäre nicht reproduzierbar. ZAP findet vor allem Konfigurations- und Injection-Probleme. Autorisierungsfehler wie BOLA brauchen eigene Tests. Aktives DAST läuft nur mit ausdrücklicher Freigabe gegen eine isolierte Umgebung mit synthetischen Daten, nie ungeplant gegen Produktion.
+Der Bericht landet als `zap-bericht.html` im aktuellen Verzeichnis, weil dieses nach `/zap/wrk` eingebunden ist @www-zaproxy-org-docs-docker-about @www-zaproxy-org-docs-docker-api-scan. Der Digest wird automatisiert aktualisiert und im Review geprüft; ein beweglicher Tag wie `stable` wäre nicht reproduzierbar, denn Tags können auf ein neues Image zeigen, ein Digest nicht @docs-docker-com-build-building-best-practices. ZAP findet vor allem Konfigurations- und Injection-Probleme. Autorisierungsfehler wie BOLA brauchen eigene Tests @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization. Aktives DAST läuft nur mit ausdrücklicher Freigabe gegen eine isolierte Umgebung mit synthetischen Daten, nie ungeplant gegen Produktion, weil ein aktiver Scan ein echter Angriff ist @www-zaproxy-org-getting-started.
 
 == In der CI
 
@@ -111,4 +111,4 @@ Der Bericht landet als `zap-bericht.html` im aktuellen Verzeichnis. Der Digest w
 ```
 ]
 
-Die Platzhalter werden im echten Repository durch geprüfte vollständige Commit-SHAs beziehungsweise Image-Digests ersetzt; die Beispielwerte dürfen nicht unverändert produktiv verwendet werden. So lädt die CI keinen ungeprüften `curl | sh`-Installer und keine unbemerkt verschobenen Actions. Schemathesis und ZAP brauchen eine laufende API mit Datenbank und laufen deshalb in einem getrennten, autorisierten Workflow gegen eine isolierte Testumgebung.
+Die Platzhalter werden im echten Repository durch geprüfte vollständige Commit-SHAs beziehungsweise Image-Digests ersetzt; die Beispielwerte dürfen nicht unverändert produktiv verwendet werden. Nur ein vollständiger Commit-SHA bindet eine Action unveränderlich @docs-github-com-en-actions-reference-security-secure-use @github-com-astral-sh-setup-uv. So lädt die CI keinen ungeprüften `curl | sh`-Installer und keine unbemerkt verschobenen Actions. Schemathesis und ZAP brauchen eine laufende API mit Datenbank und laufen deshalb in einem getrennten, autorisierten Workflow gegen eine isolierte Testumgebung.

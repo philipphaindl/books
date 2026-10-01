@@ -1,6 +1,9 @@
 #import "lib.typ": *
 
-= Glossar und Quellen
+= Glossar
+
+#text(size: 8.6pt, fill: c-grey.darken(20%))[Quellen und weiterführende Literatur zu den Begriffen, Standards und Werkzeugen dieses Handbuchs stehen im anschließenden Literaturverzeichnis. Begleitbände: *Secure API Design* (Autorisierung, Logging) und *Docker von Grund auf* (Secrets, Betrieb).]
+#v(0.4em)
 
 #let begriffe = (
   ([Ack / Nack], [Bestätigung bzw. Ablehnung einer empfangenen Nachricht durch den Consumer.]),
@@ -24,7 +27,7 @@
   ([Routing Key], [Adressangabe einer Nachricht in RabbitMQ, ausgewertet vom Exchange.]),
   ([Stream], [Dauerhaft gespeicherte, geordnete Folge von Nachrichten.]),
   ([Subject], [Hierarchischer Nachrichtenname in NATS, z.B. `bestellung.eingegangen`.]),
-  ([vhost], [Virtueller Host in RabbitMQ: vollständig getrennter Bereich mit eigenen Rechten.]),
+  ([vhost], [Virtueller Host in RabbitMQ: logisch getrennter Bereich mit eigenen Rechten.]),
 )
 
 #set text(size: 8.2pt)
@@ -33,14 +36,3 @@
     #block(below: 0.5em, breakable: false)[*#b* \ #d]
   ]
 ]
-
-#v(0.2em)
-#heading(level: 2, numbering: none)[Weiterführende Quellen]
-
-- *NATS-Dokumentation*, besonders JetStream, Security und Authorization: https://docs.nats.io
-- *nats-py*: https://github.com/nats-io/nats.py
-- *RabbitMQ-Dokumentation*, besonders Quorum Queues, Access Control und TLS: https://www.rabbitmq.com/docs
-- *aio-pika*: https://docs.aio-pika.com
-- *CloudEvents-Spezifikation*: https://cloudevents.io
-- *cryptography* (Ed25519, AES-GCM): https://cryptography.io
-- Begleitbände: *Secure API Design* (Autorisierung, Logging), *Docker von Grund auf* (Secrets, Betrieb)

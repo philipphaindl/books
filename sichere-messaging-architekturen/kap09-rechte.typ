@@ -20,7 +20,7 @@ Keiner der Anwendungsdienste darf Streams, Queues oder Exchanges anlegen, änder
 
 == NATS: Rechte auf Subjects
 
-In NATS werden Rechte als erlaubte und verbotene Subjects für `publish` und `subscribe` vergeben, mit denselben Platzhaltern `*` und `>` wie bei Subjects. Zwei Besonderheiten von JetStream sind zu beachten: Die Bestätigung eines Streams kommt auf einer _Inbox_ zurück (Standard `_INBOX.>`), und ein Pull-Consumer spricht interne API-Subjects an (`$JS.API...`, `$JS.ACK...`). Damit Dienste nicht die Antworten anderer mitlesen können, bekommt jeder ein eigenes Inbox-Präfix:
+In NATS werden Rechte als erlaubte und verbotene Subjects für `publish` und `subscribe` vergeben, mit denselben Platzhaltern `*` und `>` wie bei Subjects @docs-nats-io-learn-security-authorization. Zwei Besonderheiten von JetStream sind zu beachten: Die Bestätigung eines Streams kommt auf einer _Inbox_ zurück (Standard `_INBOX.>`) @docs-nats-io-learn-security-authorization, und ein Pull-Consumer spricht interne API-Subjects an (`$JS.API...`, `$JS.ACK...`) @docs-nats-io-reference-jetstream-api-consumer @github-com-nats-io-nats-architecture-and-design-blob-main-adr-adr-15-md. Die Bestätigungen laufen über Antwort-Subjects mit dem Präfix `$JS.ACK`, die neuere Serverversionen um Domain und Account-Hash erweitern @github-com-nats-io-nats-architecture-and-design-blob-main-adr-adr-15-md. Deshalb erlaubt die Konfiguration beide Formen. Damit Dienste nicht die Antworten anderer mitlesen können, bekommt jeder ein eigenes Inbox-Präfix @examples-nats-io-examples-auth-private-inbox-cli @nats-io-github-io-nats-py-modules-html:
 
 #datei("nats-server.conf (Accounts)")[
 ```text
@@ -39,6 +39,7 @@ accounts {
             "$JS.API.CONSUMER.MSG.NEXT.BESTELLUNGEN.provisionierung",   # Nachrichten abholen
             "$JS.API.CONSUMER.INFO.BESTELLUNGEN.provisionierung",       # an Consumer binden
             "$JS.ACK.BESTELLUNGEN.provisionierung.>",                   # ack, nak, term
+            "$JS.ACK.*.*.BESTELLUNGEN.provisionierung.>",               # dasselbe im neuen Format
             "provisionierung.abgeschlossen",
             "dlq.provisionierung" ] }
           subscribe: { allow: ["_INBOX_prov.>"] }
@@ -58,17 +59,17 @@ nc = await nats.connect(servers=[...], user="shop", password=passwort,
                         inbox_prefix=b"_INBOX_shop", tls=tls_kontext("shop"))
 ```
 
-Wird ein Recht verweigert, meldet der Server `Permissions Violation` an den Client und schreibt es ins Server-Log. Diese Meldungen gehören in die Überwachung, denn im Betrieb deuten sie entweder auf einen Konfigurationsfehler oder auf einen Angriff hin. *Accounts* trennen zusätzlich ganze Bereiche: Dienste in verschiedenen Accounts sehen die Subjects des anderen überhaupt nicht, außer ein Account exportiert sie ausdrücklich. Getrennte Accounts für Produktion und Test auf demselben Server verhindern, dass ein Testdienst versehentlich echte Bestellungen verarbeitet.
+Wird ein Recht verweigert, meldet der Server `Permissions Violation` an den Client und schreibt es ins Server-Log @docs-nats-io-learn-security-authorization. Diese Meldungen gehören in die Überwachung, denn im Betrieb deuten sie entweder auf einen Konfigurationsfehler oder auf einen Angriff hin. *Accounts* trennen zusätzlich ganze Bereiche: Dienste in verschiedenen Accounts sehen die Subjects des anderen überhaupt nicht, außer ein Account exportiert sie ausdrücklich @docs-nats-io-learn-security-accounts-and-multitenancy. Getrennte Accounts für Produktion und Test auf demselben Server verhindern, dass ein Testdienst versehentlich echte Bestellungen verarbeitet.
 
 == RabbitMQ: configure, write, read
 
-RabbitMQ vergibt pro Benutzer und vhost drei Rechte, jeweils als regulärer Ausdruck über Namen von Exchanges und Queues:
+RabbitMQ vergibt pro Benutzer und vhost drei Rechte, jeweils als regulärer Ausdruck über Namen von Exchanges und Queues @www-rabbitmq-com-docs-access-control:
 
 #table(columns: (auto, 1fr),
   [Recht], [erlaubt],
   [*configure*], [Exchanges und Queues anlegen, ändern, löschen],
   [*write*], [in Exchanges veröffentlichen, Queues an Exchanges binden (auf Seiten der Queue)],
-  [*read*], [aus Queues lesen, bestätigen, Bindings (auf Seiten des Exchanges)],
+  [*read*], [aus Queues lesen, Queues leeren, Bindings (auf Seiten des Exchanges)],
 )
 
 ```bash
@@ -86,6 +87,6 @@ rabbitmqctl set_topic_permissions -p bestellungen shop ereignisse "^bestellung\.
 rabbitmqctl set_topic_permissions -p bestellungen provisionierung ereignisse "^provisionierung\." "^$"
 ```
 
-`"^$"` passt auf keinen Namen und entzieht das jeweilige Recht vollständig. Ohne _Topic-Rechte_ dürfte `shop` mit Schreibrecht auf `ereignisse` jeden beliebigen Routing Key verwenden, also auch `zahlung.eingegangen`. Erst die Topic-Rechte schränken die Routing Keys ein und schließen damit die Lücke aus der Einleitung. Ein eigener vhost pro Anwendung und Umgebung trennt Bereiche wie die Accounts in NATS.
+`"^$"` passt auf keinen Namen und entzieht das jeweilige Recht vollständig @www-rabbitmq-com-docs-access-control. Ohne _Topic-Rechte_ dürfte `shop` mit Schreibrecht auf `ereignisse` jeden beliebigen Routing Key verwenden, also auch `zahlung.eingegangen`. Erst die Topic-Rechte schränken die Routing Keys ein und schließen damit die Lücke aus der Einleitung @www-rabbitmq-com-docs-access-control. Ein eigener vhost pro Anwendung und Umgebung trennt Bereiche wie die Accounts in NATS @www-rabbitmq-com-docs-access-control.
 
-#tipp[Dienste deklarieren ihre Exchanges und Queues in Produktion nicht selbst (Kapitel 5 verwendet `get_exchange(..., ensure=False)` und `get_queue(..., ensure=False)`). Ohne `configure`-Recht würde eine Deklaration ohnehin scheitern. Das hat den Nebeneffekt, dass ein Tippfehler im Queue-Namen nicht stillschweigend eine neue, leere Queue erzeugt.]
+#tipp[Dienste deklarieren ihre Exchanges und Queues in Produktion nicht selbst (Kapitel 5 verwendet `get_exchange(..., ensure=False)` und `get_queue(..., ensure=False)`). Ohne `configure`-Recht würde eine Deklaration ohnehin scheitern @www-rabbitmq-com-docs-access-control. Das hat den Nebeneffekt, dass ein Tippfehler im Queue-Namen nicht stillschweigend eine neue, leere Queue erzeugt.]

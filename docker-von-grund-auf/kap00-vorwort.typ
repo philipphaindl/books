@@ -11,7 +11,7 @@ Dieses Handbuch ist das Gegenstück zu "Git von Grund auf" und folgt demselben P
 - *Teil III, Betrieb:* Registry in Gitea, Sicherheit, Betrieb auf einem Linux-Server mit Reverse Proxy, Updates und Backups, Builds und Deployment mit Gitea Actions sowie eine Einordnung von Swarm und Kubernetes.
 - *Anhang:* Befehlsübersicht und Glossar.
 
-Für Gitea, Pull Requests, Runner, Secrets und SSH-Deployment verweist dieses Buch auf das Git-Handbuch (dort Kapitel 12 bis 15), statt alles zu wiederholen.
+Für Gitea, Pull Requests, Runner, Secrets und SSH-Deployment verweist dieses Buch auf das Git-Handbuch (dort Kapitel 12 bis 15) @haindl-2026-git, statt alles zu wiederholen.
 
 == Konventionen
 
@@ -28,7 +28,7 @@ Befehle stehen in grauen Kästen, Ausgaben in gestrichelten, Dateiinhalte tragen
   }
 }))
 
-Als durchgängiges Beispiel dient das Projekt `notizen`: eine kleine REST-API mit FastAPI, die Notizen in PostgreSQL speichert. Abhängigkeiten verwaltet `uv`. Es ist bewusst klein, enthält aber alles, was in echten Projekten vorkommt: eine Anwendung, eine Datenbank mit persistenten Daten, Konfiguration über Umgebungsvariablen, Geheimnisse, Migrationen und Tests.
+Als durchgängiges Beispiel dient das Projekt `notizen`: eine kleine REST-API mit FastAPI @fastapi-tiangolo-com-deployment-docker, die Notizen in PostgreSQL speichert. Abhängigkeiten verwaltet `uv` @docs-astral-sh-uv-guides-integration-docker. Es ist bewusst klein, enthält aber alles, was in echten Projekten vorkommt: eine Anwendung, eine Datenbank mit persistenten Daten, Konfiguration über Umgebungsvariablen, Geheimnisse, Migrationen und Tests.
 
 #datei("Projektstruktur")[
 ```text
@@ -47,4 +47,4 @@ notizen/
 ```
 ]
 
-Server heißen wie im Git-Handbuch `gitea.example.com` (Gitea mit Container-Registry) und `app.example.com` (Zielserver). Getestete Basis dieses Handbuchs sind Docker Engine 29.8 und Docker Compose 5.5 im September 2026. Die gezeigten Grundfunktionen funktionieren auch mit aktuellen Compose-v2-Versionen; neuere Funktionen sind im Text ausdrücklich gekennzeichnet. Der Befehl heißt weiterhin `docker compose` (mit Leerzeichen). Das alte, separate Programm `docker-compose` mit Bindestrich ist veraltet.
+Server heißen wie im Git-Handbuch `gitea.example.com` (Gitea mit Container-Registry) und `app.example.com` (Zielserver). Getestete Basis dieses Handbuchs sind Docker Engine 29.8 und Docker Compose 5.5 im September 2026 @docs-docker-com-engine-release-notes-29 @github-com-docker-compose-releases. Die gezeigten Grundfunktionen funktionieren auch mit aktuellen Compose-v2-Versionen; neuere Funktionen sind im Text ausdrücklich gekennzeichnet. Der Befehl heißt weiterhin `docker compose` (mit Leerzeichen). Das alte, separate Programm `docker-compose` mit Bindestrich ist veraltet @docs-docker-com-retired.

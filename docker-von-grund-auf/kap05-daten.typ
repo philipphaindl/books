@@ -2,7 +2,7 @@
 
 = Daten: Volumes und Bind Mounts
 
-Aus Kapitel 1 ist klar: Die Schreibschicht eines Containers verschwindet mit ihm. Bei jedem Update wird ein Container aber gerade gelöscht und aus dem neuen Image neu erzeugt. Alles, was bleiben soll, muss deshalb *außerhalb* des Containers liegen und nur hineingereicht werden. Dafür gibt es drei Mechanismen.
+Aus Kapitel 1 ist klar: Die Schreibschicht eines Containers verschwindet mit ihm @docs-docker-com-engine-storage-drivers. Bei jedem Update wird ein Container aber gerade gelöscht und aus dem neuen Image neu erzeugt. Alles, was bleiben soll, muss deshalb *außerhalb* des Containers liegen und nur hineingereicht werden. Dafür gibt es drei Mechanismen.
 
 == Drei Arten, Daten einzubinden
 
@@ -26,9 +26,9 @@ Aus Kapitel 1 ist klar: Die Schreibschicht eines Containers verschwindet mit ihm
 
 #table(columns: (auto, 1fr, 1fr),
   [Art], [Eigenschaften], [Typische Verwendung],
-  [*Volume*], [Von Docker verwaltet. Beim lokalen rootful Treiber liegt es typischerweise unter `/var/lib/docker/volumes`; Rootless-Betrieb, VM und andere Volume-Treiber können andere Pfade nutzen.], [Datenbanken, Uploads: alles Persistente in Produktion],
-  [*Bind Mount*], [Ein beliebiges Verzeichnis des Hosts wird direkt eingeblendet. Änderungen sind sofort auf beiden Seiten sichtbar.], [Quellcode während der Entwicklung, Konfigurationsdateien],
-  [*tmpfs*], [Nur im Arbeitsspeicher, verschwindet beim Stopp.], [temporäre Dateien, die nicht auf die Platte sollen],
+  [*Volume*], [Von Docker verwaltet. Beim lokalen rootful Treiber liegt es typischerweise unter `/var/lib/docker/volumes` @docs-docker-com-engine-storage-volumes; Rootless-Betrieb, VM und andere Volume-Treiber können andere Pfade nutzen.], [Datenbanken, Uploads: alles Persistente in Produktion],
+  [*Bind Mount*], [Ein beliebiges Verzeichnis des Hosts wird direkt eingeblendet. Änderungen sind sofort auf beiden Seiten sichtbar @docs-docker-com-engine-storage-bind-mounts.], [Quellcode während der Entwicklung, Konfigurationsdateien],
+  [*tmpfs*], [Nur im Arbeitsspeicher, verschwindet beim Stopp @docs-docker-com-engine-storage-tmpfs.], [temporäre Dateien, die nicht auf die Platte sollen],
 )
 
 == Volumes
@@ -44,17 +44,17 @@ docker run -d --name db -v pgdaten:/var/lib/postgresql -e POSTGRES_PASSWORD=gehe
 docker run -d --name db --mount type=volume,src=pgdaten,dst=/var/lib/postgresql ... postgres:18
 ```
 
-Die Syntax `-v a:b` ist mehrdeutig: Beginnt `a` mit `/` oder `.`, ist es ein Bind Mount, sonst ein Volume-Name. `--mount` ist länger, aber eindeutig und meldet einen Fehler, wenn ein Host-Pfad nicht existiert, statt stillschweigend ein leeres Verzeichnis anzulegen.
+Die Syntax `-v a:b` ist mehrdeutig: Beginnt `a` mit `/` oder `.`, ist es ein Bind Mount, sonst ein Volume-Name @docs-docker-com-engine-storage-volumes. `--mount` ist länger, aber eindeutig und meldet einen Fehler, wenn ein Host-Pfad nicht existiert, statt stillschweigend ein leeres Verzeichnis anzulegen @docs-docker-com-engine-storage-bind-mounts.
 
 === Anonyme Volumes
 
-Viele Images deklarieren mit `VOLUME` im Dockerfile einen Pfad für Daten. Bindet man dort nichts ein, legt Docker automatisch ein *anonymes* Volume mit einem Zufallsnamen an. Die Daten sind dann zwar da, aber nach dem Neuerzeugen des Containers hängt ein *neues* anonymes Volume an diesem Pfad, und die alten Daten liegen verwaist in einem Volume namens `3f9a0c…`. Daher gilt: Für persistente Daten immer ein *benanntes* Volume angeben.
+Viele Images deklarieren mit `VOLUME` im Dockerfile einen Pfad für Daten. Bindet man dort nichts ein, legt Docker automatisch ein *anonymes* Volume mit einem Zufallsnamen an @docs-docker-com-reference-dockerfile @docs-docker-com-engine-storage-volumes. Die Daten sind dann zwar da, aber nach dem Neuerzeugen des Containers hängt ein *neues* anonymes Volume an diesem Pfad, und die alten Daten liegen verwaist in einem Volume namens `3f9a0c…` @docs-docker-com-engine-storage-volumes. Daher gilt: Für persistente Daten immer ein *benanntes* Volume angeben.
 
-#achtung[*PostgreSQL 18 hat den Datenpfad geändert.* Bis Version 17 bindet man das Volume an `/var/lib/postgresql/data`. Ab dem offiziellen Image für Version 18 liegt das Datenverzeichnis unter `/var/lib/postgresql/18/docker`, das deklarierte Volume ist `/var/lib/postgresql`. Wer bei `postgres:18` wie gewohnt `/var/lib/postgresql/data` einbindet, bekommt Fehlermeldungen oder Daten, die beim Neuerzeugen verloren gehen. Also: bei 18+ an `/var/lib/postgresql` einbinden. Ein Wechsel der Hauptversion (17 -> 18) passiert zudem nie automatisch durch einen neuen Tag: Dafür ist ein Dump und Restore (siehe unten) oder `pg_upgrade` nötig.]
+#achtung[*PostgreSQL 18 hat den Datenpfad geändert.* Bis Version 17 bindet man das Volume an `/var/lib/postgresql/data` @hub-docker-com-postgres. Ab dem offiziellen Image für Version 18 liegt das Datenverzeichnis unter `/var/lib/postgresql/18/docker`, das deklarierte Volume ist `/var/lib/postgresql` @hub-docker-com-postgres @github-com-docker-library-postgres-pull-1259. Wer bei `postgres:18` wie gewohnt `/var/lib/postgresql/data` einbindet, bekommt eine Fehlermeldung; ohne ein Volume auf `/var/lib/postgresql` landen die Daten in einem anonymen Volume, das beim Neuerzeugen verwaist @github-com-docker-library-postgres-pull-1372 @hub-docker-com-postgres. Also: bei 18+ an `/var/lib/postgresql` einbinden. Ein Wechsel der Hauptversion (17 -> 18) passiert zudem nie automatisch durch einen neuen Tag: Dafür ist ein Dump und Restore (siehe unten) oder `pg_upgrade` nötig @postgresql-org-docs-18-upgrading-html.]
 
 == Bind Mounts in der Entwicklung
 
-Beim Entwickeln will man den Code nicht nach jeder Änderung neu bauen. Ein Bind Mount blendet das Projektverzeichnis direkt in den Container ein, zusammen mit einem Server, der bei Änderungen neu lädt:
+Beim Entwickeln will man den Code nicht nach jeder Änderung neu bauen. Ein Bind Mount blendet das Projektverzeichnis direkt in den Container ein @docs-docker-com-engine-storage-bind-mounts, zusammen mit einem Server, der bei Änderungen neu lädt:
 
 ```bash
 docker run --rm -p 8000:8000 \
@@ -62,13 +62,13 @@ docker run --rm -p 8000:8000 \
   notizen:dev fastapi dev app/main.py --host 0.0.0.0 --port 8000
 ```
 
-Mit `:ro` am Ende (`-v "$PWD/config.toml:/app/config.toml:ro"`) ist der Mount im Container schreibgeschützt, was sich für Konfigurationsdateien empfiehlt. Komfortabler löst Compose das Thema mit `develop: watch` (Kapitel 7).
+Mit `:ro` am Ende (`-v "$PWD/config.toml:/app/config.toml:ro"`) ist der Mount im Container schreibgeschützt @docs-docker-com-engine-storage-bind-mounts, was sich für Konfigurationsdateien empfiehlt. Komfortabler löst Compose das Thema mit `develop: watch` (Kapitel 7).
 
 #praxis[Auf Linux-Servern haben Mounts eine typische Falle: Dateien, die ein Container als `root` anlegt, gehören auf dem Host ebenfalls `root`, und ein Prozess, der im Container als Benutzer mit UID 1000 läuft, darf ein Verzeichnis von UID 1001 nicht beschreiben. Benutzer-IDs sind im Container und auf dem Host dieselben Zahlen, die Namen können sich unterscheiden. Am Mac übersetzt virtiofs einen Teil dieser Unterschiede, deshalb fällt das Problem oft erst auf dem Server auf. Auch ein neues benanntes Volume ist nicht automatisch für den Anwendungsbenutzer beschreibbar: Das Image muss es beim Start initialisieren, der Administrator muss Besitzer und Modus passend setzen, oder Host und Container verwenden abgestimmte UID/GID.]
 
 == Sichern und Wiederherstellen
 
-Für Datenbanken ist ein logischer Dump die sichere Wahl, weil er einen konsistenten Stand liefert, während die Datenbank weiterläuft:
+Für Datenbanken ist ein logischer Dump die sichere Wahl, weil er einen konsistenten Stand liefert, während die Datenbank weiterläuft @postgresql-org-docs-18-app-pgdump-html @postgresql-org-docs-18-backup-dump-html:
 
 ```bash
 # Sichern (Custom-Format, komprimiert)
@@ -78,7 +78,7 @@ docker exec db pg_dump -U notizen -Fc notizen > notizen-$(date +%F).dump
 docker exec -i db pg_restore -U notizen -d notizen --clean --if-exists < notizen-2026-09-24.dump
 ```
 
-Beliebige Volumes lassen sich mit einem kurzlebigen Hilfscontainer als Archiv sichern. Der Trick: Beide, das Volume und ein Verzeichnis des Hosts, werden in einen Wegwerf-Container eingebunden, der nur `tar` ausführt:
+Beliebige Volumes lassen sich mit einem kurzlebigen Hilfscontainer als Archiv sichern @docs-docker-com-engine-storage-volumes. Der Trick: Beide, das Volume und ein Verzeichnis des Hosts, werden in einen Wegwerf-Container eingebunden, der nur `tar` ausführt:
 
 ```bash
 # Sichern: Volume "uploads" nach ./uploads.tgz
@@ -90,6 +90,6 @@ docker run --rm -v uploads:/daten -v "$PWD":/backup alpine \
   tar xzf /backup/uploads.tgz -C /daten
 ```
 
-#achtung[Die Dateien einer *laufenden* Datenbank per `tar` zu kopieren, ergibt ein inkonsistentes Backup, das sich eventuell nicht wiederherstellen lässt. Entweder die Datenbank vorher stoppen oder, besser, `pg_dump` verwenden. Und ein Backup, dessen Wiederherstellung nie getestet wurde, ist nur eine Hoffnung.]
+#achtung[Die Dateien einer *laufenden* Datenbank per `tar` zu kopieren, ergibt ein inkonsistentes Backup, das sich eventuell nicht wiederherstellen lässt @postgresql-org-docs-18-backup-file-html. Entweder die Datenbank vorher stoppen oder, besser, `pg_dump` verwenden. Und ein Backup, dessen Wiederherstellung nie getestet wurde, ist nur eine Hoffnung.]
 
-`pg_dump` sichert eine einzelne Datenbank. Globale Objekte wie Rollen und Tablespaces sind darin nicht enthalten; falls sie nicht anderweitig als Konfiguration vorliegen, werden sie zusätzlich mit `pg_dumpall --globals-only` gesichert. Produktionsbackups gehören verschlüsselt auf einen zweiten Rechner und werden regelmäßig probeweise wiederhergestellt.
+`pg_dump` sichert eine einzelne Datenbank. Globale Objekte wie Rollen und Tablespaces sind darin nicht enthalten @postgresql-org-docs-18-app-pgdump-html; falls sie nicht anderweitig als Konfiguration vorliegen, werden sie zusätzlich mit `pg_dumpall --globals-only` gesichert @postgresql-org-docs-18-app-pg-dumpall-html. Produktionsbackups gehören verschlüsselt auf einen zweiten Rechner und werden regelmäßig probeweise wiederhergestellt.

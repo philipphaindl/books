@@ -2,11 +2,11 @@
 
 = Fehler, Logging und Datensparsamkeit
 
-Fehlermeldungen und Logs sind für Entwickler gemacht, werden aber leicht zu einer Informationsquelle für Angreifer oder zu einem Datenschutzproblem. Das Ziel: Der Client erfährt genug, um sinnvoll zu reagieren, aber nichts über Interna. Die Logs enthalten genug, um Vorfälle aufzuklären, aber keine Geheimnisse und so wenig personenbezogene Daten wie möglich.
+Fehlermeldungen und Logs sind für Entwickler gemacht, werden aber leicht zu einer Informationsquelle für Angreifer @api-security-owasp-org-editions-2023-en-0xa8-security-misconfiguration oder zu einem Datenschutzproblem. Das Ziel: Der Client erfährt genug, um sinnvoll zu reagieren, aber nichts über Interna. Die Logs enthalten genug, um Vorfälle aufzuklären, aber keine Geheimnisse und so wenig personenbezogene Daten wie möglich.
 
 == Einheitliche Fehler nach RFC 9457
 
-RFC 9457 (_Problem Details for HTTP APIs_, Nachfolger von RFC 7807) definiert ein einheitliches JSON-Format für Fehler mit dem Medientyp `application/problem+json`:
+RFC 9457 (_Problem Details for HTTP APIs_, Nachfolger von RFC 7807) definiert ein einheitliches JSON-Format für Fehler mit dem Medientyp `application/problem+json` @rfc9457:
 
 ```json
 {
@@ -60,7 +60,7 @@ def registrieren(app: FastAPI) -> None:
 ```
 ]
 
-Der Validierungs-Handler gibt nur Feldnamen zurück, nicht die eingegebenen Werte. Der HTTP-Handler übernimmt `exc.headers`; sonst ginge etwa das für 401 erforderliche `WWW-Authenticate` verloren. Der generische Titel kommt aus dem Statuscode, während Details nur aus bewusst erzeugten Anwendungsfehlern stammen. Der letzte Handler fängt Unerwartetes: Der Client bekommt nur die `request_id`, mit der sich der vollständige Fehler im Log finden lässt.
+Der Validierungs-Handler gibt nur Feldnamen zurück, nicht die eingegebenen Werte @fastapi-tiangolo-com-tutorial-handling-errors. Der HTTP-Handler übernimmt `exc.headers`; sonst ginge etwa das für 401 erforderliche `WWW-Authenticate` @rfc9110 verloren. Der generische Titel kommt aus dem Statuscode, während Details nur aus bewusst erzeugten Anwendungsfehlern stammen. Der letzte Handler fängt Unerwartetes: Der Client bekommt nur die `request_id` @cheatsheetseries-owasp-org-cheatsheets-rest-security-cheat-sheet-html @rfc9457, mit der sich der vollständige Fehler im Log finden lässt.
 
 == Eine Request-ID für jede Anfrage
 
@@ -75,18 +75,18 @@ async def request_id(request: Request, call_next):
 ```
 ]
 
-Die ID erscheint in jeder Logzeile und in jeder Fehlerantwort. Meldet ein Benutzer einen Fehler, genügt die ID, um den Ablauf nachzuvollziehen, ohne dass er Details beschreiben muss.
+Die ID erscheint in jeder Logzeile und in jeder Fehlerantwort. Meldet ein Benutzer einen Fehler, genügt die ID, um den Ablauf nachzuvollziehen @cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html, ohne dass er Details beschreiben muss.
 
 == Was ins Log gehört und was nicht
 
 #table(columns: (1fr, 1fr),
   [Loggen], [Nie loggen],
-  [Zeitpunkt, Request-ID, Methode, Pfad (ohne Query-Werte mit Geheimnissen), Statuscode, Dauer], [Access-Tokens, Refresh-Tokens, Passwörter, API-Schlüssel, Client-Secrets],
+  [Zeitpunkt, Request-ID, Methode, Pfad (ohne Query-Werte mit Geheimnissen), Statuscode, Dauer], [Access-Tokens, Refresh-Tokens, Passwörter, API-Schlüssel, Client-Secrets @cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html],
   [Benutzer-ID (`sub`), nicht Name oder E-Mail], [vollständige Request- und Response-Bodies],
-  [Sicherheitsereignisse: 401, 403, 429, abgelehnte Tokens, Rechteänderungen], [Gesundheits-, Finanz- oder andere besonders schützenswerte Inhalte],
+  [Sicherheitsereignisse: 401, 403, 429, abgelehnte Tokens, Rechteänderungen @cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html], [Gesundheits-, Finanz- oder andere besonders schützenswerte Inhalte @cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html],
   [Ursache unerwarteter Fehler mit Stacktrace (nur serverseitig)], [den `Authorization`-Header, auch nicht "zur Fehlersuche"],
 )
 
-Logs werden strukturiert (JSON) mit UTC-Zeit geschrieben, damit sie sich durchsuchen und auswerten lassen. Ein eigenes _Audit-Log_ für sicherheitsrelevante Aktionen (Freigabe erteilt, Notiz gelöscht, Rolle geändert) mit Akteur, Aktion, Objekt, Ergebnis und Zeitpunkt ist bei Vorfällen oft die einzige Möglichkeit festzustellen, was geschehen ist. Es ist zugriffsbeschränkt, gegen nachträgliche Änderung geschützt und hat eine festgelegte Aufbewahrungs- und Löschfrist. Für verteilte Systeme ergänzt W3C Trace Context beziehungsweise OpenTelemetry die lokale Request-ID; externe IDs werden validiert und nie blind als Logstruktur übernommen.
+Logs werden strukturiert (JSON) mit UTC-Zeit geschrieben, damit sie sich durchsuchen und auswerten lassen. Ein eigenes _Audit-Log_ für sicherheitsrelevante Aktionen (Freigabe erteilt, Notiz gelöscht, Rolle geändert) mit Akteur, Aktion, Objekt, Ergebnis und Zeitpunkt ist bei Vorfällen oft die einzige Möglichkeit festzustellen, was geschehen ist. Es ist zugriffsbeschränkt, gegen nachträgliche Änderung geschützt und hat eine festgelegte Aufbewahrungs- und Löschfrist @cheatsheetseries-owasp-org-cheatsheets-logging-cheat-sheet-html. Für verteilte Systeme ergänzt W3C Trace Context @www-w3-org-tr-trace-context beziehungsweise OpenTelemetry @opentelemetry-io-docs-concepts-context-propagation die lokale Request-ID; externe IDs werden validiert @www-w3-org-tr-trace-context und nie blind als Logstruktur übernommen.
 
-#merke[*Datensparsamkeit* ist die wirksamste Datenschutzmaßnahme: Was nicht gespeichert wird, kann weder abfließen noch muss es gelöscht, beauskunftet oder geschützt werden. Für jede Spalte, jedes Log-Feld und jedes Feld in einer Antwort lohnt die Frage, ob es wirklich gebraucht wird. Pseudonyme IDs aus dem IdP (`sub`) statt E-Mail-Adressen in der eigenen Datenbank sind ein einfacher erster Schritt.]
+#merke[*Datensparsamkeit* @gdpr-info-eu-art-5-gdpr ist die wirksamste Datenschutzmaßnahme: Was nicht gespeichert wird, kann weder abfließen noch muss es gelöscht, beauskunftet oder geschützt werden. Für jede Spalte, jedes Log-Feld und jedes Feld in einer Antwort lohnt die Frage, ob es wirklich gebraucht wird. Pseudonyme IDs aus dem IdP (`sub`) statt E-Mail-Adressen in der eigenen Datenbank sind ein einfacher erster Schritt.]

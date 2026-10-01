@@ -21,7 +21,7 @@ Damit ein Image vom Build-Rechner auf den Server kommt, braucht es eine Registry
 
 == Die Gitea-Registry
 
-Images in Gitea heißen `gitea.example.com/<besitzer>/<image>:<tag>`, wobei der Besitzer ein Benutzer oder eine Organisation ist. Zum Anmelden braucht es einen persönlichen Zugriffstoken (Gitea: _Einstellungen -> Anwendungen_) mit dem Recht, Pakete zu lesen bzw. zu schreiben. Das normale Passwort funktioniert nicht, wenn Zwei-Faktor-Authentifizierung aktiv ist, und sollte ohnehin nicht in Skripten stehen.
+Images in Gitea heißen `gitea.example.com/<besitzer>/<image>:<tag>`, wobei der Besitzer ein Benutzer oder eine Organisation ist @docs-gitea-com-usage-packages-container. Zum Anmelden braucht es einen persönlichen Zugriffstoken (Gitea: _Einstellungen -> Anwendungen_) mit dem Recht, Pakete zu lesen bzw. zu schreiben @docs-gitea-com-development-api-usage @docs-gitea-com-usage-packages-overview. Das normale Passwort funktioniert nicht, wenn Zwei-Faktor-Authentifizierung aktiv ist @docs-gitea-com-usage-packages-container, und sollte ohnehin nicht in Skripten stehen.
 
 ```bash
 docker login gitea.example.com               # Benutzername + Token (Schlüsselbund)
@@ -30,13 +30,13 @@ docker push gitea.example.com/team/notizen:1.4.0
 docker pull gitea.example.com/team/notizen:1.4.0
 ```
 
-Nach dem ersten Push erscheint das Image unter _Pakete_ beim Besitzer. Dort lässt es sich mit einem Repository verknüpfen und in der Sichtbarkeit einschränken. Für den Server legt man einen eigenen Token *nur mit Leserecht* an. Kommt dieser Token abhanden, kann damit niemand manipulierte Images hochladen.
+Nach dem ersten Push erscheint das Image unter _Pakete_ beim Besitzer. Dort lässt es sich mit einem Repository verknüpfen. Die Sichtbarkeit wird vom Besitzer geerbt, für private Images muss also der Besitzer (Benutzer oder Organisation) privat sein @docs-gitea-com-usage-packages-overview. Für den Server legt man einen eigenen Token *nur mit Leserecht* an. Kommt dieser Token abhanden, kann damit niemand manipulierte Images hochladen.
 
-#tipp[Gitea kann alte Image-Versionen automatisch löschen: Unter _Pakete -> Aufräumregeln_ legst du etwa fest, dass von jedem Image nur die letzten 20 Versionen behalten werden, Tags nach dem Muster `v*` aber nie gelöscht werden. Ohne solche Regeln wächst die Registry mit jedem CI-Lauf.]
+#tipp[Gitea kann alte Image-Versionen automatisch löschen: In den Einstellungen des Besitzers unter _Pakete -> Aufräumregeln_ legst du etwa fest, dass von jedem Image nur die letzten 20 Versionen behalten werden, Tags, die auf den regulären Ausdruck `\d+\.\d+\.\d+` passen, aber nie gelöscht werden @docs-gitea-com-usage-packages-storage. Ohne solche Regeln wächst die Registry mit jedem CI-Lauf.]
 
 == Eine Tag-Strategie
 
-Tags sind beweglich (Kapitel 1). Damit jederzeit klar ist, welcher Code in welchem Image steckt, braucht es ein festes Schema:
+Tags sind beweglich (Kapitel 1) @docs-docker-com-build-building-best-practices. Damit jederzeit klar ist, welcher Code in welchem Image steckt, braucht es ein festes Schema:
 
 #table(columns: (auto, 1fr),
   [Tag], [Verwendung],
@@ -48,4 +48,4 @@ Tags sind beweglich (Kapitel 1). Damit jederzeit klar ist, welcher Code in welch
 
 == Docker Hub
 
-Öffentliche Images von Docker Hub lassen sich ohne Anmeldung laden. Im September 2026 gilt ein Sechs-Stunden-Kontingent von 100 Pulls je IPv4-Adresse beziehungsweise IPv6-/64-Netz für anonyme Nutzung und 200 Pulls für ein authentifiziertes Personal-Konto; bezahlte Tarife sind im Rahmen der Fair-Use-Regeln unbegrenzt. Ein Multi-Plattform-Pull zählt pro geladener Architektur. Auf gemeinsam genutzten Build-Servern ist das Kontingent schnell erreicht, und Builds schlagen mit _toomanyrequests_ fehl. Abhilfe: Runner anmelden, Builds und Pulls nicht unnötig wiederholen, Caches kontrolliert verwenden und bevorzugt offizielle Images oder Images bekannter Herausgeber einsetzen.
+Öffentliche Images von Docker Hub lassen sich ohne Anmeldung laden. Stand Oktober 2026 gilt ein Sechs-Stunden-Kontingent von 100 Pulls je IPv4-Adresse beziehungsweise IPv6-/64-Netz für anonyme Nutzung und 200 Pulls für ein authentifiziertes Personal-Konto; bezahlte Tarife sind im Rahmen der Fair-Use-Regeln unbegrenzt. Ein Multi-Plattform-Pull zählt pro geladener Architektur @docs-docker-com-docker-hub-usage-pulls. Auf gemeinsam genutzten Build-Servern ist das Kontingent schnell erreicht, und Builds schlagen mit HTTP 429 und der Meldung _You have reached your pull rate limit_ fehl @docs-docker-com-docker-hub-usage-pulls. Abhilfe: Runner anmelden, Builds und Pulls nicht unnötig wiederholen, Caches kontrolliert verwenden und bevorzugt offizielle Images oder Images bekannter Herausgeber einsetzen @docs-docker-com-docker-hub-image-library-trusted-content.

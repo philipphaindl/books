@@ -53,7 +53,7 @@ docker compose ps
 curl http://localhost:8000/health
 ```
 
-Die Datei heißt `compose.yaml` (ältere Projekte nutzen `docker-compose.yml`, beides wird erkannt). Eine Zeile `version: "3.8"` am Anfang ist veraltet und wird nur noch mit einer Warnung ignoriert.
+Die Datei heißt `compose.yaml` (ältere Projekte nutzen `docker-compose.yml`, beides wird erkannt) @docs-docker-com-compose-intro-compose-application-model. Eine Zeile `version: "3.8"` am Anfang ist veraltet und wird nur noch mit einer Warnung ignoriert @docs-docker-com-reference-compose-file-version-and-name.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -71,13 +71,13 @@ Die Datei heißt `compose.yaml` (ältere Projekte nutzen `docker-compose.yml`, b
   caption: [Was `docker compose up` anlegt. Der Projektname ist standardmäßig der Verzeichnisname.],
 )
 
-Compose leitet einen *Projektnamen* ab, standardmäßig den Namen des Verzeichnisses, und stellt ihn allen Ressourcen voran. Das Netz `notizen_default` entsteht automatisch, alle Dienste der Datei hängen darin und erreichen sich über ihren Dienstnamen (`db`, `api`). Zwei Projekte mit gleichem Verzeichnisnamen würden sich dieselben Ressourcen teilen. Dann hilft `name: notizen` oben in der Datei oder `-p name` beim Aufruf.
+Compose leitet einen *Projektnamen* ab, standardmäßig den Namen des Verzeichnisses, und stellt ihn allen Ressourcen voran @docs-docker-com-compose-how-tos-project-name. Das Netz `notizen_default` entsteht automatisch, alle Dienste der Datei hängen darin und erreichen sich über ihren Dienstnamen (`db`, `api`) @docs-docker-com-compose-how-tos-networking. Zwei Projekte mit gleichem Verzeichnisnamen würden sich dieselben Ressourcen teilen. Dann hilft `name: notizen` oben in der Datei oder `-p name` beim Aufruf.
 
 == Die Befehle
 
 #table(columns: (auto, 1fr),
   [Befehl], [Wirkung],
-  [`docker compose up -d`], [Sollzustand herstellen: fehlende Images bauen, geänderte Container neu erzeugen, starten],
+  [`docker compose up -d`], [Sollzustand herstellen: fehlende Images bauen, geänderte Container neu erzeugen, starten @docs-docker-com-reference-cli-docker-compose-up],
   [`docker compose up -d --build`], [vor dem Start einen Build anstoßen; unveränderte Schichten dürfen aus dem Cache kommen],
   [`docker compose up -d --wait`], [starten und bis `running` beziehungsweise `healthy` warten],
   [`docker compose ps`], [Dienste mit Status und Gesundheit],
@@ -87,9 +87,9 @@ Compose leitet einen *Projektnamen* ab, standardmäßig den Namen des Verzeichni
   [`docker compose restart api`], [Dienst neu starten (ohne Neuerzeugung, Konfigurationsänderungen greifen *nicht*)],
   [`docker compose stop` / `start`], [anhalten, ohne etwas zu löschen],
   [`docker compose down`], [Container und Netz entfernen. Volumes und Images bleiben.],
-  [`docker compose down -v`], [zusätzlich *die Volumes löschen*, also die Datenbank!],
+  [`docker compose down -v`], [zusätzlich *die Volumes löschen*, also die Datenbank! @docs-docker-com-reference-cli-docker-compose-down],
   [`docker compose pull`], [neuere Versionen der Images laden (danach `up -d`)],
-  [`docker compose config`], [die vollständig aufgelöste Konfiguration anzeigen],
+  [`docker compose config`], [die vollständig aufgelöste Konfiguration anzeigen @docs-docker-com-reference-cli-docker-compose-config],
 )
 
 #merke[`docker compose up -d` ist *idempotent*: Es vergleicht Soll- und Istzustand und ändert nur, was nötig ist. Nach jeder Änderung an `compose.yaml`, `.env` oder am Image genügt ein erneutes `up -d`. Ein `restart` übernimmt dagegen keine Konfigurationsänderungen, weil der Container nicht neu erzeugt wird.]
@@ -100,7 +100,7 @@ Hier gibt es eine Verwechslungsgefahr, die fast jeder einmal erlebt. Es gibt zwe
 
 #table(columns: (auto, 1fr, 1fr),
   [], [`.env` im Projektordner], [`env_file:` in einem Dienst],
-  [Wirkt auf], [die `compose.yaml` selbst: ersetzt `${VARIABLE}` beim Einlesen], [den Container: setzt Umgebungsvariablen im laufenden Prozess],
+  [Wirkt auf], [die `compose.yaml` selbst: ersetzt `${VARIABLE}` beim Einlesen @docs-docker-com-compose-how-tos-environment-variables-variable-interpolation], [den Container: setzt Umgebungsvariablen im laufenden Prozess @docs-docker-com-compose-how-tos-environment-variables-set-environment-variables],
   [Automatisch?], [aus dem Projektverzeichnis; mit `--env-file` lässt sich die Quelle explizit wählen], [nur wenn im Dienst angegeben],
   [Sichtbar im Container?], [nur, was über `environment:` weitergereicht wird], [ja, alle Einträge],
 )
@@ -113,11 +113,11 @@ Hier gibt es eine Verwechslungsgefahr, die fast jeder einmal erlebt. Es gibt zwe
       - app.env                                     # alle Zeilen als Variablen in den Container
 ```
 
-Shell-Variablen, explizite `--env-file`-Dateien und `.env` haben eine festgelegte Priorität. Was Compose aus allen Quellen gemacht hat, zeigen `docker compose config` und `docker compose config --environment`. Das ist der erste Schritt, wenn ein Wert nicht ankommt. Geheimnisse gehören trotzdem nicht in `.env`, weil die aufgelöste Konfiguration und Prozessumgebung sie offenlegen können.
+Shell-Variablen, explizite `--env-file`-Dateien und `.env` haben eine festgelegte Priorität @docs-docker-com-compose-how-tos-environment-variables-variable-interpolation. Was Compose aus allen Quellen gemacht hat, zeigen `docker compose config` und `docker compose config --environment`. Das ist der erste Schritt, wenn ein Wert nicht ankommt. Geheimnisse gehören trotzdem nicht in `.env`, weil die aufgelöste Konfiguration und Prozessumgebung sie offenlegen können @docs-docker-com-compose-how-tos-environment-variables-set-environment-variables.
 
 == Startreihenfolge, Healthchecks und Migrationen
 
-`depends_on` allein regelt nur die *Startreihenfolge*: Die Datenbank wird zuerst gestartet, ist aber in dem Moment noch lange nicht bereit, Verbindungen anzunehmen. Erst `condition: service_healthy` wartet beim Start, bis der Healthcheck des anderen Dienstes erfolgreich ist. Das ist keine dauerhafte Selbstheilung: Wird ein laufender Container später `unhealthy`, startet ihn Docker deshalb nicht automatisch neu. Eine Restart Policy greift erst, wenn sein Hauptprozess endet. Deshalb braucht jede Datenbank im Compose-Projekt einen Healthcheck, und die Anwendung muss vorübergehende Verbindungsfehler selbst mit Retries behandeln.
+`depends_on` allein regelt nur die *Startreihenfolge*: Die Datenbank wird zuerst gestartet, ist aber in dem Moment noch lange nicht bereit, Verbindungen anzunehmen. Erst `condition: service_healthy` wartet beim Start, bis der Healthcheck des anderen Dienstes erfolgreich ist @docs-docker-com-reference-compose-file-services. Das ist keine dauerhafte Selbstheilung: Wird ein laufender Container später `unhealthy`, startet ihn Docker deshalb nicht automatisch neu, denn der Healthcheck setzt nur den Status. Eine Restart Policy greift erst, wenn sein Hauptprozess endet @docs-docker-com-reference-dockerfile @docs-docker-com-engine-containers-start-containers-automatically. Deshalb braucht jede Datenbank im Compose-Projekt einen Healthcheck, und die Anwendung muss vorübergehende Verbindungsfehler selbst mit Retries behandeln.
 
 Datenbank-Migrationen, etwa mit Alembic, laufen am saubersten als eigener Einmal-Dienst, der vor der API fertig sein muss:
 
@@ -141,11 +141,11 @@ Datenbank-Migrationen, etwa mit Alembic, laufen am saubersten als eigener Einmal
 
 Schlägt die Migration fehl, startet die API gar nicht erst. Das ist genau richtig, denn eine neue Version gegen ein altes Datenbankschema laufen zu lassen, führt zu schwer verständlichen Fehlern.
 
-Seit Compose 5.3 kann ein Dienst alternativ über `pre_start` einen Initialisierungsschritt unmittelbar vor seinem Hauptprozess ausführen. Für kleine lokale Setups ist das kompakt. Ein eigener Migrations-Dienst bleibt für Produktion oft klarer, weil sein einmaliger Status sichtbar ist und mehrere API-Replikate nicht gleichzeitig dieselbe Migration starten.
+Seit Compose 5.3 kann ein Dienst alternativ über `pre_start` einen Initialisierungsschritt unmittelbar vor seinem Hauptprozess ausführen @github-com-docker-compose-releases-tag-v5-3-0 @docs-docker-com-compose-how-tos-init-containers. Für kleine lokale Setups ist das kompakt. Ein eigener Migrations-Dienst bleibt für Produktion oft klarer, weil sein einmaliger Status sichtbar ist, er von mehreren Diensten abhängig sein kann und sich unabhängig aufrufen lässt @docs-docker-com-compose-how-tos-init-containers.
 
 == Entwickeln mit Compose Watch
 
-Für die Entwicklung soll eine Codeänderung sofort wirken, ohne Neubau. `develop: watch` synchronisiert geänderte Dateien in den laufenden Container und baut nur neu, wenn sich die Abhängigkeiten ändern:
+Für die Entwicklung soll eine Codeänderung sofort wirken, ohne Neubau. `develop: watch` synchronisiert geänderte Dateien in den laufenden Container und baut nur neu, wenn sich die Abhängigkeiten ändern @docs-docker-com-compose-how-tos-file-watch:
 
 ```yaml
   api:
@@ -164,11 +164,11 @@ Für die Entwicklung soll eine Codeänderung sofort wirken, ohne Neubau. `develo
 docker compose up --watch        # startet alles und überwacht die Pfade
 ```
 
-`fastapi dev` lädt die Anwendung bei jeder synchronisierten Änderung neu. Gegenüber einem Bind Mount hat das den Vorteil, dass keine Dateien vom Container zurück auf den Mac geschrieben werden und das Verhalten auf allen Rechnern gleich ist.
+`fastapi dev` lädt die Anwendung bei jeder synchronisierten Änderung neu. Gegenüber einem Bind Mount hat das den Vorteil, dass keine Dateien vom Container zurück auf den Mac geschrieben werden und das Verhalten auf allen Rechnern gleich ist @docs-docker-com-compose-how-tos-file-watch.
 
 == Profile: optionale Dienste
 
-Werkzeuge wie eine Datenbank-Oberfläche sollen nur bei Bedarf laufen. Dienste mit einem Profil startet Compose nur, wenn das Profil ausdrücklich aktiviert wird:
+Werkzeuge wie eine Datenbank-Oberfläche sollen nur bei Bedarf laufen. Dienste mit einem Profil startet Compose nur, wenn das Profil ausdrücklich aktiviert wird @docs-docker-com-compose-how-tos-profiles:
 
 ```yaml
   adminer:
@@ -186,4 +186,4 @@ docker compose --profile werkzeuge up -d
 Die `compose.yaml` im Repository ist auf die Entwicklung ausgelegt: Sie baut das Image selbst, veröffentlicht die API direkt und nutzt ein einfaches Passwort. Auf dem Server gelten andere Regeln: Das Image kommt fertig aus der Registry, davor steht ein Reverse Proxy, Passwörter liegen in Dateien. Dafür gibt es zwei Wege:
 
 - *Eine eigene Datei für die Produktion*, im Repository als `compose.prod.yaml` gepflegt und auf dem Server als `compose.yaml` abgelegt. Übersichtlich, weil man auf dem Server genau sieht, was läuft. Diesen Weg nutzt Kapitel 13.
-- *Überlagerung mehrerer Dateien*: `docker compose -f compose.yaml -f compose.prod.yaml up -d` führt beide zusammen, spätere Dateien überschreiben frühere. Eine Datei `compose.override.yaml` wird sogar automatisch dazugenommen. Das spart Wiederholungen, macht aber schwerer nachvollziehbar, was am Ende gilt. Dann hilft wieder `docker compose config`.
+- *Überlagerung mehrerer Dateien*: `docker compose -f compose.yaml -f compose.prod.yaml up -d` führt beide zusammen, spätere Dateien überschreiben frühere. Eine Datei `compose.override.yaml` wird sogar automatisch dazugenommen @docs-docker-com-compose-how-tos-multiple-compose-files-merge. Das spart Wiederholungen, macht aber schwerer nachvollziehbar, was am Ende gilt. Dann hilft wieder `docker compose config`.

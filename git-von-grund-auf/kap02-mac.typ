@@ -6,7 +6,7 @@ Bevor es um Git selbst geht, lohnt sich eine halbe Stunde für eine saubere Grun
 
 == Terminal-Grundlagen in fünf Minuten
 
-Das Terminal (`Programme -> Dienstprogramme -> Terminal`, oder schneller über #key[⌘] #key[Leertaste] und "Terminal") startet seit macOS Catalina standardmäßig die Shell *zsh*. Alternativen wie iTerm2 oder Ghostty funktionieren genauso. Die wichtigsten Befehle zum Navigieren:
+Das Terminal (`Programme -> Dienstprogramme -> Terminal`, oder schneller über #key[⌘] #key[Leertaste] und "Terminal") startet seit macOS Catalina standardmäßig die Shell *zsh* @support-apple-com-en-us-102360. Alternativen wie iTerm2 oder Ghostty funktionieren genauso. Die wichtigsten Befehle zum Navigieren:
 
 #table(columns: (auto, 1fr),
   [Befehl], [Bedeutung],
@@ -16,14 +16,14 @@ Das Terminal (`Programme -> Dienstprogramme -> Terminal`, oder schneller über #
   [`mkdir -p a/b/c`], [Legt Verzeichnisse an, inklusive fehlender Zwischenebenen.],
   [`open .`], [Öffnet das aktuelle Verzeichnis im Finder. `open datei.pdf` öffnet mit dem Standardprogramm.],
   [`cat`, `less`], [Datei ausgeben bzw. seitenweise anzeigen.],
-  [`code .`], [Öffnet das Verzeichnis in VS Code (wenn der Befehl installiert ist, siehe unten).],
+  [`code .`], [Öffnet das Verzeichnis in VS Code (wenn der Befehl installiert ist, siehe unten) @code-visualstudio-com-docs-setup-mac.],
 )
 
-Zwei Dinge sparen im Alltag am meisten Zeit: Die #key[Tab]-Taste vervollständigt Pfade, Befehle und bei Git sogar Branch-Namen. Mit #key[↑] holst du frühere Befehle zurück, mit #key[ctrl] #key[R] durchsuchst du die gesamte Befehlshistorie.
+Zwei Dinge sparen im Alltag am meisten Zeit: Die #key[Tab]-Taste vervollständigt Pfade, Befehle und bei Git sogar Branch-Namen @git-scm-com-book-en-v2-appendix-a-3a-git-in-other-environments-git-in-zsh. Mit #key[↑] holst du frühere Befehle zurück, mit #key[ctrl] #key[R] durchsuchst du die gesamte Befehlshistorie.
 
 === Der Pager: Warum `git log` "hängen bleibt"
 
-Längere Ausgaben wie `git log` oder `git diff` zeigt Git im Programm `less` an. Das wirkt beim ersten Mal wie ein Hänger, ist aber ein Betrachter mit eigenen Tasten:
+Längere Ausgaben wie `git log` oder `git diff` zeigt Git im Programm `less` an @git-scm-com-docs-git-config. Das wirkt beim ersten Mal wie ein Hänger, ist aber ein Betrachter mit eigenen Tasten @man7-org-linux-man-pages-man1-less-1-html:
 
 #table(columns: (auto, 1fr, auto, 1fr),
   [Taste], [Wirkung], [Taste], [Wirkung],
@@ -32,11 +32,11 @@ Längere Ausgaben wie `git log` oder `git diff` zeigt Git im Programm `less` an.
   [#key[g] / #key[G]], [Anfang / Ende], [#key[q]], [*beenden*],
 )
 
-Hilfe gibt es auf zwei Stufen: `git log -h` zeigt eine kurze Optionsübersicht im Terminal, `git help log` öffnet die vollständige Handbuchseite.
+Hilfe gibt es auf zwei Stufen: `git log -h` zeigt eine kurze Optionsübersicht im Terminal @git-scm-com-docs-gitcli, `git help log` öffnet die vollständige Handbuchseite @git-scm-com-docs-git-help.
 
 == Git installieren
 
-macOS bringt kein vollwertiges Git mit. Beim ersten Aufruf von `git` bietet das System die Installation der _Xcode Command Line Tools_ an, die ein von Apple gepflegtes Git enthalten. Das funktioniert, hinkt aber der offiziellen Version meist einige Releases hinterher. Empfehlenswert ist Git über Homebrew, den Paketmanager für macOS:
+macOS bringt kein vollwertiges Git mit. Beim ersten Aufruf von `git` bietet das System die Installation der _Xcode Command Line Tools_ an @git-scm-com-book-en-v2-getting-started-installing-git, die ein von Apple gepflegtes Git enthalten @git-scm-com-install-mac. Das funktioniert, hinkt aber der offiziellen Version meist einige Releases hinterher @git-scm-com-install-mac. Empfehlenswert ist Git über Homebrew, den Paketmanager für macOS @docs-brew-sh-installation:
 
 ```bash
 # 1. Homebrew installieren (einmalig; Befehl von brew.sh)
@@ -61,7 +61,7 @@ git version 2.55.0
 
 == Die Konfiguration
 
-Git liest Einstellungen aus drei Ebenen, wobei die spezifischere gewinnt:
+Git liest Einstellungen aus drei Ebenen, wobei die spezifischere gewinnt @git-scm-com-docs-git-config:
 
 #table(columns: (auto, auto, 1fr),
   [Ebene], [Datei], [Gilt für],
@@ -70,7 +70,7 @@ Git liest Einstellungen aus drei Ebenen, wobei die spezifischere gewinnt:
   [`--local`], [`.git/config` im Projekt], [nur dieses eine Repository (Standard, wenn nichts angegeben ist)],
 )
 
-Mit `git config --list --show-origin` siehst du alle aktiven Werte und aus welcher Datei sie stammen. Das ist die erste Anlaufstelle, wenn sich Git "komisch" verhält. Die folgende Datei ist eine erprobte Grundkonfiguration, jede Zeile ist in der Tabelle darunter erklärt. Du kannst sie direkt als `~/.gitconfig` speichern und Name und E-Mail anpassen.
+Mit `git config --list --show-origin` siehst du alle aktiven Werte und aus welcher Datei sie stammen @git-scm-com-docs-git-config. Das ist die erste Anlaufstelle, wenn sich Git "komisch" verhält. Die folgende Datei ist eine erprobte Grundkonfiguration, jede Zeile ist in der Tabelle darunter erklärt. Du kannst sie direkt als `~/.gitconfig` speichern und Name und E-Mail anpassen.
 
 #datei("~/.gitconfig")[
 ```ini
@@ -119,24 +119,24 @@ Mit `git config --list --show-origin` siehst du alle aktiven Werte und aus welch
 
 #table(columns: (auto, 1fr),
   [Einstellung], [Wirkung],
-  [`init.defaultBranch`], [Neue Repositories beginnen mit `main` statt `master`.],
-  [`pull.rebase = true`], [`git pull` setzt eigene, noch nicht gepushte Commits auf den neuen Remote-Stand, statt einen Merge-Commit zu erzeugen. Hält die Historie linear (Kapitel 5).],
-  [`push.autoSetupRemote`], [Beim ersten `git push` eines neuen Branches wird der Upstream automatisch gesetzt. Kein `-u origin feature` mehr nötig.],
-  [`fetch.prune`], [Entfernt lokale `origin/...`-Branches, die auf dem Server gelöscht wurden, etwa nach einem gemergten Pull Request.],
-  [`rebase.autoStash`], [Uncommittete Änderungen werden vor einem Rebase automatisch beiseitegelegt und danach wiederhergestellt.],
-  [`rebase.autoSquash`], [`fixup!`-Commits werden beim interaktiven Rebase automatisch an die richtige Stelle sortiert (Kapitel 7).],
-  [`rebase.updateRefs`], [Beim Rebase aufeinander aufbauender Branches werden die Zwischen-Branches mitverschoben.],
-  [`merge.conflictStyle = zdiff3`], [Konfliktmarkierungen zeigen zusätzlich den gemeinsamen Ursprung. Das macht Konflikte deutlich leichter lesbar (Kapitel 6).],
-  [`rerere.enabled`], [Git merkt sich, wie du einen Konflikt gelöst hast, und wendet die Lösung beim nächsten identischen Konflikt selbst an.],
-  [`diff.algorithm = histogram`], [Liefert bei verschobenen Codeblöcken meist verständlichere Diffs als der Standardalgorithmus.],
-  [`commit.verbose`], [Zeigt beim Schreiben der Commit-Nachricht im Editor den Diff darunter an.],
-  [`branch.sort`], [`git branch` listet die zuletzt benutzten Branches zuerst.],
-  [`help.autocorrect = prompt`], [Bei Tippfehlern wie `git stauts` fragt Git, ob `status` gemeint war.],
+  [`init.defaultBranch`], [Neue Repositories beginnen mit `main` statt `master` @git-scm-com-docs-git-init.],
+  [`pull.rebase = true`], [`git pull` setzt eigene, noch nicht gepushte Commits auf den neuen Remote-Stand, statt einen Merge-Commit zu erzeugen @git-scm-com-docs-git-pull. Hält die Historie linear (Kapitel 5).],
+  [`push.autoSetupRemote`], [Beim ersten `git push` eines neuen Branches wird der Upstream automatisch gesetzt. Kein `-u origin feature` mehr nötig @git-scm-com-docs-git-push.],
+  [`fetch.prune`], [Entfernt lokale `origin/...`-Branches, die auf dem Server gelöscht wurden, etwa nach einem gemergten Pull Request @git-scm-com-docs-git-fetch.],
+  [`rebase.autoStash`], [Uncommittete Änderungen werden vor einem Rebase automatisch beiseitegelegt und danach wiederhergestellt @git-scm-com-docs-git-rebase.],
+  [`rebase.autoSquash`], [`fixup!`-Commits werden beim interaktiven Rebase automatisch an die richtige Stelle sortiert (Kapitel 7) @git-scm-com-docs-git-rebase.],
+  [`rebase.updateRefs`], [Beim Rebase aufeinander aufbauender Branches werden die Zwischen-Branches mitverschoben @git-scm-com-docs-git-rebase.],
+  [`merge.conflictStyle = zdiff3`], [Konfliktmarkierungen zeigen zusätzlich den gemeinsamen Ursprung @git-scm-com-docs-git-merge. Das macht Konflikte deutlich leichter lesbar (Kapitel 6).],
+  [`rerere.enabled`], [Git merkt sich, wie du einen Konflikt gelöst hast, und wendet die Lösung beim nächsten identischen Konflikt selbst an @git-scm-com-docs-git-rerere.],
+  [`diff.algorithm = histogram`], [Liefert bei verschobenen Codeblöcken meist verständlichere Diffs als der Standardalgorithmus @git-scm-com-docs-diff-options.],
+  [`commit.verbose`], [Zeigt beim Schreiben der Commit-Nachricht im Editor den Diff darunter an @git-scm-com-docs-git-config.],
+  [`branch.sort`], [`git branch` listet die zuletzt benutzten Branches zuerst @git-scm-com-docs-git-branch.],
+  [`help.autocorrect = prompt`], [Bei Tippfehlern wie `git stauts` fragt Git, ob `status` gemeint war @git-scm-com-docs-git-config.],
 )
 
 === Unterschiedliche Identitäten pro Ordner
 
-Wer beruflich und privat mit verschiedenen E-Mail-Adressen committet, kann die Identität abhängig vom Ordner setzen. Alle Repositories unter `~/work/` bekommen dann automatisch die Arbeitsadresse:
+Wer beruflich und privat mit verschiedenen E-Mail-Adressen committet, kann die Identität abhängig vom Ordner setzen. Alle Repositories unter `~/work/` bekommen dann automatisch die Arbeitsadresse @git-scm-com-docs-git-config:
 
 ```ini
 # in ~/.gitconfig ergänzen
@@ -154,14 +154,14 @@ Prüfen lässt sich das im jeweiligen Repository mit `git config user.email`.
 
 == Der Editor für Commit-Nachrichten
 
-Ohne Konfiguration öffnet Git für Commit-Nachrichten und interaktive Rebases den Editor `vim`. Wer dort unfreiwillig landet: #key[i] schaltet in den Schreibmodus, #key[Esc] zurück, dann `:wq` und #key[⏎] speichert und beendet, `:q!` beendet ohne Speichern (bei einer Commit-Nachricht bricht das den Commit ab). Angenehmer sind:
+Ohne Konfiguration öffnet Git für Commit-Nachrichten und interaktive Rebases den Editor `vi` (am Mac ist das Vim) @git-scm-com-docs-git-var. Wer dort unfreiwillig landet: #key[i] schaltet in den Schreibmodus, #key[Esc] zurück, dann `:wq` und #key[⏎] speichert und beendet, `:q!` beendet ohne Speichern (bei einer Commit-Nachricht bricht das den Commit ab). Angenehmer sind:
 
 ```bash
 git config --global core.editor nano             # einfacher Terminal-Editor
 git config --global core.editor "code --wait"    # VS Code
 ```
 
-Für VS Code muss einmalig der Shell-Befehl `code` installiert werden: In VS Code #key[⌘] #key[⇧] #key[P] drücken und _Shell Command: Install 'code' command in PATH_ wählen. Das `--wait` ist wichtig, damit Git wartet, bis du den Tab schließt. Bei `nano` speichert #key[ctrl] #key[O] und #key[ctrl] #key[X] beendet.
+Für VS Code muss einmalig der Shell-Befehl `code` installiert werden: In VS Code #key[⌘] #key[⇧] #key[P] drücken und _Shell Command: Install 'code' command in PATH_ wählen @code-visualstudio-com-docs-setup-mac. Das `--wait` ist wichtig, damit Git wartet, bis du den Tab schließt @code-visualstudio-com-docs-editor-command-line. Bei `nano` speichert #key[ctrl] #key[O] und #key[ctrl] #key[X] beendet @nano-editor-org-dist-latest-cheatsheet-html.
 
 == SSH-Schlüssel einrichten
 
@@ -173,7 +173,7 @@ ssh-keygen -t ed25519 -C "philipp@macbook"
 # Speicherort bestätigen (~/.ssh/id_ed25519) und eine Passphrase vergeben
 ```
 
-Damit du die Passphrase nicht bei jedem Push eintippen musst, speichert macOS sie im Schlüsselbund. Dazu gehört ein Eintrag in der SSH-Konfiguration, in dem du auch gleich einen Kurznamen für den Gitea-Server anlegen kannst:
+Damit du die Passphrase nicht bei jedem Push eintippen musst, speichert macOS sie im Schlüsselbund @developer-apple-com-library-archive-technotes-tn2449-index-html @docs-github-com-en-authentication-connecting-to-github-with-ssh-generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent. Dazu gehört ein Eintrag in der SSH-Konfiguration, in dem du auch gleich einen Kurznamen für den Gitea-Server anlegen kannst @man-openbsd-org-ssh-config:
 
 #datei("~/.ssh/config")[
 ```text
@@ -195,7 +195,7 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519   # Passphrase einmal in den Schl
 pbcopy < ~/.ssh/id_ed25519.pub                   # öffentlichen Schlüssel in die Zwischenablage
 ```
 
-In Gitea fügst du den Schlüssel unter _Einstellungen -> SSH/GPG-Schlüssel -> Schlüssel hinzufügen_ ein. Danach testest du die Verbindung:
+In Gitea fügst du den Schlüssel unter _Einstellungen -> SSH/GPG-Schlüssel -> Schlüssel hinzufügen_ ein. Danach testest du die Verbindung @docs-gitea-com-help-faq:
 
 ```bash
 ssh -T gitea
@@ -223,14 +223,14 @@ Manche Dateien entstehen nicht durch das Projekt, sondern durch deinen Rechner, 
 ```
 ]
 
-Diese Datei liest Git automatisch. Der Eintrag `core.excludesFile` in der Konfiguration oben macht es nur explizit.
+Diese Datei liest Git automatisch @git-scm-com-docs-gitignore. Der Eintrag `core.excludesFile` in der Konfiguration oben macht es nur explizit.
 
 == Branch im Prompt anzeigen
 
-Sehr hilfreich ist es, den aktuellen Branch direkt in der Eingabezeile zu sehen. zsh bringt dafür alles mit. In die Datei `~/.zshrc` eintragen und ein neues Terminalfenster öffnen:
+Sehr hilfreich ist es, den aktuellen Branch direkt in der Eingabezeile zu sehen. zsh bringt dafür alles mit @git-scm-com-book-en-v2-appendix-a-3a-git-in-other-environments-git-in-zsh. In die Datei `~/.zshrc` eintragen und ein neues Terminalfenster öffnen:
 
 #datei("~/.zshrc")[
-```bash
+```zsh
 # Tab-Vervollständigung (inklusive Git-Branches)
 autoload -Uz compinit && compinit
 
@@ -244,12 +244,12 @@ PROMPT='%F{cyan}%~%f%F{yellow}${vcs_info_msg_0_}%f %# '
 ```
 ]
 
-Das Ergebnis sieht so aus: `~/projekte/demo (feature/login) %`. Das `actionformats` zeigt zusätzlich an, wenn gerade ein Rebase oder Merge läuft, etwa `(main|rebase-i)`. Wer mehr möchte (Anzeige von uncommitteten Änderungen, Ahead/Behind-Zähler), findet mit _Starship_ (`brew install starship`) einen fertigen, schnellen Prompt.
+Das Ergebnis sieht so aus: `~/projekte/demo (feature/login) %`. Das `actionformats` zeigt zusätzlich an, wenn gerade ein Rebase oder Merge läuft, etwa `(main|rebase-i)` @zsh-sourceforge-io-doc-release-user-contributions-html. Wer mehr möchte (Anzeige von uncommitteten Änderungen, Ahead/Behind-Zähler), findet mit _Starship_ (`brew install starship`) einen fertigen, schnellen Prompt @starship-rs.
 
 #mac[
-*Groß-/Kleinschreibung:* Das Mac-Dateisystem APFS unterscheidet standardmäßig nicht zwischen `readme.md` und `README.md`, Linux-Server und Git selbst aber schon. Eine reine Umbenennung der Schreibweise ist deshalb heikel. Zuverlässig funktioniert sie in zwei Schritten: `git mv readme.md tmp.md && git mv tmp.md README.md`.
+*Groß-/Kleinschreibung:* Das Mac-Dateisystem APFS unterscheidet standardmäßig nicht zwischen `readme.md` und `README.md` @support-apple-com-guide-disk-utility-file-system-formats-dsku19ed921c-mac, Linux-Server und Git selbst aber schon @git-scm-com-docs-git-config. Eine reine Umbenennung der Schreibweise ist deshalb heikel. Zuverlässig funktioniert sie in zwei Schritten: `git mv readme.md tmp.md && git mv tmp.md README.md`.
 
 *Versteckte Dateien:* Im Finder blendet #key[⌘] #key[⇧] #key[.] versteckte Dateien wie `.git` und `.gitignore` ein und aus.
 
-*Umlaute in Dateinamen:* macOS speichert Umlaute intern zerlegt (a + Trema), Linux zusammengesetzt. Git gleicht das über `core.precomposeUnicode` aus, das am Mac automatisch aktiv ist. Trotzdem gilt: Dateinamen in Repositories am besten ohne Umlaute und Leerzeichen.
+*Umlaute in Dateinamen:* macOS speichert Umlaute intern zerlegt (a + Trema), Linux zusammengesetzt. Git gleicht das über `core.precomposeUnicode` aus @git-scm-com-docs-git-config, das am Mac automatisch aktiv ist. Trotzdem gilt: Dateinamen in Repositories am besten ohne Umlaute und Leerzeichen.
 ]

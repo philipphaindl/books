@@ -6,7 +6,7 @@ Am Ende soll die Anwendung auf einem Linux-Server laufen: erreichbar über HTTPS
 
 == Docker Engine installieren
 
-Auf dem Server wird kein Docker Desktop gebraucht, sondern die Docker Engine aus dem offiziellen Paket-Repository von Docker. Die Pakete der Distribution (`docker.io`) sind oft veraltet, das Komfortskript `get.docker.com` ist für Testrechner gedacht. Für Debian sieht die Installation so aus (Ubuntu analog, aktuelle Fassung auf docs.docker.com prüfen):
+Auf dem Server wird kein Docker Desktop gebraucht, sondern die Docker Engine aus dem offiziellen Paket-Repository von Docker. Die Pakete der Distribution (`docker.io`) sind inoffiziell und können mit den offiziellen Paketen kollidieren, das Komfortskript `get.docker.com` ist für Testrechner gedacht @docs-docker-com-engine-install-debian. Für Debian sieht die Installation so aus (Ubuntu analog, aktuelle Fassung auf docs.docker.com prüfen):
 
 ```bash
 sudo apt-get update && sudo apt-get install -y ca-certificates curl
@@ -28,7 +28,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
 sudo docker run --rm hello-world
 ```
 
-Docker Engine 29 bevorzugt cgroup v2 und hat cgroup v1 als veraltet markiert. Auf einem neuen Server zeigt `docker info --format '{{.CgroupVersion}}'` deshalb `2`. Bestehende Systeme mit cgroup v1 werden vor einer späteren Entfernung des Supports auf cgroup v2 migriert; für Engine 29 ist noch keine sofortige Abschaltung nötig.
+Docker Engine 29 hat cgroup v1 als veraltet markiert und unterstützt es noch bis mindestens Mai 2029 @docs-docker-com-engine-deprecated. Auf einem neuen Server zeigt `docker info --format '{{.CgroupVersion}}'` deshalb `2`. Bestehende Systeme mit cgroup v1 werden vor einer späteren Entfernung des Supports auf cgroup v2 migriert; für Engine 29 ist noch keine sofortige Abschaltung nötig.
 
 === Grundkonfiguration des Daemons
 
@@ -46,7 +46,7 @@ Docker Engine 29 bevorzugt cgroup v2 und hat cgroup v1 als veraltet markiert. Au
 sudo systemctl restart docker
 ```
 
-Ohne Begrenzung schreibt Docker die Ausgaben jedes Containers unbegrenzt auf die Platte, bis sie voll ist. Der Treiber `local` rotiert und komprimiert die Logs, hier auf höchstens fünf Dateien mit je 20 MB pro Container. `live-restore` kann Container während eines Daemon-Neustarts oder kompatiblen Patch-Updates weiterlaufen lassen. Bei einem Major-Upgrade oder Änderungen an Storage-Treiber, Bridge-Netz oder anderen Daemon-Optionen gilt diese Garantie nicht. Die Einstellungen gelten nur für neu erzeugte Container.
+Ohne Begrenzung schreibt Docker die Ausgaben jedes Containers unbegrenzt auf die Platte, bis sie voll ist @docs-docker-com-engine-logging-configure. Der Treiber `local` rotiert und komprimiert die Logs, hier auf höchstens fünf Dateien mit je 20 MB pro Container @docs-docker-com-engine-logging-drivers-local. `live-restore` kann Container während eines Daemon-Neustarts oder kompatiblen Patch-Updates weiterlaufen lassen. Bei einem Major-Upgrade oder Änderungen an Storage-Treiber, Bridge-Netz oder anderen Daemon-Optionen gilt diese Garantie nicht @docs-docker-com-engine-containers-live-restore. Die Einstellungen gelten nur für neu erzeugte Container @docs-docker-com-engine-logging-configure.
 
 == Aufbau auf dem Server
 
@@ -87,7 +87,7 @@ Das Projekt liegt in einem eigenen Verzeichnis, typischerweise unter `/srv`:
 
 == Reverse Proxy mit automatischem HTTPS
 
-Ein Reverse Proxy nimmt alle Anfragen auf Port 80 und 443 entgegen, kümmert sich um die TLS-Zertifikate und leitet an die Anwendung weiter. *Caddy* ist dafür besonders einfach: Er holt und erneuert Let's-Encrypt-Zertifikate selbstständig, sobald der DNS-Eintrag auf den Server zeigt. Die komplette Konfiguration für eine Domain:
+Ein Reverse Proxy nimmt alle Anfragen auf Port 80 und 443 entgegen, kümmert sich um die TLS-Zertifikate und leitet an die Anwendung weiter. *Caddy* ist dafür besonders einfach: Er holt und erneuert Let's-Encrypt-Zertifikate selbstständig, sobald der DNS-Eintrag auf den Server zeigt @caddyserver-com-docs-automatic-https. Die komplette Konfiguration für eine Domain:
 
 #datei("Caddyfile")[
 ```text
@@ -157,9 +157,9 @@ volumes:
 
 Die freigegebene Image-Referenz steht nicht in der Datei, sondern kommt über `IMAGE_REF` aus der `.env`, zum Beispiel `gitea.example.com/team/notizen@sha256:…`. Der Digest bezeichnet unveränderlich exakt das in der CI geprüfte Image. Ein Update oder Applikations-Rollback ändert damit genau eine Zeile. Das `:?` sorgt dafür, dass Compose bei fehlendem Wert abbricht.
 
-Die Tags `caddy:2` und `postgres:18` erhalten Sicherheitsupdates und sind deshalb beweglich. Sie werden nicht ungeprüft bei jedem API-Deployment aktualisiert, sondern in einem eigenen Wartungsfenster gezogen, getestet und bei streng reproduzierbaren Umgebungen zusätzlich über einen dokumentierten Digest festgelegt. Für das selbst gebaute API-Image wird nach der CI der konkrete Registry-Digest protokolliert.
+Die Tags `caddy:2` und `postgres:18` erhalten Sicherheitsupdates und sind deshalb beweglich @hub-docker-com-postgres. Sie werden nicht ungeprüft bei jedem API-Deployment aktualisiert, sondern in einem eigenen Wartungsfenster gezogen, getestet und bei streng reproduzierbaren Umgebungen zusätzlich über einen dokumentierten Digest festgelegt. Für das selbst gebaute API-Image wird nach der CI der konkrete Registry-Digest protokolliert.
 
-Das file-basierte Secret muss für den Anwendungsbenutzer lesbar sein; `uid`, `gid` und `mode` im Compose-Eintrag würden bei `file:` nicht helfen. Die Einrichtung aus Kapitel 12 setzt deshalb den numerischen Besitzer auf UID 10001. Vor dem ersten Start prüfen:
+Das file-basierte Secret muss für den Anwendungsbenutzer lesbar sein; `uid`, `gid` und `mode` im Compose-Eintrag würden bei `file:` nicht helfen @docs-docker-com-reference-compose-file-services. Die Einrichtung aus Kapitel 12 setzt deshalb den numerischen Besitzer auf UID 10001. Vor dem ersten Start prüfen:
 
 ```bash
 docker compose run --rm api test -r /run/secrets/db_passwort
@@ -178,9 +178,9 @@ docker compose ps && docker compose logs --tail 30 api
 
 Alte API-Images bleiben zunächst für einen schnellen Rollback lokal vorhanden und werden erst nach der festgelegten Aufbewahrungsfrist durch eine getrennte Wartungsaufgabe entfernt.
 
-Ein Applikations-Rollback ist derselbe Ablauf mit der vorherigen Version, solange die Datenbank dazu kompatibel bleibt. Datenbankänderungen werden deshalb nach dem Expand/Contract-Muster gebaut: zunächst nur additive, rückwärtskompatible Änderungen; Entfernen alter Spalten erst in einem späteren Release. Ein Dump ist die Notfallabsicherung, aber kein schneller automatischer Rollback einer laufenden Migration. In der Praxis erledigt diese Schritte die CI (Kapitel 14), von Hand macht man sie nur im Notfall.
+Ein Applikations-Rollback ist derselbe Ablauf mit der vorherigen Version, solange die Datenbank dazu kompatibel bleibt. Datenbankänderungen werden deshalb nach dem Expand/Contract-Muster gebaut: zunächst nur additive, rückwärtskompatible Änderungen; Entfernen alter Spalten erst in einem späteren Release @martinfowler-com-bliki-parallelchange-html. Ein Dump ist die Notfallabsicherung, aber kein schneller automatischer Rollback einer laufenden Migration. In der Praxis erledigt diese Schritte die CI (Kapitel 14), von Hand macht man sie nur im Notfall.
 
-#achtung[Das früher beliebte Werkzeug _Watchtower_, das laufende Container automatisch auf neue Images aktualisiert, wurde im Dezember 2025 archiviert und wird nicht mehr gepflegt. Automatische Updates ohne Tests und ohne Backup sind für eigene Anwendungen ohnehin riskant. Besser: Deployments über die CI, und für Basis-Images wie `postgres` oder `caddy` nur *benachrichtigen* lassen, etwa mit dem Werkzeug _Diun_, und bewusst aktualisieren.]
+#achtung[Das früher beliebte Werkzeug _Watchtower_, das laufende Container automatisch auf neue Images aktualisiert, wurde im Dezember 2025 archiviert und wird nicht mehr gepflegt @github-com-containrrr-watchtower. Automatische Updates ohne Tests und ohne Backup sind für eigene Anwendungen ohnehin riskant. Besser: Deployments über die CI, und für Basis-Images wie `postgres` oder `caddy` nur *benachrichtigen* lassen, etwa mit dem Werkzeug _Diun_, und bewusst aktualisieren @github-com-crazy-max-diun.]
 
 == Backups
 
@@ -214,7 +214,7 @@ crontab -e
 15 3 * * * /srv/notizen/backup.sh >> /srv/notizen/backups/backup.log 2>&1
 ```
 
-Das `-T` bei `exec` schaltet das Terminal ab, sonst beschädigt Compose die Binärdaten des Dumps. Zeit bis auf die Sekunde verhindert, dass zwei Deployments am selben Tag dieselbe Datei überschreiben; temporäre Datei und `pg_restore -l` verhindern, dass ein unvollständiger Dump wie ein gültiges Backup aussieht. Rollen und Tablespaces werden bei Bedarf zusätzlich mit `pg_dumpall --globals-only` gesichert. Ein Backup auf demselben Server schützt nur vor Bedienfehlern, nicht vor dessen Ausfall. Die Dumps gehören deshalb verschlüsselt an einen zweiten Ort, etwa mit `restic` auf eine NAS oder in Object Storage. Der Backup-Job wird überwacht, und mindestens quartalsweise wird ein Dump in eine frische Datenbank eingespielt.
+Das `-T` bei `exec` schaltet die Pseudo-Terminal-Zuweisung ab, die sonst die Binärdaten des Dumps verfälschen kann @docs-docker-com-reference-cli-docker-compose-exec. Zeit bis auf die Sekunde verhindert, dass zwei Deployments am selben Tag dieselbe Datei überschreiben; temporäre Datei und `pg_restore -l` verhindern, dass ein unvollständiger Dump wie ein gültiges Backup aussieht @postgresql-org-docs-current-app-pgdump-html @postgresql-org-docs-current-app-pgrestore-html. Rollen und Tablespaces werden bei Bedarf zusätzlich mit `pg_dumpall --globals-only` gesichert. Ein Backup auf demselben Server schützt nur vor Bedienfehlern, nicht vor dessen Ausfall. Die Dumps gehören deshalb verschlüsselt an einen zweiten Ort, etwa mit `restic` auf eine NAS oder in Object Storage @restic-readthedocs-io-en-stable-010-introduction-html. Der Backup-Job wird überwacht, und mindestens quartalsweise wird ein Dump in eine frische Datenbank eingespielt.
 
 == Beobachten
 
@@ -229,4 +229,4 @@ Das `-T` bei `exec` schaltet das Terminal ab, sonst beschädigt Compose die Bin�
 
 Für mehr als einen Blick von Hand lohnt sich ein externer Uptime-Monitor, der die Health-Route der Anwendung regelmäßig von außen aufruft und bei Ausfall benachrichtigt (etwa _Uptime Kuma_, selbst als Container auf einem anderen Rechner betrieben).
 
-#praxis[*Synology:* Der _Container Manager_ versteht Compose-Dateien als _Projekte_, doch Engine-/Compose-Version, CPU-Architektur, Dateirechte und unterstützte Felder hängen vom DSM-Modell und Release ab. Deshalb `docker version`, `docker compose version` und `docker compose config` vorab prüfen. Der Weg über SSH und `docker compose` ist gut dokumentierbar; Bind Mounts legt man bevorzugt unter `/volume1/docker/<projekt>` an und bezieht sie ausdrücklich in das NAS-Backup ein.]
+#praxis[*Synology:* Der _Container Manager_ versteht Compose-Dateien als _Projekte_ @kb-synology-com-en-us-dsm-help-containermanager-docker-project, doch Engine-/Compose-Version, CPU-Architektur, Dateirechte und unterstützte Felder hängen vom DSM-Modell und Release ab. Deshalb `docker version`, `docker compose version` und `docker compose config` vorab prüfen. Der Weg über SSH und `docker compose` ist gut dokumentierbar; Bind Mounts legt man bevorzugt unter `/volume1/docker/<projekt>` an und bezieht sie ausdrücklich in das NAS-Backup ein.]

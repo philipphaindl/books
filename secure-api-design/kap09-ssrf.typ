@@ -2,11 +2,11 @@
 
 = SSRF und fremde APIs
 
-Bei _Server Side Request Forgery_ (OWASP API7) bringt ein Angreifer die API dazu, eine von ihm gewählte Adresse aufzurufen. _Unsafe Consumption of APIs_ (API10) entsteht, wenn Antworten fremder Dienste zu viel Vertrauen bekommen.
+Bei _Server Side Request Forgery_ (OWASP API7) bringt ein Angreifer die API dazu, eine von ihm gewählte Adresse aufzurufen @api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery. _Unsafe Consumption of APIs_ (API10) entsteht, wenn Antworten fremder Dienste zu viel Vertrauen bekommen @api-security-owasp-org-editions-2023-en-0xaa-unsafe-consumption-of-apis.
 
 == Server Side Request Forgery
 
-Link-Vorschau, Bildimport, frei wählbare Webhooks oder PDF-Erzeugung aus einer URL können Zugriff auf interne Dienste, `localhost`, Docker-Netze oder Cloud-Metadaten ermöglichen.
+Link-Vorschau, Bildimport, frei wählbare Webhooks oder PDF-Erzeugung aus einer URL können Zugriff auf interne Dienste, `localhost`, Docker-Netze oder Cloud-Metadaten @api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery @docs-aws-amazon-com-awsec2-latest-userguide-instancedata-data-retrieval ermöglichen.
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -25,11 +25,11 @@ Link-Vorschau, Bildimport, frei wählbare Webhooks oder PDF-Erzeugung aus einer 
 
 === Abwehr in Schichten
 
-+ *Keine freien Ziele, wenn vermeidbar:* IDs oder eine exakte Allowlist vertrauenswürdiger Partner statt beliebiger URLs.
-+ *Strenge URL-Regeln:* nur `https`, kein Benutzername/Passwort, erwarteter Port, normalisierter Host; alle DNS-Ergebnisse auf öffentliche Adressen prüfen.
-+ *Keine Redirects* – oder jedes Ziel erneut vollständig prüfen.
-+ *Antwort begrenzen:* Zeit, Bytes und erlaubte Medientypen, bevor der Body vollständig geladen ist.
-+ *Egress-Kontrolle:* Proxy/Firewall blockiert interne, Link-Local- und Metadatenziele. Diese Netzwerkgrenze ist bei freien URLs unverzichtbar, weil Anwendungsprüfungen DNS-Rebinding und Parser-Unterschiede nie vollständig ausschließen.
++ *Keine freien Ziele, wenn vermeidbar:* IDs oder eine exakte Allowlist vertrauenswürdiger Partner statt beliebiger URLs @api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery @cheatsheetseries-owasp-org-cheatsheets-server-side-request-forgery-prevention-cheat-sheet-html.
++ *Strenge URL-Regeln:* nur `https`, kein Benutzername/Passwort, erwarteter Port, normalisierter Host; alle DNS-Ergebnisse auf öffentliche Adressen prüfen @cheatsheetseries-owasp-org-cheatsheets-server-side-request-forgery-prevention-cheat-sheet-html.
++ *Keine Redirects* @api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery @api-security-owasp-org-editions-2023-en-0xaa-unsafe-consumption-of-apis – oder jedes Ziel erneut vollständig prüfen.
++ *Antwort begrenzen:* Zeit, Bytes und erlaubte Medientypen, bevor der Body vollständig geladen ist @api-security-owasp-org-editions-2023-en-0xa7-server-side-request-forgery @api-security-owasp-org-editions-2023-en-0xaa-unsafe-consumption-of-apis.
++ *Egress-Kontrolle:* Proxy/Firewall blockiert interne, Link-Local- und Metadatenziele. Diese Netzwerkgrenze ist bei freien URLs unverzichtbar, weil Anwendungsprüfungen DNS-Rebinding und Parser-Unterschiede nie vollständig ausschließen @cheatsheetseries-owasp-org-cheatsheets-server-side-request-forgery-prevention-cheat-sheet-html.
 
 #datei("app/ssrf.py")[
 ```python
@@ -74,15 +74,15 @@ def vorschau_laden(url: str) -> str:
 ```
 ]
 
-`client.get()` wäre hier falsch: Es lädt den Body vollständig, bevor ein nachträgliches `text[:100_000]` greift. Auch der Code oben ist nur eine Anwendungsschicht; zwischen DNS-Prüfung und Verbindung kann sich die Auflösung ändern. Die robuste Produktionslösung verbindet über einen kontrollierten Egress-Proxy beziehungsweise erzwingt die Sperre im Netz.
+`client.get()` wäre hier falsch: Es lädt den Body vollständig @www-python-httpx-org-quickstart, bevor ein nachträgliches `text[:100_000]` greift. Auch der Code oben ist nur eine Anwendungsschicht; zwischen DNS-Prüfung und Verbindung kann sich die Auflösung ändern @cheatsheetseries-owasp-org-cheatsheets-server-side-request-forgery-prevention-cheat-sheet-html. Die robuste Produktionslösung verbindet über einen kontrollierten Egress-Proxy beziehungsweise erzwingt die Sperre im Netz.
 
 == Fremde APIs konsumieren
 
-Partnerantworten sind untrusted input: mit Pydantic validieren, Antwortgröße und Zeit begrenzen, TLS nie mit `verify=False` abschalten und pro Partner minimale Zugangsdaten verwenden. Fehler des Partners werden nicht ungefiltert an eigene Clients durchgereicht. Retries erfolgen nur bei sicher wiederholbaren Operationen, mit Backoff, Obergrenze und Jitter; Circuit Breaker verhindern Kaskaden.
+Partnerantworten sind untrusted input: mit Pydantic validieren, Antwortgröße und Zeit begrenzen, TLS nie mit `verify=False` abschalten @api-security-owasp-org-editions-2023-en-0xaa-unsafe-consumption-of-apis und pro Partner minimale Zugangsdaten verwenden. Fehler des Partners werden nicht ungefiltert an eigene Clients durchgereicht. Retries erfolgen nur bei sicher wiederholbaren Operationen @docs-aws-amazon-com-prescriptive-guidance-latest-cloud-design-patterns-retry-backoff-html, mit Backoff, Obergrenze und Jitter @aws-amazon-com-blogs-architecture-exponential-backoff-and-jitter; Circuit Breaker verhindern Kaskaden @martinfowler-com-bliki-circuitbreaker-html.
 
 == Webhooks signieren und Replays verhindern
 
-Ein Zeitstempel begrenzt das Replay-Fenster, verhindert aber keine zweite Zustellung *innerhalb* dieses Fensters. Deshalb besitzt jedes Ereignis zusätzlich eine eindeutige ID, die der Empfänger für mindestens die Toleranzdauer atomar speichert und nur einmal akzeptiert.
+Ein Zeitstempel begrenzt das Replay-Fenster, verhindert aber keine zweite Zustellung *innerhalb* dieses Fensters @docs-stripe-com-webhooks. Deshalb besitzt jedes Ereignis zusätzlich eine eindeutige ID, die der Empfänger für mindestens die Toleranzdauer atomar speichert und nur einmal akzeptiert @docs-github-com-en-webhooks-using-webhooks-best-practices-for-using-webhooks @docs-stripe-com-webhooks.
 
 #datei("app/webhooks.py")[
 ```python
@@ -107,4 +107,4 @@ def pruefen(geheimnis, koerper, ereignis, zeit, sig, toleranz=300):
 ```
 ]
 
-Die ID stammt aus dem persistenten Outbox-Eintrag. Signiert wird der rohe Body (`await request.body()`), nicht neu serialisiertes JSON. Nach gültiger Signatur reserviert der Empfänger die ID per Unique-Constraint; ein Duplikat bleibt wirkungslos. Die Key-ID ermöglicht Rotation. Rate-/Größenlimits gelten auch hier; Geheimnisse und Rohdaten landen nie im Log.
+Die ID stammt aus dem persistenten Outbox-Eintrag. Signiert wird der rohe Body (`await request.body()`), nicht neu serialisiertes JSON @docs-stripe-com-webhooks. Nach gültiger Signatur reserviert der Empfänger die ID per Unique-Constraint; ein Duplikat bleibt wirkungslos. Die Key-ID ermöglicht Rotation. Rate-/Größenlimits gelten auch hier; Geheimnisse und Rohdaten landen nie im Log.

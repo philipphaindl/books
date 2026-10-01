@@ -21,11 +21,11 @@ notizen      dev           4c1f0a9d2e11   2 minutes ago  212MB
 python       3.14-slim     a7d3c1e2b9f0   5 days ago     148MB
 ```
 
-Zwei Namen mit derselben Image-ID sind *ein* Image mit zwei Etiketten, genau wie zwei Branches, die auf denselben Commit zeigen.
+Zwei Namen mit derselben Image-ID sind *ein* Image mit zwei Etiketten, genau wie zwei Branches, die auf denselben Commit zeigen @docs-docker-com-reference-cli-docker-image-tag.
 
 == Das erste Dockerfile
 
-Das Beispielprojekt definiert seine Abhängigkeiten in `pyproject.toml` und hält die exakten Versionen in `uv.lock` fest:
+Das Beispielprojekt definiert seine Abhängigkeiten in `pyproject.toml` und hält die exakten Versionen in `uv.lock` fest @docs-astral-sh-uv-concepts-projects-sync:
 
 #datei("pyproject.toml")[
 ```toml
@@ -77,11 +77,11 @@ curl http://localhost:8000/health          # in einem zweiten Terminal
   [`FROM image`], [Basis-Image. Jedes Dockerfile beginnt damit (bei Multi-Stage-Builds mehrfach, Kapitel 8).],
   [`WORKDIR /app`], [Arbeitsverzeichnis für alle folgenden Anweisungen und für den Container, wird bei Bedarf angelegt.],
   [`COPY quelle ziel`], [Dateien aus dem Build-Kontext ins Image kopieren. `--from=` kopiert aus einem anderen Image oder einer Build-Stufe.],
-  [`ADD`], [Wie `COPY`, kann zusätzlich URLs laden und Archive entpacken. Nur verwenden, wenn genau das gebraucht wird.],
+  [`ADD`], [Wie `COPY`, kann zusätzlich URLs laden und Archive entpacken. Nur verwenden, wenn genau das gebraucht wird @docs-docker-com-reference-dockerfile @docs-docker-com-build-building-best-practices.],
   [`RUN befehl`], [Befehl beim Bauen ausführen, das Ergebnis wird zur neuen Schicht.],
   [`ENV NAME=wert`], [Umgebungsvariable, gilt beim Bauen *und* im laufenden Container.],
   [`ARG NAME=wert`], [Variable nur beim Bauen, setzbar mit `docker build --build-arg NAME=...`.],
-  [`EXPOSE 8000`], [Dokumentiert den Port. Veröffentlicht ihn *nicht*, das macht erst `-p`.],
+  [`EXPOSE 8000`], [Dokumentiert den Port. Veröffentlicht ihn *nicht*, das macht erst `-p` @docs-docker-com-reference-dockerfile.],
   [`USER app`], [Benutzer für folgende Anweisungen und den Container (Kapitel 8).],
   [`CMD [...]`], [Standardbefehl beim Start, beim `docker run` überschreibbar.],
   [`ENTRYPOINT [...]`], [Fester Startbefehl, `CMD` liefert dann nur dessen Standardargumente.],
@@ -91,7 +91,7 @@ curl http://localhost:8000/health          # in einem zweiten Terminal
 
 == Build-Kontext und `.dockerignore`
 
-Der Punkt am Ende von `docker build -t notizen:dev .` ist der *Build-Kontext*: das Verzeichnis, dessen Inhalt an den Build übergeben wird. Nur Dateien darin kann `COPY` erreichen. Ohne Filter landen auch `.git`, virtuelle Umgebungen, Caches und im schlimmsten Fall `.env`-Dateien mit Passwörtern im Kontext und über ein unbedachtes `COPY . .` im Image. Eine `.dockerignore` schließt sie aus:
+Der Punkt am Ende von `docker build -t notizen:dev .` ist der *Build-Kontext*: das Verzeichnis, dessen Inhalt an den Build übergeben wird. Nur Dateien darin kann `COPY` erreichen @docs-docker-com-build-concepts-context. Ohne Filter landen auch `.git`, virtuelle Umgebungen, Caches und im schlimmsten Fall `.env`-Dateien mit Passwörtern im Kontext und über ein unbedachtes `COPY . .` im Image. Eine `.dockerignore` schließt sie aus @docs-docker-com-build-concepts-context @docs-docker-com-build-building-best-practices:
 
 #datei(".dockerignore")[
 ```text
@@ -109,7 +109,7 @@ Dockerfile
 
 == Der Schicht-Cache
 
-Docker merkt sich jede gebaute Schicht. Ändert sich an einer Anweisung und ihren Eingaben nichts, wird die Schicht aus dem Cache genommen. Sobald sich aber eine Schicht ändert, werden *alle folgenden* neu gebaut. Deshalb kommt es auf die Reihenfolge an:
+Docker merkt sich jede gebaute Schicht. Ändert sich an einer Anweisung und ihren Eingaben nichts, wird die Schicht aus dem Cache genommen. Sobald sich aber eine Schicht ändert, werden *alle folgenden* neu gebaut @docs-docker-com-build-cache. Deshalb kommt es auf die Reihenfolge an:
 
 #figure(
   cetz.canvas(length: 1cm, {
@@ -128,7 +128,7 @@ Docker merkt sich jede gebaute Schicht. Ändert sich an einer Anweisung und ihre
   caption: [Nach einer Codeänderung: Links werden alle Abhängigkeiten neu installiert, rechts nur der Code kopiert.],
 )
 
-Die Faustregel: *Was sich selten ändert, gehört nach oben; was sich oft ändert, nach unten.* Deshalb kopiert das Dockerfile oben zuerst nur `pyproject.toml` und `uv.lock`, installiert die Abhängigkeiten und kopiert erst danach den Code. Eine Codeänderung baut dann in Sekunden.
+Die Faustregel: *Was sich selten ändert, gehört nach oben; was sich oft ändert, nach unten.* Deshalb kopiert das Dockerfile oben zuerst nur `pyproject.toml` und `uv.lock`, installiert die Abhängigkeiten und kopiert erst danach den Code @docs-docker-com-build-cache-optimize @docs-astral-sh-uv-guides-integration-docker. Eine Codeänderung baut dann in Sekunden.
 
 == `CMD`, `ENTRYPOINT` und die Signale
 
@@ -136,13 +136,13 @@ Beide Anweisungen gibt es in zwei Schreibweisen, und der Unterschied ist wichtig
 
 #table(columns: (auto, auto, 1fr),
   [Form], [Beispiel], [Folge],
-  [Exec-Form], [`CMD ["fastapi", "run", "app/main.py"]`], [Das Programm ist direkt PID 1 und bekommt Signale wie SIGTERM. *Immer verwenden.*],
-  [Shell-Form], [`CMD fastapi run app/main.py`], [Docker startet `/bin/sh -c "..."`. PID 1 ist die Shell, die SIGTERM nicht weiterreicht.],
+  [Exec-Form], [`CMD ["fastapi", "run", "app/main.py"]`], [Das Programm ist direkt PID 1 und bekommt Signale wie SIGTERM (als PID 1 muss es SIGTERM allerdings selbst behandeln) @docs-docker-com-reference-dockerfile @man7-org-linux-man-pages-man7-pid-namespaces-7-html. *Immer verwenden.*],
+  [Shell-Form], [`CMD fastapi run app/main.py`], [Docker startet `/bin/sh -c "..."`. PID 1 ist die Shell, die SIGTERM nicht weiterreicht @docs-docker-com-reference-dockerfile.],
 )
 
-`docker stop` schickt dem Hauptprozess SIGTERM und wartet zehn Sekunden. Reagiert er nicht, folgt SIGKILL. Bei der Shell-Form kommt das SIGTERM nie bei der Anwendung an: Jeder Stopp dauert zehn Sekunden und endet mit einem harten Abbruch, offene Datenbankverbindungen werden nicht sauber geschlossen.
+`docker stop` schickt dem Hauptprozess SIGTERM und wartet zehn Sekunden. Reagiert er nicht, folgt SIGKILL @docs-docker-com-reference-cli-docker-container-stop. Bei der Shell-Form kommt das SIGTERM in der Regel nicht bei der Anwendung an @docs-docker-com-reference-dockerfile: Jeder Stopp dauert dann zehn Sekunden und endet mit einem harten Abbruch, offene Datenbankverbindungen werden nicht sauber geschlossen.
 
-`CMD` und `ENTRYPOINT` arbeiten zusammen: Ist ein `ENTRYPOINT` gesetzt, wird `CMD` als Argumente an ihn angehängt. Das Muster eignet sich für Images, die wie ein Programm benutzt werden:
+`CMD` und `ENTRYPOINT` arbeiten zusammen: Ist ein `ENTRYPOINT` gesetzt, wird `CMD` als Argumente an ihn angehängt @docs-docker-com-reference-dockerfile. Das Muster eignet sich für Images, die wie ein Programm benutzt werden:
 
 ```dockerfile
 ENTRYPOINT ["python", "-m", "app.cli"]
@@ -153,4 +153,4 @@ docker run --rm notizen-cli                # führt "python -m app.cli --help" a
 docker run --rm notizen-cli import x.csv   # ersetzt nur CMD: "... app.cli import x.csv"
 ```
 
-Für die meisten Dienste genügt ein `CMD` in Exec-Form. Mit `docker run --entrypoint sh ...` lässt sich ein `ENTRYPOINT` zur Fehlersuche übergehen (Kapitel 10).
+Für die meisten Dienste genügt ein `CMD` in Exec-Form. Mit `docker run --entrypoint sh ...` lässt sich ein `ENTRYPOINT` zur Fehlersuche übergehen @docs-docker-com-reference-cli-docker-container-run (Kapitel 10).

@@ -2,11 +2,11 @@
 
 = Remotes: Arbeiten mit dem Server
 
-Bis hierhin lief alles lokal. Git ist ein verteiltes System: Dein Mac hat eine vollständige Kopie des Repositories mit allen Commits, genau wie der Gitea-Server. Remotes sind die Verbindung zwischen diesen Kopien. Dabei gilt ein Grundsatz, der viele Missverständnisse erklärt: *Git spricht nur dann mit dem Server, wenn du es ausdrücklich verlangst*, also bei `clone`, `fetch`, `pull` und `push`. Alles andere, auch `git status`, arbeitet mit dem Wissensstand des letzten Kontakts.
+Bis hierhin lief alles lokal. Git ist ein verteiltes System: Dein Mac hat eine vollständige Kopie des Repositories mit allen Commits, genau wie der Gitea-Server. Remotes sind die Verbindung zwischen diesen Kopien. Dabei gilt ein Grundsatz, der viele Missverständnisse erklärt: *Git spricht nur dann mit dem Server, wenn du es ausdrücklich verlangst*, also bei `clone`, `fetch`, `pull` und `push` @git-scm-com-book-en-v2-git-branching-remote-branches. Alles andere, auch `git status`, arbeitet mit dem Wissensstand des letzten Kontakts @git-scm-com-book-en-v2-git-branching-remote-branches.
 
 == Remotes verwalten
 
-Ein Remote ist nichts anderes als ein Name für eine URL. Nach `git clone` heißt er `origin`.
+Ein Remote ist nichts anderes als ein Name für eine URL @git-scm-com-docs-git-remote. Nach `git clone` heißt er `origin` @git-scm-com-docs-git-clone @git-scm-com-book-en-v2-git-basics-working-with-remotes.
 
 ```bash
 git remote -v                                  # alle Remotes mit URL anzeigen
@@ -20,7 +20,7 @@ Mehrere Remotes sind möglich und manchmal nützlich, etwa `origin` für den eig
 
 == Remote-Tracking-Branches
 
-Neben deinen lokalen Branches verwaltet Git für jedes Remote *Remote-Tracking-Branches* wie `origin/main`. Sie sind deine lokale, schreibgeschützte Erinnerung daran, wo der Branch `main` auf dem Server beim letzten Kontakt stand. Du arbeitest nie direkt auf ihnen. Sie werden nur durch `fetch`, `pull` und `push` aktualisiert.
+Neben deinen lokalen Branches verwaltet Git für jedes Remote *Remote-Tracking-Branches* wie `origin/main`. Sie sind deine lokale, schreibgeschützte Erinnerung daran, wo der Branch `main` auf dem Server beim letzten Kontakt stand @git-scm-com-docs-gitglossary @git-scm-com-book-en-v2-git-branching-remote-branches. Du arbeitest nie direkt auf ihnen. Sie werden nur durch `fetch`, `pull` und `push` aktualisiert.
 
 #figure(
   grid(columns: (1fr, 1fr), column-gutter: 10pt,
@@ -34,7 +34,7 @@ Neben deinen lokalen Branches verwaltet Git für jedes Remote *Remote-Tracking-B
   caption: [Du hast lokal `C` committet, jemand anderes hat inzwischen `D` gepusht. Dein `origin/main` weiß davon noch nichts.],
 ) <fig-tracking>
 
-In dieser Situation meldet `git status` fröhlich _Your branch is ahead of 'origin/main' by 1 commit_. Das stimmt aber nur gemessen am Stand des letzten Kontakts. Dass der Server weitergelaufen ist, erfährst du erst nach einem `git fetch`.
+In dieser Situation meldet `git status` fröhlich _Your branch is ahead of 'origin/main' by 1 commit_. Das stimmt aber nur gemessen am Stand des letzten Kontakts. Dass der Server weitergelaufen ist, erfährst du erst nach einem `git fetch` @git-scm-com-book-en-v2-git-branching-remote-branches.
 
 == fetch, pull und push
 
@@ -56,20 +56,20 @@ In dieser Situation meldet `git status` fröhlich _Your branch is ahead of 'orig
   caption: [Welcher Befehl was bewegt.],
 )
 
-- *`git fetch`* lädt neue Commits vom Server und aktualisiert die Remote-Tracking-Branches. Deine lokalen Branches und dein Arbeitsverzeichnis bleiben unangetastet. `fetch` ist deshalb *immer ungefährlich* und eine gute Gewohnheit, bevor du irgendetwas integrierst.
-- *`git pull`* ist `fetch` plus Integration: Der Remote-Stand wird in deinen aktuellen Branch eingearbeitet, je nach Konfiguration per Merge oder Rebase.
-- *`git push`* überträgt deine lokalen Commits und verschiebt den Branch auf dem Server. Das gelingt nur, wenn der Server-Branch ein Vorfahre deines lokalen Branches ist, der Server also nichts hat, was dir fehlt.
+- *`git fetch`* lädt neue Commits vom Server und aktualisiert die Remote-Tracking-Branches @git-scm-com-docs-git-fetch. Deine lokalen Branches und dein Arbeitsverzeichnis bleiben unangetastet @git-scm-com-book-en-v2-git-basics-working-with-remotes. `fetch` ist deshalb *immer ungefährlich* und eine gute Gewohnheit, bevor du irgendetwas integrierst.
+- *`git pull`* ist `fetch` plus Integration: Der Remote-Stand wird in deinen aktuellen Branch eingearbeitet, je nach Konfiguration per Merge oder Rebase @git-scm-com-docs-git-pull @git-scm-com-book-en-v2-git-basics-working-with-remotes.
+- *`git push`* überträgt deine lokalen Commits und verschiebt den Branch auf dem Server. Das gelingt nur, wenn der Server-Branch ein Vorfahre deines lokalen Branches ist, der Server also nichts hat, was dir fehlt @git-scm-com-docs-git-push.
 
 === Der Upstream
 
-Jeder lokale Branch kann einen _Upstream_ haben, den Remote-Branch, mit dem er standardmäßig abgeglichen wird. Erst dadurch wissen `git pull`, `git push` und `git status`, womit sie vergleichen sollen. Bei einem neuen Branch setzt man ihn beim ersten Push:
+Jeder lokale Branch kann einen _Upstream_ haben, den Remote-Branch, mit dem er standardmäßig abgeglichen wird @git-scm-com-docs-gitglossary. Erst dadurch wissen `git pull`, `git push` und `git status`, womit sie vergleichen sollen. Bei einem neuen Branch setzt man ihn beim ersten Push @git-scm-com-docs-git-push:
 
 ```bash
 git push -u origin feature/login   # -u = --set-upstream
 git branch -vv                     # zeigt den Upstream jedes Branches
 ```
 
-Mit der Einstellung `push.autoSetupRemote = true` aus Kapitel 2 genügt ein schlichtes `git push`. In Git-Ausdrücken lässt sich der Upstream als `@{u}` ansprechen: `git log @{u}..` zeigt, welche Commits du noch nicht gepusht hast.
+Mit der Einstellung `push.autoSetupRemote = true` aus Kapitel 2 genügt ein schlichtes `git push` @git-scm-com-docs-git-push. In Git-Ausdrücken lässt sich der Upstream als `@{u}` ansprechen @git-scm-com-docs-gitrevisions: `git log @{u}..` zeigt, welche Commits du noch nicht gepusht hast.
 
 == Wenn der Push abgelehnt wird
 
@@ -82,7 +82,7 @@ hint: Updates were rejected because the remote contains work that you do not
 hint: have locally.
 ```
 
-Das ist die Situation aus @fig-tracking: Server und lokaler Branch sind auseinandergelaufen. Die Lösung ist *nicht* `--force`, denn damit würdest du den Commit `D` auf dem Server vernichten. Stattdessen holst du den Server-Stand und setzt deine Arbeit obendrauf:
+Das ist die Situation aus @fig-tracking: Server und lokaler Branch sind auseinandergelaufen. Die Lösung ist *nicht* `--force`, denn damit würdest du den Commit `D` auf dem Server vernichten @git-scm-com-docs-git-push. Stattdessen holst du den Server-Stand und setzt deine Arbeit obendrauf:
 
 ```bash
 git pull --rebase     # mit pull.rebase = true genügt git pull
@@ -102,12 +102,12 @@ git push
 
 == `git pull` richtig konfigurieren
 
-Ohne Konfiguration verlangt Git bei auseinandergelaufenen Branches eine Entscheidung; mit `pull.rebase = false` erzeugt `git pull` einen Merge-Commit ("Merge branch 'main' of ..."). Ein solcher Commit kann eine bewusste Zusammenführung dokumentieren, entsteht beim beiläufigen Pull aber oft nur als technisches Nebenprodukt. Zwei sinnvolle Einstellungen gibt es:
+Ohne Konfiguration verlangt Git bei auseinandergelaufenen Branches eine Entscheidung @git-scm-com-docs-git-pull; mit `pull.rebase = false` erzeugt `git pull` einen Merge-Commit @git-scm-com-docs-git-pull ("Merge branch 'main' of ..."). Ein solcher Commit kann eine bewusste Zusammenführung dokumentieren, entsteht beim beiläufigen Pull aber oft nur als technisches Nebenprodukt. Zwei sinnvolle Einstellungen gibt es:
 
 #table(columns: (auto, 1fr),
   [Einstellung], [Verhalten bei auseinandergelaufenen Branches],
-  [`pull.rebase = true`], [Deine lokalen Commits werden auf den Server-Stand gesetzt. Lineare Historie, empfohlen für die meisten Fälle.],
-  [`pull.ff = only`], [`pull` verweigert und du entscheidest selbst, ob du `git rebase` oder `git merge` ausführst. Maximal kontrolliert, etwas umständlicher.],
+  [`pull.rebase = true`], [Deine lokalen Commits werden auf den Server-Stand gesetzt @git-scm-com-docs-git-pull. Lineare Historie, empfohlen für die meisten Fälle.],
+  [`pull.ff = only`], [`pull` verweigert @git-scm-com-docs-git-pull und du entscheidest selbst, ob du `git rebase` oder `git merge` ausführst. Maximal kontrolliert, etwas umständlicher.],
 )
 
 == Aufräumen und Remote-Branches löschen
@@ -118,4 +118,4 @@ git fetch --prune                        # verschwundene origin/...-Branches lok
 git branch -vv | grep ': gone]'          # lokale Branches, deren Upstream gelöscht wurde
 ```
 
-Gitea kann Branches nach dem Mergen eines Pull Requests automatisch löschen (Kapitel 12). Mit `fetch.prune = true` verschwinden dann auch die zugehörigen `origin/...`-Einträge automatisch beim nächsten Fetch.
+Gitea kann Branches nach dem Mergen eines Pull Requests automatisch löschen @docs-gitea-com-administration-config-cheat-sheet (Kapitel 12). Mit `fetch.prune = true` verschwinden dann auch die zugehörigen `origin/...`-Einträge automatisch beim nächsten Fetch @git-scm-com-docs-git-fetch.

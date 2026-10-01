@@ -31,7 +31,7 @@ nothing to commit, working tree clean
 ```
 ])
 
-In Commit-Graphen ist jeder Kreis ein Commit. *Die Pfeile zeigen immer vom neueren Commit auf seinen Vorgänger* (Elterncommit), weil Git es intern genau so speichert: Ein Commit kennt seine Eltern, aber nicht seine Nachfolger. Die Zeit läuft also von links nach rechts, die Pfeile zeigen nach links.
+In Commit-Graphen ist jeder Kreis ein Commit. *Die Pfeile zeigen immer vom neueren Commit auf seinen Vorgänger* (Elterncommit), weil Git es intern genau so speichert: Ein Commit kennt seine Eltern, aber nicht seine Nachfolger @git-scm-com-book-en-v2-git-internals-git-objects. Die Zeit läuft also von links nach rechts, die Pfeile zeigen nach links.
 
 #align(center, gitgraph(
   chain(("a","b","c"), ("A","B","C")) + chain(("d",), ("D",), y: -1, x0: 2.6, color: c-accent, first-parent: "b"),

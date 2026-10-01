@@ -2,7 +2,7 @@
 #set heading(numbering: none)
 = Bevor es losgeht
 
-Sobald mehrere Dienste zusammenarbeiten, stellt sich die Frage, wie sie miteinander sprechen. Direkte HTTP-Aufrufe sind einfach, koppeln die Dienste aber eng: Ist einer langsam oder ausgefallen, bleiben alle stehen, die ihn aufrufen. Nachrichtenbasierte Architekturen entkoppeln die Dienste über einen *Broker*, der Nachrichten zwischenspeichert und verteilt. Das bringt Robustheit, aber auch neue Fragen: Was passiert, wenn eine Nachricht verloren geht oder doppelt ankommt? Wer darf welche Nachrichten senden und lesen? Wie erkennt ein Empfänger, dass eine Nachricht echt ist?
+Sobald mehrere Dienste zusammenarbeiten, stellt sich die Frage, wie sie miteinander sprechen. Direkte HTTP-Aufrufe sind einfach, koppeln die Dienste aber eng: Ist einer langsam oder ausgefallen, bleiben alle stehen, die ihn aufrufen. Nachrichtenbasierte Architekturen entkoppeln die Dienste über einen *Broker*, der Nachrichten zwischenspeichert und verteilt @hohpe-2003-eip @www-enterpriseintegrationpatterns-com-patterns-messaging-messaging-html. Das bringt Robustheit, aber auch neue Fragen: Was passiert, wenn eine Nachricht verloren geht oder doppelt ankommt? Wer darf welche Nachrichten senden und lesen? Wie erkennt ein Empfänger, dass eine Nachricht echt ist?
 
 Dieses Handbuch beantwortet diese Fragen für Python mit zwei Brokern, die gleichwertig behandelt werden: *NATS JetStream* und *RabbitMQ*.
 

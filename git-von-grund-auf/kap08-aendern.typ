@@ -21,7 +21,7 @@ Eine falsche Commit-Nachricht, eine vergessene Datei, ein Commit, der eigentlich
 
 == Die letzte Commit-Nachricht ändern
 
-Der einfachste und häufigste Fall. `--amend` ersetzt den letzten Commit durch einen neuen:
+Der einfachste und häufigste Fall. `--amend` ersetzt den letzten Commit durch einen neuen @git-scm-com-docs-git-commit:
 
 ```bash
 git commit --amend                         # öffnet den Editor mit der alten Nachricht
@@ -38,7 +38,7 @@ git commit --amend -m "Login-Sperre einführen"   # neue Nachricht direkt angebe
   caption: [`--amend` erzeugt einen Ersatz `C'` mit gleichem Elternteil. `C` bleibt verwaist zurück.],
 )
 
-#achtung[`--amend` nimmt *alles mit, was gerade im Index liegt*. Wer nur die Nachricht korrigieren will, prüft vorher mit `git status`, dass nichts vorgemerkt ist. Sonst landet eine halbfertige Änderung versehentlich im korrigierten Commit.]
+#achtung[`--amend` nimmt *alles mit, was gerade im Index liegt* @git-scm-com-docs-git-commit. Wer nur die Nachricht korrigieren will, prüft vorher mit `git status`, dass nichts vorgemerkt ist. Sonst landet eine halbfertige Änderung versehentlich im korrigierten Commit.]
 
 == Vergessene Dateien nachreichen
 
@@ -68,14 +68,14 @@ e5f6b72 (HEAD -> feature/login) Tests für Login
 git rebase -i HEAD~2      # oder: git rebase -i 7b9e4d1^   (^ = "Elternteil von")
 ```
 
-*3. In der Liste `pick` durch `reword` (oder kurz `r`) ersetzen,* speichern und den Editor schließen:
+*3. In der Liste `pick` durch `reword` (oder kurz `r`) ersetzen,* speichern und den Editor schließen @git-scm-com-docs-git-rebase:
 
 ```text
 r 7b9e4d1 Validirung ergänzen
 pick e5f6b72 Tests für Login
 ```
 
-*4. Git öffnet den Editor ein zweites Mal*, jetzt mit der Nachricht dieses Commits. Korrigieren, speichern, schließen. Git spielt die restlichen Commits automatisch ab:
+*4. Git öffnet den Editor ein zweites Mal*, jetzt mit der Nachricht dieses Commits. Korrigieren, speichern, schließen. Git spielt die restlichen Commits automatisch ab @git-scm-com-docs-git-rebase:
 
 ```out
 [detached HEAD 4c8d0e2] Validierung ergänzen
@@ -93,13 +93,13 @@ Successfully rebased and updated refs/heads/feature/login.
   caption: [Der korrigierte Commit und *alle danach* bekommen neue Hashes, frühere Commits bleiben unverändert.],
 )
 
-Mehrere Nachrichten auf einmal änderst du, indem du in Schritt 3 mehrere Zeilen auf `reword` setzt. Git öffnet den Editor dann nacheinander für jede. Soll auch der allererste Commit des Repositories geändert werden, der kein Elternteil hat, verwendest du `git rebase -i --root`.
+Mehrere Nachrichten auf einmal änderst du, indem du in Schritt 3 mehrere Zeilen auf `reword` setzt. Git öffnet den Editor dann nacheinander für jede @git-scm-com-book-en-v2-git-tools-rewriting-history. Soll auch der allererste Commit des Repositories geändert werden, der kein Elternteil hat, verwendest du `git rebase -i --root` @git-scm-com-docs-git-rebase.
 
-#tipp[Abkürzung ohne Bearbeiten der Liste: `git commit --fixup=reword:7b9e4d1` fragt sofort nach der neuen Nachricht und legt einen Markierungs-Commit an. Ein späteres `git rebase -i --autosquash main` wendet die Korrektur an.]
+#tipp[Abkürzung ohne Bearbeiten der Liste: `git commit --fixup=reword:7b9e4d1` fragt sofort nach der neuen Nachricht und legt einen Markierungs-Commit an @git-scm-com-docs-git-commit. Ein späteres `git rebase -i --autosquash main` wendet die Korrektur an @git-scm-com-docs-git-rebase.]
 
 == Einen Commit aufteilen
 
-Hat ein Commit zu viel auf einmal geändert, lässt er sich per `edit` zerlegen:
+Hat ein Commit zu viel auf einmal geändert, lässt er sich per `edit` zerlegen @git-scm-com-book-en-v2-git-tools-rewriting-history:
 
 ```bash
 git rebase -i HEAD~3            # beim betroffenen Commit "edit" eintragen
@@ -114,30 +114,30 @@ git rebase --continue
 
 == Wenn der Commit schon gepusht ist <sec-gepusht>
 
-Hast du einen Branch bereits gepusht und danach lokal umgeschrieben, lehnt der Server einen normalen Push ab, weil deine neue Historie die alte nicht mehr enthält. Du musst den Server anweisen, seinen Branch zu ersetzen. Dafür gibt es drei Varianten:
+Hast du einen Branch bereits gepusht und danach lokal umgeschrieben, lehnt der Server einen normalen Push ab, weil deine neue Historie die alte nicht mehr enthält @git-scm-com-docs-git-push. Du musst den Server anweisen, seinen Branch zu ersetzen. Dafür gibt es drei Varianten:
 
 #table(columns: (auto, 1fr),
   [Befehl], [Verhalten],
-  [`git push --force`], [Überschreibt den Server-Branch bedingungslos. Hat inzwischen jemand anderes etwas gepusht, ist es weg. *Vermeiden.*],
-  [`git push --force-with-lease`], [Überschreibt nur, wenn der Server-Branch noch dort steht, wo dein `origin/feature` ihn zuletzt gesehen hat. Sonst Abbruch mit _stale info_.],
-  [`git push --force-with-lease --force-if-includes`], [Prüft zusätzlich, ob du den Server-Stand auch tatsächlich in deine Arbeit aufgenommen hast. Schützt vor dem Fall, dass ein zwischenzeitliches `git fetch` die "Lease" unbemerkt erneuert hat.],
+  [`git push --force`], [Überschreibt den Server-Branch bedingungslos. Hat inzwischen jemand anderes etwas gepusht, ist es weg @git-scm-com-docs-git-push. *Vermeiden.*],
+  [`git push --force-with-lease`], [Überschreibt nur, wenn der Server-Branch noch dort steht, wo dein `origin/feature` ihn zuletzt gesehen hat. Sonst Abbruch mit _stale info_ @git-scm-com-docs-git-push.],
+  [`git push --force-with-lease --force-if-includes`], [Prüft zusätzlich, ob du den Server-Stand auch tatsächlich in deine Arbeit aufgenommen hast. Schützt vor dem Fall, dass ein zwischenzeitliches `git fetch` die "Lease" unbemerkt erneuert hat @git-scm-com-docs-git-push.],
 )
 
 Die Idee der "Lease" (Pacht): Du darfst den Branch nur überschreiben, solange du nachweisen kannst, dass du den aktuellen Stand kennst. Als Alias lohnt sich `git config --global alias.pushf "push --force-with-lease --force-if-includes"`.
 
 === Und wenn es schon in `main` ist?
 
-Commits auf einem geschützten, gemeinsam genutzten Branch werden nicht umgeschrieben. Gitea lehnt einen Force-Push auf `main` bei aktivem Branch-Schutz ohnehin ab. Für eine unglückliche Nachricht gibt es pragmatische Wege:
+Commits auf einem geschützten, gemeinsam genutzten Branch werden nicht umgeschrieben. Gitea lehnt einen Force-Push auf `main` bei aktivem Branch-Schutz ohnehin ab @docs-gitea-com-usage-access-control-protected-branches. Für eine unglückliche Nachricht gibt es pragmatische Wege:
 
 - Mit der Tippfehler-Nachricht leben. Das ist fast immer die richtige Antwort.
-- Eine Notiz anhängen, ohne den Commit zu ändern: `git notes add -m "Gemeint war: ..." 7b9e4d1`. Notizen erscheinen in `git log`, müssen aber separat gepusht werden (`git push origin refs/notes/*`).
+- Eine Notiz anhängen, ohne den Commit zu ändern: `git notes add -m "Gemeint war: ..." 7b9e4d1`. Notizen erscheinen in `git log`, müssen aber separat gepusht werden (`git push origin refs/notes/*`) @git-scm-com-docs-git-notes.
 - Bei inhaltlichen Fehlern: `git revert` (Kapitel 9).
 
 #tipp[Bei Squash-Merges in Gitea kannst du die Nachricht des entstehenden Commits im Merge-Dialog frei bearbeiten. Unordentliche Einzelnachrichten im Pull Request sind dann egal, entscheidend ist nur die Nachricht, die du beim Mergen formulierst.]
 
 == Autor und E-Mail korrigieren
 
-Wurde mit falscher Identität committet, etwa mit der privaten statt der dienstlichen Adresse, korrigierst du zuerst die Konfiguration und dann den Commit:
+Wurde mit falscher Identität committet, etwa mit der privaten statt der dienstlichen Adresse, korrigierst du zuerst die Konfiguration und dann den Commit @git-scm-com-docs-git-commit:
 
 ```bash
 git config user.email "philipp.haindl@firma.example"
@@ -147,7 +147,7 @@ git commit --amend --reset-author --no-edit         # letzter Commit
 git rebase HEAD~5 --exec "git commit --amend --reset-author --no-edit"
 ```
 
-Ganz ohne Umschreiben geht es mit einer Datei `.mailmap`: Sie ordnet alte Namen und Adressen den richtigen zu, und `log`, `shortlog` sowie `blame` zeigen die korrigierte Identität, ohne dass sich ein Hash ändert:
+Ganz ohne Umschreiben geht es mit einer Datei `.mailmap`: Sie ordnet alte Namen und Adressen den richtigen zu, und `log`, `shortlog` sowie `blame` zeigen die korrigierte Identität, ohne dass sich ein Hash ändert @git-scm-com-docs-gitmailmap:
 
 #datei(".mailmap")[
 ```text
@@ -157,10 +157,10 @@ Philipp Haindl <philipp.haindl@firma.example> <philipp@privat.example>
 
 == Große Umbauten: Dateien aus der gesamten Historie entfernen
 
-Muss eine Datei aus _allen_ Commits verschwinden (Passwort, riesige Binärdatei), reicht Rebase nicht. Dafür gibt es `git filter-repo` (`brew install git-filter-repo`), den empfohlenen Nachfolger von `git filter-branch`:
+Muss eine Datei aus _allen_ Commits verschwinden (Passwort, riesige Binärdatei), reicht Rebase nicht. Dafür gibt es `git filter-repo` (`brew install git-filter-repo` @formulae-brew-sh-formula-git-filter-repo), den empfohlenen Nachfolger von `git filter-branch` @git-scm-com-docs-git-filter-branch @github-com-newren-git-filter-repo:
 
 ```bash
 git filter-repo --path .env --invert-paths    # .env aus allen Commits entfernen
 ```
 
-Das schreibt *jeden* Commit ab dem ersten Vorkommen um. Danach müssen alle Branches mit Force gepusht werden (Branch-Schutz vorübergehend lockern), und alle Beteiligten klonen neu. Bei Geheimnissen gilt: zuerst austauschen, dann aufräumen.
+Das schreibt *jeden* Commit ab dem ersten Vorkommen um. Danach müssen alle Branches mit Force gepusht werden (Branch-Schutz vorübergehend lockern), und alle Beteiligten klonen neu @github-com-newren-git-filter-repo. Bei Geheimnissen gilt: zuerst austauschen, dann aufräumen.

@@ -31,7 +31,7 @@ An jeder Vertrauensgrenze muss geprüft werden, was hereinkommt. Für eine API b
 
 == Die OWASP API Security Top 10
 
-Das Open Worldwide Application Security Project (OWASP) veröffentlicht eine Liste der häufigsten Sicherheitsrisiken speziell für APIs. Die aktuelle Ausgabe von 2023 bildet das Gerüst für Teil II:
+Das Open Worldwide Application Security Project (OWASP) veröffentlicht eine Liste der häufigsten Sicherheitsrisiken speziell für APIs. Die aktuelle Ausgabe von 2023 @api-security-owasp-org-editions-2023-en-0x11-t10 bildet das Gerüst für Teil II:
 
 #table(columns: (auto, 1fr, auto),
   [Nr.], [Risiko], [Kapitel],
@@ -47,7 +47,7 @@ Das Open Worldwide Application Security Project (OWASP) veröffentlicht eine Lis
   [API10], [*Unsafe Consumption of APIs:* Daten fremder APIs ungeprüft übernehmen], [9],
 )
 
-Auffällig ist, dass drei der ersten fünf Punkte Autorisierung betreffen. Die meisten API-Lücken sind keine technischen Schwachstellen im engeren Sinn, sondern fehlende Prüfungen in der Geschäftslogik. Kein Scanner und keine Firewall findet sie zuverlässig, sie müssen im Code vermieden werden.
+Auffällig ist, dass drei der ersten fünf Punkte Autorisierung betreffen @api-security-owasp-org-editions-2023-en-0x11-t10. Die meisten API-Lücken sind keine technischen Schwachstellen im engeren Sinn, sondern fehlende Prüfungen in der Geschäftslogik. Kein Scanner und keine Firewall findet sie zuverlässig, sie müssen im Code vermieden werden.
 
 == Grundprinzipien
 

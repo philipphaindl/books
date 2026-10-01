@@ -23,13 +23,13 @@ Das Git-Handbuch beschreibt in den Kapiteln 13 bis 15 Gitea Actions, Runner, Sec
 
 == Vertrauenswürdige Werkzeuge im Runner
 
-Installationsbefehle wie `curl ... | sh` sparen Zeilen, führen aber bei jedem Lauf ungeprüften, veränderlichen Code aus. Der dedizierte Runner dieses Beispiels stellt Docker Buildx, `uv`, Trivy und `curl` in festgelegten Versionen bereit. Das Runner-Image selbst wird separat aktualisiert, per Checksum oder Signatur geprüft und getestet. Auch Actions werden auf den vollständigen Commit-SHA statt nur auf einen beweglichen Tag gepinnt.
+Installationsbefehle wie `curl ... | sh` sparen Zeilen, führen aber bei jedem Lauf ungeprüften, veränderlichen Code aus. Der dedizierte Runner dieses Beispiels stellt Docker Buildx, `uv`, Trivy und `curl` in festgelegten Versionen bereit. Das Runner-Image selbst wird separat aktualisiert, per Checksum oder Signatur geprüft und getestet. Auch Actions werden auf den vollständigen Commit-SHA statt nur auf einen beweglichen Tag gepinnt @docs-github-com-en-actions-reference-security-secure-use.
 
-#achtung[Ein Runner mit Zugriff auf `/var/run/docker.sock` hat praktisch Root-Rechte auf seinem Host. Er darf deshalb nur vertrauenswürdige Workflows ausführen, ist dediziert oder kurzlebig und erhält bei Pull Requests aus fremden Forks weder Secrets noch Docker-Socket-Zugriff.]
+#achtung[Ein Runner mit Zugriff auf `/var/run/docker.sock` hat praktisch Root-Rechte auf seinem Host @docs-docker-com-engine-security. Er darf deshalb nur vertrauenswürdige Workflows ausführen, ist dediziert oder kurzlebig und erhält bei Pull Requests aus fremden Forks weder Secrets noch Docker-Socket-Zugriff @docs-github-com-en-actions-how-tos-write-workflows-choose-what-workflows-do-use-secrets @docs-gitea-com-usage-actions-faq.]
 
 == Tests gegen eine echte Datenbank
 
-Gitea Actions kann für einen Job Hilfscontainer starten (_services_). Der Job erreicht sie über ihren Namen, genau wie in einem Compose-Netz. So laufen die Tests gegen dieselbe PostgreSQL-Hauptversion wie in Produktion statt gegen eine Attrappe:
+Gitea Actions kann für einen Job, dessen Runner-Label auf ein Docker-Image zeigt, Hilfscontainer starten (_services_). Der Job erreicht sie über ihren Namen, genau wie in einem Compose-Netz @gitea-com-gitea-runner. So laufen die Tests gegen dieselbe PostgreSQL-Hauptversion wie in Produktion statt gegen eine Attrappe:
 
 #datei(".gitea/workflows/ci.yml (Auszug)")[
 ```yaml
@@ -58,11 +58,11 @@ jobs:
 ```
 ]
 
-Der Runner wartet, bis der Healthcheck des Service-Containers erfolgreich ist, bevor er die Schritte startet. Das prüft den Quellcode. Zusätzlich wird im nächsten Job das wirklich veröffentlichte Image als Container gestartet.
+Der Runner wartet, bis der Healthcheck des Service-Containers erfolgreich ist, bevor er die Schritte startet @gitea-com-gitea-runner. Das prüft den Quellcode. Zusätzlich wird im nächsten Job das wirklich veröffentlichte Image als Container gestartet.
 
 == Image bauen, attestieren und als Kandidat veröffentlichen
 
-BuildKit kann neben dem Image eine Software-Stückliste (_SBOM_) und Provenance über den Build erzeugen. Attestations werden zuverlässig in einer Registry gespeichert; deshalb erhält der Kandidat zunächst nur den vollständigen Commit-SHA als internen Tag. Erst nach Smoke-Test und Scan darf sein Digest deployt oder unter einem Release-Tag beworben werden.
+BuildKit kann neben dem Image eine Software-Stückliste (_SBOM_) und Provenance über den Build erzeugen @docs-docker-com-build-metadata-attestations. Attestations werden zuverlässig in einer Registry gespeichert; deshalb erhält der Kandidat zunächst nur den vollständigen Commit-SHA als internen Tag. Erst nach Smoke-Test und Scan darf sein Digest deployt oder unter einem Release-Tag beworben werden.
 
 #datei(".gitea/workflows/deploy.yml (Auszug)")[
 ```yaml
@@ -122,21 +122,21 @@ BuildKit kann neben dem Image eine Software-Stückliste (_SBOM_) und Provenance 
           done
       - name: Kandidaten scannen
         run: |
-          trivy image --exit-code 1 --exit-on-eol --severity CRITICAL \
+          trivy image --exit-code 1 --exit-on-eol 1 --severity CRITICAL \
             "$IMAGE@${{ steps.image.outputs.digest }}"
 ```
 ]
 
-- `--pull` nimmt Sicherheitsupdates des beweglichen Basis-Tags in einen neuen Kandidaten auf.
-- `--sbom=true` dokumentiert enthaltene Pakete; `--provenance=mode=max` dokumentiert Build-Quelle und Parameter.
-- Der Smoke-Test und Trivy verwenden `repository@sha256:…`, also exakt den veröffentlichten Inhalt. Ein fehlgeschlagener Kandidat bleibt zwar für die Analyse in der Registry, wird aber weder promoted noch deployt.
-- Der Registry-Token ist ein persönlicher Zugriffstoken mit Schreibrecht für Pakete, weil der automatische `GITEA_TOKEN` Pakete nicht hochladen kann.
+- `--pull` nimmt Sicherheitsupdates des beweglichen Basis-Tags in einen neuen Kandidaten auf @docs-docker-com-reference-cli-docker-buildx-build.
+- `--sbom=true` dokumentiert enthaltene Pakete; `--provenance=mode=max` dokumentiert Build-Quelle und Parameter, legt dabei aber auch Build-Argument-Werte offen (deshalb keine Geheimnisse in `--build-arg`) @docs-docker-com-build-metadata-attestations-slsa-provenance.
+- Der Smoke-Test und Trivy verwenden `repository@sha256:…`, also exakt den veröffentlichten Inhalt @trivy-dev-docs-latest-references-configuration-cli-trivy-image. Ein fehlgeschlagener Kandidat bleibt zwar für die Analyse in der Registry, wird aber weder promoted noch deployt.
+- Der Registry-Token ist ein persönlicher Zugriffstoken mit Schreibrecht für Pakete, weil der automatische `GITEA_TOKEN` Pakete nicht hochladen kann @docs-gitea-com-usage-actions-comparison.
 
-Für besonders schützenswerte Lieferketten signiert die CI den geprüften Digest anschließend mit Cosign oder Notation. Docker Content Trust gehört seit Engine 29 nicht mehr zur Docker-CLI. Die Deployment-Seite prüft dann Signatur und erlaubte Identität, bevor sie den Digest übernimmt.
+Für besonders schützenswerte Lieferketten signiert die CI den geprüften Digest anschließend mit Cosign oder Notation @docs-sigstore-dev-cosign-signing-overview. Docker Content Trust gehört seit Engine 29 nicht mehr zur Docker-CLI @docs-docker-com-engine-release-notes-29; sein Notary-v1-Dienst wird am 8. Dezember 2026 abgeschaltet @docs-docker-com-retired. Die Deployment-Seite prüft dann Signatur und erlaubte Identität, bevor sie den Digest übernimmt.
 
 == Das Deployment-Skript für Compose
 
-Der Deploy-Job ruft per SSH mit einem eingeschränkten Schlüssel (`restrict,command=...`) das folgende Skript auf und übergibt ausschließlich den geprüften Digest. Einrichtung von Schlüssel, `authorized_keys` und `known_hosts` siehe Git-Handbuch Kapitel 14.
+Der Deploy-Job ruft per SSH mit einem eingeschränkten Schlüssel (`restrict,command=...`) @man-openbsd-org-sshd-8 das folgende Skript auf und übergibt ausschließlich den geprüften Digest. Einrichtung von Schlüssel, `authorized_keys` und `known_hosts` siehe Git-Handbuch Kapitel 14.
 
 #datei("/srv/notizen/deploy.sh")[
 ```bash
@@ -182,7 +182,7 @@ exit 1
 ```
 ]
 
-Das Lock verhindert parallele Deployments. Die produktive `.env` wird erst nach einem erfolgreichen Healthcheck ersetzt. Bei einem Fehler wird die vorherige *Applikationsversion* wieder gestartet. Die bereits ausgeführte Datenbankmigration wird absichtlich nicht automatisch zurückgerollt: Migrationen müssen nach dem Expand/Contract-Muster rückwärtskompatibel sein. Ein Datenbank-Restore ist ein bewusster Notfallvorgang mit möglichem Datenverlust seit dem Backup.
+Das Lock verhindert parallele Deployments. Die produktive `.env` wird erst nach einem erfolgreichen Healthcheck ersetzt. Bei einem Fehler wird die vorherige *Applikationsversion* wieder gestartet. Die bereits ausgeführte Datenbankmigration wird absichtlich nicht automatisch zurückgerollt: Migrationen müssen nach dem Expand/Contract-Muster rückwärtskompatibel sein @martinfowler-com-bliki-parallelchange-html. Ein Datenbank-Restore ist ein bewusster Notfallvorgang mit möglichem Datenverlust seit dem Backup.
 
 Alte Images werden nicht im selben Skript sofort gelöscht, damit ein Rollback verfügbar bleibt. Eine getrennte, überwachte Wartungsaufgabe entfernt sie nach der festgelegten Aufbewahrungsfrist.
 

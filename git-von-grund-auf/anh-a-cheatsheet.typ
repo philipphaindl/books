@@ -106,5 +106,9 @@
   ([`$GITHUB_OUTPUT`], [Ausgaben eines Steps]),
   ([`needs:` / `if:`], [Abhängigkeit / Bedingung]),
   ([`git merge-base --is-ancestor A B`], [prüfen, ob A in B enthalten ist]),
+  ([`renovate-config-validator renovate.json`], [Renovate-Konfiguration prüfen]),
+  ([`semgrep scan --config .semgrep/ --error .`], [versionierte SAST-Regeln ausführen]),
+  ([`trivy fs --scanners vuln,misconfig,secret .`], [Repository und IaC prüfen]),
+  ([`trivy image image@sha256:…`], [gebautes Image prüfen]),
 )
 ]

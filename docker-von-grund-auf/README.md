@@ -11,5 +11,6 @@ Aufbau:
 - `main.typ`  Layout, Titelseite, Inhaltsverzeichnis, Reihenfolge der Kapitel
 - `lib.typ`   Farben, Commit-Graph-Funktion `gitgraph`, Docker-Diagrammhelfer `stapel` und `rahmen`, Hinweiskästen (`merke`, `achtung`, `tipp`, `mac`, `praxis`), `datei`, `kasten`, `pfeil`
 - `kap00` bis `kap15`, `anh-a`, `anh-b`  die Kapitel
+- `literatur.typ`, `literatur.yml`  Literaturverzeichnis (IEEE, Hayagriva-Format); im Text zitiert mit `@schluessel`
 
 Zum Live-Bearbeiten: `typst watch --font-path fonts main.typ`

@@ -1,6 +1,6 @@
 #import "lib.typ": *
 
-= Glossar und Quellen
+= Glossar
 
 #let begriffe = (
   ([Basis-Image], [Image, auf dem ein Dockerfile mit `FROM` aufbaut, z.B. `python:3.14-slim`.]),
@@ -43,17 +43,6 @@
   ]
 ]
 
-#v(0.2em)
-#heading(level: 2, numbering: none)[Weiterführende Quellen]
-
-- *Offizielle Docker-Dokumentation*, besonders _Dockerfile reference_, _Compose file reference_ und _Build best practices_: https://docs.docker.com
-- *Colima*: Installation, Optionen und FAQ unter https://github.com/abiosoft/colima
-- *uv in Docker*: Leitfaden von Astral unter https://docs.astral.sh/uv/guides/integration/docker/
-- *FastAPI in Containern*: https://fastapi.tiangolo.com/deployment/docker/
-- *Offizielles PostgreSQL-Image*, inklusive der Änderungen ab Version 18: #link("https://hub.docker.com/_/postgres")
-- *Caddy*: https://caddyserver.com/docs
-- *Trivy*: https://trivy.dev
-- *Build-Attestations (SBOM und Provenance)*: https://docs.docker.com/build/metadata/attestations/
-- *Cosign*: https://docs.sigstore.dev/cosign/
-- *Docker Hardened Images*: https://docs.docker.com/dhi/
-- *Git von Grund auf* (Begleitband): Gitea, Pull Requests, Gitea Actions, Runner, Secrets und SSH-Deployment.
+#v(0.4em)
+#set text(size: 9pt)
+Quellen und weiterführende Literatur zu den Begriffen und Werkzeugen dieses Handbuchs stehen im anschließenden Literaturverzeichnis. Für Gitea, Pull Requests, Gitea Actions, Runner, Secrets und SSH-Deployment ist das Begleitbuch "Git von Grund auf" @haindl-2026-git der Einstieg.

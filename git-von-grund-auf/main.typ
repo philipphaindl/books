@@ -158,8 +158,11 @@
 #include "kap13-actions.typ"
 #include "kap14-runner-deploy.typ"
 #include "kap15-pipeline.typ"
+#include "kap16-renovate.typ"
+#include "kap17-ci-governance.typ"
 #metadata("Anhang") <teil>
 #counter(heading).update(0)
 #set heading(numbering: "A.1")
 #include "anh-a-cheatsheet.typ"
 #include "anh-b-glossar.typ"
+#include "literatur.typ"

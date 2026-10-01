@@ -2,12 +2,12 @@
 #set heading(numbering: none)
 = Bevor es losgeht
 
-Fast jede Anwendung bietet heute eine API an, und viele Angriffe auf Webanwendungen treffen genau diese Schnittstelle. Die Fehler sind dabei selten exotisch: Eine API liefert Daten eines fremden Kontos aus, weil nur geprüft wurde, *ob* jemand angemeldet ist, aber nicht, *wem* das Objekt gehört. Ein Endpunkt übernimmt ein Feld `is_admin` aus der Anfrage. Ein Token wird akzeptiert, das für eine ganz andere Anwendung ausgestellt wurde. Dieses Handbuch zeigt, wie man solche Fehler systematisch vermeidet, am Beispiel von FastAPI.
+Fast jede Anwendung bietet heute eine API an, und viele Angriffe auf Webanwendungen treffen genau diese Schnittstelle. Die Fehler sind dabei selten exotisch: Eine API liefert Daten eines fremden Kontos aus, weil nur geprüft wurde, *ob* jemand angemeldet ist, aber nicht, *wem* das Objekt gehört @api-security-owasp-org-editions-2023-en-0xa1-broken-object-level-authorization. Ein Endpunkt übernimmt ein Feld `is_admin` aus der Anfrage. Ein Token wird akzeptiert, das für eine ganz andere Anwendung ausgestellt wurde. Dieses Handbuch zeigt, wie man solche Fehler systematisch vermeidet, am Beispiel von FastAPI.
 
 == Aufbau
 
 - *Teil I, Grundlagen:* ein Bedrohungsmodell für APIs, Authentifizierung mit OAuth 2.0 und OpenID Connect über Authentik und die korrekte Prüfung von Tokens in FastAPI.
-- *Teil II, die Risiken in der Praxis:* entlang der OWASP API Security Top 10 (Ausgabe 2023) Autorisierung, Datenmodelle, Ressourcenverbrauch, Fehlerbehandlung und Logging, Transport und Konfiguration sowie SSRF und fremde APIs.
+- *Teil II, die Risiken in der Praxis:* entlang der OWASP API Security Top 10 (Ausgabe 2023) @api-security-owasp-org-editions-2023-en-0x11-t10 Autorisierung, Datenmodelle, Ressourcenverbrauch, Fehlerbehandlung und Logging, Transport und Konfiguration sowie SSRF und fremde APIs.
 - *Teil III, Betrieb:* Versionierung und Inventar sowie automatisierte Sicherheitstests in der CI.
 - *Anhang:* eine Checkliste für Reviews und ein Glossar.
 

@@ -2,7 +2,7 @@
 
 = Rückgängig machen und Rettung
 
-Die gute Nachricht vorweg: In Git geht erstaunlich wenig endgültig verloren. Alles, was einmal committet wurde, lässt sich wochenlang wiederfinden. Wirklich gefährlich sind nur zwei Dinge: Änderungen, die *nie committet* wurden, und Befehle, die das Arbeitsverzeichnis überschreiben (`reset --hard`, `restore`, `clean`). Dieses Kapitel ordnet die Werkzeuge danach, was sie verändern.
+Die gute Nachricht vorweg: In Git geht erstaunlich wenig endgültig verloren. Alles, was einmal committet wurde, lässt sich wochenlang wiederfinden @git-scm-com-docs-git-gc. Wirklich gefährlich sind nur zwei Dinge: Änderungen, die *nie committet* wurden, und Befehle, die das Arbeitsverzeichnis überschreiben (`reset --hard`, `restore`, `clean`). Dieses Kapitel ordnet die Werkzeuge danach, was sie verändern.
 
 == Die Werkzeuge im Überblick
 
@@ -26,11 +26,11 @@ git restore --source=HEAD~3 src/app.py  # Datei auf den Stand von vor drei Commi
 git restore -p src/app.py               # nur einzelne Abschnitte verwerfen
 ```
 
-#achtung[`git restore datei` (ohne `--staged`) verwirft uncommittete Änderungen *unwiderruflich*. Sie waren nie in Git gespeichert, also kann Git sie auch nicht zurückholen. Im Zweifel vorher `git stash` ausführen.]
+#achtung[`git restore datei` (ohne `--staged`) verwirft uncommittete Änderungen *unwiderruflich* @git-scm-com-docs-git-restore. Sie waren nie in Git gespeichert, also kann Git sie auch nicht zurückholen. Im Zweifel vorher `git stash` ausführen.]
 
 == `reset`: den Branch verschieben
 
-`git reset <commit>` setzt den aktuellen Branch auf einen anderen Commit. Die drei Modi unterscheiden sich darin, was sie außer dem Branch-Zeiger noch anfassen:
+`git reset <commit>` setzt den aktuellen Branch auf einen anderen Commit @git-scm-com-docs-git-reset. Die drei Modi unterscheiden sich darin, was sie außer dem Branch-Zeiger noch anfassen:
 
 #figure(
   grid(columns: (1.3fr, 1fr), column-gutter: 14pt, align: horizon,
@@ -47,9 +47,9 @@ git restore -p src/app.py               # nur einzelne Abschnitte verwerfen
   caption: [Alle drei Modi entfernen `C` aus dem Branch. `--mixed` ist der Standard, wenn kein Modus angegeben wird.],
 )
 
-- *`--soft`:* Der Commit ist weg, seine Änderungen liegen aber vorgemerkt im Index. Ideal, um die letzten Commits neu zusammenzufassen: `git reset --soft HEAD~3 && git commit`.
-- *`--mixed`:* Commit weg, Änderungen liegen unvorgemerkt im Arbeitsverzeichnis. Gut zum Aufteilen (siehe Kapitel 8). Ohne Commit-Angabe (`git reset`) nimmt es nur alle Vormerkungen zurück.
-- *`--hard`:* Commit weg, *und alle uncommitteten Änderungen im Arbeitsverzeichnis ebenfalls*. Committetes lässt sich über das Reflog retten, Uncommittetes nicht.
+- *`--soft`:* Der Commit ist weg, seine Änderungen liegen aber vorgemerkt im Index @git-scm-com-docs-git-reset. Ideal, um die letzten Commits neu zusammenzufassen: `git reset --soft HEAD~3 && git commit`.
+- *`--mixed`:* Commit weg, Änderungen liegen unvorgemerkt im Arbeitsverzeichnis. Gut zum Aufteilen (siehe Kapitel 8). Ohne Commit-Angabe (`git reset`) nimmt es nur alle Vormerkungen zurück @git-scm-com-docs-git-reset.
+- *`--hard`:* Commit weg, *und alle uncommitteten Änderungen im Arbeitsverzeichnis ebenfalls*. Committetes lässt sich über das Reflog retten, Uncommittetes nicht @git-scm-com-docs-git-reset.
 
 Typische Anwendungen:
 
@@ -61,7 +61,7 @@ git reset --hard ORIG_HEAD       # missglückten Merge/Rebase direkt danach rüc
 
 == `revert`: sicher rückgängig nach dem Push
 
-Ist ein fehlerhafter Commit bereits in `main` und damit bei anderen angekommen, darfst du ihn nicht per `reset` entfernen. Stattdessen erzeugt `git revert` einen *neuen* Commit, der die Änderungen des alten exakt umkehrt. Die Historie bleibt intakt und dokumentiert sogar, dass und warum zurückgenommen wurde.
+Ist ein fehlerhafter Commit bereits in `main` und damit bei anderen angekommen, darfst du ihn nicht per `reset` entfernen. Stattdessen erzeugt `git revert` einen *neuen* Commit, der die Änderungen des alten exakt umkehrt @git-scm-com-docs-git-revert. Die Historie bleibt intakt und dokumentiert sogar, dass und warum zurückgenommen wurde.
 
 ```bash
 git revert 7b9e4d1               # erzeugt "Revert 'Validierung ergänzen'"
@@ -75,11 +75,11 @@ git revert --no-commit A^..C     # mehrere Commits in einem einzigen Revert-Comm
   caption: [Revert: `B̄` hebt die Änderungen von `B` auf, alle Commits bleiben erhalten.],
 )
 
-#tipp[Wird ein per Revert zurückgenommenes Feature später repariert, reicht ein erneuter Merge nicht: Git weiß, dass die ursprünglichen Commits schon enthalten sind. Dann revertierst du den Revert-Commit (`git revert B̄`) und bringst danach die Reparatur ein.]
+#tipp[Wird ein per Revert zurückgenommenes Feature später repariert, reicht ein erneuter Merge nicht: Git weiß, dass die ursprünglichen Commits schon enthalten sind @github-com-git-git-blob-master-documentation-howto-revert-a-faulty-merge-adoc. Dann revertierst du den Revert-Commit (`git revert B̄`) und bringst danach die Reparatur ein.]
 
 == `reflog`: das Sicherheitsnetz
 
-Git protokolliert lokal jede Bewegung von `HEAD` und jedes Branches: jeden Commit, Checkout, Reset, Rebase und Merge. Dieses Protokoll ist das _Reflog_, und es ist das wichtigste Rettungswerkzeug überhaupt.
+Git protokolliert lokal jede Bewegung von `HEAD` und jedes Branches: jeden Commit, Checkout, Reset, Rebase und Merge. Dieses Protokoll ist das _Reflog_ @git-scm-com-docs-git-reflog, und es ist das wichtigste Rettungswerkzeug überhaupt.
 
 ```bash
 git reflog
@@ -100,13 +100,13 @@ git branch rettung e5f6b72
 git log --oneline rettung
 ```
 
-Das Reflog hilft auch bei gelöschten Branches (den letzten Commit des Branches im Reflog suchen und neu anlegen) und bei Commits aus einem Detached-HEAD-Ausflug. Einträge werden standardmäßig 90 Tage aufbewahrt, für nicht mehr erreichbare Commits 30 Tage. `git reflog show feature/login` zeigt das Protokoll eines einzelnen Branches.
+Das Reflog hilft auch bei gelöschten Branches (den letzten Commit des Branches im Reflog suchen und neu anlegen) und bei Commits aus einem Detached-HEAD-Ausflug @git-scm-com-book-en-v2-git-internals-maintenance-and-data-recovery. Einträge werden standardmäßig 90 Tage aufbewahrt, für nicht mehr erreichbare Commits 30 Tage @git-scm-com-docs-git-gc @git-scm-com-docs-git-reflog. `git reflog show feature/login` zeigt das Protokoll eines einzelnen Branches @git-scm-com-docs-git-reflog.
 
-#merke[Das Reflog ist rein lokal. Es wird weder gepusht noch geklont. Auf einem frisch geklonten Rechner gibt es keine Vorgeschichte, auf die man zurückgreifen könnte.]
+#merke[Das Reflog ist rein lokal. Es wird weder gepusht noch geklont @git-scm-com-docs-git-reflog @git-scm-com-book-en-v2-git-internals-maintenance-and-data-recovery. Auf einem frisch geklonten Rechner gibt es keine Vorgeschichte, auf die man zurückgreifen könnte.]
 
 == `stash`: Änderungen beiseitelegen
 
-Der Stash ist ein Stapel für halbfertige Arbeit, wenn du kurz etwas anderes tun musst:
+Der Stash ist ein Stapel für halbfertige Arbeit, wenn du kurz etwas anderes tun musst @git-scm-com-docs-git-stash:
 
 ```bash
 git stash push -m "Login halbfertig"   # Änderungen sichern, Arbeitsverzeichnis sauber
@@ -123,7 +123,7 @@ Stashes sind praktisch, geraten aber leicht in Vergessenheit. Für alles, was l�
 
 == `cherry-pick`: einzelne Commits übernehmen
 
-`git cherry-pick` nimmt die Änderung eines einzelnen Commits (seinen Diff zum Elternteil) und wendet sie als *neuen Commit* auf den aktuellen Branch an. Nachricht und Autor bleiben gleich, Elternteil und Hash sind neu. Übernommen wird nur genau diese eine Änderung, nicht die Vorgeschichte des Commits und nicht die übrigen Commits seines Branches.
+`git cherry-pick` nimmt die Änderung eines einzelnen Commits (seinen Diff zum Elternteil) und wendet sie als *neuen Commit* auf den aktuellen Branch an @git-scm-com-docs-git-cherry-pick. Nachricht und Autor bleiben gleich, Elternteil und Hash sind neu. Übernommen wird nur genau diese eine Änderung, nicht die Vorgeschichte des Commits und nicht die übrigen Commits seines Branches.
 
 #figure(
   grid(columns: (1fr, 1fr), column-gutter: 10pt,
@@ -158,9 +158,9 @@ git commit -m "CSRF-Fixes zurückportieren"
 git cherry-pick -m 1 4f2a9e0         # Merge-Commit: Änderungen relativ zum ersten Elternteil
 ```
 
-`-x` hängt an die Nachricht die Zeile `(cherry picked from commit 7b9e4d1...)` an. Das ist bei Backports auf öffentliche Branches sehr nützlich, weil man später nachvollziehen kann, woher ein Fix stammt. Bei der Rettung privater Commits, deren Original ohnehin verschwindet, verweist der Vermerk dagegen ins Leere und kann entfallen.
+`-x` hängt an die Nachricht die Zeile `(cherry picked from commit 7b9e4d1...)` an @git-scm-com-docs-git-cherry-pick. Das ist bei Backports auf öffentliche Branches sehr nützlich, weil man später nachvollziehen kann, woher ein Fix stammt. Bei der Rettung privater Commits, deren Original ohnehin verschwindet, verweist der Vermerk dagegen ins Leere und kann entfallen @git-scm-com-docs-git-cherry-pick.
 
-Bei Bereichen ist die Schreibweise wichtig: `A..C` bedeutet "alle Commits bis `C`, die nicht in `A` enthalten sind", schließt `A` selbst also *aus*. Soll `A` dabei sein, lautet der Bereich `A^..C`. Einen Merge-Commit kann Git nicht ohne Weiteres übernehmen, weil unklar ist, gegenüber welchem Elternteil die Änderung gemeint ist. `-m 1` wählt das erste Elternteil, also "alles, was dieser Merge in den Ziel-Branch gebracht hat".
+Bei Bereichen ist die Schreibweise wichtig: `A..C` bedeutet "alle Commits bis `C`, die nicht in `A` enthalten sind", schließt `A` selbst also *aus*. Soll `A` dabei sein, lautet der Bereich `A^..C` @git-scm-com-docs-git-cherry-pick @git-scm-com-docs-gitrevisions. Einen Merge-Commit kann Git nicht ohne Weiteres übernehmen, weil unklar ist, gegenüber welchem Elternteil die Änderung gemeint ist. `-m 1` wählt das erste Elternteil, also "alles, was dieser Merge in den Ziel-Branch gebracht hat" @git-scm-com-docs-git-cherry-pick.
 
 === Konflikte beim Cherry-Pick
 
@@ -174,19 +174,19 @@ git cherry-pick --skip          # diesen Commit des Bereichs auslassen
 git cherry-pick --abort         # alles zurück zum Zustand vor dem Cherry-Pick
 ```
 
-Anders als beim Rebase sind `--ours` und `--theirs` hier *nicht* vertauscht: "Ours" ist der Branch, auf dem du stehst, "theirs" der übernommene Commit. Meldet Git beim Übernehmen _The previous cherry-pick is now empty_, ist die Änderung auf dem Ziel-Branch bereits vorhanden. Dann ist `--skip` richtig.
+Anders als beim Rebase sind `--ours` und `--theirs` hier *nicht* vertauscht: "Ours" ist der Branch, auf dem du stehst, "theirs" der übernommene Commit @git-scm-com-docs-git-rebase. Meldet Git beim Übernehmen _The previous cherry-pick is now empty_, ist die Änderung auf dem Ziel-Branch bereits vorhanden. Dann ist `--skip` richtig @git-scm-com-docs-git-cherry-pick.
 
 === Wenn der Quell-Branch später doch gemergt wird
 
 Nach einem Cherry-Pick existiert dieselbe Änderung als zwei verschiedene Commits (`D` und `D'`). Das ist meist harmlos, sollte man aber kennen:
 
-- *Rebase* erkennt, dass eine inhaltsgleiche Änderung schon im Ziel liegt, und lässt den Commit weg. Git meldet das als _skipped previously applied commit_.
+- *Rebase* erkennt, dass eine inhaltsgleiche Änderung schon im Ziel liegt, und lässt den Commit weg @git-scm-com-docs-git-rebase. Git meldet das als _skipped previously applied commit_.
 - *Merge* führt beide Seiten zusammen. Da beide dieselbe Änderung enthalten, gibt es in der Regel keinen Konflikt. Wurde die betroffene Stelle danach aber auf einer Seite weiter verändert, kann doch einer entstehen.
 - *Squash-Merge* eines PRs zeigt die bereits übernommene Änderung nicht mehr im Diff, weil sie im Ziel schon vorhanden ist.
 
 === Prüfen, was schon übernommen wurde
 
-Bei Release-Branches stellt sich regelmäßig die Frage, welche Fixes aus `main` dort noch fehlen. Git vergleicht dafür nicht Hashes, sondern den Inhalt der Änderungen:
+Bei Release-Branches stellt sich regelmäßig die Frage, welche Fixes aus `main` dort noch fehlen. Git vergleicht dafür nicht Hashes, sondern den Inhalt der Änderungen @git-scm-com-docs-git-cherry:
 
 ```bash
 git cherry -v release/1.2 main
@@ -197,7 +197,7 @@ git cherry -v release/1.2 main
 + 91fe2d4 Neue Berichtsansicht
 ```
 
-`-` bedeutet: Eine inhaltsgleiche Änderung ist in `release/1.2` schon vorhanden. `+` bedeutet: fehlt noch. Dasselbe zeigt `git log --oneline --cherry-mark release/1.2...main`, das übernommene Commits mit `=` markiert. Musste beim Cherry-Pick ein Konflikt gelöst werden, ist die Änderung nicht mehr exakt gleich und erscheint weiterhin als fehlend. Hier hilft der `-x`-Vermerk: `git log release/1.2 --grep="cherry picked from commit 7b9e4d1"` findet den Backport trotzdem.
+`-` bedeutet: Eine inhaltsgleiche Änderung ist in `release/1.2` schon vorhanden. `+` bedeutet: fehlt noch @git-scm-com-docs-git-cherry. Dasselbe zeigt `git log --oneline --cherry-mark release/1.2...main`, das übernommene Commits mit `=` markiert @git-scm-com-docs-git-log. Musste beim Cherry-Pick ein Konflikt gelöst werden, ist die Änderung nicht mehr exakt gleich und erscheint weiterhin als fehlend. Hier hilft der `-x`-Vermerk: `git log release/1.2 --grep="cherry picked from commit 7b9e4d1"` findet den Backport trotzdem.
 
 === Mit Pull Request statt direkt
 
@@ -221,7 +221,7 @@ git clean -fdx      # zusätzlich ignorierte Dateien (Build-Ordner, .venv, node_
 git clean -i        # interaktiv auswählen
 ```
 
-`git clean` löscht Dateien, die Git nie gesehen hat, und kann sie deshalb auch nicht wiederherstellen. Immer zuerst mit `-n` prüfen.
+`git clean` löscht Dateien, die Git nie gesehen hat, und kann sie deshalb auch nicht wiederherstellen @git-scm-com-docs-git-clean. Immer zuerst mit `-n` prüfen.
 
 == Notfall-Tabelle
 
@@ -236,5 +236,5 @@ git clean -i        # interaktiv auswählen
   [... mitten in einem Merge/Rebase den Überblick verloren], [`git merge --abort` bzw. `git rebase --abort`.],
   [... ein Passwort committet und gepusht], [Sofort das Passwort austauschen, dann ggf. `git filter-repo` (Kapitel 8).],
   [... eine riesige Datei committet (noch nicht gepusht)], [`git rm --cached datei`, in `.gitignore` eintragen, `git commit --amend`.],
-  [... uncommittete Änderungen mit `restore` oder `reset --hard` verloren], [Git kann nicht helfen. Eventuell hat der Editor eine lokale Historie (VS Code: _Timeline_) oder Time Machine eine Kopie.],
+  [... uncommittete Änderungen mit `restore` oder `reset --hard` verloren], [Git kann nicht helfen. Eventuell hat der Editor eine lokale Historie (VS Code: _Timeline_ @code-visualstudio-com-docs-sourcecontrol-overview) oder Time Machine eine Kopie.],
 )
