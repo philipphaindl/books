@@ -1,0 +1,19 @@
+|--- temperatur_c <= 79.85
+|   |--- schwingung_mm_s <= 6.00
+|   |   |--- class: 0
+|   |--- schwingung_mm_s >  6.00
+|   |   |--- class: 1
+|--- temperatur_c >  79.85
+|   |--- temperatur_c <= 80.90
+|   |   |--- class: 1
+|   |--- temperatur_c >  80.90
+|   |   |--- class: 1
+
+Modell                            Training    Test
+Logistische Regression               0.839   0.837
+Baum, Tiefe 2                        0.954   0.953
+Baum, unbegrenzt                     1.000   0.923
+Random Forest (200 Bäume)            1.000   0.953
+Gradient Boosting (100 Bäume)        0.970   0.930
+
+Unbegrenzter Baum: Tiefe 20 , Blätter 76

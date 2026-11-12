@@ -1,0 +1,6 @@
+Version 1: LogisticRegression           accuracy 0.791
+Version 2: GradientBoostingClassifier   accuracy 0.843
+Anfragen je Version bei 10 % Canary: {1: 911, 2: 89}
+Übereinstimmung v1/v2: 0.870
+production -> 2
+Rollback: production -> 1

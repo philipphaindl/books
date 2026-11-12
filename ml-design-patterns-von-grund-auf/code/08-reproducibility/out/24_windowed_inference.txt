@@ -1,0 +1,3 @@
+Batch und Stream identisch: True | gültige Werte: 1495
+Fenster 'richtig': MAE offline 0.880 | MAE im Stream 0.880
+Fenster 'leck':    MAE offline 0.727 | MAE im Stream 0.883

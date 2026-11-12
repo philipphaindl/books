@@ -1,0 +1,1 @@
+[{"name": "nur Tabelle (Schadenshöhe)", "acc": 0.657}, {"name": "nur Text (Bag of Words)", "acc": 0.683}, {"name": "nur Bild (64 Pixel)", "acc": 0.627}, {"name": "Tabelle + Text", "acc": 0.713}, {"name": "Tabelle + Text + Bild", "acc": 0.733}, {"name": "dito, Höhe zusätzlich in Buckets", "acc": 0.733}]

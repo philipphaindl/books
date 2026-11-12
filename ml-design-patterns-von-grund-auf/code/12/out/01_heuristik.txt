@@ -1,0 +1,8 @@
+Kunden 35,041 | Zeilen 285,328 | Zeilen je Kunde 8.1
+Abwanderung in den nächsten 3 Monaten: 4.5%
+
+Niemand kündigt: Accuracy 0.955
+Faustregel     : Accuracy 0.863, Precision 0.128, Recall 0.350
+                 F1 0.187, markiert 12.3% der Zeilen
+Nutzen mit Faustregel: -333 Euro je 1000 Kunden-Monate
+PR-AUC nach Login-Tagen: 0.197 (Zufall 0.045)

@@ -1,0 +1,30 @@
+Woche Phase             Genauigkeit  PSI(x1)   KS-p(x1)  Alarm
+    4 stabil                  0.857    0.009       0.26  
+    5 stabil                  0.862    0.008      0.056  
+    6 stabil                  0.862    0.005       0.58  
+    7 stabil                  0.857    0.005       0.81  
+    8 Covariate Shift         0.935    2.037   4.6e-321  Eingaben
+    9 Covariate Shift         0.942    2.218   3.8e-321  Eingaben
+   10 Covariate Shift         0.945    2.170   4.1e-321  Eingaben
+   11 Covariate Shift         0.943    2.070   4.3e-321  Eingaben
+   12 Covariate Shift         0.945    2.043   4.1e-321  Eingaben
+   13 Covariate Shift         0.936    2.083   4.5e-321  Eingaben
+   14 Concept Drift           0.809    0.008       0.51  
+   15 Concept Drift           0.706    0.018      0.089  Qualität
+   16 Concept Drift           0.625    0.005       0.66  Qualität
+   17 Concept Drift           0.558    0.005       0.56  Qualität
+   18 Concept Drift           0.541    0.005       0.46  Qualität
+   19 Concept Drift           0.550    0.009       0.49  Qualität
+   20 Concept Drift           0.538    0.004       0.43  Qualität
+   21 Concept Drift           0.530    0.002       0.97  Qualität
+   22 Concept Drift           0.546    0.008       0.15  Qualität
+   23 Concept Drift           0.545    0.013     0.0015  Qualität
+
+Qualitätsalarm erstmals in Woche 15.
+Retraining in Woche 17 mit den Wochen 14-17:
+  Woche 18: altes Modell=0.541  neues Modell=0.783
+  Woche 20: altes Modell=0.538  neues Modell=0.787
+  Woche 22: altes Modell=0.546  neues Modell=0.784
+Zum Vergleich: Modell nur mit den Wochen 18-21 (Beziehung stabil):
+  Woche 22: 0.863
+  Woche 23: 0.856

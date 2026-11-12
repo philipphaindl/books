@@ -1,0 +1,19 @@
+Genauigkeit Test: 0.937
+Schicht 1: Gewichte (2, 16), Bias (16,)
+Schicht 2: Gewichte (16, 8), Bias (8,)
+Schicht 3: Gewichte (8, 1), Bias (1,)
+Parameter insgesamt: 193
+
+Embedding-Tabelle E (eine Zeile pro Wort):
+  drucker   [0.35 0.82 0.33]
+  scanner   [-1.3   0.91  0.45]
+  passwort  [-0.54  0.58  0.36]
+  login     [0.29 0.03 0.55]
+  vpn       [-0.74 -0.16 -0.48]
+One-hot für 'passwort': [0. 0. 1. 0. 0.]
+one_hot @ E            : [-0.54  0.58  0.36]
+E[idx]                 : [-0.54  0.58  0.36]
+Ähnlichkeit(drucker, scanner) = +0.93
+Ähnlichkeit(passwort, login) = +0.99
+Ähnlichkeit(drucker, passwort) = +0.18
+Ähnlichkeit(vpn, drucker) = -0.14

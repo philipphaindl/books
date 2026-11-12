@@ -1,0 +1,18 @@
+#let begriffe = (
+  ("RAG (Retrieval-Augmented Generation)", [System, das vor dem Schreiben der Antwort passende Textstellen aus eigenen Dokumenten sucht und dem Sprachmodell mitgibt.], 9),
+  ("Chunk", [Textstück von einigen hundert Wörtern, in das man Dokumente für die Suche zerlegt.], 9),
+  ("Embedding", [Liste von Zahlen, die den Inhalt eines Textes beschreibt, sodass ähnliche Texte ähnliche Zahlen bekommen.], 9),
+  ("Retriever", [Der Teil eines RAG-Systems, der zu einer Frage die passenden Chunks aus dem Index holt.], 9),
+  ("Faithfulness", [Anteil der Aussagen einer Antwort, die durch den bereitgestellten Kontext gestützt sind, unabhängig davon, ob der Kontext stimmt.], 9),
+  ("Factuality", [Übereinstimmung einer Aussage mit der Wirklichkeit, unabhängig von einer bestimmten Quelle.], 9),
+  ("Precision@k", [Anteil der k angezeigten Treffer, die brauchbar sind.], 9),
+  ("Recall@k", [Anteil aller brauchbaren Chunks, die unter den ersten k Treffern gefunden wurden.], 9),
+  ("MRR (Mean Reciprocal Rank)", [Durchschnitt über viele Fragen, wie weit oben der erste brauchbare Treffer steht: Platz 1 zählt 1, Platz 2 zählt 0.5.], 9),
+  ("MAP (Mean Average Precision)", [Durchschnitt der Precision an jedem brauchbaren Treffer, wobei nie gefundene Chunks mit null zählen.], 9),
+  ("nDCG", [Zahl zwischen 0 und 1, die misst, ob die besten Treffer weit oben stehen; 1 bedeutet die bestmögliche Reihenfolge.], 9),
+  ("Context Recall", [Anteil der Aussagen einer Musterantwort, die der abgerufene Kontext stützt.], 9),
+  ("Claim", [Einzelne kleine Behauptung, in die man eine Antwort zerlegt, um jede für sich zu prüfen.], 9),
+  ("Nugget", [Kleiner Fakt, den eine gute Antwort enthalten sollte, wie ein Punkt in einem Bewertungsschema.], 9),
+  ("Cohen's kappa", [Maß für die Übereinstimmung zweier Urteilender, bei dem die Übereinstimmung durch reines Raten herausgerechnet ist.], 9),
+  ("Paired Bootstrap", [Verfahren, das die Testfragen mit Zurücklegen neu zieht, um ein Intervall für den Unterschied zweier Systeme zu bekommen.], 9),
+)

@@ -1,0 +1,15 @@
+Modell aus Schritt 5, Wichtigkeit von anmeldetag: +0.0044
+Modell aus Schritt 5, Wichtigkeit von bandbreite_mbit: -0.0016
+PR-AUC Test: mit Fingerabdruck-Spalten 0.292, ohne 0.293
+
+Kunde K016338, Monat 10: Vorhersage 0.603, Basis 0.050
+Summe der Beiträge +0.5522 = Vorhersage - Basis +0.5522
+        merkmal    wert  beitrag  andere_ziehung
+  stunden_trend   0.429   +0.313          +0.330
+tage_seit_login       5   +0.166          +0.160
+    tickets_30d       1   +0.083          +0.077
+          kanal  aktion   +0.032          +0.028
+          tarif premium   -0.018          -0.017
+          preis   17.99   -0.014          -0.012
+          alter      36   -0.013          -0.010
+Rest (7 Merkmale): +0.002

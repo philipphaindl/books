@@ -1,0 +1,18 @@
+random_state=42        Zeilen, die nach 1 neuer Zeile die Seite wechseln: 245 von 1000
+md5(kunde) % 10 < 8    Zeilen, die nach 1 neuer Zeile die Seite wechseln: 0 von 1000
+Checkpoint nach Epoche  3: Gewichte-Hash 1f5da3eef201, Accuracy 0.850
+Checkpoint nach Epoche 10: Gewichte-Hash 181d6dffc2a6, Accuracy 0.841
+{
+  "checkpoint": "181d6dffc2a6",
+  "code": "39caa6399991",
+  "daten": "161edbfd7c61",
+  "hyperparameter": {
+    "loss": "log_loss",
+    "epochen": 10,
+    "random_state": 0
+  },
+  "transform": "keine (Rohmerkmale)",
+  "metrik": {
+    "accuracy_train": 0.841
+  }
+}

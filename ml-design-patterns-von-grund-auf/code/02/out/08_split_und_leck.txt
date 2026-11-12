@@ -1,0 +1,12 @@
+Training/Validierung/Test: 600 200 200
+max_depth= 1: Validierung 0.895
+max_depth= 2: Validierung 0.970
+max_depth= 3: Validierung 0.970
+max_depth= 5: Validierung 0.970
+max_depth=10: Validierung 0.955
+
+5-fache Kreuzvalidierung: [0.944 0.931 0.962 0.962 0.962]
+Mittel 0.953, Streuung 0.013
+
+Zufallsdaten, Auswahl vor dem Split  : 0.84 Genauigkeit im Mittel (Leck)
+Zufallsdaten, Auswahl in der Pipeline: 0.51 Genauigkeit im Mittel (ehrlich)

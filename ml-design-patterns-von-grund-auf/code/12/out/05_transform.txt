@@ -1,0 +1,11 @@
+Logistische Regression: PR-AUC 0.252 ohne log1p, 0.247 mit log1p
+Gradient Boosting     : PR-AUC 0.292 ohne log1p, 0.292 mit log1p
+Schiefe von 'stunden' vor/nach log1p: 2.97 / -0.05
+Pipeline vs. Einzelaufruf der Teile: größte Abweichung 0.0e+00
+Service ohne log1p: PR-AUC 0.188 (Pipeline 0.292)
+  mittlere Wahrscheinlichkeit 0.140 (Pipeline 0.046)
+  Entscheidung ändert sich bei 21.7% der Zeilen
+Unbekannter Tarif 'mobil', Pipeline : [0.023 0.03  0.037 0.032 0.031]
+Unbekannter Tarif 'mobil', get_dummies: ValueError
+  The feature names should match those that were passed during fit.
+modell_v0.joblib gespeichert (PR-AUC Test 0.292).

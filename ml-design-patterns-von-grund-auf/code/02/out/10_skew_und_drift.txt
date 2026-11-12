@@ -1,0 +1,11 @@
+Hyperparameter (vorher gewählt): max_depth = 2
+Parameter (gelernt): Schwellen = [79.85  6.   80.9 ]
+
+Offline-Genauigkeit (Celsius)      : 0.827
+Serving mit Fahrenheit-Werten      : 0.280
+Anteil echter Ausfälle im Test     : 0.280
+
+Data Drift: Temperatur Training Mittel 69.3, Sommer 82.2, KS-Statistik 0.50, p = 6.1e-95
+Genauigkeit im Sommer, Regel unverändert: 0.943
+
+Concept Drift (Schwelle jetzt 75 °C): Genauigkeit 0.837 statt 0.947

@@ -1,0 +1,7 @@
+fertig 06-model-training/trainingsschleife.py rc=0
+fertig 06-model-training/distribution_strategy.py rc=0
+fertig 06-model-training/checkpoints.py rc=0
+fertig 06-model-training/useful_overfitting.py rc=0
+fertig 06-model-training/transfer_learning.py rc=0
+fertig 06-model-training/hyperparameter_tuning.py rc=0
+fertig export rc=0

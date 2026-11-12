@@ -1,0 +1,237 @@
+{
+ "rang0": [
+  {
+   "merkmal": "tage_seit_login",
+   "abfall": 0.15075833790569376,
+   "streuung": 0.0032718499326711316
+  },
+  {
+   "merkmal": "stunden_trend",
+   "abfall": 0.06148010798334887,
+   "streuung": 0.0012033534201219068
+  },
+  {
+   "merkmal": "kanal",
+   "abfall": 0.025198370530290927,
+   "streuung": 0.0004560455652908901
+  },
+  {
+   "merkmal": "tenure",
+   "abfall": 0.022392675835831953,
+   "streuung": 0.0011823297053015242
+  },
+  {
+   "merkmal": "stunden",
+   "abfall": 0.010082373576625503,
+   "streuung": 0.0015850354057303168
+  },
+  {
+   "merkmal": "tickets_30d",
+   "abfall": 0.009541406708364952,
+   "streuung": 0.0015791732929930527
+  },
+  {
+   "merkmal": "alter",
+   "abfall": 0.009242943449655438,
+   "streuung": 0.0014129712361817754
+  },
+  {
+   "merkmal": "aktion_restmonate",
+   "abfall": 0.004358881835937756,
+   "streuung": 0.00017982651556425547
+  },
+  {
+   "merkmal": "anmeldetag",
+   "abfall": 0.004358758953028641,
+   "streuung": 0.0009823108805022721
+  },
+  {
+   "merkmal": "zahlungsfehler_90d",
+   "abfall": 0.00423184234923778,
+   "streuung": 0.001050505733625907
+  },
+  {
+   "merkmal": "tarif",
+   "abfall": 0.0015341335406346079,
+   "streuung": 0.0004938286847427667
+  },
+  {
+   "merkmal": "sessions",
+   "abfall": 0.0014401880647357701,
+   "streuung": 0.0003146881338604344
+  },
+  {
+   "merkmal": "geraet",
+   "abfall": 0.0006607390886044451,
+   "streuung": 0.0003943986313153633
+  },
+  {
+   "merkmal": "preis",
+   "abfall": 0.00035041262554122985,
+   "streuung": 0.0002389328572862723
+  },
+  {
+   "merkmal": "land",
+   "abfall": 0.00019771002683989237,
+   "streuung": 0.00021557180573725197
+  },
+  {
+   "merkmal": "bandbreite_mbit",
+   "abfall": -0.0016038178749917197,
+   "streuung": 0.0005207491875752886
+  }
+ ],
+ "rang": [
+  {
+   "merkmal": "tage_seit_login",
+   "abfall": 0.15155515845266768,
+   "streuung": 0.003405080194572101
+  },
+  {
+   "merkmal": "stunden_trend",
+   "abfall": 0.06025350260271041,
+   "streuung": 0.0013072603698240986
+  },
+  {
+   "merkmal": "tenure",
+   "abfall": 0.025074520385055855,
+   "streuung": 0.0010423964209350792
+  },
+  {
+   "merkmal": "kanal",
+   "abfall": 0.024000458640305457,
+   "streuung": 0.0005873713144825026
+  },
+  {
+   "merkmal": "tickets_30d",
+   "abfall": 0.010312756731005512,
+   "streuung": 0.0016290824343763621
+  },
+  {
+   "merkmal": "alter",
+   "abfall": 0.009637310154888046,
+   "streuung": 0.0025031180348135287
+  },
+  {
+   "merkmal": "stunden",
+   "abfall": 0.006921455259872056,
+   "streuung": 0.0019043441575902344
+  },
+  {
+   "merkmal": "zahlungsfehler_90d",
+   "abfall": 0.004188060895443291,
+   "streuung": 0.0012157196914230146
+  },
+  {
+   "merkmal": "aktion_restmonate",
+   "abfall": 0.0025254023518237246,
+   "streuung": 0.0002007954568592685
+  },
+  {
+   "merkmal": "sessions",
+   "abfall": 0.0014929465210942738,
+   "streuung": 0.0004560594476795036
+  },
+  {
+   "merkmal": "tarif",
+   "abfall": 0.001248747654448279,
+   "streuung": 0.000258776928140164
+  },
+  {
+   "merkmal": "geraet",
+   "abfall": 0.0003670794388368814,
+   "streuung": 0.00014117856558456198
+  },
+  {
+   "merkmal": "preis",
+   "abfall": 0.00014472532046466702,
+   "streuung": 0.00016351136988107274
+  },
+  {
+   "merkmal": "land",
+   "abfall": -0.0001295188658797408,
+   "streuung": 0.00038973594104263823
+  }
+ ],
+ "ap0": 0.29210009543756627,
+ "ap1": 0.2926538288596166,
+ "fall": {
+  "id": "K016338",
+  "monat": 10,
+  "gruppe": "25-39",
+  "vorhersage": 0.6025047405795457,
+  "basis": 0.05034704477415077,
+  "beitraege": [
+   {
+    "merkmal": "stunden_trend",
+    "wert": "0.429",
+    "beitrag": 0.31297058610894657
+   },
+   {
+    "merkmal": "tage_seit_login",
+    "wert": "5",
+    "beitrag": 0.1663973826545908
+   },
+   {
+    "merkmal": "tickets_30d",
+    "wert": "1",
+    "beitrag": 0.08345836992862095
+   },
+   {
+    "merkmal": "kanal",
+    "wert": "aktion",
+    "beitrag": 0.032363454371259974
+   },
+   {
+    "merkmal": "tarif",
+    "wert": "premium",
+    "beitrag": -0.01808248270917496
+   },
+   {
+    "merkmal": "preis",
+    "wert": "17.99",
+    "beitrag": -0.013899783762132537
+   },
+   {
+    "merkmal": "alter",
+    "wert": "36",
+    "beitrag": -0.01333018029823681
+   },
+   {
+    "merkmal": "zahlungsfehler_90d",
+    "wert": "1",
+    "beitrag": 0.01180970928144153
+   },
+   {
+    "merkmal": "tenure",
+    "wert": "10",
+    "beitrag": -0.009694178110550945
+   },
+   {
+    "merkmal": "sessions",
+    "wert": "29",
+    "beitrag": -0.005790839732301803
+   },
+   {
+    "merkmal": "aktion_restmonate",
+    "wert": "0",
+    "beitrag": 0.0027959005963840112
+   },
+   {
+    "merkmal": "stunden",
+    "wert": "19.37",
+    "beitrag": 0.002029042990116352
+   },
+   {
+    "merkmal": "land",
+    "wert": "DE",
+    "beitrag": 0.0009926325129103874
+   },
+   {
+    "merkmal": "geraet",
+    "wert": "tv",
+    "beitrag": 0.00013808197352118415
+   }
+  ]
+ }
+}

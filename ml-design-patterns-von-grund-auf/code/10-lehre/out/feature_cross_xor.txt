@@ -1,0 +1,3 @@
+Logistische Regression, Rohmerkmale:      0.55
+Logistische Regression, mit Feature Cross: 0.98
+Entscheidungsbaum, Rohmerkmale (Tiefe 4):  1.00

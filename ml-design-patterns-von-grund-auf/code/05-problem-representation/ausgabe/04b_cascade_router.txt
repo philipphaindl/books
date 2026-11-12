@@ -1,0 +1,6 @@
+ein lineares Modell auf allen              ROC-AUC 0.641  PR-AUC 0.133
+ein Baummodell auf x und r                 ROC-AUC 0.737  PR-AUC 0.150
+Router-Genauigkeit auf den Testdaten: 91.7%
+Cascade: Router + 2 Spezialisten           ROC-AUC 0.759  PR-AUC 0.180
+Cascade mit wahrem Segment (Orakel)        ROC-AUC 0.805  PR-AUC 0.197
+falsch geroutet: 8.3%; AUC nur über diese Fälle: 0.237

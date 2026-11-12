@@ -1,0 +1,13 @@
+Labels pro Beispiel im Mittel: 2.25 | verschiedene Label-Kombinationen: 31
+
+Sigmoid-Ausgaben für 3 Beispiele (Summe muss nicht 1 sein):
+  [0.04 0.01 1.   0.   0.  ] Summe 1.05 | wahr [0 0 1 0 0]
+  [0.45 0.28 0.14 0.98 0.07] Summe 1.91 | wahr [1 0 0 1 0]
+  [0.55 0.09 0.29 0.96 0.13] Summe 2.03 | wahr [1 0 0 1 0]
+
+Sigmoid, Schwelle 0,5       Hamming 0.175  F1 micro 0.805  macro 0.802  exakt 0.443
+gewählte Schwellen: [0.3  0.28 0.45 0.3  0.38]
+Sigmoid, Schwelle je Label  Hamming 0.179  F1 micro 0.818  macro 0.819  exakt 0.405
+Softmax (nur Top-1)         Hamming 0.274  F1 micro 0.579  macro 0.578  exakt 0.302
+  Softmax-Ausgabe, zweites Testbeispiel: [0.12 0.25 0.05 0.55 0.03] Summe 1.0
+Label Powerset (31 Klassen) Hamming 0.187  F1 micro 0.783  macro 0.780  exakt 0.468

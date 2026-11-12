@@ -1,0 +1,25 @@
+Edge-Modell (16 Merkmale):  Genauigkeit Test=0.869
+Cloud-Modell (64 Merkmale): Genauigkeit Test=0.980
+
+Schwellwert tau auf den Testdaten
+   tau   an Cloud weitergereicht   Genauigkeit gesamt   Edge allein entschieden
+  0.00                      0.0%                0.869                     0.869
+  0.50                     33.1%                0.949                     0.940
+  0.70                     58.0%                0.978                     0.989
+  0.80                     75.6%                0.980                     1.000
+  0.90                     93.3%                0.980                     1.000
+  0.95                     99.8%                0.980                     1.000
+  0.99                    100.0%                0.980                       nan
+  1.01                    100.0%                0.980                       nan
+
+tau=0.59 (auf Validierungsdaten gewählt)
+  Genauigkeit Test: 0.969, an die Cloud weitergereicht: 44.9%
+  mittlere Latenz: 59 ms gegen 120 ms nur Cloud
+  (angenommen: 5 ms Edge, 120 ms Cloud inkl. Netz)
+
+Edge-Modell auf den Testdaten: Sicherheit gegen tatsächliche Trefferquote
+  Sicherheit  Anzahl  Mittel Sicherheit  Trefferquote
+  0.0 bis 0.5     149               0.38          0.72
+  0.5 bis 0.7     112               0.59          0.86
+  0.7 bis 0.9     159               0.80          0.99
+  0.9 bis 1.0      30               0.92          1.00

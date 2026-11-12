@@ -1,0 +1,10 @@
+Batch A (sauber): 500 Zeilen, gültig
+
+Batch B (kaputt): 4 Verstöße
+      column                     check failure_case
+Bestellungen          column_in_schema     kunde_id
+  distanz_km           greater_than(0)         -1.0
+      stunde less_than_or_equal_to(23)           24
+       regen              isin([0, 1])            2
+
+Batch C (Meilen statt km): 500 Zeilen, gültig

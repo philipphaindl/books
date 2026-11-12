@@ -1,0 +1,13 @@
+Fläche roh      : [40.0, 75.0, 120.0]
+min-max (0..1)  : [0.13, 0.44, 0.83]
+z-score         : [-1.77, 0.02, 2.32]
+
+Einkommen roh: Mittel 46,050, Median 39,476, Schiefe 2.05
+Einkommen log: Mittel 10.56, Median 10.58, Schiefe -0.03
+
+Quartilgrenzen: [6447.0, 26284.0, 39476.0, 56720.0, 230625.0]
+Bucket für 20.000 / 40.000 / 90.000 / 300.000: [0, 2, 3, 3]
+
+Spalten: ['stadtteil_Mitte', 'stadtteil_Nord', 'stadtteil_Ost', 'stadtteil_Sued']
+[[0 1 0 0]
+ [0 0 1 0]]

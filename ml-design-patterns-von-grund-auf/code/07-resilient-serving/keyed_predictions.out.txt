@@ -1,0 +1,9 @@
+Stücke in Reihenfolge des Eintreffens: [3, 8, 1, 10, 5, 7, 0, 4, 9, 2, 11, 6]
+
+a) positionsbasiert zugeordnet:  Genauigkeit = 0.117
+b) per Schlüssel zugeordnet:     Genauigkeit = 0.883
+schluessel  wahr  vorhersage
+   img-000     1           1
+   img-001     7           7
+   img-002     4           4
+   img-003     6           6

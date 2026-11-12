@@ -1,0 +1,7 @@
+Gewichte (Minuten pro km bzw. pro Routing-Minute)
+  ohne routing_min: distanz_km = 2.88
+  mit  routing_min: distanz_km = 0.27, routing_min = 0.92
+
+MAE auf Testdaten (Minuten)
+  ohne routing_min: vor dem Update 3.71, nach dem Update 3.71
+  mit  routing_min: vor dem Update 2.63, nach dem Update 5.63

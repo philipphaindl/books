@@ -1,0 +1,16 @@
+Trainingssitzungen 107,377, davon Käufe 7,382; Testsitzungen 42,623, davon Käufe 2,869
+
+                                  Kauf-AUC  Kategorie richtig
+ein Modell, 13 Klassen               0.752              51.6%
+Cascade (Stufe 1 + Stufe 2)          0.767              51.7%
+Heuristik: Kategorie der Seite                          45.4%
+immer die häufigste Kategorie                           23.9%
+
+Betrieb: Stufe 2 nur für die Sitzungen mit dem höchsten Score
+ Anteil an Stufe 2   Käufer erfasst  Kategorie richtig (erfasst)
+               10%            37.3%                        57.6%
+               20%            53.9%                        54.5%
+               30%            66.2%                        54.1%
+              100%           100.0%                        51.7%
+
+Trainingszeilen: ein Modell 107,377 x 13 Klassen; Stufe 1 107,377 x 2; Stufe 2 7,382 x 12

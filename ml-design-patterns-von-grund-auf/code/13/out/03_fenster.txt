@@ -1,0 +1,11 @@
+Vorhersagezeitpunkte verglichen: 1510
+max. Abweichung Stream vs. Batch (Fenster endet bei t): 4.35e-14
+max. Abweichung Stream vs. Batch (Fenster zentriert):   14.32
+max. Abweichung vib_mittel zentriert vs. pandas rolling(center=True): 0.0e+00
+
+Modell / Auswertung                           PR-AUC  Precision  Recall
+zentriert trainiert, offline (Notebook)        0.924       0.81    0.84
+zentriert trainiert, im Stream                 0.835       0.93    0.50
+nachlaufend trainiert, offline = Stream        0.862       0.83    0.69
+(Schwelle: Precision >= 0,80 auf den Validierungsdaten)
+Testzeilen: zentriert 35780, nachlaufend 33650

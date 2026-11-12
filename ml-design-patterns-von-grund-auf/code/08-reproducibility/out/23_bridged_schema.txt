@@ -1,0 +1,7 @@
+MAE (Prozentpunkte Trinkgeld), Test im neuen Schema, 30 Wiederholungen
+                                Mittel   Std
+nur neue Daten                    2.65  0.14
+Roll-up auf cash/card             3.76  0.06
+Bridged, statisch                 2.52  0.13
+Bridged, probabilistisch          3.70  0.06
+Referenz (Detail nie verloren)    2.40  0.04

@@ -1,0 +1,9 @@
+Testzeilen: 33.650
+Paket mit  1.000 Zeilen:   4.7 us je Zeile (Einzelaufruf 643 us, Faktor 137)
+Paket mit 33.650 Zeilen:   3.0 us je Zeile (Einzelaufruf 643 us, Faktor 212)
+identische Ergebnisse: True
+
+Flotte mit 2.000 Pumpen, Zeilen pro Tag:
+  alle 10 min: 288.000
+  stuendlich: 48.000
+  einmal nachts: 2.000

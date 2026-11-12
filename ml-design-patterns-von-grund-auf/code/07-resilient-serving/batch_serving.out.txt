@@ -1,0 +1,10 @@
+a/b) Durchsatz in Vorhersagen pro Sekunde
+  Einzelaufrufe (1000):             271
+  eine Batch-Vorhersage (200.000):    602.228
+  Faktor: 2220
+
+c) 200.000 Zeilen in 4 Stücken bewertet, 1.2 s; erste Zeilen:
+ bestell_id  lieferzeit_min
+          0            39.8
+          1            48.8
+          2            45.0

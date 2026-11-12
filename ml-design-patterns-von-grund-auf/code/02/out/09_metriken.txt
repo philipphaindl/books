@@ -1,0 +1,14 @@
+Betrugsanteil im Test: 0.010 (50 von 5000)
+
+'Immer kein Betrug': Accuracy 0.9900, Recall 0.00
+
+Schwelle 0.5: TN=4950 FP=0 FN=45 TP=5
+  Accuracy 0.9910  Precision 1.00  Recall 0.10  F1 0.18
+
+Schwelle 0.1: TN=4940 FP=10 FN=36 TP=14
+  Accuracy 0.9908  Precision 0.58  Recall 0.28  F1 0.38
+
+ROC-AUC (schwellenunabhängig): 0.688
+
+Miete: MAE 50.3 Euro, RMSE 64.6 Euro
+Mit einem Ausreißer von +1000 Euro: MAE 68.5, RMSE 149.6

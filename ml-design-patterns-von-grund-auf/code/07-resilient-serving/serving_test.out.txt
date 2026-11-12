@@ -1,0 +1,7 @@
+POST /predict {'distanz_km': 6.4, 'artikel': 3, 'stunde': 19, 'regen': 1}
+  -> 200 {'lieferzeit_min': 34.4}
+POST /predict mit stunde=31
+  -> 422 Input should be less than or equal to 23
+
+30 Anfragen, einmal reihum, einmal gemischt auf zufällige Kopien:
+identische Antworten = True

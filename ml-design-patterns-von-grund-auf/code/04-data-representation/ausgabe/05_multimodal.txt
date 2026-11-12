@@ -1,0 +1,6 @@
+nur Tabelle (Schadenshöhe)                 Genauigkeit 0.657
+nur Text (Bag of Words)                    Genauigkeit 0.683
+nur Bild (64 Pixel)                        Genauigkeit 0.627
+Tabelle + Text                             Genauigkeit 0.713
+Tabelle + Text + Bild                      Genauigkeit 0.733
+dito, Höhe zusätzlich in Buckets           Genauigkeit 0.733

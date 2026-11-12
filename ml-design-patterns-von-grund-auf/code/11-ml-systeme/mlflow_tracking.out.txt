@@ -1,0 +1,7 @@
+mlflow.runName n_estimators max_depth  mae_test
+     gbr-100-3          100         3     2.032
+     gbr-300-3          300         3     2.053
+      gbr-50-2           50         2     2.258
+
+Registriert: lieferzeit, Version 1, Alias 'champion'
+Vorhersage für 3 km, 4 Artikel, 19 Uhr, Regen: 27.7 min

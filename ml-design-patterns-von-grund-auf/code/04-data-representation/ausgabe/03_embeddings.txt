@@ -1,0 +1,13 @@
+Form der ersten Gewichtsmatrix: (24, 2)
+one_hot @ W == W[Zeile]: True
+Aktie     [0.56 0.9 ]
+Tor       [-1.18  0.82]
+Pfanne    [ 0.78 -0.7 ]
+
+mittlerer Kosinus, gleiches Thema : +0.99
+mittlerer Kosinus, anderes Thema  : -0.33
+ähnlichste Wörter zu 'Aktie': ['Dividende', 'Börse', 'Zins']
+unähnlichstes Wort zu 'Aktie': Compiler
+Kategorien        24 -> Faustregel   2.2 Dimensionen
+Kategorien     5,000 -> Faustregel   8.4 Dimensionen
+Kategorien 1,000,000 -> Faustregel  31.6 Dimensionen

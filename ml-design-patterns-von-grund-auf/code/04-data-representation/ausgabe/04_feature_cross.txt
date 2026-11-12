@@ -1,0 +1,13 @@
+tageszeit       nachmittag  vormittag
+richtung                             
+stadtauswaerts         0.9        0.1
+stadteinwaerts         0.1        0.9
+lineares Modell, ohne Cross                Genauigkeit 0.504
+lineares Modell, mit Cross                 Genauigkeit 0.901
+Netz mit versteckter Schicht, ohne Cross   Genauigkeit 0.901
+Entscheidungsbaum (Tiefe 2), ohne Cross    Genauigkeit 0.901
+
+Anzahl der Cross-Zellen:
+  Wochentag x Stunde                   168
+  ... x Stadtteil (40)                 6720
+  ... x Stadtteil x Fahrzeugtyp (12)   80640

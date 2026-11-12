@@ -1,0 +1,2 @@
+MAE auf Testdaten: 2.03 Minuten
+exportiert nach modell.joblib (140 KiB)

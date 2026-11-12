@@ -1,0 +1,11 @@
+Zeilen: 2.345.379  Pumpen: 30  Tage: 56
+Betriebszyklen: 183, davon mit Ausfall: 155
+mittlere Laufzeit bis Ausfall: 9.5 Tage
+Anteil Minuten mit Label 'Ausfall in 24 h': 9.517%
+        vib    temp  druck
+mean   2.87   64.44   5.93
+std    0.78    4.92   0.28
+min    0.60   52.36   4.18
+max   10.27  104.31   6.79
+Merkmalszeilen (alle 10 min, Fenster 24 h): 204.589, davon Positive: 10.9%
+Verlauf P03 exportiert: 145 Stundenwerte

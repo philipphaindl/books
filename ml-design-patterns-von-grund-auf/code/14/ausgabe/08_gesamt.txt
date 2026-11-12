@@ -1,0 +1,10 @@
+Test: 42,623 Sitzungen, 2,869 Käufe
+unbekanntes Produkt: 1,391 Sitzungen, 106 Käufe
+
+Stufe                                           Spalten  AUC einzeln  AUC kumuliert     AP  LogLoss  AUC neu
+Ausgangsmodell (Wörterbuch für ID und Marke)     19,110                       0.667  0.161   0.2328    0.580
++ Hashed Feature (Produkt-ID, B = 2^14)          17,202        0.657          0.657  0.151   0.2347    0.577
++ Embeddings (32 Dim., Mittel der 3 Produkte)    17,234        0.734          0.730  0.190   0.2238    0.682
++ Feature Cross (Kategorie x Preisband)          17,338        0.688          0.744  0.201   0.2207    0.724
++ Multimodal Input (Titeltext TF-IDF)            17,448        0.712          0.744  0.200   0.2210    0.717
++ Feature Store (Popularität, Point in Time)     17,451        0.726          0.768  0.248   0.2133    0.741

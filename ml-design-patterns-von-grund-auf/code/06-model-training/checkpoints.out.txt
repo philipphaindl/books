@@ -1,0 +1,21 @@
+1) Early Stopping
+   Epoche   1: Loss Training=1.7652  Validierung=1.7806
+   Epoche   5: Loss Training=0.4153  Validierung=0.5059
+   Epoche  10: Loss Training=0.1467  Validierung=0.2640
+   Epoche  20: Loss Training=0.0536  Validierung=0.2034
+   Epoche  30: Loss Training=0.0256  Validierung=0.1964
+   Epoche  40: Loss Training=0.0143  Validierung=0.1966
+   Epoche  41: Loss Training=0.0136  Validierung=0.1967
+   Abbruch nach Epoche 41, bester Stand in Epoche 31 (Validierungs-Loss 0.1960)
+   Genauigkeit Validierung: letzter Stand=0.943  bester Checkpoint=0.942
+   Größe eines Checkpoints: 609 KiB
+
+2) Absturz nach 25 Epochen, Neustart aus Checkpoint, 15 weitere Epochen
+   gegen 40 Epochen am Stück:
+   Gewichte bitgleich: True   Genauigkeit: 0.943 / 0.943
+
+3) fit(max_iter=40) gegen zweimal fit(max_iter=20, warm_start=True)
+   Gewichte bitgleich: False   Genauigkeit: 0.945 / 0.945
+
+4) Fine-Tuning des besten Checkpoints mit 300 neuen Beispielen (10 Epochen)
+   Genauigkeit Validierung: vorher=0.942  nachher=0.963

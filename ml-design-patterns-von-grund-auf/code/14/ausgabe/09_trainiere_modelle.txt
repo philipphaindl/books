@@ -1,0 +1,3 @@
+v1: Tabelle, gehashte ID, Kreuz Kategorie x Preis  (AUC auf Tag 50-69: 0.680)
+v2: v1 + Titeltext, Embeddings, Popularität  (AUC auf Tag 50-69: 0.768)
+Feature-Store-Schnappschuss für 23,500 Produkte gespeichert

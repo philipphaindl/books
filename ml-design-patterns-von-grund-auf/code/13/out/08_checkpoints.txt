@@ -1,0 +1,14 @@
+A) ohne Unterbrechung:  150 Schritte, PR-AUC Test 0.7054
+B) Knoten entzogen vor Schritt 97; kein Checkpoint, Neustart bei Schritt 0
+   Aufwand: 97 + 150 = 247 Schritte, identisch zu A: True
+C) Knoten entzogen vor Schritt 97
+   letzter Checkpoint: vor Schritt 90, Datei 1234 Bytes
+   Aufwand: 97 + 60 = 157 Schritte, identisch zu A: True
+   PR-AUC Test 0.7054
+
+ Intervall  Checkpoints  max. Verlust  mittl. Verlust
+         1          150         1 Schr.         0.5 Schr.
+         5           30         5 Schr.         2.5 Schr.
+        10           15        10 Schr.         5.0 Schr.
+        25            6        25 Schr.        12.5 Schr.
+        50            3        50 Schr.        25.0 Schr.

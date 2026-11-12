@@ -1,0 +1,41 @@
+D2  Kollisionen bei n = 20 000 Produkt-IDs
+        B   Formel  gemessen  belegt (Formel)  belegt (gemessen)
+    10000   0.8647    0.8682           8646.8               8611
+    20000   0.6321    0.6298          12642.6              12647
+    50000   0.3297    0.3276          16484.1              16516
+   100000   0.1813    0.1788          18127.0              18148
+   200000   0.0952    0.0935          19032.6              19047
+   500000   0.0392    0.0413          19605.3              19587
+  1000000   0.0198    0.0215          19801.3              19785
+  2000000   0.0099    0.0110          19900.3              19890
+
+B für höchstens 5 % Kollision: exakt 389,896, Näherung n/(-ln 0,95) = 389,915
+Das ist das 19.5-Fache der Wertezahl.
+
+Zusatz zu D2: 2 000 Postleitzahlen in 500 Buckets
+Anteil mit Kollision (Formel): 0.9817
+Anteil mit Kollision (gemessen): 0.9855, belegte Buckets: 491 von 500
+Im Mittel 4 Werte je Bucket; One-Hot hätte 2000 Spalten.
+
+D3  Zellen und Beispiele je Zelle (1 000 000 Fahrten)
+Wochentag x Stunde                      168 Zellen,    5952.4 Fahrten je Zelle
+Wochentag x Stunde x Bezirk (23)       3864 Zellen,     258.8 Fahrten je Zelle
+Werktag/Wochenende x Stunde              48 Zellen,   20833.3 Fahrten je Zelle
+Stunde x Bezirk                         552 Zellen,    1811.6 Fahrten je Zelle
+
+D4  Quadranten-Aufgabe: Label ist 1, wenn x*y > 0 (5 % Rauschen)
+Logistische Regression, Buckets einzeln (8 Spalten): 0.554
+Logistische Regression, Cross der Buckets (16 Spalten): 0.951
+Entscheidungsbaum, Buckets einzeln, Tiefe 4:           0.951
+Obergrenze durch das Rauschen:                         0.950
+Beste Gerade auf den Rohwerten (Rastersuche): Training 0.654, Test 0.654
+Ohne Cross, 20 Wiederholungen: Mittel 0.506, Minimum 0.384, Maximum 0.670
+
+D5  Embedding-Tabelle für 4 000 000 Titel
+Vierte Wurzel: 44.72 -> d = 45
+ohne Hashing                180,000,000 Parameter,     720 MB (float32)
+Hash auf 500 000 Buckets     22,500,000 Parameter,      90 MB (float32)
+Lineares Modell mit One-Hot: 4,000,000 Gewichte, 16 MB
+
+D6  Multimodal: Betrag der Teilvektoren
+Bild: sqrt(10000) = 100, Tabelle: sqrt(5) = 2.24, Verhältnis 44.7

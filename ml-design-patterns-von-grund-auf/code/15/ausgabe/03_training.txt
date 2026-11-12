@@ -1,0 +1,50 @@
+T2  Training mit 60 Stunden Arbeit, Ausfall im Mittel alle 20 Stunden, Checkpoint kostet 3 Minuten
+Optimum nach sqrt(2 * delta * MTBF) = 1.41 Stunden, Overhead nach Formel 4.24 Stunden
+ Intervall T   Formel  simuliert
+      0.25 h    12.38      12.49
+      0.50 h     6.75       6.86
+      1.00 h     4.50       4.64
+      1.41 h     4.24       4.44
+      2.00 h     4.50       4.69
+      4.00 h     6.75       7.26
+      8.00 h    12.38      13.96
+     15.00 h    22.70      30.59
+Ganz ohne Checkpoints (jeder Ausfall startet bei null): erwarteter Mehraufwand 322 Stunden
+Checkpoint alle 2 h, Ausfall bei Stunde 41: letzter Stand bei Stunde 40, verloren 1 Stunde
+Overhead nur durch das Schreiben: alle 2 h = 1.5 h (2.5%); alle 30 min = 6.0 h (10.0%)
+
+T4  8 Worker, je 64 Beispiele, 25 Mio. Parameter (float32), Rechenzeit 0,30 s je Schritt
+Effektive Batch-Größe 512; lineare Skalierung: Lernrate 0.8
+Gradientengröße 100 MB; Ring-All-Reduce sendet je Worker 175 MB
+100 Gbit/s (12,5 GB/s)   Kommunikation      14 ms, Effizienz 0.955, Beschleunigung 7.64x
+1 Gbit/s (0,125 GB/s)    Kommunikation    1400 ms, Effizienz 0.176, Beschleunigung 1.41x
+
+T5  Zufallssuche: Wahrscheinlichkeit, mindestens einmal in die besten 5 % zu treffen
+n =  14: 0.5123
+n =  30: 0.7854
+n =  60: 0.9539
+n =  90: 0.9901
+Für 99 %: n >= 89.78 -> 90
+Raster mit 4 Werten je Hyperparameter und 3 Hyperparametern: 64 Läufe, aber nur 4 verschiedene Werte je Achse
+
+T6  Reines Rauschen (kein Zusammenhang), 100 zufällige Konfigurationen eines Entscheidungsbaums
+Mittel aller Konfigurationen auf den Testdaten: 0.532
+Auswahl auf den Testdaten: bester Wert 0.63; auf 5000 frischen Beispielen 0.510
+Auswahl per Kreuzvalidierung (CV-Wert 0.64): einmalig auf den Testdaten 0.52
+Erwartetes Maximum von 100 reinen Zufallsergebnissen bei 100 Testbeispielen: 0.625
+
+T7  Early Stopping (Geduld 3, Mindestverbesserung 0,001)
+Epoche  1: 0.800 <- best geschrieben
+Epoche  2: 0.620 <- best geschrieben
+Epoche  3: 0.510 <- best geschrieben
+Epoche  4: 0.450 <- best geschrieben
+Epoche  5: 0.420 <- best geschrieben
+Epoche  6: 0.405 <- best geschrieben
+Epoche  7: 0.398 <- best geschrieben
+Epoche  8: 0.399 (1 ohne Besserung)
+Epoche  9: 0.401 (2 ohne Besserung)
+Epoche 10: 0.396 <- best geschrieben
+Epoche 11: 0.397 (1 ohne Besserung)
+Epoche 12: 0.402 (2 ohne Besserung)
+Epoche 13: 0.410 (3 ohne Besserung)
+Stopp nach Epoche 13; behalten wird Epoche 10 mit 0.396

@@ -1,0 +1,12 @@
+Zeilen Training/Validierung/Test: 111122/37006/20254; Ausfaelle im Test: 29
+MAE (RUL roh) bei wahrer RUL   0 bis  24 h:   11.3 h  (4111 Zeilen)
+MAE (RUL roh) bei wahrer RUL  24 bis  72 h:   24.3 h  (7239 Zeilen)
+MAE (RUL roh) bei wahrer RUL  72 bis 999 h:   40.9 h  (8904 Zeilen)
+
+Ansatz                                    PR-AUC  erkannt  Fehlalarme  Kosten/Test
+Regression, Ziel = RUL in h                0.823    29/29           7       83.000
+Regression, Ziel auf 72 h gekappt          0.886    29/29           7       83.000
+Klassifikation, Ziel = Ausfall in 24 h     0.863    29/29           5       80.000
+ohne Ueberwachung (alle Ausfaelle ungeplant): 522.000
+
+Verlauf exportiert: P01, Zyklus 5, 120 Stundenwerte

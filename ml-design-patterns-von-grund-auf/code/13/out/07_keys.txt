@@ -1,0 +1,9 @@
+Pakete in Reihenfolge der Fertigstellung: [5, 6, 8, 11, 2, 4, 10, 3, 0, 7, 9, 1]
+Zeilen mit fremder Vorhersage (ohne Schluessel): 59.4%
+Alarme ohne Schluessel: 4173, davon an einer Zeile, die keinen verdient: 79.3%
+PR-AUC ohne Schluessel: 0.229
+PR-AUC mit Schluessel:  0.863  (sequentielle Referenz: 0.863)
+Zuordnung ueber (pumpe, minute) identisch zur Referenz: True
+
+hoechster Score der Referenz: Zeile 15324 = P24, Minute 75640, Score 1.00
+ohne Schluessel steht an dieser Stelle: 0.05

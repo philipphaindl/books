@@ -1,0 +1,1 @@
+{"ergebnis": [{"name": "ein lineares Modell auf allen", "auc": 0.641, "ap": 0.133}, {"name": "ein Baummodell auf x und r", "auc": 0.737, "ap": 0.15}, {"name": "Cascade: Router + 2 Spezialisten", "auc": 0.759, "ap": 0.18}, {"name": "Cascade mit wahrem Segment (Orakel)", "auc": 0.805, "ap": 0.197}], "router_acc": 0.917}

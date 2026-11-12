@@ -1,0 +1,24 @@
+K1  Betrugserkennung
+Betrugsfälle am Tag: 40,000; ein Modell, das nie Alarm schlägt: Genauigkeit 99.900%
+Das bisherige Modell: Recall 8 % -> 3,200 gefunden, 36,800 übersehen
+Teure Abfragen für alle: 20,000 Euro am Tag
+Cascade, Stufe 1 lässt 5% durch: 2,000,000 Zahlungen, 1,000 Euro am Tag
+Soll der Gesamt-Recall 85% erreichen, braucht Stufe 1 bei r2 = 90% einen Recall von 0.9444
+Mit r1 = 95%: Treffer 34,200, Fehlalarme 1,962, Precision 0.9457, Gesamt-Recall 0.855, Alarme am Tag 36,162
+
+K2  Röntgen-Triage
+Aufnahmen je Patient im Mittel: 3.7
+  Patient mit 1 Aufnahmen steht bei zufälliger 80/20-Aufteilung auf beiden Seiten: -0.0000
+  Patient mit 2 Aufnahmen steht bei zufälliger 80/20-Aufteilung auf beiden Seiten: 0.3200
+  Patient mit 4 Aufnahmen steht bei zufälliger 80/20-Aufteilung auf beiden Seiten: 0.5888
+  Patient mit 6 Aufnahmen steht bei zufälliger 80/20-Aufteilung auf beiden Seiten: 0.7378
+Test bei Aufteilung nach Patienten (20 %): rund 640 Patienten, rund 2368 Aufnahmen
+Uneinigkeit bei 22 %: 2,605 Aufnahmen als Klasse "unklar"
+Treffen drei Radiologen mit je 85 % Zustimmung zur Mehrheit: alle einig 0.6175
+
+K3  Smart-Meter-Prognose
+Messwerte am Tag: 144,000,000
+Zustand für ein 24-Stunden-Fenster (96 Werte, float64) je Zähler: 768 Byte, gesamt 1.15 GB
+Zustand, wenn nur Summe und Anzahl geführt werden (zwei Zahlen): 24 MB
+Nachts bewerten: 144,000,000 Prognosen; bei 4 ms je Einzelaufruf wären das 160 Stunden
+Gleiches Fenster zentriert statt rückwärts: nutzt 48 Werte aus der Zukunft des Prognosezeitpunkts (24 h Fenster)

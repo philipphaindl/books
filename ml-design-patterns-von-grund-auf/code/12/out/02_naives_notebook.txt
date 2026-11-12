@@ -1,0 +1,2 @@
+Zeilen Training 228,262 | Test 57,066
+Accuracy 0.960 | Precision 0.713 | Recall 0.195 | PR-AUC 0.385

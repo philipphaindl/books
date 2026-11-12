@@ -1,0 +1,22 @@
+Referenz: 5000 Bestellungen, MAE im Training 1.94 min
+
+                                PSI der Merkmale   PSI der
+              distanz artikel  stunde   regen  Vorhers.   MAE
+W1 sauber       0.008   0.006   0.006   0.001     0.012  2.02
+W2 Zeitzone     0.005   0.005   1.937   0.000     0.003  2.99
+W3 Gebiet       0.538   0.003   0.003   0.001     0.362  3.95
+
+Einstufung (ok < 0,10 <= Warnung < 0,25 <= ALARM):
+  W1 sauber: nichts Auffälliges
+  W2 Zeitzone: stunde (ALARM, 1.94)
+  W3 Gebiet: distanz_km (ALARM, 0.54), Vorhersage (ALARM, 0.36)
+
+KS-Test gegen die Referenz (D = größter Abstand der Verteilungsfunktionen)
+  W1 sauber    distanz: D=0.017 p=7e-01   stunde: D=0.014 p=8e-01
+  W2 Zeitzone  distanz: D=0.022 p=3e-01   stunde: D=0.156 p=2e-40
+  W3 Gebiet    distanz: D=0.322 p=2e-172   stunde: D=0.009 p=1e+00
+
+Distanz um 0,05 km verschoben (0,3 % des Wertebereichs), KS-Test, p < 0,05:
+  je     1.000 Beobachtungen: Alarm in  1 von 20 Wiederholungen
+  je   100.000 Beobachtungen: Alarm in 11 von 20 Wiederholungen
+  je 1.000.000 Beobachtungen: Alarm in 20 von 20 Wiederholungen

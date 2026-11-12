@@ -1,0 +1,5 @@
+Steigung w = 7.95 Euro pro m²
+Achsenabschnitt b = 244.28 Euro
+Vorhersage für 75 m²: 840 Euro
+
+Drei Features: {'flaeche_m2': 8.21, 'zimmer': -5.18, 'baujahr': 1.68} b = -3100.2

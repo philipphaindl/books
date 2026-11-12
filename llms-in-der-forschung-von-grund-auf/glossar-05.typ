@@ -1,0 +1,18 @@
+#let begriffe = (
+  ("Annotation (annotation)", [Das Zuordnen eines Werts aus einem festen Schema, etwa einer Kategorie oder Skalenstufe, zu einem Textstück; auch Labeln oder Codieren genannt.], 5),
+  ("Codebook (codebook)", [Die Anleitung mit Definitionen und Beispielen für jede Kategorie, nach der Menschen und Sprachmodell dieselben Labels vergeben sollen.], 5),
+  ("Deduktives und induktives Codieren", [Deduktiv heißt, dass die Kategorien vorher in einem Codebook feststehen; induktiv heißt, dass sie erst beim Lesen der Daten entstehen.], 5),
+  ("Zero-Shot", [Ein Sprachmodell bekommt nur eine Anweisung, aber keine gelösten Beispiele der Aufgabe.], 5),
+  ("F1-Wert (F1 score)", [Ein Wert von 0 bis 1, der nur hoch ist, wenn ein Modell die gesuchten Fälle vollständig und ohne viele Fehlgriffe findet.], 5),
+  ("Zufallskorrigierte Übereinstimmung", [Ein Übereinstimmungsmaß, das die Treffer abzieht, die bei zwei Beurteilern schon durch Zufall zu erwarten wären: 1 heißt perfekt, 0 nicht besser als Zufall, darunter schlechter als Zufall.], 5),
+  ("Krippendorffs alpha (Krippendorff's alpha)", [Ein Übereinstimmungsmaß für beliebig viele Beurteiler, das fehlende Labels verträgt und Kategorien, Ränge und Zahlen unterscheidet.], 5),
+  ("Fleiss' kappa", [Die Fassung von Cohen's kappa für drei oder mehr Beurteiler, wenn niemand Texte auslässt.], 5),
+  ("Gwets AC1 (Gwet's AC1)", [Ein Übereinstimmungsmaß, das bei überwiegender Kategorie weniger Zufallstreffer annimmt und deshalb bei seltenen Klassen höher ausfällt als kappa.], 5),
+  ("ICC (intraclass correlation)", [Ein Maß für Bewertungen auf einer Skala, das fragt, wie viel der Unterschiede zwischen den Bewertungen echte Unterschiede zwischen den Texten sind und wie viel Uneinigkeit der Bewerter.], 5),
+  ("Bootstrap", [Ein Verfahren, bei dem man aus den vorhandenen Texten viele Male mit Zurücklegen neue Stichproben zieht, jedes Mal das Maß berechnet und so dessen Streuung abschätzt.], 5),
+  ("LLM-Hacking (LLM hacking)", [Eine Konfiguration aus Modell, Prompt und Einstellungen führt zu einem Schluss, den die Wahrheit nicht stützt, etwa durch absichtliches oder unabsichtliches Ausprobieren.], 5),
+  ("Alternativer Annotator-Test (alt-test)", [Ein Test, ob ein Sprachmodell einen menschlichen Annotator ersetzen kann: Man lässt jeweils einen Menschen weg und prüft, wer den übrigen Menschen näher ist, mit einer Toleranz für den Qualitätsverlust.], 5),
+  ("Kontamination (contamination)", [Die Validierungsdaten oder ihre Labels waren schon im Training des Modells, sodass die Werte zu gut ausfallen.], 5),
+  ("Adjusted Rand Index (ARI)", [Ein Maß dafür, wie ähnlich zwei Einteilungen derselben Texte in Gruppen sind, unabhängig von den Namen der Gruppen und um den Zufall bereinigt.], 5),
+  ("Sättigungsverhältnis (saturation ratio)", [Die Zahl der verschiedenen Codes geteilt durch alle vergebenen Codes nach dem letzten Interview; ein niedriger Wert heißt, dass sich die Codes wiederholen.], 5),
+)

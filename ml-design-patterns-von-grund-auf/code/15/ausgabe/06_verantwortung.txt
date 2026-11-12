@@ -1,0 +1,34 @@
+V1  Lieferzeit: Benchmarks und Modelle (mittlerer absoluter Fehler in Minuten)
+Mittelwert der Trainingsdaten    6.84
+Faustregel 10 + 3 * km           5.47
+Lineare Regression               2.00
+Gradient Boosting                2.02
+Linear gegen Faustregel: 63.5% weniger Fehler
+Boosting gegen linear:   -1.4% weniger Fehler
+Rauschen der Daten (Standardabweichung 2,5): erwarteter MAE im Optimum 1.99
+
+V2  Lineares Modell: Beitrag je Merkmal gegen eine Baseline
+Baseline Mittelwerte (4 km, 3 Artikel, Regenanteil 0,3)
+  Vorhersage Baseline 21.3, Fall 38.5, Differenz 17.2
+  Beiträge km/Artikel/Regen: [12.5  1.2  3.5] Summe 17.20; exakt (Shapley): [12.5  1.2  3.5]
+Baseline trockener Tag (4 km, 3 Artikel, kein Regen)
+  Vorhersage Baseline 19.8, Fall 38.5, Differenz 18.7
+  Beiträge km/Artikel/Regen: [12.5  1.2  5. ] Summe 18.70; exakt (Shapley): [12.5  1.2  5. ]
+
+V4  Kennzahlen je Gruppe
+A {'n': 1000, 'Genauigkeit': 0.86, 'Auswahlrate': 0.38, 'TPR': 0.8, 'FPR': 0.1, 'PPV': 0.842}
+B {'n': 500, 'Genauigkeit': 0.84, 'Auswahlrate': 0.2, 'TPR': 0.6, 'FPR': 0.1, 'PPV': 0.6}
+Gesamtgenauigkeit 0.8533
+Verhältnis der Auswahlraten B/A: 0.526
+Differenz der TPR: 0.20; Differenz der FPR: 0.00
+
+V5  Gleiche TPR und FPR, verschiedene Basisraten
+Gruppe A: Basisrate 0.40 -> PPV 0.842, Auswahlrate 0.380
+Gruppe B: Basisrate 0.20 -> PPV 0.667, Auswahlrate 0.240
+Damit B dieselbe PPV 0,842 wie A erreicht (TPR 0,8), müsste die FPR in B 0.0375 sein statt 0.1
+
+V6  Das geschützte Merkmal wird entfernt, ein Proxy bleibt
+Historische Einstellquote: Gruppe 0 0.394, Gruppe 1 0.139
+Korrelation Proxy und Gruppe: 0.71
+Können + Proxy   Auswahlrate Gruppe 0: 0.381, Gruppe 1: 0.218
+nur Können       Auswahlrate Gruppe 0: 0.302, Gruppe 1: 0.298

@@ -1,0 +1,13 @@
+Regression für 5 km: 50 min
+Anteil echter Lieferungen (4,5-5,5 km) innerhalb ±5 min um diese Vorhersage: 0.0%
+Quantile (10 %, 50 %, 90 %): {0.1: 27, 0.5: 63, 0.9: 73}
+
+Verteilung für 5 km (Bin-Untergrenze: Wahrscheinlichkeit):
+  ab  20 min: 21.4%
+  ab  30 min: 20.2%
+  ab  40 min:  0.0%
+  ab  50 min:  0.0%
+  ab  60 min: 27.4%
+  ab  70 min: 31.1%
+  ab  80 min:  0.0%
+  ab  90 min:  0.0%

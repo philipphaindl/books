@@ -1,0 +1,30 @@
+Wasserkocher  murmurhash3_32 = 1241995430  ->  Bucket 2
+Kaffeemühle   murmurhash3_32 = 2988581302  ->  Bucket 2
+Toaster       murmurhash3_32 = 4077643628  ->  Bucket 0
+Mixer         murmurhash3_32 = 4214966034  ->  Bucket 2
+Teekanne      murmurhash3_32 = 3599985207  ->  Bucket 3
+Pfanne        murmurhash3_32 = 2034520326  ->  Bucket 2
+
+        B  belegt     leer  größter  kollidiert  Formel
+    1,000   1,000        0       21      100.0%  100.0%
+    5,000   4,310      690        9       86.5%   86.5%
+   10,000   6,335    3,665        7       63.1%   63.2%
+   50,000   9,056   40,944        5       18.2%   18.1%
+  100,000   9,533   90,467        4        9.2%    9.5%
+1,000,000   9,951  990,049        2        1.0%    1.0%
+
+5000 Kategorien, 200,000 Zeilen, Basisrate 0.091
+B =     16: AUC 0.567
+B =     64: AUC 0.635
+B =    256: AUC 0.673
+B =   1024: AUC 0.714
+B =   4096: AUC 0.750
+B =  16384: AUC 0.766
+B =  65536: AUC 0.773
+One-Hot ohne Hashing (5000 Spalten): AUC 0.776
+
+unbekannte Kategorie landet in Bucket 899
+P(Klick) = 0.269  (Basisrate 0.091)
+
+hash('Berlin') % 1000 in drei Prozessen: ['136', '617', '673']
+murmurhash3_32('Berlin') % 1000 in drei Aufrufen: [359, 359, 359]

@@ -1,0 +1,8 @@
+Beispiele: 300 | Parameter: 1251
+Vor dem Training: Loss 0.985  (Raten wäre ln 3 = 1.099), Genauigkeit 0.473
+Gradienten-Check: größte relative Abweichung über 15 Gewichte = 2.2e-08
+Epoche   1: Loss 0.712  Genauigkeit 0.603
+Epoche  10: Loss 0.512  Genauigkeit 0.753
+Epoche  50: Loss 0.015  Genauigkeit 0.997
+Epoche 100: Loss 0.003  Genauigkeit 1.000
+Testdaten: Genauigkeit 0.997

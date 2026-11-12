@@ -1,0 +1,8 @@
+Vortraining auf 900 Bildern, Ziffernerkennung auf den übrigen 897: 0.974
+
+Genauigkeit für gerade/ungerade, Mittel +- Std. über 20 Stichproben
+Beispiele  Pixel+LogReg      von Null Feature-Extr.   Fine-Tuning
+        6  0.685+-0.064  0.675+-0.058  0.734+-0.062  0.665+-0.073
+       10  0.741+-0.049  0.741+-0.047  0.778+-0.040  0.730+-0.054
+       20  0.798+-0.032  0.799+-0.044  0.831+-0.033  0.789+-0.050
+       50  0.850+-0.020  0.870+-0.019  0.862+-0.018  0.850+-0.026

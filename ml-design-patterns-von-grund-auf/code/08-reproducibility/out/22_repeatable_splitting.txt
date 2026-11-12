@@ -1,0 +1,6 @@
+zeilenweiser Split : Accuracy 0.748 | Patienten in beiden Teilen: 448
+Hash-Split         : Accuracy 0.572 | Patienten in beiden Teilen: 0
+Zeilen Train/Test  : 4010/990
+GroupShuffleSplit  : Accuracy 0.566
+Bisherige 500 Patienten nach Datenzuwachs unverändert: True
+hash('P0001') in zwei Prozessen gleich: False

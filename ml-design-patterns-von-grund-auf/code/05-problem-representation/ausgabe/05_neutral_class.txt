@@ -1,0 +1,18 @@
+Labeler einstimmig: 77.8%, Uneinigkeit (2:1): 22.2%
+
+Test: 9,000 Beispiele, davon strittig 21.4%
+
+Binäres Modell
+  Fehlerrate bei einstimmigen Fällen: 4.0%
+  Fehlerrate bei strittigen Fällen  : 31.0%   (Mehrheitslabel als Referenz)
+  Gesamtfehler gegen Mehrheitslabel  : 9.8%
+  mittlere Sicherheit max(p,1-p) bei strittigen Fällen: 0.78
+
+Modell mit Neutral-Klasse
+  als neutral erkannt: 51.4% der strittigen, 12.8% der einstimmigen Fälle
+  automatisch entschieden: 79.0% aller Fälle
+  Fehlerrate unter den automatisch entschiedenen (Mehrheitslabel): 3.5%
+  Fehlerrate bei einstimmigen Fällen: 7.1% (neutral-Vorhersagen mitgezählt: 13.6%)
+
+Binäres Modell mit Konfidenzschwelle (gleicher Automatisierungsanteil)
+  automatisch entschieden: 79.0%, Fehlerrate darunter: 3.4%

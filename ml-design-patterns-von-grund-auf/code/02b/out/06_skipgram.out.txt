@@ -1,0 +1,16 @@
+600 Sätze, Vokabular 27 Wörter, 10800 Trainingspaare, Vektorlänge 8
+'drucker' und 'scanner' gemeinsam in einem Satz: 0 mal
+Epoche  1: Loss je Paar 3.134  (Raten: ln 27 = 3.296)
+Epoche  5: Loss je Paar 2.384  (Raten: ln 27 = 3.296)
+Epoche 30: Loss je Paar 2.118  (Raten: ln 27 = 3.296)
+
+Kosinus(drucker, scanner) = +0.98
+Kosinus(passwort, login) = +1.00
+Kosinus(vpn, router) = +0.99
+Kosinus(drucker, passwort) = +0.40
+Kosinus(drucker, vpn) = +0.46
+Kosinus(toner, papierstau) = +0.98
+Kosinus(toner, gesperrt) = +0.21
+Nächste Wörter zu 'drucker': tastatur (+1.00), scanner (+0.98), monitor (+0.98)
+
+PCA: die ersten zwei Richtungen erklären 59 % der Streuung

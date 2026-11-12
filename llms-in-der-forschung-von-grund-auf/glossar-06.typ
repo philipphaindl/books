@@ -1,0 +1,17 @@
+#let begriffe = (
+  ("Schätzwert (estimate)", [Eine Zahl, die aus einer Stichprobe berechnet wird, um einen unbekannten wahren Wert anzunähern.], 6),
+  ("Standardfehler (standard error)", [Die typische Größe, um die ein Schätzwert von Stichprobe zu Stichprobe schwankt; je größer die Stichprobe, desto kleiner.], 6),
+  ("Abdeckung (coverage)", [Der Anteil von Konfidenzintervallen, die bei wiederholten Studien den wahren Wert tatsächlich enthalten; bei einem 95-%-Intervall sollten es etwa 95 von 100 sein.], 6),
+  ("Plug-in-Schätzung (naive Schätzung)", [Das Ergebnis, das man bekommt, wenn man LLM-Labels einfach wie menschliche Labels zählt; es ist meist verzerrt und täuscht mit seiner schmalen Spanne Sicherheit vor.], 6),
+  ("Differential error", [Ein Fehler des Modells, der je nach Gruppe verschieden groß ist und deshalb Unterschiede zwischen Gruppen verzerrt.], 6),
+  ("Prediction-powered inference (PPI)", [Ein Verfahren, das an einer kleinen menschlich gelabelten Zufallsstichprobe misst, um wie viel ein LLM im Schnitt danebenliegt, und das Ergebnis der großen Menge um diesen Betrag korrigiert.], 6),
+  ("Rectifier", [Der mittlere Fehler des LLM, gemessen an der menschlich gelabelten Stichprobe; PPI zieht ihn vom LLM-Ergebnis ab.], 6),
+  ("PPI++", [Eine Verbesserung von PPI mit einem Gewicht, das die Daten selbst wählen und das bestimmt, wie stark dem LLM-Ergebnis vertraut wird; asymptotisch nie schlechter als der rein menschliche Weg.], 6),
+  ("Effektive Stichprobengröße (effective sample size)", [Die Zahl rein menschlicher Labels, die dieselbe Genauigkeit gebracht hätten wie die Kombination aus menschlichen und LLM-Labels.], 6),
+  ("Cross-PPI", [Eine PPI-Variante für selbst trainierte Modelle, bei der jedes menschliche Label von einem Modell beurteilt wird, das es nie gesehen hat.], 6),
+  ("Aktive Inferenz (active inference)", [Ein Verfahren, bei dem Menschen bevorzugt dort labeln, wo das Modell unsicher ist, mit bekannten Ziehungschancen, damit das Ergebnis gültig bleibt.], 6),
+  ("DSL (design-based supervised learning)", [Eine Korrektur, die bekannte Ziehungschancen und ein flexibles Modell nutzt und selbst bei stark verzerrten LLM-Labels gültig bleibt.], 6),
+  ("LLM hacking", [Das Ausprobieren vieler Modelle und Prompts, bis das gewünschte Ergebnis erscheint, was falsche Schlüsse erzeugt.], 6),
+  ("Gültigkeit und Trennschärfe (validity, power)", [Gültig ist ein Ergebnis, dessen Spanne ihr Versprechen hält; Trennschärfe ist die Chance, einen echten Effekt zu finden, und eine Korrektur sichert nur das Erste.], 6),
+  ("ppi_py", [Die Python-Bibliothek, die PPI, PPI++ und Varianten sowie Planungsfunktionen für die Größe der menschlichen Stichprobe bereitstellt.], 6),
+)

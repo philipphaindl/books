@@ -1,0 +1,17 @@
+Edge-Schwelle auf Validierung: Recall 0.980
+Anteil der Testzeilen, die an die Cloud gehen: 48.1%
+Positive im Test, die Stufe 1 passieren: 97.0%
+
+Variante                      PR-AUC  erkannt  Fehlalarme  Kosten/Test
+nur Cloud                      0.863    29/29           5       80.000
+nur Edge                       0.737    29/29          20      102.500
+zweistufig                     0.852    29/29           8       84.500
+
+Median je Einzelvorhersage: Edge 0.5 us, Cloud-Modell (lokal) 946 us
+
+Flotte: 2000 Pumpen, 144 Vorhersagen/Tag, 0.40 EUR je 1000 Aufrufe
+  alles in die Cloud: 288.000 Aufrufe/Tag = 42.048 EUR/Jahr
+  zweistufig:         138.639 Aufrufe/Tag = 20.241 EUR/Jahr
+  Ersparnis: 10.90 EUR je Pumpe und Jahr
+Mehrkosten durch Fehler im Test: 4500 EUR bei 0.73 Pumpenjahren
+  = 6139 EUR je Pumpe und Jahr

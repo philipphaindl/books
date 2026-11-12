@@ -1,0 +1,13 @@
+Training 171,508 | Validierung 56,762 | Test 57,058
+
+Niemand kündigt: Accuracy 0.955
+Variante                           Acc  Prec   Rec    F1 PR-AUC   Euro
+A  Schwelle 0.5                  0.959 0.667 0.187 0.292  0.292     89
+B  Gewichte, Schwelle 0.5        0.853 0.153 0.497 0.234  0.280   -330
+C  Downsampling 1:4, Schw. 0.5   0.951 0.433 0.265 0.329  0.284     77
+D  F1-Schwelle 0.20              0.956 0.522 0.238 0.327  0.292     90
+E  Gewichte, F1-Schwelle 0.80    0.955 0.496 0.245 0.328  0.280     87
+F  Kostenregel, Schwelle 0.28    0.958 0.596 0.216 0.317  0.292     94
+(Euro = Nutzen je 1000 Kunden-Monate)
+
+Mittlere Wahrscheinlichkeit: ohne Gewichte 0.046, mit 0.394; tatsächlich 0.045

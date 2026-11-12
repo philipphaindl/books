@@ -1,0 +1,8 @@
+Eingabe des Modells       Spalten     AUC      AP   LogLoss   AUC neu
+nur Tabelle                   818   0.625   0.113    0.2401     0.579
+nur Titeltext                 110   0.683   0.132    0.2332     0.634
+Tabelle und Titeltext         928   0.705   0.162    0.2288     0.662
+
+Wörter, die die Kaufwahrscheinlichkeit am stärksten erhöhen: ultraleicht (+1.28), trail (+1.25), laufweste (+1.14), gelände (+0.99), schulweg (+0.81), plus (+0.73)
+Wörter, die sie am stärksten senken: bergstiefel (-1.29), trekking (-0.99), gipfel (-0.89), revier (-0.88), pirsch (-0.74), seemann (-0.67)
+Titelvokabular: 110 Wörter; Spalten der Tabellenhälfte: 818

@@ -1,0 +1,5 @@
+Median (Konstante)       MAE  8.14 min
+Faustregel 10 + 3/km     MAE  4.25 min
+Median je Distanzband    MAE  4.50 min
+Gradient Boosting        MAE  2.50 min
+Modell gegenüber bester Heuristik: 41.2 % weniger Fehler

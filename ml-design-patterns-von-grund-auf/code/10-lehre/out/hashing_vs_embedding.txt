@@ -1,0 +1,7 @@
+20 Begriffe in 64 Buckets: 2 Buckets mit Kollision, kuendigung=49, kuendigen=10
+20 Begriffe in  8 Buckets: 4 Buckets mit Kollision, kuendigung=1, kuendigen=2
+Kosinus-Ähnlichkeit kuendigung / kuendigen :  0.99
+Kosinus-Ähnlichkeit rechnung   / mahnung   :  1.00
+Kosinus-Ähnlichkeit router     / störung   :  1.00
+Kosinus-Ähnlichkeit kuendigung / router    :  0.00
+Kosinus-Ähnlichkeit rechnung   / roaming   : -0.00

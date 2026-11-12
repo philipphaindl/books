@@ -1,0 +1,36 @@
+P2  Logits (2,2; 1,9; -0,5; -2,0) für die Tags A, B, C, D
+softmax: [0.549 0.406 0.037 0.008] Summe 1.0
+sigmoid: [0.9   0.87  0.378 0.119] Summe 2.267
+
+P3  Mehrheitsentscheid von k Klassifikatoren mit je 70 % Genauigkeit
+k=3 (3 * 0,7^2 * 0,3 + 0,7^3): 0.784 | von Hand: 0.784
+k=5: 0.8369
+unabhängig                                     k=3: 0.7840  k=5: 0.8369  k=21: 0.9736
+schwach korreliert (Korrelation der Treffer 0.14) k=3: 0.7540  k=5: 0.7802  k=21: 0.8320
+stark korreliert (Korrelation der Treffer 0.33) k=3: 0.7280  k=5: 0.7388  k=21: 0.7557
+Grenzwert für k -> unendlich: {6: 0.8579, 2: 0.7625}
+
+P4  Cascade: 100 000 Zahlungen am Tag, 1 % Betrug
+Stufe 2 prüft 8000 Zahlungen, davon 960 Betrug und 7040 harmlos
+Kosten der teuren Abfragen: 400 Euro (alle) gegen 32 Euro (Cascade)
+Ersparnis: 92 % = 368 Euro am Tag
+Gesamt-Recall: 0.96 * 0.9 = 0.864; Treffer 864, Fehlalarme 70, Precision 0.925
+
+P5  Zwei Schwellen auf denselben 10 000 Zahlungen (100 Betrugsfälle)
+A (Schwelle hoch)      n=10000 Genauigkeit 0.9940 Precision 0.667 Recall 0.800 F1 0.727 Kosten 4200 Euro
+B (Schwelle niedrig)   n=10000 Genauigkeit 0.9840 Precision 0.375 Recall 0.900 F1 0.529 Kosten 2750 Euro
+Immer "kein Betrug": Genauigkeit 0.99 Kosten 20000 Euro
+
+P6  Drei Labeler, je mit Wahrscheinlichkeit q für "positiv"
+q=0.55: Mehrheitslabel positiv 0.5748, alle drei einig 0.2575, 2:1 0.7425
+q=0.65: Mehrheitslabel positiv 0.7183, alle drei einig 0.3175, 2:1 0.6825
+q=0.9: Mehrheitslabel positiv 0.9720, alle drei einig 0.7300, 2:1 0.2700
+
+P7  Undersampling der Mehrheitsklasse
+Negative: 49000, behalten: 10000, Faktor beta = 0.2041
+class_weight=balanced: Gewicht positiv 25.0, negativ 0.5102
+Modell sagt 0,5 -> wahre Wahrscheinlichkeit 0.1695
+Modell sagt 0,9 -> wahre Wahrscheinlichkeit 0.6475
+
+Simulation: Anteil positiv im Training 0.0185, im Test 0.0186
+mittlere P(positiv): voll trainiert 0.0185, unterabgetastet 0.0756, korrigiert 0.0193, wahr 0.0186

@@ -1,0 +1,14 @@
+Teil A: Surrogat für eine deterministische Simulation
+  Trainingsraum: 549 Gitterpunkte, Zwischenwerte zum Test: 480
+  Modell                          RMSE Gitter   RMSE Zwischenwerte
+  MLP ohne Regularisierung            0.00642              0.00503
+  MLP, alpha=1 (regularisiert)        0.10820              0.09235
+
+Teil B: dieselbe Funktion, aber Messdaten mit Rauschen (sigma=0.3)
+  Modell                    RMSE Training  Test: Messung  Test: Wahrheit
+  Baum ohne Tiefenlimit             0.000          0.459           0.334
+  Baum, Tiefe 5                     0.250          0.367           0.198
+
+Teil C: Zufallslabels (zwischen X und y gibt es nichts zu lernen)
+  Entscheidungsbaum            Genauigkeit Training=1.00  Test=0.47
+  Random Forest (200 Bäume)    Genauigkeit Training=1.00  Test=0.52

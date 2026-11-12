@@ -1,0 +1,1 @@
+{"zellen": [{"richtung": "stadtauswaerts", "tageszeit": "nachmittag", "stau": 0.9}, {"richtung": "stadtauswaerts", "tageszeit": "vormittag", "stau": 0.1}, {"richtung": "stadteinwaerts", "tageszeit": "nachmittag", "stau": 0.1}, {"richtung": "stadteinwaerts", "tageszeit": "vormittag", "stau": 0.9}], "ohne": 0.504, "cross": 0.901, "mlp": 0.901, "baum": 0.901}

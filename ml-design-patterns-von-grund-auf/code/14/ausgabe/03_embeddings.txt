@@ -1,0 +1,32 @@
+Ko-Klick-Matrix: 23,500 x 23,500, 1,204,686 belegte Zellen (0.218%)
+PPMI-Matrix: 1,204,488 Einträge, Rang 32, Embedding-Tabelle (23500, 32)
+Produkte mit Vektor: 21,595, ohne (nie gemeinsam gesehen): 1,905
+Produkte mit mindestens 60 Ko-Klicks: 6,468
+
+Biwak Lagerfeuer Tarp (Zelte, Welt Camping)
+    0.96  Familienzelt Lagerfeuer Schuhe Plus    Schuhe        Camping
+    0.95  Lagerfeuer Laufweste Hose Plus         Hosen         Camping
+    0.95  Lagerfeuer Biwak Tasche Set            Rucksäcke     Camping
+    0.95  Familienzelt Biwak Pulsmesser          Uhren         Camping
+
+Kletter Seilschaft Uhr Plus (Uhren, Welt Klettern)
+    0.95  Kletter Seilschaft Zelt Basic          Zelte         Klettern
+    0.95  Kletter Fels Laterne Set               Lampen        Klettern
+    0.94  Fels Grip Weste Pro                    Jacken        Klettern
+    0.93  Kletter Grip Kochset Plus              Kocher        Klettern
+
+Trail Laufweste Stiefel Pro (Schuhe, Welt Trailrunning)
+    0.96  Trail Balance Hose Neu                 Hosen         Trailrunning
+    0.96  Gelände Laufweste Stiefel              Schuhe        Trailrunning
+    0.96  Gelände Fitness Stiefel Light          Schuhe        Trailrunning
+    0.96  Laufweste Ultraleicht Weste            Jacken        Trailrunning
+
+Gleiche Welt unter den 10 nächsten Nachbarn: 100% (Zufall: 6%); gleiche Kategorie: 26%
+
+Variante                                         AUC      AP   LogLoss   AUC neu
+ohne Embedding (ohne ID, Marke Wörterbuch)     0.625   0.113    0.2401     0.579
++ Embedding-Mittel der drei Produkte (32 Dim.)   0.728   0.177    0.2247     0.684
+
+Kaltstart-Brücke: für 400 Produkte ohne Ko-Klicks wird der Vektor aus dem Titel geschätzt; gleiche Welt unter den 10 Nachbarn: 95%
++ Embedding mit Titel-Brücke für neue Produkte   0.730   0.178    0.2242     0.710
+Anteil der Varianz der beiden Achsen in der Abbildung: 80%

@@ -1,0 +1,16 @@
+Positive: 0.50%; Train 600 / 120,000, Test 200 / 40,000
+Triviales Modell 'nie Betrug': Genauigkeit 0.995, Recall 0.000
+
+Strategie                    Prec   Rec    F1   F1* PR-AUC   ROC mittl.P
+Baseline (nichts getan)     0.674 0.145 0.239 0.384  0.368 0.964  0.0050
+Klassengewichte (balanced)  0.037 0.900 0.071 0.366  0.314 0.963  0.1727
+Downsampling 1:10           0.175 0.660 0.277 0.397  0.345 0.964  0.0459
+SMOTE (Upsampling)          0.040 0.885 0.076 0.362  0.314 0.963  0.1537
+F1*: F1 mit der auf den Validierungsdaten gewählten Schwelle
+
+Konfusionsmatrix Baseline bei 0,5 (Zeilen: wahr, Spalten: Vorhersage)
+[[39786    14]
+ [  171    29]]
+Konfusionsmatrix Klassengewichte bei 0,5
+[[35112  4688]
+ [   20   180]]

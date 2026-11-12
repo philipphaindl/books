@@ -1,0 +1,18 @@
+#let begriffe = (
+  ("Paradigma (paradigm)", [Das Bündel von Grundannahmen darüber, was es gibt und wie man es erkennen kann; es legt fest, welche Qualitätskriterien für eine Studie gelten.], 1),
+  ("Methodologie (methodology)", [Die Gesamtlogik, die eine Forschungsfrage mit Daten verbindet, etwa Fallstudie, Experiment oder Design Science.], 1),
+  ("Instrument", [Das konkrete Werkzeug einer Studie, zum Beispiel ein Fragebogen, ein Interviewleitfaden oder ein Prompt für ein Sprachmodell; es muss geprüft werden.], 1),
+  ("Quasi-Experiment (quasi-experiment)", [Ein Vergleich von Gruppen, bei dem nicht zufällig zugeteilt werden konnte, sodass andere Erklärungen für Unterschiede möglich bleiben.], 1),
+  ("Saturation (Sättigung)", [Der Punkt in einer Interviewstudie, an dem neue Interviews kaum noch neue relevante Aspekte liefern.], 1),
+  ("Information power", [Der Gedanke, dass man umso weniger Teilnehmende braucht, je mehr relevante Information jede Person liefert.], 1),
+  ("Thematic analysis (TA)", [Ein Verfahren, um Muster von Bedeutung in Texten wie Interviewtranskripten zu finden; es gibt drei Familien mit verschiedenen Qualitätsregeln.], 1),
+  ("Fehler 1. und 2. Art (Type I and II error)", [Fehler 1. Art ist ein Fehlalarm (Effekt gemeldet, obwohl keiner da ist), Fehler 2. Art ein Übersehen (echter Effekt nicht bemerkt).], 1),
+  ("Power", [Die Chance, dass eine Studie einen echten Effekt entdeckt; üblich sind 80 %.], 1),
+  ("Cohen's d", [Der Abstand zweier Gruppendurchschnitte, gemessen in Einheiten der Streuung innerhalb der Gruppen; 0,2 gilt als klein, 0,5 als mittel, 0,8 als groß.], 1),
+  ("Forking paths", [Die vielen Auswertungsentscheidungen, die man nach einem Blick auf die Daten trifft; jede Gabelung erhöht die Chance auf einen Zufallstreffer.], 1),
+  ("Positive predictive value (PPV)", [Der Anteil echter Treffer unter allen als signifikant gemeldeten Treffern; er sinkt, wenn viele Ideen getestet werden und nur wenige stimmen.], 1),
+  ("Preregistration", [Das Festschreiben von Fragen und Analyseplan, bevor die Ergebnisse vorliegen, damit Vorhersage und nachträgliche Deutung getrennt bleiben.], 1),
+  ("Data leakage", [Information aus dem Test oder aus der Zukunft, die ins Training gerät und die Ergebnisse unrealistisch gut aussehen lässt.], 1),
+  ("Mixed methods", [Das absichtliche Verbinden qualitativer und quantitativer Methoden in einer Untersuchung, sodass eine Schlussfolgerung entsteht, die keiner der Stränge allein trägt.], 1),
+  ("Trustworthiness (Vertrauenswürdigkeit)", [Das qualitative Gegenstück zu Validität und Reliabilität, bestehend aus credibility, transferability, dependability und confirmability.], 1),
+)

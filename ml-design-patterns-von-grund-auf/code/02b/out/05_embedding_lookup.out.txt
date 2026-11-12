@@ -1,0 +1,18 @@
+One-Hot für 'login': [0. 0. 0. 1. 0.]
+one_hot @ E        : [-0.4  0.8  0.3]
+E[idx]             : [-0.4  0.8  0.3]
+
+Gradient der Tabelle:
+ [[ 0.   0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5 -1.   2. ]
+ [ 0.   0.   0. ]]
+
+Tabelle 50.000 x 300: 15.000.000 Gewichte = 60 MB in float32
+One-Hot-Matmul: 15.000.000 Multiplikationen, davon 14.999.700 mit null; Lookup: 300 Werte kopieren
+
+E[[0, 3, 4]] =
+ [[ 0.9  0.1 -0.3]
+ [-0.4  0.8  0.3]
+ [ 0.1 -0.7  0.9]]

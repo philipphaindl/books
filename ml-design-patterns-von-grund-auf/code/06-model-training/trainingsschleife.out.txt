@@ -1,0 +1,7 @@
+Epoche  1: w= 2.46  b= 0.39  Loss= 23.81
+Epoche  2: w= 3.07  b= 0.49  Loss=  3.72
+Epoche  5: w= 3.25  b= 0.55  Loss=  2.48
+Epoche 10: w= 3.25  b= 0.59  Loss=  2.46
+Epoche 25: w= 3.23  b= 0.72  Loss=  2.40
+Epoche 50: w= 3.19  b= 0.89  Loss=  2.34
+Epoche 100: w= 3.17  b= 1.14  Loss=  2.28

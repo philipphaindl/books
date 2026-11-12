@@ -1,0 +1,21 @@
+Produkte         : 23,500 (davon 20,000 zum Start, 3,500 neu in 70 Tagen)
+Marken           : 800   Kategorien: 12   Welten: 20
+Sitzungen        : 150,000 (Training Tag 0-49: 107,377, Test Tag 50-69: 42,623)
+Kaufrate         : 6.8% (Training 6.9%, Test 6.7%)
+Ansichten gesamt : 572,088   Ø je Sitzung 3.81
+die beliebtesten   1% der Produkte (   235) haben 11% der Ansichten
+die beliebtesten  10% der Produkte ( 2,350) haben 44% der Ansichten
+die beliebtesten  50% der Produkte (11,750) haben 88% der Ansichten
+Produkte ohne eine einzige Ansicht: 695 (3.0%)
+größte Marke: 2377 Produkte, kleinste: 2; Marken mit weniger als 5 Produkten: 60
+
+Testsitzungen mit einem Produkt, das im Training nie vorkam: 1,391 (3.3%)
+  davon erst nach Tag 49 eingeführt: 70%
+
+Beispielprodukte:
+ produkt_id kategorie    marke  preis                       titel
+       6944    Schuhe   Halwen   61.9 Fitness Studio Schuhe Basic
+      10044     Hosen  Kalquen   33.9    Citytrip Büro Hose Basic
+      18148     Hosen  Elkalin   24.9 Bergstiefel Gipfel Hose Set
+      13040    Jacken   Boryor  216.9    Marathon Tempo Weste Pro
+      16002    Schuhe Quenelfi  130.9  Fairway Golf Stiefel Light

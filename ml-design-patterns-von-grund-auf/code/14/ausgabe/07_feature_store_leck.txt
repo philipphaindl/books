@@ -1,0 +1,10 @@
+Kaufrate der drei Produkte allein als Score (AUC, Testtage):
+  gesamter Datensatz                     AUC 0.831
+  7 Tage bis einschließlich heute        AUC 0.885
+  7 Tage bis gestern (Point in Time)     AUC 0.682
+
+Training mit                            AUC offline  AUC online  Differenz
+gesamter Datensatz                            0.823       0.714     -0.109
+7 Tage bis einschließlich heute               0.878       0.744     -0.134
+7 Tage bis gestern (Point in Time)            0.768       0.768     +0.000
+ohne Popularitätsfeatures                     0.744       0.744     +0.000

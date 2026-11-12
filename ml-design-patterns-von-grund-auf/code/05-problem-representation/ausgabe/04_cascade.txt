@@ -1,0 +1,7 @@
+positive Beispiele: 0.99% (Test: 237 von 24,000)
+Stufe 1: lässt 6.6% durch, Recall 0.949
+Stufe 2 auf den Durchgelassenen: Recall 0.640
+Kaskade gesamt: Recall 0.608  Precision 0.954
+Modell auf allen: Recall 0.586  Precision 0.853
+Abfragen der teuren Merkmale: Kaskade 1,578 statt 24,000
+Recall 1 * Recall 2 = 0.949 * 0.640 = 0.608

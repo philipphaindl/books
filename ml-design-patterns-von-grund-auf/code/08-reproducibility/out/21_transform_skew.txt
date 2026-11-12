@@ -1,0 +1,5 @@
+erwarteter Preis      : [11.1, 10.8, 14.7, 12.5, 19.2]
+Serving (naiv)        : [12.85, 21.05, 27.72, 31.19, 46.3]
+Serving (Pipeline)    : [11.09, 10.83, 14.68, 12.51, 19.17]
+Einzelanfrage         : [11.09]
+gelernter Mittelwert  : 12.085

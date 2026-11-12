@@ -1,0 +1,6 @@
+Schema                     Training    Test  Positiv  Ausf.  PR-AUC
+zufaellig je Zeile           143212   61377    11.0%    155   0.992
+nach Pumpe (Hash)            136877   67712    11.5%     54   0.892
+zeitlich                     111122   33650    12.2%     29   0.862
+nach Pumpe und zeitlich       74551   10781    12.8%     10   0.858
+Test-Pumpen: P02 P03 P05 P13 P15 P17 P18 P20 P24 P25

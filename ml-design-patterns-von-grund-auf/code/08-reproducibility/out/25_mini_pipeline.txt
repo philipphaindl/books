@@ -1,0 +1,18 @@
+Lauf 1
+  laden       berechnet  (071599f4c6bb)
+  teilen      berechnet  (80fb4a4e4ae7)
+  trainieren  berechnet  (bfdb54bfe93e)
+  evaluieren  berechnet  (2fe7f1e49d20)
+  Ergebnis: {'accuracy': 0.834}
+Lauf 2 (unverändert)
+  laden       aus Cache  (071599f4c6bb)
+  teilen      aus Cache  (80fb4a4e4ae7)
+  trainieren  aus Cache  (bfdb54bfe93e)
+  evaluieren  aus Cache  (2fe7f1e49d20)
+  Ergebnis: {'accuracy': 0.834}
+Lauf 3 (n_estimators=300)
+  laden       aus Cache  (071599f4c6bb)
+  teilen      aus Cache  (80fb4a4e4ae7)
+  trainieren  berechnet  (6ef78f8571bd)
+  evaluieren  berechnet  (18b0f0bac33d)
+  Ergebnis: {'accuracy': 0.828}

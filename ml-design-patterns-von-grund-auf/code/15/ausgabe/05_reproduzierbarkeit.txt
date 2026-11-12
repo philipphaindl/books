@@ -1,0 +1,44 @@
+R1  Standardisierung mit Trainingskonstanten gegen Konstanten der Anfrage
+Alter:                   [62. 58. 66.]
+mit Trainingskonstanten: [2.2 1.8 2.6]
+mit Konstanten der Anfrage: [ 0.   -1.22  1.22]
+Einzelanfrage, Konstanten der Anfrage: Standardabweichung = 0.0 -> Division durch null
+
+R2  Split nach Patienten-ID über eine Hashfunktion
+Anteil Training: Patienten 0.795, Zeilen 0.798
+Patienten auf beiden Seiten: 0
+Zuordnung der alten Patienten nach 200 neuen Patienten geändert: 0
+Zum Vergleich zwei Zufallsaufteilungen mit anderem Seed (200 Paare): 0.320 der Patienten wechseln die Seite (erwartet 0,32)
+Standardabweichung der Trainingszahl bei 1000 Patienten: 12.65 = 1.26 Prozentpunkte
+
+R3  Bridged Schema, probabilistische Methode
+Zufällig nach 70/30 zugewiesen: richtig 0.58, falsch 0.42
+Immer "Kreditkarte" (häufigster Wert): richtig 0.70, falsch 0.30
+Waren die Anteile früher 50/50 und man nimmt 70/30 an: richtig 0.50
+
+R4  Mittelwert der letzten drei Messwerte: Batch gegen Stream
+   messwert  batch  stream  zentriert
+0      10.0  10.00   10.00      11.00
+1      12.0  11.00   11.00      11.00
+2      11.0  11.00   11.00      12.67
+3      15.0  12.67   12.67      15.33
+4      20.0  15.33   15.33      17.67
+5      18.0  17.67   17.67      18.33
+6      17.0  18.33   18.33      17.50
+Batch und Stream identisch: True
+Zentriertes Fenster weicht ab in 6 von 7 Zeilen (nutzt die Zukunft)
+
+R5  Feature Store: Zeitpunktrichtiger Join
+ kunde       zeit  zeitpunktrichtig  neuester_wert
+     1 2026-03-12               5.0              1
+     1 2026-03-25               1.0              1
+     2 2026-03-03               NaN              3
+     2 2026-03-15               7.0              3
+
+R6  Workflow Pipeline: was muss neu laufen?
+Topologische Ordnung: ['ingest', 'clean', 'featurize', 'split', 'train', 'evaluate', 'register']
+Änderung an train     -> neu: evaluate, register, train (3 von 7)
+Änderung an split     -> neu: evaluate, register, split, train (4 von 7)
+Änderung an featurize -> neu: evaluate, featurize, register, train (4 von 7)
+Änderung an clean     -> neu: clean, evaluate, featurize, register, split, train (6 von 7)
+Stufen (parallel ausführbar): [['ingest'], ['clean'], ['featurize', 'split'], ['train'], ['evaluate'], ['register']]

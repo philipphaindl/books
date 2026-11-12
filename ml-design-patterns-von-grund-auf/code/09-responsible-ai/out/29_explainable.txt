@@ -1,0 +1,35 @@
+Accuracy Test: 0.704
+
+Permutation Importance (AUC-Abfall)
+                      Mittel    Std
+einkommen              0.187  0.015
+schuldenquote          0.062  0.008
+beschaeftigung_jahre   0.019  0.005
+alter                  0.001  0.001
+rauschen              -0.002  0.002 
+
+Mit Duplikat 'einkommen_netto'
+                      Mittel    Std
+einkommen_netto        0.060  0.008
+schuldenquote          0.056  0.007
+einkommen              0.043  0.008
+beschaeftigung_jahre   0.016  0.004
+alter                  0.000  0.001
+rauschen              -0.002  0.001 
+
+Exakte Shapley-Werte für Antrag 0 (Wahrscheinlichkeit 'bewilligt'):
+einkommen              -0.154
+schuldenquote           0.099
+beschaeftigung_jahre    0.031
+alter                  -0.008
+rauschen                0.001
+Baseline f(b) = 0.559 | Vorhersage f(x) = 0.528 | Summe = -0.031 = f(x) - f(b): True
+
+Shapley (Brute Force) == coef*(x-b) beim linearen Modell: True
+Integrated Gradients (logistisches Modell):
+einkommen              -0.186
+schuldenquote           0.152
+beschaeftigung_jahre    0.011
+alter                   0.015
+rauschen               -0.002
+Summe IG = -0.0096 | f(x) - f(b) = -0.0096

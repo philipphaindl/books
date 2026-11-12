@@ -1,0 +1,10 @@
+Attention-Gewichte (Zeile = fragendes Token, Spalte = betrachtetes Token):
+                der  drucker  streikt
+der            0.97     0.00     0.02   Summe 1.0
+drucker        0.15     0.67     0.17   Summe 1.0
+streikt        0.01     0.79     0.20   Summe 1.0
+
+Eingabe umsortiert -> Ausgabe nur umsortiert: True
+     10 Tokens: Gewichtsmatrix 10x10 = 100 Einträge je Kopf und Schicht
+   1000 Tokens: Gewichtsmatrix 1000x1000 = 1.000.000 Einträge je Kopf und Schicht
+ 100000 Tokens: Gewichtsmatrix 100000x100000 = 10.000.000.000 Einträge je Kopf und Schicht

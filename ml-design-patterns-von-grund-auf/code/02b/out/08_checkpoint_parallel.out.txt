@@ -1,0 +1,10 @@
+Checkpoint-Dateien: ['gewichte.npz', 'rest.json']
+
+Nach insgesamt 40 Epochen: größter Unterschied der Parameter zum durchgehenden Lauf
+  alles gesichert          0.00e+00
+  ohne Optimizer-Zustand   5.23e-02
+  ohne Zufallsgenerator    7.70e-02
+
+Gradient: ein Gerät (Batch 256) gegen Mittel aus 4 Workern (je 64): max. Abweichung 2.8e-17
+ungleiche Shards (100/100/56): gewichtetes Mittel 2.8e-17, ungewichtetes Mittel 4.3e-03
+Nach 100 Schritten: größter Unterschied der Parameter 2.2e-16

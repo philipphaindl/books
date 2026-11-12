@@ -1,0 +1,13 @@
+Trefferquote (Fehler <= 3 min): alt 0.636, neu 0.760
+MAE: alt 2.64 min, neu 2.04 min
+
+A/B-Test: nötige Beobachtungen je Gruppe
+  0.64 -> 0.74 (+10 Prozentpunkte)                    338
+  0.64 -> 0.69 (+5 Prozentpunkte)                   1.407
+  0.64 -> 0.66 (+2 Prozentpunkte)                   8.977
+  0.64 -> 0.65 (+1 Prozentpunkte)                  36.134
+  hier: +12.4 Prozentpunkte                           215
+
+Shadow-Modus, gepaarter Vergleich der Fehler (20.000 Anfragen)
+  mittlere Verbesserung 0.59 min, t = 48.7
+  nötige Anfragen (5 % / 80 % Power)                   67

@@ -1,0 +1,13 @@
+== 1. Accuracy reicht nicht (1 % Betrug) ==
+Immer 'kein Betrug'                Accuracy 0.990  Recall 0.00  Precision 0.00
+Logistische Regression             Accuracy 0.992  Recall 0.19  Precision 0.86
+... mit class_weight='balanced'    Accuracy 0.789  Recall 0.75  Precision 0.03
+
+== 2. Mehr Daten: Anteil bleibt, Metrik-Falle auch ==
+n=   2000  Betrugsfälle im Training:    22  Anteil 0.011  Accuracy 0.994  Recall 0.40
+n=  20000  Betrugsfälle im Training:   200  Anteil 0.010  Accuracy 0.993  Recall 0.33
+n= 200000  Betrugsfälle im Training:  1990  Anteil 0.010  Accuracy 0.993  Recall 0.35
+
+== 3. Oversampling VOR dem Split täuscht (5 % Minderheit, 1-Nächster-Nachbar) ==
+Duplizieren, dann splitten (falsch) Accuracy 0.979  Recall 1.00  Precision 0.94
+Splitten, dann duplizieren (richtig) Accuracy 0.946  Recall 0.27  Precision 0.43

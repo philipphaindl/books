@@ -1,0 +1,19 @@
+1) Gradient aus 4 Shards (gemittelt) gegen Gradient über alle Daten
+   größte Abweichung einer Komponente: 1.78e-15
+
+2) Verlust nach 50 / 100 / 200 / 300 Schritten (Rauschgrenze 0.25), Lernrate 0.05
+   synchron                          0.257       0.256       0.257       0.259
+   asynchron, 4 Schritte alt         0.258       0.256       0.258        0.26
+   asynchron, 10 Schritte alt        0.516       0.283       0.265       0.272
+   asynchron, 20 Schritte alt         1.36        59.9          47    2.81e+03
+
+3) Zwei Epochen Training, Verlust am Ende (Rauschgrenze 0.25)
+   Batch  32, Lernrate 0.01   500 Schritte  Verlust= 0.255   Ausgangslage
+   Batch 256, Lernrate 0.01    64 Schritte  Verlust= 0.738   8x Batch
+   Batch 256, Lernrate 0.08    64 Schritte  Verlust= 0.256   8x Batch, 8x Rate
+
+4) All-Reduce über einen Gradientenvektor der Länge 240.000
+   Worker  Ring: je Worker  Koordinator gesamt  Summe korrekt
+        4          360.000           1.440.000  True
+        8          420.000           3.360.000  True
+       16          450.000           7.200.000  True

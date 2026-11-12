@@ -1,0 +1,11 @@
+Gleiches Budget: 25 Versuche mit je 5-facher Kreuzvalidierung (125 Läufe)
+  Verfahren             CV-Wert       C   gamma     Test
+  GridSearchCV           0.9805      10     0.1   0.9917
+  RandomizedSearchCV     0.9814   25.77  0.1512   0.9930
+  verschiedene gamma-Werte ausprobiert: Grid=5, Random=25
+
+Random Search mit 10 verschiedenen Seeds, bester CV-Wert:
+  min=0.9814  Mittel=0.9822  max=0.9833  (Grid: 0.9805)
+
+25 Grid-Ergebnisse: min=0.113  Median=0.965  max=0.981
+  davon unter 0.5: 9 Versuche

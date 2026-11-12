@@ -1,0 +1,1 @@
+{"A": {"n": 1000, "Genauigkeit": 0.86, "Auswahlrate": 0.38, "TPR": 0.8, "FPR": 0.1, "PPV": 0.8421052631578947}, "B": {"n": 500, "Genauigkeit": 0.84, "Auswahlrate": 0.2, "TPR": 0.6, "FPR": 0.1, "PPV": 0.6}}

@@ -1,0 +1,11 @@
+v1: AUC 0.68, Tabelle, gehashte ID, Kreuz Kategorie x Preis
+v2: AUC 0.768, v1 + Titeltext, Embeddings, Popularität
+
+bekanntes Produkt    v1: 0.1420
+bekanntes Produkt    v2: 0.2886
+neues Produkt 99999  v1: 0.1753
+neues Produkt 99999  v2: 0.4283
+
+gleiche Anfrage nach anderen Anfragen: identische Antwort
+unbekannte Version  : 404 unbekannte Version v3; vorhanden: ['v1', 'v2']
+ungültige Eingabe   : 422 Input should be less than or equal to 23

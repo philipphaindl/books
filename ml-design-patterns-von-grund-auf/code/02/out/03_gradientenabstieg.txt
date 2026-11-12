@@ -1,0 +1,15 @@
+Analytisches Optimum: w = 0.930, Loss = 0.135
+w nach Schritt 0, 1, ..., 8 bei verschiedenen Lernraten:
+Lernrate 0.1 : w =  -1.00  -0.62  -0.31  -0.06   0.14   0.29   0.42   0.52   0.60
+               loss nach Schritt 8: 0.241
+Lernrate 0.9 : w =  -1.00   2.46  -0.28   1.88   0.17   1.53   0.46   1.30   0.63
+               loss nach Schritt 8: 0.222
+Lernrate 1.05: w =  -1.00   3.03  -1.36   3.43  -1.79   3.89  -2.30   4.45  -2.90
+               loss nach Schritt 8: 14.738
+
+200 Beispiele, Batch 32 -> 7 Schritte pro Epoche
+Epoche 1: w = 0.502, b = 0.003, loss = 0.317
+Epoche 2: w = 0.799, b = -0.016, loss = 0.152
+Epoche 3: w = 0.964, b = -0.001, loss = 0.136
+Epoche 4: w = 0.939, b = 0.008, loss = 0.135
+Epoche 5: w = 0.923, b = 0.041, loss = 0.137

@@ -1,0 +1,8 @@
+......F...                                                               [100%]
+=================================== FAILURES ===================================
+E   AssertionError: 15 km: 43.3 min, 25 km: 43.3 min
+    assert (np.float64(43.28738975640278) - np.float64(43.28738975640278)) > 10
+/Users/lbhaindlp/Documents/Sources/Lehre/WS27/MDI - Clean Code und Software Engineering/handbuch-ml-design-patterns/code/11-ml-systeme/test_modell.py:70: AssertionError: 15 km: 43.3 min, 25 km: 43.3 min
+=========================== short test summary info ============================
+FAILED test_modell.py::test_extrapolation_distanz - AssertionError: 15 km: 43...
+1 failed, 9 passed in 403.76s (0:06:43)

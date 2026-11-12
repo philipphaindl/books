@@ -1,0 +1,15 @@
+Zeilen-Split: 25,518 Kunden in Training UND Test; bei 98.6% der
+              Testzeilen liegen Zeilen desselben Kunden im Training
+Kunden-Split: 0 Kunden in beiden Teilen
+
+PR-AUC (Test)       Zeilen-Split  Kunden-Split
+großes Modell              0.385         0.258
+kleines Modell             0.311         0.292
+Großes Modell, Zeilen-Split, ohne anmeldetag und bandbreite_mbit: 0.302
+Validierungskunden: großes Modell 0.236, kleines Modell 0.289
+
+Tabelle wächst auf 574,865 Zeilen. Alte Zeilen, die die Seite wechseln:
+  Zeilen-Split: 32.1%
+  Hash-Split  : 0.0%
+hash('K000001') % 10, drei Prozesse: ['3', '0', '9']
+bucket('K000001')     , drei Prozesse: ['7', '7', '7']

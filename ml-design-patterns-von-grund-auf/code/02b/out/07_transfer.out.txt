@@ -1,0 +1,14 @@
+
+Ferner Transfer: Ziffern 0-4 -> Ziffern 5-9 (Genauigkeit auf ungesehenen Testbildern, Mittel über 20 Wiederholungen)
+Beispiele je Klasse               1      2      5     10     30
+von Grund auf                 0.708  0.780  0.907  0.932  0.963
+zufällig, eingefroren         0.549  0.600  0.736  0.790  0.851
+vortrainiert, eingefroren     0.510  0.575  0.701  0.755  0.845
+vortrainiert, feinjustiert    0.585  0.668  0.826  0.899  0.950
+
+Naher Transfer: zehn Ziffern -> gerade/ungerade (Genauigkeit auf ungesehenen Testbildern, Mittel über 20 Wiederholungen)
+Beispiele je Klasse               1      2      5     10     30
+von Grund auf                 0.583  0.640  0.696  0.820  0.881
+zufällig, eingefroren         0.577  0.610  0.635  0.715  0.763
+vortrainiert, eingefroren     0.690  0.707  0.770  0.856  0.892
+vortrainiert, feinjustiert    0.662  0.689  0.753  0.854  0.906
